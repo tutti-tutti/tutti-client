@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "3.2.5",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
     "@storybook/addon-essentials": "8.6.0",
     "@storybook/addon-interactions": "8.6.0",
     "@storybook/addon-onboarding": "8.6.0",

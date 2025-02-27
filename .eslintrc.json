@@ -4,5 +4,10 @@
     "next/typescript",
     "prettier",
     "plugin:storybook/recommended"
-  ]
+  ],
+  "rules": {
+    "eqeqeq": "error",
+    "dot-notation": "warn",
+    "@typescript-eslint/no-unused-vars": "error"
+  }
 }

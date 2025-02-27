@@ -1,21 +1,18 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "../styles/globals.css";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import '@/styles/globals.css';
+
+const pretendard = localFont({
+  src: './fonts/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+  weight: '45 920',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Tutti",
-  description: "Tutti의 프론트엔드입니다.",
+  title: 'Tutti',
+  description: 'Tutti의 프론트엔드입니다.',
 };
 
 export default function RootLayout({
@@ -25,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${pretendard.variable} font-pretendard antialiased`}>
         {children}
       </body>
     </html>

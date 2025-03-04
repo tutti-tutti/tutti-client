@@ -72,6 +72,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.0.4(@types/react@19.0.10)
+      chromatic:
+        specifier: ^11.26.1
+        version: 11.26.1
       eslint:
         specifier: ^8
         version: 8.57.1

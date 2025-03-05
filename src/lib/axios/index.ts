@@ -1,9 +1,9 @@
+import axios from 'axios';
 import {
   API_ROUTE_BASE_URL,
   SERVER_API_BASE_URL,
   SERVER_API_VERSION_V1,
 } from '@/constants';
-import axios from 'axios';
 
 const isServer = typeof window === 'undefined';
 

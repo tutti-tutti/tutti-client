@@ -22,8 +22,5 @@
     --border-radius-xl: 12px;
     --border-radius-2xl: 16px;
     --border-radius-full: 50%;
-  
-    /* Default Border */
-    --border-default: var(--border-width) var(--border-style) var(--border-color);
   }
   

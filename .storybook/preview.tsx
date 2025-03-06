@@ -1,4 +1,8 @@
+import React from 'react';
+
 import type { Preview } from '@storybook/react';
+
+import '../src/styles/globals.css';
 
 const preview: Preview = {
   parameters: {
@@ -9,6 +13,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    Story => (
+      <div style={{ fontFamily: 'Pretendard' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;

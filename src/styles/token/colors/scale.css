@@ -1,7 +1,4 @@
-@import "tailwindcss";
-
-@theme {
-
+:root {
     /** Primary Colors */
     --color-primary-50: var(--color-violet-50);
     --color-primary-100: var(--color-violet-100);

@@ -1,7 +1,4 @@
-@import "tailwindcss";
-
-@theme {
-
+:root {
     /** Base Colors */
     --color-base-white: #ffffff;
     --color-base-black: #000000;

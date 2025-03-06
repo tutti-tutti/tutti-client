@@ -36,9 +36,7 @@ const ClickText = ({
 
   return (
     <Link href={href}>
-      <p className={cn(baseStyle, stateStyles, className)} {...props}>
-        {children}
-      </p>
+      <p className={cn(baseStyle, stateStyles, className)}>{children}</p>
     </Link>
   );
 };

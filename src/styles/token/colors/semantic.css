@@ -77,9 +77,9 @@
     --color-bg-secondaryInteraction: var(--color-secondary-600);
     --color-bg-secondaryHover: var(--color-secondary-700);
     --color-bg-secondaryPressed: var(--color-secondary-800);
-    --color-bg-tertiaryInteraction: var(--color-neutral-50);
-    --color-bg-tertiaryHover: var(--color-neutral-200);
-    --color-bg-tertiaryPressed: var(--color-neutral-300);
+    --color-bg-tertiaryInteraction: var(--color-tertiary-50);
+    --color-bg-tertiaryHover: var(--color-tertiary-200);
+    --color-bg-tertiaryPressed: var(--color-tertiary-300);
     --color-bg-dangerInteraction: var(--color-danger-600);
     --color-bg-dangerHover: var(--color-danger-700);
     --color-bg-dangerPressed: var(--color-danger-800);
@@ -108,9 +108,9 @@
     --color-border-secondaryInteraction: var(--color-secondary-600);
     --color-border-secondaryHover: var(--color-secondary-700);
     --color-border-secondaryPressed: var(--color-secondary-800);
-    --color-border-tertiaryInteraction: var(--color-neutral-300);
-    --color-border-tertiaryHover: var(--color-neutral-400);
-    --color-border-tertiaryPressed: var(--color-neutral-500);
+    --color-border-tertiaryInteraction: var(--color-tertiary-300);
+    --color-border-tertiaryHover: var(--color-tertiary-400);
+    --color-border-tertiaryPressed: var(--color-tertiary-500);
     --color-border-dangerInteraction: var(--color-danger-600);
     --color-border-dangerHover: var(--color-danger-700);
     --color-border-dangerPressed: var(--color-danger-800);

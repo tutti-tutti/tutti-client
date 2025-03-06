@@ -1,0 +1,130 @@
+:root {
+    /** Base Colors */
+    --color-base-white: #ffffff;
+    --color-base-black: #000000;
+
+    /** Transparent Colors */
+    --color-transparent-white80: rgba(255, 255, 255, 0.8);
+    --color-transparent-black12: rgba(0, 0, 0, 0.12);
+    --color-transparent-black16: rgba(0, 0, 0, 0.16);
+    --color-transparent-black20: rgba(0, 0, 0, 0.20);
+    --color-transparent-black24: rgba(0, 0, 0, 0.24);
+    --color-transparent-black32: rgba(0, 0, 0, 0.32);
+
+    /** Neutral Colors */
+    --color-neutral-50: #fafafa;
+    --color-neutral-100: #f5f5f5;
+    --color-neutral-200: #e5e5e5;
+    --color-neutral-300: #d4d4d4;
+    --color-neutral-400: #a1a1a1;
+    --color-neutral-500: #737373;
+    --color-neutral-600: #525252;
+    --color-neutral-700: #404040;
+    --color-neutral-800: #262626;
+    --color-neutral-900: #171717;
+    --color-neutral-950: #0a0a0a;
+
+    /** Green Colors */
+    --color-green-50: #F0FDF4;
+    --color-green-100: #DCFCE7;
+    --color-green-200: #B9F8CF;
+    --color-green-300: #7BF1A8;
+    --color-green-400: #05DF72;
+    --color-green-500: #00C950;
+    --color-green-600: #00A63E;
+    --color-green-700: #008236;
+    --color-green-800: #016630;
+    --color-green-900: #0D542B;
+    --color-green-950: #032E15;
+
+    /** Red Colors */
+    --color-red-50: #fef2f2;
+    --color-red-100: #fee2e2;
+    --color-red-200: #FFC9C9;
+    --color-red-300: #FFA2A2;
+    --color-red-400: #FF6467;
+    --color-red-500: #FB2C36;
+    --color-red-600: #E7000B;
+    --color-red-700: #C10007;
+    --color-red-800: #9F0712;
+    --color-red-900: #82181A;
+    --color-red-950: #460809;
+
+    /** Violet Colors */
+    --color-violet-50: #FBFAFF;
+    --color-violet-100: #D0C3FF;
+    --color-violet-200: #B9A6FF;
+    --color-violet-300: #987EFF;
+    --color-violet-400: #8565FF;
+    --color-violet-500: #663EFF;
+    --color-violet-600: #5D38E8;
+    --color-violet-700: #482CB5;
+    --color-violet-800: #38228C;
+    --color-violet-900: #2B1A6B;
+    --color-violet-950: #231655;
+
+    /** Pink Colors */
+    --color-pink-50: #FFECF2;
+    --color-pink-100: #FFC5D7;
+    --color-pink-200: #FFA9C3;
+    --color-pink-300: #FF81A8;
+    --color-pink-400: #FF6997;
+    --color-pink-500: #FF437D;
+    --color-pink-600: #E83D72;
+    --color-pink-700: #B53059;
+    --color-pink-800: #8C2545;
+    --color-pink-900: #6B1C35;
+    --color-pink-950: #5D162D;
+
+    /** Skyblue Colors */
+    --color-skyblue-50: #E6F2FF;
+    --color-skyblue-100: #B0D6FF;
+    --color-skyblue-200: #8AC2FF;
+    --color-skyblue-300: #54A7FF;
+    --color-skyblue-400: #3395FF;
+    --color-skyblue-500: #007BFF;
+    --color-skyblue-600: #0070E8;
+    --color-skyblue-700: #0057B5;
+    --color-skyblue-800: #00448C;
+    --color-skyblue-900: #00346B;
+    --color-skyblue-950: #012952;
+
+    /** Indigo Colors */
+    --color-indigo-50: #EEF2FF;
+    --color-indigo-100: #E0E7FF;
+    --color-indigo-200: #C6D2FF;
+    --color-indigo-300: #A3B3FF;
+    --color-indigo-400: #7C86FF;
+    --color-indigo-500: #615FFF;
+    --color-indigo-600: #4F39F6;
+    --color-indigo-700: #432DD7;
+    --color-indigo-800: #372AAC;
+    --color-indigo-900: #312C85;
+    --color-indigo-950: #1E1A4D;
+
+    /** Yellow Colors */
+    --color-yellow-50: #FEFCE8; 
+    --color-yellow-100:#FEF9C2; 
+    --color-yellow-200:#FFF085; 
+    --color-yellow-300:#FFDF20; 
+    --color-yellow-400:#FDC700; 
+    --color-yellow-500:#F0B100; 
+    --color-yellow-600:#D08700; 
+    --color-yellow-700:#A65F00; 
+    --color-yellow-800:#894B00; 
+    --color-yellow-900:#733E0A; 
+    --color-yellow-950:#432004;
+
+    /** Orange Colors */
+   --color-orange-50:#FFF7ED;
+   --color-orange-100:#FFEDD4;
+   --color-orange-200:#FFD6A8;
+   --color-orange-300:#FFB86A;
+   --color-orange-400:#FF8904;
+   --color-orange-500:#FF6900;
+   --color-orange-600:#F54900;
+   --color-orange-700:#CA3500;
+   --color-orange-800:#9F2D00;
+   --color-orange-900:#7E2A0C;
+   --color-orange-950:#441306;
+}

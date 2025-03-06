@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+
+    /* Text Colors */
+    --color-text-primary: var(--color-neutral-800);
+    --color-text-secondary: var(--color-neutral-600);
+    --color-text-tertiary: var(--color-neutral-500);
+    --color-text-tertiaryInfo: var(--color-neutral-400);
+    --color-text-info: var(--color-info-600);
+    --color-text-infoBold: var(--color-info-800);
+    --color-text-warning: var(--color-warning-600);
+    --color-text-warningBold: var(--color-warning-800);
+    --color-text-success: var(--color-success-600);
+    --color-text-successBold: var(--color-success-800);
+    --color-text-danger: var(--color-danger-600);
+    --color-text-dangerBold: var(--color-danger-800);
+    --color-text-disabled: var(--color-neutral-400);
+
+    /* Background Colors */
+    --color-bg-primary: var(--color-base-white);
+    --color-bg-primaryBlur: var(--color-transparent-white80);
+    --color-bg-secondary: var(--color-neutral-100);
+    --color-bg-tertiary: var(--color-neutral-50);
+    --color-bg-brand: var(--color-primary-600);
+    --color-bg-subBrand: var(--color-accent-300);
+    --color-bg-infoSubtle: var(--color-info-50);
+    --color-bg-infoBold: var(--color-info-700);
+    --color-bg-warningSubtle: var(--color-warning-50);
+    --color-bg-warningBold: var(--color-warning-500);
+    --color-bg-successSubtle: var(--color-success-50);
+    --color-bg-successBold: var(--color-success-700);
+    --color-bg-dangerSubtle: var(--color-danger-50);
+    --color-bg-dangerBold: var(--color-danger-700);
+    --color-bg-inverseSubtle: var(--color-danger-50);
+    --color-bg-inverseBold: var(--color-danger-700);
+    --color-bg-disabled: var(--color-neutral-300);
+
+    /* Icon Colors */
+    --color-icon-primary: var(--color-neutral-900);
+    --color-icon-secondary: var(--color-neutral-700);
+    --color-icon-tertiary: var(--color-neutral-400);
+    --color-icon-checked: var(--color-primary-600);
+    --color-icon-unchecked: var(--color-neutral-300);
+    --color-icon-info: var(--color-info-600);
+    --color-icon-starInfo: var(--color-yellow-300);
+    --color-icon-warning: var(--color-warning-700);
+    --color-icon-success: var(--color-success-700);
+    --color-icon-danger: var(--color-danger-700);
+    --color-icon-disabled: var(--color-neutral-400);
+
+    /* Border Colors */
+    --color-border-primary: var(--color-neutral-400);
+    --color-border-secondary: var(--color-neutral-200);
+    --color-border-focus: var(--color-primary-600);
+    --color-border-infoSubtle: var(--color-info-50);
+    --color-border-info: var(--color-info-600);
+    --color-border-warningSubtle: var(--color-warning-50);
+    --color-border-warning: var(--color-warning-600);
+    --color-border-successSubtle: var(--color-success-50);
+    --color-border-success: var(--color-success-600);
+    --color-border-dangerSubtle: var(--color-danger-50);
+    --color-border-danger: var(--color-danger-600);
+    --color-border-disabled: var(--color-neutral-400);
+
+    /* Shadow Colors */
+    --color-shadow-core: var(--color-transparent-black12); /* 그림자에서 가장 어두운 색 */
+    --color-shadow-cast: var(--color-transparent-black16); /* 그림자에서 가장 옅은 색 */
+
+    /* Logo Colors */
+    --color-logo-naver: #03C75A;
+}

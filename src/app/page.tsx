@@ -4,7 +4,7 @@ const HomePage = () => {
       <h1 className="p-xs text-xl font-extrabold text-base-white bg-bg-successBold">
         반갑습니다. Tutti입니다.
       </h1>
-      <p>테스트 입니다.</p>
+      <p className="border-md rounded-lg border-border-color">테스트 입니다.</p>
     </div>
   );
 };

@@ -1,14 +1,20 @@
 import { cn } from '@/utils/cn';
-import { ROUTER_PATH } from '@/constants/paths';
-import ClickText from './click-text';
+import { ROUTER_PATH, PATH_NAME } from '@/constants';
+import ClickText from '@/components/common/ClickText';
 
 interface TextHeaderProps {
   email: string;
   isLoggedIn: boolean;
   className?: string;
+  country: string;
 }
 
-const TextHeader = ({ email, isLoggedIn, className = '' }: TextHeaderProps) => {
+const TextHeader = ({
+  email,
+  isLoggedIn,
+  className = '',
+  country,
+}: TextHeaderProps) => {
   const renderHeaderItems = (items: React.ReactNode[]) => {
     return items.map((item, index) => (
       <div key={index} className="flex items-center">
@@ -19,25 +25,25 @@ const TextHeader = ({ email, isLoggedIn, className = '' }: TextHeaderProps) => {
   };
 
   const commonItems = [
-    <ClickText key="signup" href={ROUTER_PATH.SIGNUP.PATH}>
-      {ROUTER_PATH.SIGNUP.NAME}
+    <ClickText key="signup" href={ROUTER_PATH.SIGNUP}>
+      {PATH_NAME.SIGNUP}
     </ClickText>,
-    <ClickText key="support" href={ROUTER_PATH.SUPPORT.PATH}>
-      {ROUTER_PATH.SUPPORT.NAME}
+    <ClickText key="support" href={ROUTER_PATH.SUPPORT}>
+      {PATH_NAME.SUPPORT}
     </ClickText>,
     <ClickText key="country" disabled>
-      현재 국가(한국)
+      {PATH_NAME.CURRENT_COUNTRY}({country})
     </ClickText>,
   ];
 
   const firstItem = isLoggedIn ? (
     <div key="account" className="flex items-center">
       <span className="mr-2">{email}</span>
-      <ClickText>로그아웃</ClickText>
+      <ClickText>{PATH_NAME.LOGOUT}</ClickText>
     </div>
   ) : (
-    <ClickText key="login" href={ROUTER_PATH.LOGIN.PATH}>
-      {ROUTER_PATH.LOGIN.NAME}
+    <ClickText key="login" href={ROUTER_PATH.LOGIN}>
+      {PATH_NAME.LOGIN}
     </ClickText>
   );
 

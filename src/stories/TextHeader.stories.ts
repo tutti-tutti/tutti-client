@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextHeader from '@/components/common/text-header';
+import TextHeader from '@/components/layout/header/TextHeader';
 
 const meta = {
   title: 'Tutti/TextHeader',
@@ -22,6 +22,10 @@ const meta = {
       control: 'text',
       description: '추가 CSS 클래스',
     },
+    country: {
+      control: 'text',
+      description: '사용자 국가',
+    },
   },
 } satisfies Meta<typeof TextHeader>;
 
@@ -31,6 +35,7 @@ type Story = StoryObj<typeof meta>;
 export const LoggedOut: Story = {
   args: {
     email: 'tutti@tutti.com',
+    country: '한국',
     isLoggedIn: false,
   },
 };
@@ -38,6 +43,7 @@ export const LoggedOut: Story = {
 export const LoggedIn: Story = {
   args: {
     email: 'tutti@tutti.com',
+    country: '한국',
     isLoggedIn: true,
   },
 };

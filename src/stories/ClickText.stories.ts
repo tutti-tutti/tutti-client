@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import ClickText from '@/components/common/click-text';
+import ClickText from '@/components/common/ClickText';
 
 const meta = {
   title: 'Tutti/ClickText',

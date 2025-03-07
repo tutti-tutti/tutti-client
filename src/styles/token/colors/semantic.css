@@ -20,7 +20,7 @@
     --color-text-primaryInteraction: var(--color-primary-400);
     --color-text-primaryHover: var(--color-primary-600);
     --color-text-primaryPressed: var(--color-primary-800);
-    --color-text-secondary: var(--color-secondary-600);
+    --color-text-secondaryInteraction: var(--color-secondary-600);
     --color-text-secondaryHover: var(--color-secondary-700);
     --color-text-secondaryPressed: var(--color-secondary-800);
     --color-text-selected: var(--color-primary-600);
@@ -44,7 +44,7 @@
     --color-icon-primaryInteraction: var(--color-primary-400);
     --color-icon-primaryHover: var(--color-primary-600);
     --color-icon-primaryPressed: var(--color-primary-800);
-    --color-icon-secondary: var(--color-secondary-600);
+    --color-icon-secondaryInteraction: var(--color-secondary-600);
     --color-icon-secondaryHover: var(--color-secondary-700);
     --color-icon-secondaryPressed: var(--color-secondary-800);
     --color-icon-selected: var(--color-primary-600);

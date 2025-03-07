@@ -26,7 +26,7 @@ const Button = ({
     tertiaryOutline:
       'border border-border-disabled bg-bg-primary text-text-disabled',
     transparent: 'text-text-secondary',
-    likeOn: 'feat/button-component-34',
+    likeOn: 'border-bg-subBrand text-text-visited border',
     likeOff: 'border border-border-primary text-text-secondary',
   };
 

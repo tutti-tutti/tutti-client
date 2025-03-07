@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-
     /* Border Width */
     --border-width: 1px;
     --border-width-sm: 1px;

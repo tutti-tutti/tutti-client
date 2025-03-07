@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import { Header } from '@/components';
 import '@/styles/globals.css';
 
 if (process.env.NODE_ENV === 'development') {
@@ -29,8 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard antialiased`}>
-        {children}
+      <body
+        className={`${pretendard.variable} font-pretendard flex flex-col items-center`}
+      >
+        <div className="w-full max-w-7xl">
+          <div className="mt-2xl mb-4xl w-full">
+            <Header />
+          </div>
+          <main className="w-full">{children}</main>
+        </div>
       </body>
     </html>
   );

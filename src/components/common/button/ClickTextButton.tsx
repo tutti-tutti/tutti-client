@@ -1,10 +1,5 @@
 import Button from '@/components/common/button/Button';
-import { ReactNode } from 'react';
-
-interface ClickTextButtonProps {
-  children: ReactNode;
-  onClick?: () => void;
-}
+import type { ClickTextButtonProps } from '@/types';
 
 const ClickTextButton = ({ children, onClick }: ClickTextButtonProps) => {
   return (

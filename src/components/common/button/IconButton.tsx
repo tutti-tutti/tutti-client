@@ -1,19 +1,5 @@
-import type { ReactNode } from 'react';
 import Button from '@/components/common/button/Button';
-
-interface IconButtonProps {
-  icon: ReactNode;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'primaryOutline'
-    | 'secondaryOutline'
-    | 'disabled'
-    | 'tertiaryOutline'
-    | 'transparent'
-    | 'subBrand';
-  onClick: () => void;
-}
+import type { IconButtonProps } from '@/types';
 
 const IconButton = ({ icon, variant, onClick }: IconButtonProps) => {
   return (

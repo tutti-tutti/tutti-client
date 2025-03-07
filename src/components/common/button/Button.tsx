@@ -1,22 +1,7 @@
-import type { ReactNode } from 'react';
-import { cn } from '@/utils/cn';
+'use client';
 
-interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset';
-  icon?: ReactNode;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'primaryOutline'
-    | 'secondaryOutline'
-    | 'disabled'
-    | 'tertiaryOutline'
-    | 'transparent'
-    | 'subBrand';
-  className?: string;
-  onClick?: () => void;
-  children?: ReactNode;
-}
+import type { ButtonProps } from '@/types';
+import { cn } from '@/utils/cn';
 
 const Button = ({
   type = 'button',
@@ -38,7 +23,8 @@ const Button = ({
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',
     tertiaryOutline: '',
     transparent: '',
-    subBrand: '',
+    likeOn: '',
+    likeOff: '',
   };
 
   return (
@@ -49,7 +35,6 @@ const Button = ({
       disabled={variant === 'disabled'}
     >
       {icon}
-      {/* 아이콘 컴포넌트 추가 필요 */}
       {children}
     </button>
   );

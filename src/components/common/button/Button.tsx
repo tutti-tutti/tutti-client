@@ -26,7 +26,7 @@ const Button = ({
     tertiaryOutline:
       'border border-border-disabled bg-bg-primary text-text-disabled',
     transparent: 'text-text-secondary',
-    likeOn: '',
+    likeOn: 'feat/button-component-34',
     likeOff: 'border border-border-primary text-text-secondary',
   };
 
@@ -40,7 +40,6 @@ const Button = ({
       {icon}
       {/* 📌 아이콘 컴포넌트로 변경 필요 */}
       {children}
-      <button className="border-bg-subBrand text-text-visited border"></button>
     </button>
   );
 };

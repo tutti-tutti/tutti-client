@@ -8,19 +8,25 @@ import TextHeader from './TextHeader';
 
 const Header = () => {
   return (
-    <header className="flex w-full flex-col">
-      <div className="mb-lg flex w-full justify-end">
-        <TextHeader country="한국" isLoggedIn={false} email="tutti@tutti.com" />
-      </div>
+    <header className="pt-2xl pb-4xl border-border-secondary flex w-full flex-col border-b">
+      <div className="mx-auto w-full max-w-7xl">
+        <nav className="mb-lg flex justify-end">
+          <TextHeader
+            country="한국"
+            isLoggedIn={false}
+            email="tutti@tutti.com"
+          />
+        </nav>
 
-      <div className="gap-md flex items-center">
-        <Link href={ROUTER_PATH.HOME}>
-          <div className="p-sm">
-            <JihyeIcon />
-          </div>
-        </Link>
-        <SearchInput />
-        <HeaderNavigation />
+        <div className="gap-md flex items-center">
+          <Link href={ROUTER_PATH.HOME}>
+            <div className="p-sm">
+              <JihyeIcon />
+            </div>
+          </Link>
+          <SearchInput />
+          <HeaderNavigation />
+        </div>
       </div>
     </header>
   );

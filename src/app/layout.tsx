@@ -33,11 +33,9 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard flex min-h-screen flex-col items-center`}
       >
-        <div className="flex w-full max-w-7xl flex-1 flex-col">
-          <div className="mt-2xl mb-4xl w-full">
-            <Header />
-          </div>
-          <main className="flex-1">{children}</main>
+        <Header />
+        <div className="w-full max-w-7xl flex-1">
+          <main>{children}</main>
         </div>
         <Footer />
       </body>

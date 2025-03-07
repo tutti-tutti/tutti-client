@@ -19,7 +19,7 @@ const ClickText = ({
   const baseStyle = 'text-base transition-colors duration-300';
   const stateStyles = disabled
     ? 'text-text-tertiary cursor-not-allowed'
-    : 'text-text-primary hover:text-text-primaryHover active:text-primaryPressed';
+    : 'text-text-primary hover:text-text-primaryHover active:text-text-primaryPressed';
 
   if (disabled || !href) {
     return (

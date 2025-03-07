@@ -1,1 +1,1 @@
-export * from './componentTypes';
+export * from './iconType';

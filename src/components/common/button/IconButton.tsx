@@ -1,5 +1,11 @@
-import Button from '@/components/common/button/Button';
-import type { IconButtonProps } from '@/types';
+import Button, { type ButtonVariant } from '@/components/common/button/Button';
+import type { IconType } from '@/types';
+
+export interface IconButtonProps {
+  icon: IconType;
+  variant?: ButtonVariant;
+  onClick: () => void;
+}
 
 const IconButton = ({ icon, variant, onClick }: IconButtonProps) => {
   return (

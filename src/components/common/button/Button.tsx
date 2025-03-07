@@ -1,7 +1,28 @@
 'use client';
 
-import type { ButtonProps } from '@/types';
+import type { IconType } from '@/types';
 import { cn } from '@/utils/cn';
+import { ReactNode } from 'react';
+
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'primaryOutline'
+  | 'secondaryOutline'
+  | 'disabled'
+  | 'tertiaryOutline'
+  | 'transparent'
+  | 'likeOn'
+  | 'likeOff';
+
+export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
+  icon?: IconType;
+  variant?: ButtonVariant;
+  className?: string;
+  onClick?: () => void;
+  children?: ReactNode;
+}
 
 const Button = ({
   type = 'button',

@@ -18,7 +18,7 @@ const TextHeader = ({
   const renderHeaderItems = (items: React.ReactNode[]) => {
     return items.map((item, index) => (
       <div key={index} className="flex items-center">
-        {index > 0 && <span className="mx-4 text-[#262626]">|</span>}
+        {index > 0 && <span className="text-text-primary mx-4">|</span>}
         {item}
       </div>
     ));

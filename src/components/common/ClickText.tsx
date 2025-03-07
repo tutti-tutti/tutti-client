@@ -18,8 +18,8 @@ const ClickText = ({
 }: ClickTextProps) => {
   const baseStyle = 'text-base transition-colors duration-300';
   const stateStyles = disabled
-    ? 'text-gray-400 cursor-not-allowed'
-    : 'text-[#262626] hover:text-[#5D38E8] active:text-[#38228C]';
+    ? 'text-text-tertiary cursor-not-allowed'
+    : 'text-text-primary hover:text-text-primaryHover active:text-text-primaryPressed';
 
   if (disabled || !href) {
     return (

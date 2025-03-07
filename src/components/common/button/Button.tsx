@@ -14,17 +14,20 @@ const Button = ({
   const defaultClass =
     'px-lg py-md flex gap-sm rounded-lg justify-center items-center cursor-pointer';
   const variantClass = {
-    primary: 'bg-[#663eff] text-white hover:bg-[#5d38e8] active:bg-[#5d38e8]',
-    secondary: 'bg-[#007bff] text-white hover:bg-[#0070e8] active:bg-[#0057b5]',
+    primary:
+      'bg-bg-primaryInteraction text-white hover:bg-bg-primaryHover active:bg-bg-primaryPressed',
+    secondary:
+      'bg-secondaryInteraction text-white hover:secondaryHover active:bg-secondaryPressed',
     primaryOutline:
-      'border border-[#663eff] text-[#663eff] hover:border--[#5d38e8] hover:text-[#5d38e8] active:border-[#5d38e8] active:text-[#5d38e8]',
+      'border border-primaryInteraction text-primaryInteraction hover:border--primaryHover hover:text-primaryHover active:border-primaryPressed active:text-primaryPressed',
     secondaryOutline:
-      'border border-[#007bff] text-[#007bff] hover:border--[#0070e8] hover:text-[#0070e8] active:border-[#0057b5] active:text-[#0057b5]',
+      'border border-secondaryInteraction text-secondaryInteraction hover:border--secondaryHover hover:text-secondaryHover active:border-secondaryPressed active:text-secondaryPressed',
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',
-    tertiaryOutline: '',
-    transparent: '',
+    tertiaryOutline:
+      'border border-border-disabled bg-bg-primary text-text-disabled',
+    transparent: 'text-text-secondary',
     likeOn: '',
-    likeOff: '',
+    likeOff: 'border border-border-primary text-text-secondary',
   };
 
   return (
@@ -35,7 +38,9 @@ const Button = ({
       disabled={variant === 'disabled'}
     >
       {icon}
+      {/* 📌 아이콘 컴포넌트로 변경 필요 */}
       {children}
+      <button className="border-bg-subBrand text-text-visited border"></button>
     </button>
   );
 };

@@ -46,9 +46,9 @@ const Button = ({
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',
     tertiaryOutline:
       'border border-border-disabled bg-bg-primary text-text-disabled',
-    transparent: 'text-[#525252]',
+    transparent: 'text-text-secondaryInteration',
     likeOn: 'border-bg-subBrand text-text-visited border',
-    likeOff: 'border border-border-primary text-[#525252]',
+    likeOff: 'border border-border-primary text-secondaryInteration',
   };
 
   return (

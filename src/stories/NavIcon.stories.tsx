@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import HeaderIcon from '@/components/common/HeaderIcon';
-import NavIcon from '@/components/layout/header/NavIcon';
+import NavIcon from '@/components/common/NavIcon';
+import HeaderNavigation from '@/components/layout/header/HeaderNavigation';
 import { NationIcon, CartIcon, UserIcon } from '@/assets/icons';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 
 const meta = {
-  title: 'Tutti/HeaderIcon',
-  component: HeaderIcon,
+  title: 'Tutti/NavIcon',
+  component: NavIcon,
   parameters: {
     layout: 'centered',
   },
@@ -26,7 +26,7 @@ const meta = {
       description: '아이콘 아래 표시되는 텍스트',
     },
   },
-} satisfies Meta<typeof HeaderIcon>;
+} satisfies Meta<typeof NavIcon>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -58,8 +58,8 @@ export const MyPage: Story = {
 export const All: Story = {
   args: {
     href: '',
-    icon: <NavIcon />,
+    icon: <HeaderNavigation />,
     label: '',
   },
-  render: () => <NavIcon />,
+  render: () => <HeaderNavigation />,
 };

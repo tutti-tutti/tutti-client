@@ -15,19 +15,19 @@ const Button = ({
     'px-lg py-md flex gap-sm rounded-lg justify-center items-center cursor-pointer';
   const variantClass = {
     primary:
-      'bg-bg-primaryInteraction text-white hover:bg-bg-primaryHover active:bg-bg-primaryPressed',
+      'bg-bg-primaryInteraction text-text-inverse hover:bg-bg-primaryHover active:bg-bg-primaryPressed',
     secondary:
-      'bg-secondaryInteraction text-white hover:secondaryHover active:bg-secondaryPressed',
+      'bg-bg-secondaryInteraction text-text-inverse hover:bg-bg-secondaryHover active:bg-bg-secondaryPressed',
     primaryOutline:
-      'border border-primaryInteraction text-primaryInteraction hover:border--primaryHover hover:text-primaryHover active:border-primaryPressed active:text-primaryPressed',
+      'border border-border-primaryInteraction text-text-primaryInteraction hover:border-border-primaryHover hover:text-text-primaryHover active:border-border-primaryPressed active:text-text-primaryPressed',
     secondaryOutline:
-      'border border-secondaryInteraction text-secondaryInteraction hover:border--secondaryHover hover:text-secondaryHover active:border-secondaryPressed active:text-secondaryPressed',
+      'border border-border-secondaryInteraction text-text-secondaryInteraction hover:border-border-secondaryHover hover:text-text-secondaryHover active:border-border-secondaryPressed active:text-text-secondaryPressed',
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',
     tertiaryOutline:
       'border border-border-disabled bg-bg-primary text-text-disabled',
-    transparent: 'text-text-secondary',
+    transparent: 'text-[#525252]',
     likeOn: 'border-bg-subBrand text-text-visited border',
-    likeOff: 'border border-border-primary text-text-secondary',
+    likeOff: 'border border-border-primary text-[#525252]',
   };
 
   return (

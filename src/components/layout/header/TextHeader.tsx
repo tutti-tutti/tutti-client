@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
-import ClickText from '@/components/common/ClickText';
+import { ClickText } from '@/components/common/header';
 
 interface TextHeaderProps {
   email: string;

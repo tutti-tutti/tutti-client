@@ -1,4 +1,4 @@
-import NavIcon from '@/components/common/NavIcon';
+import { NavIcon } from '@/components/common/header';
 import { NationIcon, CartIcon, UserIcon } from '@/assets/icons';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 

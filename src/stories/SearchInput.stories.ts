@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn, expect, waitFor, userEvent, within } from '@storybook/test';
 
-import SearchInput from '@/components/common/SearchInput';
+import { SearchInput } from '@/components/common/header';
 
 const meta = {
   title: 'Tutti/SearchInput',

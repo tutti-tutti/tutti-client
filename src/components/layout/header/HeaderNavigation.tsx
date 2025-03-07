@@ -1,5 +1,5 @@
-import { NavIcon } from '@/components/common/header';
-import { NationIcon, CartIcon, UserIcon } from '@/assets/icons';
+import { NavIcon } from '@/components';
+import { NationIcon, CartIcon, UserIcon } from '@/assets';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 
 const HeaderNavigation = () => {

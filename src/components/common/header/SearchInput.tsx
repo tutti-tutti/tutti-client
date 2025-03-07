@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 
-import { SearchIcon } from '@/assets/icons';
-import { useDebounce } from '@/hooks/common/useDebounce';
-import { cn } from '@/utils/cn';
+import { SearchIcon } from '@/assets';
+import { useDebounce } from '@/hooks';
+import { cn } from '@/utils';
 
 interface SearchInputProps {
   placeholder?: string;

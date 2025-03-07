@@ -5,7 +5,7 @@ import { NationIcon, CartIcon, UserIcon } from '@/assets/icons';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 
 const meta = {
-  title: 'Tutti/NavIcon',
+  title: 'Header/NavIcon',
   component: NavIcon,
   parameters: {
     layout: 'centered',

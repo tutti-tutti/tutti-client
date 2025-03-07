@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { SearchInput } from '@/components/common';
-import { JihyeIcon } from '@/assets/icons';
+import { SearchInput } from '@/components';
+import { JihyeIcon } from '@/assets';
 import { ROUTER_PATH } from '@/constants';
 import HeaderNavigation from './HeaderNavigation';
 import TextHeader from './TextHeader';

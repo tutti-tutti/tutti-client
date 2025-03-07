@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { Header } from '@/components';
+import { Header, Footer } from '@/components';
 import '@/styles/globals.css';
 
 if (process.env.NODE_ENV === 'development') {
@@ -31,14 +31,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard flex flex-col items-center`}
+        className={`${pretendard.variable} font-pretendard flex min-h-screen flex-col items-center`}
       >
-        <div className="w-full max-w-7xl">
+        <div className="flex w-full max-w-7xl flex-1 flex-col">
           <div className="mt-2xl mb-4xl w-full">
             <Header />
           </div>
-          <main className="w-full">{children}</main>
+          <main className="flex-1">{children}</main>
         </div>
+        <Footer />
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const defaultInputClass =
-  'px-md py-sm block w-full rounded-sm border focus:outline-none';
+  'px-md py-sm block w-full rounded-sm border focus:outline-none disabled:text-text-tertiary disabled:border-border-disabled disabled:bg-bg-tertiary';
 const variantClass = {
   default: 'border-border-primary focus:border-border-focus',
   success:

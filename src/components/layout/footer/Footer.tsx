@@ -1,7 +1,7 @@
 import FooterLogo from './FooterLogo';
 import FooterNav from './FooterNav';
 import FooterCompanyInfo from './FooterCompanyInfo';
-import FooterInfoSection from './FooterInfoSection';
+import FooterCustomerInfo from './FooterCustomerInfo';
 
 const Footer = () => {
   return (
@@ -15,12 +15,12 @@ const Footer = () => {
 
           <div className="flex justify-between">
             <FooterCompanyInfo />
-            <FooterInfoSection />
+            <FooterCustomerInfo />
           </div>
         </div>
 
         <div className="pt-2xl text-text-tertiaryInfo text-sm">
-          Copyright &copy; splash. All Rights Reserved. Hosting by Cafe24 Corp.
+          Copyright &copy; tutti. All Rights Reserved.
         </div>
       </div>
     </footer>

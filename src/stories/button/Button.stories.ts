@@ -121,6 +121,16 @@ export const LikeOff: Story = {
   },
 };
 
+export const MoreView: Story = {
+  args: {
+    variant: 'transparent',
+    icon: 'chevronsDown',
+    iconPosition: 'right',
+    children: '더보기',
+    className: '!py-lg text-text-secondary w-full text-xl',
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     variant: 'primary',

@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
-import { ClickText } from '@/components';
+import { ClickText, LogoutButton } from '@/components';
 
 interface TextHeaderProps {
   email: string;
@@ -39,7 +39,7 @@ const TextHeader = ({
   const firstItem = isLoggedIn ? (
     <div key="account" className="flex items-center">
       <span className="mr-2">{email}</span>
-      <ClickText>{PATH_NAME.LOGOUT}</ClickText>
+      <LogoutButton />
     </div>
   ) : (
     <ClickText key="login" href={ROUTER_PATH.LOGIN}>

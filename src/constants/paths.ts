@@ -1,4 +1,5 @@
 export const ROUTER_PATH = {
+  HOME: '/',
   SIGNUP: '/signup',
   LOGIN: '/login',
   SUPPORT: '/support',

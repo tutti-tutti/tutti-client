@@ -147,3 +147,22 @@ export const IconRight: Story = {
     iconPosition: 'right',
   },
 };
+
+export const ScrollToTop: Story = {
+  args: {
+    variant: 'primary',
+    icon: 'upArrow',
+    iconProps: {
+      width: 32,
+      height: 32,
+      style: {
+        minWidth: '32px',
+        minHeight: '32px',
+        width: '32px',
+        height: '32px',
+      },
+    },
+    className:
+      'bg-bg-primary text-text-primary hover:text-text-inverse active:text-text-inverse shadow-custom-effect h-32 w-16 rounded-full',
+  },
+};

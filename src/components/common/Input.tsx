@@ -18,14 +18,7 @@ const variantClass = {
   error: 'border-border-danger focus:border-border-danger bg-bg-dangerSubtle',
 };
 
-const Input: React.FC<InputProps> = ({
-  label,
-  name,
-  icon,
-  error,
-  success,
-  ...props
-}) => {
+const Input = ({ label, name, icon, error, success, ...props }: InputProps) => {
   return (
     <>
       {label && (

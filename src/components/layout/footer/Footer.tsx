@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="py-6xl bg-bg-tertiary w-full">
       <div className="mx-auto max-w-7xl">
-        <div className="space-y-3xl pb-5xl border-border-tertiaryHover border-b-[0.5px]">
+        <div className="space-y-3xl pb-6xl border-border-tertiaryHover border-b-[0.5px]">
           <div className="space-y-4xl">
             <FooterLogo />
             <FooterNav />

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ClickTextButton } from '@/components';
 
 const meta: Meta<typeof ClickTextButton> = {
-  title: 'TUTTI/button/ClickTextButton',
+  title: 'Button/ClickTextButton',
   component: ClickTextButton,
   parameters: {
     layout: 'centered',

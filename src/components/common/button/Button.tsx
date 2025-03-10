@@ -1,8 +1,10 @@
 'use client';
 
-import type { IconType } from '@/types';
-import { cn } from '@/utils/cn';
 import { ReactNode } from 'react';
+
+import { cn } from '@/utils/cn';
+import type { IconType } from '@/types';
+import Icon from '../Icon';
 
 export type ButtonVariant =
   | 'primary'
@@ -18,19 +20,23 @@ export type ButtonVariant =
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   icon?: IconType;
+  iconPosition?: 'left' | 'right';
   variant?: ButtonVariant;
   className?: string;
   onClick?: () => void;
   children?: ReactNode;
+  iconProps?: React.SVGProps<SVGSVGElement>;
 }
 
 const Button = ({
   type = 'button',
   icon,
+  iconPosition = 'left',
   variant = 'primary',
   className,
   onClick,
   children,
+  iconProps,
 }: ButtonProps) => {
   const defaultClass =
     'px-lg py-md flex gap-sm rounded-lg justify-center items-center cursor-pointer';
@@ -58,9 +64,13 @@ const Button = ({
       onClick={onClick}
       disabled={variant === 'disabled'}
     >
-      {icon}
-      {/* 📌 아이콘 컴포넌트로 변경 필요 */}
+      {iconPosition === 'left' && icon && (
+        <Icon iconName={icon} {...iconProps} />
+      )}
       {children}
+      {iconPosition === 'right' && icon && (
+        <Icon iconName={icon} {...iconProps} />
+      )}
     </button>
   );
 };

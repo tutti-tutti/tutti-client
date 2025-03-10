@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TextHeader } from '@/components';
 
 const meta = {
-  title: 'Tutti/TextHeader',
+  title: 'Header/TextHeader',
   component: TextHeader,
   parameters: {
     layout: 'centered',

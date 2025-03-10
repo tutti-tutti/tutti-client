@@ -8,7 +8,7 @@ import TextHeader from './TextHeader';
 const Header = () => {
   return (
     <header className="pt-2xl pb-4xl border-border-secondary flex w-full flex-col border-b">
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-[1280px]">
         <nav className="mb-lg flex justify-end">
           <TextHeader
             country="한국"

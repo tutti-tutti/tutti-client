@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@/components';
 
+import type { IconType } from '@/types';
+
 const meta: Meta<typeof Button> = {
-  title: 'TUTTI/button/Button',
+  title: 'Button/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -28,8 +30,26 @@ const meta: Meta<typeof Button> = {
       control: 'text',
       defaultValue: 'button',
     },
+    iconPosition: {
+      control: 'select',
+      options: ['left', 'right'],
+      defaultValue: 'left',
+    },
     icon: {
-      control: 'boolean',
+      control: 'select',
+      options: [
+        undefined,
+        'cancelCircle',
+        'heart',
+        'heartFill',
+        'plus',
+        'minus',
+        'check',
+        'search',
+        'cart',
+        'user',
+      ] as (IconType | undefined)[],
+      description: '버튼에 표시할 아이콘',
     },
     onClick: { action: 'clicked' },
   },
@@ -98,5 +118,22 @@ export const LikeOff: Story = {
   args: {
     variant: 'likeOff',
     children: 'likeOff',
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Button with Icon',
+    icon: 'heartFill',
+  },
+};
+
+export const IconRight: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Icon Right',
+    icon: 'heartFill',
+    iconPosition: 'right',
   },
 };

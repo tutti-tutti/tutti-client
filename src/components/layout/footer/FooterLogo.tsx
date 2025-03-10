@@ -1,4 +1,4 @@
-import { JihyeIcon } from '@/assets';
+import { JihyeIcon } from '@/components';
 
 const FooterLogo = () => {
   return (

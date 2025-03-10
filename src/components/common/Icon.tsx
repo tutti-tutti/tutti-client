@@ -31,7 +31,7 @@ import {
   ViewIcon,
   XIcon,
   GoogleLogoIcon,
-} from '@/assets';
+} from '../icons';
 
 export const IconMap: Record<
   IconType,

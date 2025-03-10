@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { SearchIcon } from '@/assets';
+import { SearchIcon } from '@/components';
 import { useDebounce } from '@/hooks';
 import { cn } from '@/utils';
 

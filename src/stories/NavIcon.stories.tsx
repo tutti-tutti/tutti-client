@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { NavIcon, HeaderNavigation } from '@/components';
-import { NationIcon, CartIcon, UserIcon } from '@/assets/icons';
+import {
+  NavIcon,
+  HeaderNavigation,
+  NationIcon,
+  CartIcon,
+  UserIcon,
+} from '@/components';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 
 const meta = {

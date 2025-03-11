@@ -4,6 +4,7 @@ export { default as IconButton } from './button/IconButton';
 export { default as LogoutButton } from './button/LogoutButton';
 export { default as MoreViewButton } from './button/MoreViewButton';
 export { default as ScrollToTopButton } from './button/ScrollToTopButton';
+export { default as ExtraButton } from './button/ExtraButton';
 export * from './header';
 export { default as Input } from './Input';
 export { default as Icon } from './Icon';

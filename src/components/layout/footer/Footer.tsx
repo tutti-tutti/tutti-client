@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <footer className="py-6xl bg-bg-tertiary w-full">
       <div className="mx-auto max-w-[1280px]">
-        <div className="space-y-3xl pb-6xl border-border-tertiaryHover border-b-[0.5px]">
-          <div className="space-y-4xl">
+        <div className="gap-3xl pb-6xl border-border-tertiaryHover flex flex-col border-b-[0.5px]">
+          <div className="gap-4xl flex flex-col">
             <FooterLogo />
             <FooterNav />
           </div>

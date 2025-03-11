@@ -1,10 +1,10 @@
 const FooterCompanyInfo = () => {
   return (
-    <div className="space-y-lg">
+    <div className="gap-lg flex flex-col">
       <p className="text-xl">쇼핑몰 기본정보</p>
 
-      <div className="space-y-sm">
-        <div className="space-x-xs">
+      <div className="gap-sm flex flex-col">
+        <div className="gap-xs flex items-center">
           <span>상호명</span>
           <span className="text-text-secondary">splash</span>
           <span className="ml-xs">대표자명</span>
@@ -15,7 +15,7 @@ const FooterCompanyInfo = () => {
           </span>
         </div>
 
-        <div className="space-x-xs">
+        <div className="gap-xs flex items-center">
           <span>대표전화</span>
           <span className="text-text-secondary">010-5059-6778</span>
           <span className="ml-xs">사업자 등록번호</span>

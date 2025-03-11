@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /** 
   * Spacing
@@ -32,42 +32,42 @@
 }
 
 @theme {
-    --padding-2xs: var(--space-2xs);
-    --padding-xs: var(--space-xs);
-    --padding-sm: var(--space-sm);
-    --padding-md: var(--space-md);
-    --padding-lg: var(--space-lg);
-    --padding-xl: var(--space-xl);
-    --padding-2xl: var(--space-2xl);
-    --padding-3xl: var(--space-3xl);
-    --padding-4xl: var(--space-4xl);
-    --padding-5xl: var(--space-5xl);
-    --padding-6xl: var(--space-6xl);
-    --padding-7xl: var(--space-7xl);
+  --padding-2xs: var(--space-2xs);
+  --padding-xs: var(--space-xs);
+  --padding-sm: var(--space-sm);
+  --padding-md: var(--space-md);
+  --padding-lg: var(--space-lg);
+  --padding-xl: var(--space-xl);
+  --padding-2xl: var(--space-2xl);
+  --padding-3xl: var(--space-3xl);
+  --padding-4xl: var(--space-4xl);
+  --padding-5xl: var(--space-5xl);
+  --padding-6xl: var(--space-6xl);
+  --padding-7xl: var(--space-7xl);
 
-    --margin-2xs: var(--space-2xs);
-    --margin-xs: var(--space-xs);
-    --margin-sm: var(--space-sm);
-    --margin-md: var(--space-md);
-    --margin-lg: var(--space-lg);
-    --margin-xl: var(--space-xl);
-    --margin-2xl: var(--space-2xl);
-    --margin-3xl: var(--space-3xl);
-    --margin-4xl: var(--space-4xl);
-    --margin-5xl: var(--space- 5xl);
-    --margin-6xl: var(--space-6xl);
-    --margin-7xl: var(--space-7xl);
+  --margin-2xs: var(--space-2xs);
+  --margin-xs: var(--space-xs);
+  --margin-sm: var(--space-sm);
+  --margin-md: var(--space-md);
+  --margin-lg: var(--space-lg);
+  --margin-xl: var(--space-xl);
+  --margin-2xl: var(--space-2xl);
+  --margin-3xl: var(--space-3xl);
+  --margin-4xl: var(--space-4xl);
+  --margin-5xl: var(--space-5xl);
+  --margin-6xl: var(--space-6xl);
+  --margin-7xl: var(--space-7xl);
 
-    --gap-2xs: var(--space-2xs);
-    --gap-xs: var(--space-xs);
-    --gap-sm: var(--space-sm);
-    --gap-md: var(--space-md);
-    --gap-lg: var(--space-lg);
-    --gap-xl: var(--space-xl);
-    --gap-2xl: var(--space-2xl);
-    --gap-3xl: var(--space-3xl);
-    --gap-4xl: var(--space-4xl);
-    --gap-5xl: var(--space-5xl);
-    --gap-6xl: var(--space-6xl);
-    --gap-7xl: var(--space-7xl);
-  }
+  --gap-2xs: var(--space-2xs);
+  --gap-xs: var(--space-xs);
+  --gap-sm: var(--space-sm);
+  --gap-md: var(--space-md);
+  --gap-lg: var(--space-lg);
+  --gap-xl: var(--space-xl);
+  --gap-2xl: var(--space-2xl);
+  --gap-3xl: var(--space-3xl);
+  --gap-4xl: var(--space-4xl);
+  --gap-5xl: var(--space-5xl);
+  --gap-6xl: var(--space-6xl);
+  --gap-7xl: var(--space-7xl);
+}

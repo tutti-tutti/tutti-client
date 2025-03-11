@@ -10,6 +10,7 @@ export type ButtonVariant =
   | 'primary'
   | 'secondary'
   | 'primaryOutline'
+  | 'primaryShadow'
   | 'secondaryOutline'
   | 'disabled'
   | 'tertiaryOutline'
@@ -47,6 +48,8 @@ const Button = ({
       'bg-bg-secondaryInteraction text-text-inverse hover:bg-bg-secondaryHover active:bg-bg-secondaryPressed',
     primaryOutline:
       'border border-border-primaryInteraction text-text-primaryInteraction hover:border-border-primaryHover hover:text-text-primaryHover active:border-border-primaryPressed active:text-text-primaryPressed',
+    primaryShadow:
+      'bg-bg-primary text-text-primary hover:text-text-inverse hover:bg-bg-primaryHover active:bg-bg-primaryPressed active:text-text-inverse shadow-custom-effect',
     secondaryOutline:
       'border border-border-secondaryInteraction text-text-secondaryInteraction hover:border-border-secondaryHover hover:text-text-secondaryHover active:border-border-secondaryPressed active:text-text-secondaryPressed',
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',

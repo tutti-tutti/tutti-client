@@ -51,7 +51,8 @@ const ScrollToTopButton = () => {
           },
         }}
         onClick={scrollToTop}
-        className="bg-bg-primary text-text-primary hover:text-text-inverse active:text-text-inverse shadow-custom-effect h-32 w-16 rounded-full"
+        variant="primaryShadow"
+        className="h-32 w-16 rounded-full"
       />
     </div>
   );

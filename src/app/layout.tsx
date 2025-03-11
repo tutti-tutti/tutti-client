@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { Header, Footer } from '@/components';
+import { Header, Footer, ScrollToTopButton } from '@/components';
 import '@/styles/globals.css';
 
 if (process.env.NODE_ENV === 'development') {
@@ -34,10 +34,11 @@ export default function RootLayout({
         className={`${pretendard.variable} font-pretendard flex min-h-screen flex-col items-center`}
       >
         <Header />
-        <div className="w-full max-w-7xl flex-1">
+        <div className="relative w-full max-w-[1280px] flex-1">
           <main>{children}</main>
         </div>
         <Footer />
+        <ScrollToTopButton />
       </body>
     </html>
   );

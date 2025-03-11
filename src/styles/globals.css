@@ -1,10 +1,10 @@
-@import "tailwindcss";
-@import "../styles/token/colors/primitive.css";
-@import "../styles/token/colors/scale.css";
-@import "../styles/token/colors/semantic.css";
-@import "../styles/token/border.css";
-@import "../styles/token/spacing.css";
-@import "../styles/fonts.css";
+@import 'tailwindcss';
+@import '../styles/token/colors/primitive.css';
+@import '../styles/token/colors/scale.css';
+@import '../styles/token/colors/semantic.css';
+@import '../styles/token/border.css';
+@import '../styles/token/spacing.css';
+@import '../styles/fonts.css';
 
 @layer base {
   *,
@@ -17,6 +17,10 @@
 }
 @theme {
   --font-pretendard: var(--font-pretendard);
+
+  --shadow-custom-effect:
+    0px 4px 8px 0px var(--color-shadow-cast),
+    0px 0px 4px 0px var(--color-shadow-core);
 }
 
 :root {

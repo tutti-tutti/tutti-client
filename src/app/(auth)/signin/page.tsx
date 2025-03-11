@@ -2,7 +2,15 @@ import { Button, ClickText, Input } from '@/components';
 import SocialLoginButton from '@/components/auth/SocialLoginButton';
 import { AUTH_CONSTANTS } from '@/constants';
 
-const { LOGIN, FORGOT_PW, AUTO_LOGIN, SOCIAL_LOGIN, TO_LOGIN } = AUTH_CONSTANTS;
+const {
+  LOGIN,
+  FORGOT_PW,
+  AUTO_LOGIN,
+  SOCIAL_LOGIN,
+  TO_LOGIN,
+  EMAIL_INPUT,
+  PW_INPUT,
+} = AUTH_CONSTANTS;
 
 const SigninPage = () => {
   const tempLoginServerAction = async () => {
@@ -16,17 +24,16 @@ const SigninPage = () => {
           <legend className="mb-xs font-style-heading">{LOGIN}</legend>
           <div className="gap-md mb-sm flex flex-col">
             <Input
-              label="이메일 입력"
+              label={EMAIL_INPUT.LABEL}
               name="email"
-              placeholder="이메일을 입력해주세요"
+              placeholder={EMAIL_INPUT.PLACEHOLDER}
             />
             <Input
-              label="비밀번호 입력"
+              label={PW_INPUT.LABEL}
               name="pw"
               type="password"
-              placeholder="비밀번호를 입력해주세요"
+              placeholder={PW_INPUT.PLACEHOLDER}
               icon="viewCancel"
-              error="아이디 혹은 비밀번호가 잘못되었습니다."
             />
           </div>
           <div className="flex justify-between">

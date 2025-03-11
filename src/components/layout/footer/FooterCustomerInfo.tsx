@@ -1,9 +1,9 @@
 const FooterCustomerInfo = () => {
   return (
-    <div className="space-y-lg">
+    <div className="gap-lg flex flex-col">
       <p className="text-xl">고객센터 정보</p>
 
-      <div className="space-y-sm">
+      <div className="gap-sm flex flex-col">
         <div>
           <div>
             <span>상담/주문 전화</span>

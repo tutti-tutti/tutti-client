@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   success?: string;
   className?: string;
+  iconProps?: React.SVGProps<SVGSVGElement>;
 }
 
 const defaultInputClass =
@@ -28,6 +29,7 @@ const Input = ({
   error,
   success,
   className,
+  iconProps,
   ...props
 }: InputProps) => {
   return (
@@ -55,7 +57,7 @@ const Input = ({
         />
         {icon && (
           <div className="pr-sm absolute inset-y-0 right-0 flex items-center">
-            <Icon iconName={icon} />
+            <Icon iconName={icon} {...iconProps} />
           </div>
         )}
       </div>

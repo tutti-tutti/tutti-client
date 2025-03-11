@@ -6,7 +6,7 @@ const sampleImage =
   'https://cdn-optimized.imweb.me/upload/S20240328110100ace0842/55757f8d5f03e.jpg';
 
 const meta: Meta<typeof ProductThumbnail> = {
-  title: 'Components/ProductThumbnail',
+  title: 'Product/ProductThumbnail',
   component: ProductThumbnail,
   parameters: {
     layout: 'centered',

@@ -7,6 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: string;
   error?: string;
   success?: string;
+  className?: string;
 }
 
 const defaultInputClass =
@@ -18,7 +19,15 @@ const variantClass = {
   error: 'border-border-danger focus:border-border-danger bg-bg-dangerSubtle',
 };
 
-const Input = ({ label, name, icon, error, success, ...props }: InputProps) => {
+const Input = ({
+  label,
+  name,
+  icon,
+  error,
+  success,
+  className,
+  ...props
+}: InputProps) => {
   return (
     <>
       {label && (
@@ -40,6 +49,7 @@ const Input = ({ label, name, icon, error, success, ...props }: InputProps) => {
               [variantClass.default]: !error && !success,
             },
             icon && 'pr-10',
+            className,
           )}
           {...props}
         />

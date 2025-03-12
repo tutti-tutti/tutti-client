@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+:root {
+  /** font famaily */
+  --font-sans: 'Pretendard';
+  --font-serif: 'Noto Serif';
+
+  /** font size */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+  --text-4xl: 36px;
+  --text-5xl: 40px;
+  --text-6xl: 48px;
+  --text-7xl: 60px;
+
+  /** line height */
+  --leading-xs: 16px;
+  --leading-sm: 20px;
+  --leading-base: 24px;
+  --leading-lg: 28px;
+  --leading-xl: 32px;
+  --leading-2xl: 40px;
+  --leading-3xl: 48px;
+  --leading-4xl: 56px;
+  --leading-5xl: 64px;
+  --leading-6xl: 72px;
+  --leading-7xl: 80px;
+  --leading-none: 1;
+
+  /** letter spacing */
+  --tracking-tighter: -0.4px;
+  --tracking-tight: -0.2px;
+  --tracking-normal: 0px;
+  --tracking-wide: 1px;
+  --tracking-wider: 0.2px;
+  --tracking-widest: 0.4px;
+  --tracking-expanded: 1.5px;
+
+  /** font weight */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  --font-weight-extrablack: 950;
+}
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+  --text-5xl: var(--text-5xl);
+  --text-6xl: var(--text-6xl);
+  --text-7xl: var(--text-7xl);
+
+  --leading-xs: var(--leading-xs);
+  --leading-sm: var(--leading-sm);
+  --leading-base: var(--leading-base);
+  --leading-lg: var(--leading-lg);
+  --leading-xl: var(--leading-xl);
+  --leading-2xl: var(--leading-2xl);
+  --leading-3xl: var(--leading-3xl);
+  --leading-4xl: var(--leading-4xl);
+  --leading-5xl: var(--leading-5xl);
+  --leading-6xl: var(--leading-6xl);
+  --leading-7xl: var(--leading-7xl);
+  --leading-none: var(--leading-none);
+
+  --tracking-tighter: var(--tracking-tighter);
+  --tracking-tight: var(--tracking-tight);
+  --tracking-normal: var(--tracking-normal);
+  --tracking-wide: var(--tracking-wide);
+  --tracking-wider: var(--tracking-wider);
+  --tracking-widest: var(--tracking-widest);
+  --tracking-expanded: var(--tracking-expanded);
+
+  --font-weight-thin: var(--font-weight-thin);
+  --font-weight-extralight: var(--font-weight-extralight);
+  --font-weight-light: var(--font-weight-light);
+  --font-weight-normal: var(--font-weight-normal);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold);
+  --font-weight-extrabold: var(--font-weight-extrabold);
+  --font-weight-black: var(--font-weight-black);
+  --font-weight-extrablack: var(--font-weight-extrablack);
+}

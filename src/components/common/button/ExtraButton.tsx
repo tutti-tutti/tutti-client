@@ -9,7 +9,7 @@ interface ExtraButtonProps {
 const ExtraButton = ({ children, onClick }: ExtraButtonProps) => {
   return (
     <Button
-      className="py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info bg-[linear-gradient(180deg,_#FFF_17.28%,_#D4D4D4_495.36%)] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.16),_0px_0px_1px_0px_rgba(0,0,0,0.12)]"
+      className="py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info shadow-custom-effect bg-[linear-gradient(180deg,_#FFF_17.28%,_#D4D4D4_495.36%)]"
       onClick={onClick}
     >
       {children}

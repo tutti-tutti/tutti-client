@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard flex min-h-screen flex-col items-center`}
+        className={`${pretendard.variable} font-pretendard font-style-paragraph flex min-h-screen flex-col items-center`}
       >
         <Header />
         <div className="relative w-full max-w-[1280px] flex-1">

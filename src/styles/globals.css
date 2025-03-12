@@ -44,3 +44,7 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+strong {
+  font-weight: var(--font-weight-medium);
+}

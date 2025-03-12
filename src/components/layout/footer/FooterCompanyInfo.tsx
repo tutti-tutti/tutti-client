@@ -1,35 +1,49 @@
 const FooterCompanyInfo = () => {
   return (
-    <div className="gap-lg flex flex-col">
-      <p className="text-xl">쇼핑몰 기본정보</p>
+    <section className="gap-lg flex flex-col">
+      <h6 className="font-style-subHeading">쇼핑몰 기본정보</h6>
 
       <div className="gap-sm flex flex-col">
-        <div className="gap-xs flex items-center">
-          <span>상호명</span>
-          <span className="text-text-secondary">splash</span>
-          <span className="ml-xs">대표자명</span>
-          <span className="text-text-secondary">이규화</span>
-          <span className="ml-xs">사업장주소</span>
-          <span className="text-text-secondary">
-            병우빌딩 908호 서울특별시 마포구 서강로 133
-          </span>
+        <div className="gap-xs flex flex-col md:flex-row">
+          <p>
+            <strong>상호명</strong>
+            <span className="text-text-secondary ml-2xs">splash</span>
+          </p>
+          <p>
+            <strong>대표자명</strong>
+            <span className="text-text-secondary ml-2xs">ooo</span>
+          </p>
+          <p>
+            <strong>사업장주소</strong>
+            <span className="text-text-secondary ml-2xs">
+              병우빌딩 908호 서울특별시 마포구 서강로 133
+            </span>
+          </p>
         </div>
 
-        <div className="gap-xs flex items-center">
-          <span>대표전화</span>
-          <span className="text-text-secondary">010-5059-6778</span>
-          <span className="ml-xs">사업자 등록번호</span>
-          <span className="text-text-secondary">211-12-64382</span>
-          <span className="ml-xs">통신판매업 신고번호</span>
-          <span className="text-text-secondary">추후작성예정</span>
+        <div className="gap-xs flex flex-col md:flex-row">
+          <p>
+            <strong>대표전화</strong>
+            <span className="text-text-secondary ml-2xs">010-5059-6778</span>
+          </p>
+          <p>
+            <strong>사업자 등록번호</strong>
+            <span className="text-text-secondary ml-2xs">211-12-64382</span>
+          </p>
+          <p>
+            <strong>통신판매업 신고번호</strong>
+            <span className="text-text-secondary ml-2xs">추후작성예정</span>
+          </p>
         </div>
 
-        <div>
-          <span>개인정보보호책임자</span>
-          <span className="text-text-secondary ml-2xs">이규화</span>
+        <div className="gap-xs flex flex-col md:flex-row">
+          <p>
+            <strong>개인정보보호책임자</strong>
+            <span className="text-text-secondary ml-2xs">이규화</span>
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

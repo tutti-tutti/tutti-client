@@ -12,7 +12,7 @@ const {
 } = AUTH_CONSTANTS;
 const { ANNOUNCEMENT, ALL, ESSENTIALS, OPTIONS } = CHECK_POLICY;
 
-const SigninPage = () => {
+const SignupPage = () => {
   const tempLoginServerAction = async () => {
     'use server';
   };
@@ -94,4 +94,4 @@ const SigninPage = () => {
   );
 };
 
-export default SigninPage;
+export default SignupPage;

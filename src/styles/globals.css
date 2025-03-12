@@ -15,6 +15,11 @@
     border-color: var(--color-border-primary, currentColor);
   }
 }
+
+@utility bg-custom-gradient {
+  background: linear-gradient(180deg, #fff 17.28%, #d4d4d4 495.36%);
+}
+
 @theme {
   --font-pretendard: var(--font-pretendard);
 

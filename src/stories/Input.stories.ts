@@ -62,7 +62,7 @@ export const WithIcon: Story = {
   args: {
     name: 'with-icon',
     placeholder: '텍스트를 입력하세요',
-    icon: 'close',
+    icon: 'cancelCircle',
   },
 };
 
@@ -87,7 +87,7 @@ export const WithLabelAndIcon: Story = {
     label: '이름',
     name: 'name',
     placeholder: '이름을 입력하세요',
-    icon: 'close',
+    icon: 'cancelCircle',
   },
 };
 
@@ -96,7 +96,7 @@ export const WithLabelIconAndError: Story = {
     label: '비밀번호',
     name: 'password',
     placeholder: '비밀번호를 입력하세요',
-    icon: 'close',
+    icon: 'cancelCircle',
     error: '비밀번호는 8자 이상이어야 합니다',
     type: 'password',
   },
@@ -107,7 +107,7 @@ export const WithLabelIconAndSuccess: Story = {
     label: '사용자명',
     name: 'username',
     placeholder: '사용자명을 입력하세요',
-    icon: 'close',
+    icon: 'cancelCircle',
     success: '사용자명을 사용할 수 있습니다',
   },
 };
@@ -125,7 +125,7 @@ export const DisabledWithLabelAndIcon: Story = {
     label: '주소',
     name: 'address',
     placeholder: '이 필드는 비활성화되어 있습니다',
-    icon: 'close',
+    icon: 'cancelCircle',
     disabled: true,
   },
 };

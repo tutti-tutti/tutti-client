@@ -21,7 +21,7 @@ const Header = () => {
           <Link href={ROUTER_PATH.HOME}>
             <Logo />
           </Link>
-          <div className="hidden md:block">
+          <div className="hidden flex-1 md:block">
             <SearchInput />
           </div>
           <div className="md:gap-xl gap-md flex">

@@ -47,7 +47,7 @@ const SearchInput = ({
       </div>
 
       <form
-        className="px-lg py-md relative flex items-center justify-between"
+        className="px-2xl py-md relative flex items-center justify-between"
         onSubmit={handleSubmit}
       >
         <input
@@ -55,10 +55,10 @@ const SearchInput = ({
           value={inputValue}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full text-2xl focus:outline-none"
+          className="font-style-subHeading w-full font-normal focus:outline-none"
         />
 
-        <button className="ml-xs cursor-pointer" aria-label="search">
+        <button className="cursor-pointer" aria-label="search">
           <SearchIcon />
         </button>
       </form>

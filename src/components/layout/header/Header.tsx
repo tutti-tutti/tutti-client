@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { ROUTER_PATH } from '@/constants';
-import { SearchInput, JihyeIcon, SearchIcon, NavIcon } from '@/components';
+import { SearchInput, Logo, SearchIcon, NavIcon } from '@/components';
 import HeaderNavigation from './HeaderNavigation';
 import TextHeader from './TextHeader';
 
@@ -19,7 +19,7 @@ const Header = () => {
 
         <div className="gap-lg flex h-[54px] items-center justify-between md:h-[84px]">
           <Link href={ROUTER_PATH.HOME}>
-            <JihyeIcon className="w-[104px] md:w-[208px]" />
+            <Logo />
           </Link>
           <div className="hidden md:block">
             <SearchInput />

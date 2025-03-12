@@ -5,3 +5,9 @@ export const API_ROUTE_BASE_URL = process.env.API_ROUTE_BASE_URL;
 export const USERS_ENDPOINTS = {
   LIST: `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}/users`,
 };
+
+export const PRODUCTS_ENDPOINTS = {
+  LIST: `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}/products`,
+  LATEST: `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}/products/latest`,
+  DETAIL: `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}/products/:productId`,
+};

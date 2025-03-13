@@ -1,6 +1,6 @@
 import { cn } from '@/utils';
-import { LeftArrowIcon, RightArrowIcon } from '../icons';
 import '@/styles/carousel.css';
+import { LeftArrowIcon, RightArrowIcon } from '../icons';
 
 type CustomArrowProps = {
   className?: string;

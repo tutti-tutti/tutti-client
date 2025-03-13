@@ -44,9 +44,9 @@ const InfoRow: React.FC<InfoRowProps> = ({
 
 // 각 Info 항목
 const InfoItem: React.FC<InfoItemType> = ({ label, value }) => (
-  <p>
+  <p className="">
     <strong>{label}</strong>
-    <span className="text-text-secondary ml-2xs">{value}</span>
+    <span className="text-text-secondary ml-2xs break-keep">{value}</span>
   </p>
 );
 

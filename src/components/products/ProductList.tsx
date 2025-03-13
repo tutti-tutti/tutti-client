@@ -8,7 +8,7 @@ const ProductList = async () => {
 
   return (
     <section>
-      <ul className="gap-x-md gap-y-7xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="gap-x-md gap-y-7xl py-7xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {productItems.map((item: Product) => (
           <ProductItem key={item.productId} {...item} />
         ))}

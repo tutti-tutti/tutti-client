@@ -17,12 +17,22 @@ export const verifyCodeAction = async (
       verify: verificationCode,
     });
 
+    if (!validatedData.success)
+      return {
+        ...prevState,
+        success: false,
+        emailVerified: false,
+        codeVerified: false,
+        error: validatedData.error.errors[0].message,
+      };
+
     const response = await verifyCode(
       validatedData.data?.email || '',
       validatedData.data?.verify || '',
     );
 
     return {
+      ...prevState,
       success: true,
       emailVerified: true,
       codeVerified: true,

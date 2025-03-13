@@ -1,1 +1,1 @@
-export * from './auth/signupSchema';
+export * from './auth';

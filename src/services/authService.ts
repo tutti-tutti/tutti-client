@@ -9,10 +9,10 @@ export const verifyEmail = async (email: string) => {
   return data;
 };
 
-export const verifyCode = async (email: string, code: string) => {
+export const verifyCode = async (email: string, verificationCode: string) => {
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.EMAIL_CONFIRM, {
     email,
-    code,
+    verificationCode,
   });
 
   return data;

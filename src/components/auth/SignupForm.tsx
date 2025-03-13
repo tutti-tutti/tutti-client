@@ -2,6 +2,7 @@
 
 import {
   requestVerificationCodeAction,
+  verifyCodeAction,
   // signupAction,
   // verifyCodeAction,
 } from '@/actions';
@@ -23,11 +24,19 @@ const { SIGNUP } = AUTH_CONSTANTS;
 const SignupForm = () => {
   const [emailVerificationState, requestVerificationCodeFormAction] =
     useActionState(requestVerificationCodeAction, initialVerificationState);
-  // const [] = useActionState('', '');
+  const [codeVerificationState, verifyCodeFormAction] = useActionState(
+    verifyCodeAction,
+    emailVerificationState,
+  );
 
-  const action = emailVerificationState.emailVerified
-    ? () => {}
-    : requestVerificationCodeFormAction;
+  const action = !emailVerificationState.emailVerified
+    ? requestVerificationCodeFormAction
+    : !codeVerificationState.codeVerified
+      ? async (formData: FormData) => {
+          formData.append('email', emailVerificationState.email?.data || '');
+          return verifyCodeFormAction(formData);
+        }
+      : () => {};
 
   return (
     <form action={action}>
@@ -37,7 +46,10 @@ const SignupForm = () => {
         isRequest={emailVerificationState.emailVerified!}
         success={emailVerificationState.message!}
       />
-      <VerifyCodeInput error={''} />
+      {emailVerificationState.emailVerified &&
+        !codeVerificationState.codeVerified && (
+          <VerifyCodeInput error={codeVerificationState.error!} />
+        )}
       <Button type="submit" className="my-lg">
         {SIGNUP}
       </Button>

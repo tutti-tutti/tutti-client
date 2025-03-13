@@ -15,11 +15,12 @@ export const authHandlers = [
         });
       }
 
-      return HttpResponse.json(AUTH_REQUEST.EMAIL_VERIFY.ERROR, {
+      return HttpResponse.json(AUTH_REQUEST.EMAIL_VERIFY.SUCCESS, {
         status: 200,
       });
     },
   ),
+
   http.post(
     getMswEndpoint(AUTH_ENDPOINTS.EMAIL_CONFIRM),
     async ({ request }) => {
@@ -28,7 +29,7 @@ export const authHandlers = [
         verificationCode: string;
       };
 
-      if (verificationCode === '000000') {
+      if (verificationCode !== '000000') {
         return HttpResponse.json(AUTH_REQUEST.EMAIL_CONFIRM.ERROR, {
           status: 400,
         });

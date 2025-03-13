@@ -35,7 +35,7 @@ export default function RootLayout({
       >
         <Header />
         <div className="relative w-full max-w-[1280px] flex-1">
-          <main>{children}</main>
+          <main className="px-container py-md">{children}</main>
         </div>
         <Footer />
         <ScrollToTopButton />

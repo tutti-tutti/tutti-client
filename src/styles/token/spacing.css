@@ -29,6 +29,8 @@
   --space-5xl: 48px;
   --space-6xl: 60px;
   --space-7xl: 80px;
+
+  --space-container: 20px;
 }
 
 @theme {
@@ -44,6 +46,7 @@
   --padding-5xl: var(--space-5xl);
   --padding-6xl: var(--space-6xl);
   --padding-7xl: var(--space-7xl);
+  --padding-container: var(--space-container);
 
   --margin-2xs: var(--space-2xs);
   --margin-xs: var(--space-xs);
@@ -57,6 +60,7 @@
   --margin-5xl: var(--space-5xl);
   --margin-6xl: var(--space-6xl);
   --margin-7xl: var(--space-7xl);
+  --margin-container: var(--space-container);
 
   --gap-2xs: var(--space-2xs);
   --gap-xs: var(--space-xs);
@@ -70,4 +74,5 @@
   --gap-5xl: var(--space-5xl);
   --gap-6xl: var(--space-6xl);
   --gap-7xl: var(--space-7xl);
+  --gap-container: var(--space-container);
 }

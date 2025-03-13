@@ -7,7 +7,7 @@ import TextHeader from './TextHeader';
 
 const Header = () => {
   return (
-    <header className="px-md pt-lg md:pt-2xl md:pb-5xl md:border-border-secondary w-full md:border-b">
+    <header className="px-container pt-lg md:pt-2xl md:pb-5xl md:border-border-secondary w-full md:border-b">
       <div className="gap-2xl mx-auto flex w-full max-w-[1280px] flex-col">
         <nav className="ml-auto hidden md:block">
           <TextHeader

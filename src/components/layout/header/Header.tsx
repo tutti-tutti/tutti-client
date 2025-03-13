@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-bg-primary px-container pt-lg md:pt-2xl md:pb-5xl md:border-border-secondary w-full md:border-b">
+    <header className="bg-bg-primary px-container pt-lg md:pt-2xl md:pb-5xl md:border-border-secondary fixed top-0 right-0 left-0 z-10 w-full md:border-b">
       <div className="gap-lg mx-auto flex w-full max-w-[1280px] flex-col">
         <nav className="ml-auto hidden md:block">
           <TextHeader

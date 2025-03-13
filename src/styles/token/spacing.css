@@ -31,6 +31,8 @@
   --space-7xl: 80px;
 
   --space-container: 20px;
+  --space-header-height: 200px;
+  --space-header-heightMobile: 54px;
 }
 
 @theme {
@@ -47,6 +49,8 @@
   --padding-6xl: var(--space-6xl);
   --padding-7xl: var(--space-7xl);
   --padding-container: var(--space-container);
+  --padding-header-heightMobile: var(--space-header-heightMobile);
+  --padding-header-height: var(--space-header-height);
 
   --margin-2xs: var(--space-2xs);
   --margin-xs: var(--space-xs);
@@ -61,6 +65,8 @@
   --margin-6xl: var(--space-6xl);
   --margin-7xl: var(--space-7xl);
   --margin-container: var(--space-container);
+  --margin-header-heightMobile: var(--space-header-heightMobile);
+  --margin-header-height: var(--space-header-height);
 
   --gap-2xs: var(--space-2xs);
   --gap-xs: var(--space-xs);

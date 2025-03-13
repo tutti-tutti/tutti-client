@@ -9,8 +9,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import type { Product } from '@/types';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
+import { RecommendProductItemSkeleton } from './skeleton/RecommendProductSkeleton';
 
-const RecommendCarousel = ({ products }: { products: Product[] }) => {
+const RecommendCarousel = ({ products }: { products?: Product[] }) => {
   const [slidesToShow, setSlidesToShow] = useState(6);
 
   useEffect(() => {
@@ -56,13 +57,23 @@ const RecommendCarousel = ({ products }: { products: Product[] }) => {
     ],
   };
 
+  const renderItems = () => {
+    if (!products || products.length === 0) {
+      return Array(12)
+        .fill(0)
+        .map((_, index) => (
+          <RecommendProductItemSkeleton key={`recommend-skeleton-${index}`} />
+        ));
+    }
+
+    return products.map(product => (
+      <RecommendProductItem key={`product-${product.productId}`} {...product} />
+    ));
+  };
+
   return (
     <ul className="pb-10">
-      <Slider {...settings}>
-        {products.map(product => (
-          <RecommendProductItem key={product.productId} {...product} />
-        ))}
-      </Slider>
+      <Slider {...settings}>{renderItems()}</Slider>
     </ul>
   );
 };

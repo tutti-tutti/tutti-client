@@ -4,15 +4,12 @@ import {
   ProductList,
   ProductListSkeleton,
   RecommendProductList,
-  RecommendProductListSkeleton,
 } from '@/components';
 
 const HomePage = () => {
   return (
     <>
-      <Suspense fallback={<RecommendProductListSkeleton />}>
-        <RecommendProductList categoryName="식료품" />
-      </Suspense>
+      <RecommendProductList categoryName="식료품" />
       <Suspense fallback={<ProductListSkeleton />}>
         <ProductList />
       </Suspense>

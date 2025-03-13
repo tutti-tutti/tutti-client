@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import RecommendCarousel from '@/components/products/RecommendCarousel';
+import { RecommendCarousel } from '@/components';
 import type { Product } from '@/types';
 
 const sampleImage =

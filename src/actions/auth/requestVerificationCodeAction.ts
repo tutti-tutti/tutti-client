@@ -25,7 +25,6 @@ export const requestVerificationCodeAction = async (
     const response = await verifyEmail(validatedEmail.data);
 
     return {
-      ...prevState,
       success: true,
       emailVerified: true,
       codeVerified: false,

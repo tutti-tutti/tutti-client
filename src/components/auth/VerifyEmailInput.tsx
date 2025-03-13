@@ -7,11 +7,17 @@ interface VerifyEmailProps {
   email: string;
   error: string;
   isRequest: boolean;
+  success: string;
 }
 
 const { EMAIL_INPUT } = AUTH_CONSTANTS;
 
-const VerifyEmailInput = ({ email, error, isRequest }: VerifyEmailProps) => {
+const VerifyEmailInput = ({
+  email,
+  error,
+  isRequest,
+  success,
+}: VerifyEmailProps) => {
   return (
     <Input
       label={EMAIL_INPUT.LABEL}
@@ -20,6 +26,7 @@ const VerifyEmailInput = ({ email, error, isRequest }: VerifyEmailProps) => {
       disabled={isRequest}
       defaultValue={email}
       error={error}
+      success={success}
     />
   );
 };

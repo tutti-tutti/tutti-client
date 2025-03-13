@@ -33,8 +33,9 @@ const SignupForm = () => {
     <form action={action}>
       <VerifyEmailInput
         email={emailVerificationState.email?.data || ''}
-        error={emailVerificationState?.error || ''}
+        error={emailVerificationState.error!}
         isRequest={emailVerificationState.emailVerified!}
+        success={emailVerificationState.message!}
       />
       <VerifyCodeInput error={''} />
       <Button type="submit" className="my-lg">

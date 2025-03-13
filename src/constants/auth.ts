@@ -12,18 +12,22 @@ export const AUTH_CONSTANTS = {
   EMAIL_INPUT: {
     LABEL: '이메일 입력',
     PLACEHOLDER: '이메일을 입력해주세요',
+    ERROR: '유효한 이메일 주소를 입력해주세요.',
   },
   VERIFY_EMAIL_INPUT: {
     LABEL: '인증번호 입력',
     PLACEHOLDER: '이메일로 전송된 인증번호를 입력해주세요',
+    ERROR: '이메일 인증 코드를 입력해주세요.',
   },
   PW_INPUT: {
     LABEL: '비밀번호 입력',
     PLACEHOLDER: '비밀번호를 입력해주세요',
+    ERROR: '비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다.',
   },
   CHECK_PW_INPUT: {
     LABEL: '비밀번호 확인',
     PLACEHOLDER: '비밀번호를 다시 입력해주세요',
+    ERROR: '비밀번호가 일치하지 않습니다.',
   },
   NEW_PW_INPUT: {
     LABEL: '새로운 비밀번호 입력',
@@ -46,6 +50,7 @@ export const AUTH_CONSTANTS = {
         '개인정보 수집 및 이용 동의',
         '개인정보 제 3자 제공 동의',
       ],
+      ERROR: '필수 약관에 동의해주세요.',
     },
     OPTIONS: {
       PREFIX: '[선택]',

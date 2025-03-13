@@ -24,12 +24,11 @@ export const authHandlers = [
   http.post(
     getMswEndpoint(AUTH_ENDPOINTS.EMAIL_CONFIRM),
     async ({ request }) => {
-      const { verificationCode } = (await request.json()) as {
-        email: string;
-        verificationCode: string;
+      const { verification_code } = (await request.json()) as {
+        verification_code: string;
       };
 
-      if (verificationCode !== '000000') {
+      if (verification_code !== '000000') {
         return HttpResponse.json(AUTH_REQUEST.EMAIL_CONFIRM.ERROR, {
           status: 400,
         });

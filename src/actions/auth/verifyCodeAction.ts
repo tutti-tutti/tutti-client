@@ -25,7 +25,7 @@ export const verifyCodeAction = async (
         codeVerified: false,
         error: validatedData.error.errors[0].message,
       };
-
+    console.log(validatedData.data);
     const response = await verifyCode(
       validatedData.data?.email || '',
       validatedData.data?.verify || '',
@@ -39,7 +39,7 @@ export const verifyCodeAction = async (
       message: response.message,
     };
   } catch (error) {
-    console.error(error);
+    console.error(error); // 📌 추후에 서버 에러 처리 예정!
 
     return {
       ...prevState,

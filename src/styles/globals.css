@@ -17,7 +17,11 @@
 }
 
 @utility bg-custom-gradient {
-  background: linear-gradient(180deg, #fff 17.28%, #d4d4d4 495.36%);
+  background: linear-gradient(
+    180deg,
+    var(--color-base-white) 17.28%,
+    var(--color-neutral-300) 495.36%
+  );
 }
 
 @utility text-brand-gradient {

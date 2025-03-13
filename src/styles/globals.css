@@ -20,6 +20,17 @@
   background: linear-gradient(180deg, #fff 17.28%, #d4d4d4 495.36%);
 }
 
+@utility text-brand-gradient {
+  background:
+    linear-gradient(118deg, #2424ff -6.96%, rgba(36, 36, 255, 0) 86.82%),
+    linear-gradient(31deg, #fa63ff 18.46%, rgba(250, 99, 255, 0) 89.69%),
+    linear-gradient(251deg, #f57291 25.39%, rgba(245, 114, 145, 0) 83.6%), #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
 @theme {
   --font-pretendard: var(--font-pretendard);
 

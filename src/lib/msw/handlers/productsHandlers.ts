@@ -8,3 +8,9 @@ export const productsHandlers = [
     return HttpResponse.json(products);
   }),
 ];
+
+export const recommendedProductsHandlers = [
+  http.get(PRODUCTS_ENDPOINTS.RECOMMEND, () => {
+    return HttpResponse.json(products);
+  }),
+];

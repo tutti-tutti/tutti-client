@@ -24,12 +24,12 @@
 
 /* 이전 화살표 */
 .custom-prev-arrow {
-  left: 12px;
+  left: var(--space-sm);
 }
 
 /* 다음 화살표 */
 .custom-next-arrow {
-  right: 12px;
+  right: var(--space-sm);
 }
 
 /* 비활성화 화살표 스타일 */

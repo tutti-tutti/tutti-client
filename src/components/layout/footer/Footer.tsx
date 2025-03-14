@@ -5,8 +5,8 @@ import FooterCustomerInfo from './FooterCustomerInfo';
 
 const Footer = () => {
   return (
-    <footer className="px-container py-6xl bg-bg-tertiary w-full">
-      <div className="mx-auto max-w-[1280px]">
+    <footer className="py-6xl bg-bg-tertiary w-full">
+      <div className="px-container mx-auto max-w-[1280px]">
         <div className="gap-3xl md:pb-6xl flex flex-col">
           <section>
             <div className="mb-3xl hidden md:block">

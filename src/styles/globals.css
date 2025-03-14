@@ -44,8 +44,8 @@
 }
 
 body {
-  color: var(--color-base-white);
-  background: var(--color-neutral-900);
+  color: var(--color-neutral-900);
+  background: var(--color-base-white);
 }
 
 strong {

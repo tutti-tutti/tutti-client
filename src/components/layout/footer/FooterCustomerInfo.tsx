@@ -1,7 +1,7 @@
 import type { FooterInfoProps } from '@/types/footerType';
 import FooterInfo from './FooterInfo';
 
-export const FooterCustomerInfo: React.FC = () => {
+export const FooterCustomerInfo = () => {
   const customerInfoData: FooterInfoProps = {
     title: '고객센터 정보',
     rows: [

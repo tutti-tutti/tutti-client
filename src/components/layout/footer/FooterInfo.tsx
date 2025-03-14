@@ -4,11 +4,7 @@ import {
   InfoItemType,
 } from '@/types/footerType';
 
-const FooterInfo: React.FC<FooterInfoProps> = ({
-  title,
-  rows,
-  gap = 'gap-sm',
-}) => {
+const FooterInfo = ({ title, rows, gap = 'gap-sm' }: FooterInfoProps) => {
   return (
     <section className="gap-lg flex flex-col">
       <h6 className="font-style-subHeading">{title}</h6>
@@ -31,10 +27,10 @@ const FooterInfo: React.FC<FooterInfoProps> = ({
 };
 
 // Info 행
-const InfoRow: React.FC<InfoRowProps> = ({
+const InfoRow = ({
   items,
   className = 'gap-sm flex flex-col',
-}) => (
+}: InfoRowProps) => (
   <div className={className}>
     {items.map((item, index) => (
       <InfoItem key={index} label={item.label} value={item.value} />
@@ -43,8 +39,8 @@ const InfoRow: React.FC<InfoRowProps> = ({
 );
 
 // 각 Info 항목
-const InfoItem: React.FC<InfoItemType> = ({ label, value }) => (
-  <p className="">
+const InfoItem = ({ label, value }: InfoItemType) => (
+  <p>
     <strong>{label}</strong>
     <span className="text-text-secondary ml-2xs break-keep">{value}</span>
   </p>

@@ -8,3 +8,4 @@ export { default as ExtraButton } from './button/ExtraButton';
 export * from './header';
 export { default as Input } from './Input';
 export { default as Icon } from './Icon';
+export { default as Logo } from './Logo';

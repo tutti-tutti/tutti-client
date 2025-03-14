@@ -43,19 +43,11 @@
     0px 0px 4px 0px var(--color-shadow-core);
 }
 
-:root {
-  --background: var(--color-base-white);
-  --foreground: var(--color-neutral-900);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-neutral-950);
-    --foreground: var(--color-neutral-200);
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-neutral-900);
+  background: var(--color-base-white);
+}
+
+strong {
+  font-weight: var(--font-weight-medium);
 }

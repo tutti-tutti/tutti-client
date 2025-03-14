@@ -1,36 +1,37 @@
-const FooterCompanyInfo = () => {
-  return (
-    <div className="gap-lg flex flex-col">
-      <p className="text-xl">쇼핑몰 기본정보</p>
+import type { FooterInfoProps } from '@/types/footerType';
+import FooterInfo from './FooterInfo';
 
-      <div className="gap-sm flex flex-col">
-        <div className="gap-xs flex items-center">
-          <span>상호명</span>
-          <span className="text-text-secondary">splash</span>
-          <span className="ml-xs">대표자명</span>
-          <span className="text-text-secondary">이규화</span>
-          <span className="ml-xs">사업장주소</span>
-          <span className="text-text-secondary">
-            병우빌딩 908호 서울특별시 마포구 서강로 133
-          </span>
-        </div>
+export const FooterCompanyInfo = () => {
+  const companyInfoData: FooterInfoProps = {
+    title: '쇼핑몰 기본정보',
+    rows: [
+      {
+        horizontal: true,
+        items: [
+          { label: '상호명', value: 'xxx' },
+          { label: '대표자명', value: 'ooo' },
+          {
+            label: '사업장주소',
+            value: 'XX빌딩 908호 서울특별시 마포구',
+          },
+        ],
+      },
+      {
+        horizontal: true,
+        items: [
+          { label: '대표전화', value: '010-1234-6778' },
+          { label: '사업자 등록번호', value: '211-XX-64382' },
+          { label: '통신판매업 신고번호', value: '추후작성예정' },
+        ],
+      },
+      {
+        horizontal: true,
+        items: [{ label: '개인정보보호책임자', value: 'ooo' }],
+      },
+    ],
+  };
 
-        <div className="gap-xs flex items-center">
-          <span>대표전화</span>
-          <span className="text-text-secondary">010-5059-6778</span>
-          <span className="ml-xs">사업자 등록번호</span>
-          <span className="text-text-secondary">211-12-64382</span>
-          <span className="ml-xs">통신판매업 신고번호</span>
-          <span className="text-text-secondary">추후작성예정</span>
-        </div>
-
-        <div>
-          <span>개인정보보호책임자</span>
-          <span className="text-text-secondary ml-2xs">이규화</span>
-        </div>
-      </div>
-    </div>
-  );
+  return <FooterInfo {...companyInfoData} />;
 };
 
 export default FooterCompanyInfo;

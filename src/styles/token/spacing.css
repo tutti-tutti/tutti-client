@@ -29,6 +29,10 @@
   --space-5xl: 48px;
   --space-6xl: 60px;
   --space-7xl: 80px;
+
+  --space-container: 20px;
+  --space-header-height: 200px;
+  --space-header-heightMobile: 54px;
 }
 
 @theme {
@@ -44,6 +48,8 @@
   --padding-5xl: var(--space-5xl);
   --padding-6xl: var(--space-6xl);
   --padding-7xl: var(--space-7xl);
+  --padding-header-heightMobile: var(--space-header-heightMobile);
+  --padding-header-height: var(--space-header-height);
 
   --margin-2xs: var(--space-2xs);
   --margin-xs: var(--space-xs);
@@ -57,6 +63,8 @@
   --margin-5xl: var(--space-5xl);
   --margin-6xl: var(--space-6xl);
   --margin-7xl: var(--space-7xl);
+  --margin-header-heightMobile: var(--space-header-heightMobile);
+  --margin-header-height: var(--space-header-height);
 
   --gap-2xs: var(--space-2xs);
   --gap-xs: var(--space-xs);
@@ -70,4 +78,14 @@
   --gap-5xl: var(--space-5xl);
   --gap-6xl: var(--space-6xl);
   --gap-7xl: var(--space-7xl);
+}
+
+@utility px-container {
+  padding-left: 0;
+  padding-right: 0;
+
+  @media (max-width: 1280px) {
+    padding-left: var(--space-container);
+    padding-right: var(--space-container);
+  }
 }

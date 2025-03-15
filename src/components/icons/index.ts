@@ -28,3 +28,4 @@ export { default as StarGrayIcon } from './StarGrayIcon';
 export { default as StarHalfIcon } from './StarHalfIcon';
 export { default as StarFillIcon } from './StarFillIcon';
 export { default as GoogleLogoIcon } from './GoogleLogoIcon';
+export { default as RadioIcon } from './RadioIcon';

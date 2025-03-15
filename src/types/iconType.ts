@@ -28,4 +28,5 @@ export type IconType =
   | 'hamburgerbar'
   | 'starGray'
   | 'starHalf'
-  | 'starFill';
+  | 'starFill'
+  | 'radio';

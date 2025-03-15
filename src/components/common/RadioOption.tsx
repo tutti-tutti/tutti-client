@@ -17,12 +17,12 @@ interface RadioOptionProps {
 const RadioOption = ({ option, isSelected, onClick }: RadioOptionProps) => {
   return (
     <div
-      className="px-sm py-xs gap-2xs flex cursor-pointer items-center"
+      className="px-sm py-xs gap-2xs flex cursor-pointer items-start"
       onClick={() => onClick(option)}
     >
       <div
         className={cn(
-          'mr-xs flex h-[var(--space-lg)] w-[var(--space-lg)] items-center justify-center rounded-full',
+          'mr-xs flex h-[var(--space-lg)] w-[var(--space-lg)] flex-shrink-0 items-center justify-center rounded-full',
           isSelected
             ? 'bg-bg-primary'
             : 'border-border-tertiaryInteraction border-2',
@@ -32,7 +32,7 @@ const RadioOption = ({ option, isSelected, onClick }: RadioOptionProps) => {
       </div>
       <span
         className={cn(
-          'font-style-paragraph',
+          'font-style-paragraph break-words',
           isSelected ? 'text-text-info' : 'text-text-secondary',
         )}
       >

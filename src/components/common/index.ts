@@ -9,3 +9,4 @@ export * from './header';
 export { default as Input } from './Input';
 export { default as Icon } from './Icon';
 export { default as Logo } from './Logo';
+export { default as Switch } from './Switch';

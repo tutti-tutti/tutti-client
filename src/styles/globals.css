@@ -4,6 +4,7 @@
 @import '../styles/token/colors/semantic.css';
 @import '../styles/token/border.css';
 @import '../styles/token/spacing.css';
+@import '../styles/token/font/primitive.css';
 @import '../styles/fonts.css';
 
 @layer base {

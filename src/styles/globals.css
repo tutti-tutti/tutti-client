@@ -41,6 +41,19 @@
   --shadow-custom-effect:
     0px 4px 8px 0px var(--color-shadow-cast),
     0px 0px 4px 0px var(--color-shadow-core);
+
+  --animate-dropdown: dropdown 0.2s ease-out forwards;
+
+  @keyframes dropdown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 body {

@@ -11,3 +11,4 @@ export { default as Icon } from './Icon';
 export { default as Logo } from './Logo';
 export { default as Dropdown } from './Dropdown';
 export { default as RadioOption } from './RadioOption';
+export { default as Switch } from './Switch';

@@ -29,4 +29,13 @@ export const AUTH_REQUEST = {
       error: '비밀번호가 일치하지 않습니다.',
     },
   },
+  SIGNIN_EMAIL: {
+    SUCCESS: {
+      access_token: '',
+      refresh_token: '',
+    },
+    ERROR: {
+      error: '이메일 혹은 비밀번호를 다시 확인해주세요.',
+    },
+  },
 };

@@ -10,6 +10,7 @@ export const AUTH_ENDPOINTS = {
   EMAIL_CONFIRM: '/members/email/confirm',
   SIGNUP_EMAIL: '/members/signup/email',
   RESET_PW: '/members/password/reset',
+  SIGNIN_EMAIL: '/members/login/email',
 };
 
 export const PRODUCT_PATHS = {

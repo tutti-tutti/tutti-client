@@ -84,4 +84,23 @@ export const authHandlers = [
       status: 200,
     });
   }),
+
+  http.post(
+    getMswEndpoint(AUTH_ENDPOINTS.SIGNIN_EMAIL),
+    async ({ request }) => {
+      const { email, password } = (await request.json()) as {
+        email: string;
+        password: string;
+      };
+      if (email === 'test@test.test' && password === 'asdasd123') {
+        return HttpResponse.json(AUTH_REQUEST.SIGNIN_EMAIL.SUCCESS, {
+          status: 200,
+        });
+      }
+
+      return HttpResponse.json(AUTH_REQUEST.SIGNIN_EMAIL.ERROR, {
+        status: 400,
+      });
+    },
+  ),
 ];

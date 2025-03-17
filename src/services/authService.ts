@@ -45,3 +45,12 @@ export const resetPw = async (email: string, pw: string, checkPw: string) => {
 
   return data;
 };
+
+export const signin = async (email: string, pw: string) => {
+  const { data } = await axiosInstance.post(AUTH_ENDPOINTS.SIGNIN_EMAIL, {
+    email,
+    password: pw,
+  });
+
+  return data;
+};

@@ -8,6 +8,7 @@ export const SERVER_API_V1_BASE_URL = `${SERVER_API_BASE_URL}${SERVER_API_VERSIO
 export const AUTH_ENDPOINTS = {
   EMAIL_VERIFY: '/members/email/verify',
   EMAIL_CONFIRM: '/members/email/confirm',
+  SIGNUP_EMAIL: '/members/signup/email',
 };
 
 export const PRODUCT_PATHS = {

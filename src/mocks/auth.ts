@@ -13,4 +13,12 @@ export const AUTH_REQUEST = {
       error: '인증 코드가 올바르지 않거나 만료되었습니다.',
     },
   },
+  SIGNUP_EMAIL: {
+    SUCCESS: {
+      message: '회원가입이 완료되었습니다.',
+    },
+    ERROR: {
+      error: '회원가입에 실패했습니다',
+    },
+  },
 };

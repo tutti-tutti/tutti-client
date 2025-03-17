@@ -25,7 +25,7 @@ export const verifyCodeAction = async (
         codeVerified: false,
         error: validatedData.error.errors[0].message,
       };
-    console.log(validatedData.data);
+
     const response = await verifyCode(
       validatedData.data?.email || '',
       validatedData.data?.verify || '',

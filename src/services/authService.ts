@@ -17,3 +17,21 @@ export const verifyCode = async (email: string, verify: string) => {
 
   return data;
 };
+
+export const signup = async (
+  email: string,
+  pw: string,
+  checkPw: string,
+  essentialPolicy: string[],
+  optionalPolicy: FormDataEntryValue[],
+) => {
+  const { data } = await axiosInstance.post(AUTH_ENDPOINTS.SIGNUP_EMAIL, {
+    email,
+    password: pw,
+    password_confirm: checkPw,
+    essential_policy: essentialPolicy,
+    optional_policy: optionalPolicy,
+  });
+
+  return data;
+};

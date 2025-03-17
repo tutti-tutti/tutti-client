@@ -39,4 +39,32 @@ export const authHandlers = [
       });
     },
   ),
+
+  http.post(
+    getMswEndpoint(AUTH_ENDPOINTS.SIGNUP_EMAIL),
+    async ({ request }) => {
+      const { email, password, password_confirm, essential_policy } =
+        (await request.json()) as {
+          email: string;
+          password: string;
+          password_confirm: string;
+          essential_policy: string[];
+          optional_policy: string[];
+        };
+      if (
+        !email ||
+        !password ||
+        !password_confirm ||
+        essential_policy.length === 0
+      ) {
+        return HttpResponse.json(AUTH_REQUEST.SIGNUP_EMAIL.ERROR, {
+          status: 400,
+        });
+      }
+
+      return HttpResponse.json(AUTH_REQUEST.SIGNUP_EMAIL.SUCCESS, {
+        status: 201,
+      });
+    },
+  ),
 ];

@@ -6,3 +6,4 @@ export { default as RecommendProductList } from './RecommendProductList';
 export { default as RecommendCarousel } from './RecommendCarousel';
 export { default as ProductListSkeleton } from './skeleton/ProductListSkeleton';
 export { default as RecommendProductSkeleton } from './skeleton/RecommendProductSkeleton';
+export { default as ProductDetailItem } from './product-detail/ProductDetailItem';

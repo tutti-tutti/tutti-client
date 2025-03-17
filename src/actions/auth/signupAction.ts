@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { signupSchema } from '@/schemas/auth/signupSchema';
 import { signup } from '@/services';
 import { EmailVerificationState } from '@/types';
@@ -57,8 +55,6 @@ export const signupAction = async (
       validatedData.data?.essentialPolicy || [],
       optinalPolicy,
     );
-
-    redirect('/signin');
 
     return {
       ...prevState,

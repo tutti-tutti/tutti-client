@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { resetPw } from '@/services';
 import { EmailVerificationState } from '@/types';
 import { resetPwSchema } from '@/schemas/auth/resetPwSchema';
@@ -49,8 +47,6 @@ export const resetPwAction = async (
       validatedData.data?.pw || '',
       validatedData.data?.checkPw || '',
     );
-
-    redirect('/signin');
 
     return {
       ...prevState,

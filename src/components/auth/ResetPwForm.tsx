@@ -23,7 +23,7 @@ const initialVerificationState: EmailVerificationState = {
 const { RESET_PW, VERIFY_EMAIL_BUTTON, CHECK_VERIFY_CODE_BUTTON } =
   AUTH_CONSTANTS;
 
-const ResetPasswordForm = () => {
+const ResetPwForm = () => {
   const [emailVerificationState, requestVerificationCodeFormAction] =
     useActionState(requestVerificationCodeAction, initialVerificationState);
   const [codeVerificationState, verifyCodeFormAction] = useActionState(
@@ -89,4 +89,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ResetPwForm;

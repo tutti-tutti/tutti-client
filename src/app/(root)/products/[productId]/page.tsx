@@ -2,11 +2,11 @@ import { fetchProductById } from '@/services';
 import { RecommendProductList, ProductDetailItem } from '@/components';
 
 interface Params {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ productId: string }>;
 }
 
 export async function generateMetadata({ params }: Params) {
-  const { slug: productId } = await params;
+  const { productId } = await params;
   const product = await fetchProductById(productId);
 
   if (!product) return;
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Params) {
 }
 
 const ProductDetailPage = async ({ params }: Params) => {
-  const { slug: productId } = await params;
+  const { productId } = await params;
   const product = await fetchProductById(productId);
 
   return (

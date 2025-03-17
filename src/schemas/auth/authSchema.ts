@@ -12,9 +12,18 @@ const {
 export const authSchema = z.object({
   email: z.string().email({ message: EMAIL_INPUT.ERROR }).trim(),
   verifyEmail: z.string().min(1, { message: VERIFY_EMAIL_INPUT.ERROR }),
-  pw: z.string().regex(/^(?=.[a-zA-Z])(?=.[0-9]).{8,}$/, {
-    message: PW_INPUT.ERROR,
-  }),
+  pw: z
+    .string()
+    .regex(
+      /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/,
+      {
+        message: PW_INPUT.ERROR,
+      },
+    ),
   checkPw: z.string(),
-  essentialPolicy: z.array(z.string()).min(1, { message: ESSENTIALS.ERROR }),
+  essentialPolicy: z
+    .array(z.string())
+    .refine(values => values.length === ESSENTIALS.POLICY.length, {
+      message: ESSENTIALS.ERROR,
+    }),
 });

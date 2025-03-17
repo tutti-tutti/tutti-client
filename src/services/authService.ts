@@ -35,3 +35,13 @@ export const signup = async (
 
   return data;
 };
+
+export const resetPw = async (email: string, pw: string, checkPw: string) => {
+  const { data } = await axiosInstance.post(AUTH_ENDPOINTS.RESET_PW, {
+    email,
+    password: pw,
+    password_confirm: checkPw,
+  });
+
+  return data;
+};

@@ -63,8 +63,25 @@ export const authHandlers = [
       }
 
       return HttpResponse.json(AUTH_REQUEST.SIGNUP_EMAIL.SUCCESS, {
-        status: 201,
+        status: 200,
       });
     },
   ),
+
+  http.post(getMswEndpoint(AUTH_ENDPOINTS.RESET_PW), async ({ request }) => {
+    const { password, password_confirm } = (await request.json()) as {
+      email: string;
+      password: string;
+      password_confirm: string;
+    };
+    if (password !== password_confirm) {
+      return HttpResponse.json(AUTH_REQUEST.RESET_PW.ERROR, {
+        status: 400,
+      });
+    }
+
+    return HttpResponse.json(AUTH_REQUEST.RESET_PW.SUCCESS, {
+      status: 200,
+    });
+  }),
 ];

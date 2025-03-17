@@ -21,4 +21,12 @@ export const AUTH_REQUEST = {
       error: '회원가입에 실패했습니다',
     },
   },
+  RESET_PW: {
+    SUCCESS: {
+      message: '비밀번호 재설정이 완료되었습니다.',
+    },
+    ERROR: {
+      error: '비밀번호가 일치하지 않습니다.',
+    },
+  },
 };

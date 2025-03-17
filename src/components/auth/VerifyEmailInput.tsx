@@ -27,6 +27,7 @@ const VerifyEmailInput = ({
       defaultValue={email}
       error={error}
       success={success}
+      className="disabled:border-border-success disabled:bg-bg-successSubtle"
     />
   );
 };

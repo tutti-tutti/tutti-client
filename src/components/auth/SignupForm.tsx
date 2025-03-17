@@ -56,33 +56,38 @@ const SignupForm = () => {
 
   return (
     <form action={action}>
-      <VerifyEmailInput
-        email={emailVerificationState.email?.data || ''}
-        error={emailVerificationState.error!}
-        isRequest={emailVerificationState.emailVerified!}
-        success={
-          !codeVerificationState.codeVerified
-            ? emailVerificationState.message!
-            : '이메일 인증이 완료되었습니다.'
-        }
-      />
-      {emailVerificationState.emailVerified &&
-        !codeVerificationState.codeVerified && (
-          <VerifyCodeInput error={codeVerificationState.error!} />
-        )}
-      {emailVerificationState.emailVerified &&
-        codeVerificationState.codeVerified && (
-          <>
-            <PwInput
-              pwError={signupState?.pwError || ''}
-              checkPwError={signupState.checkPwError || ''}
-            />
-            <PoliciesInput error={signupState.essentialPolicyError || ''} />
-          </>
-        )}
-      <Button type="submit" className="my-lg">
-        {buttonChildren}
-      </Button>
+      <fieldset className="flex flex-col">
+        <legend className="mb-sm font-style-heading">{SIGNUP}</legend>
+        <div className="gap-sm mb-5xl flex flex-col">
+          <VerifyEmailInput
+            email={emailVerificationState.email?.data || ''}
+            error={emailVerificationState.error!}
+            isRequest={emailVerificationState.emailVerified!}
+            success={
+              !codeVerificationState.codeVerified
+                ? emailVerificationState.message!
+                : '이메일 인증이 완료되었습니다.'
+            }
+          />
+          {emailVerificationState.emailVerified &&
+            !codeVerificationState.codeVerified && (
+              <VerifyCodeInput error={codeVerificationState.error!} />
+            )}
+          {emailVerificationState.emailVerified &&
+            codeVerificationState.codeVerified && (
+              <>
+                <PwInput
+                  pwError={signupState?.pwError || ''}
+                  checkPwError={signupState.checkPwError || ''}
+                />
+                <PoliciesInput error={signupState.essentialPolicyError || ''} />
+              </>
+            )}
+        </div>
+        <Button type="submit" className="my-lg">
+          {buttonChildren}
+        </Button>
+      </fieldset>
     </form>
   );
 };

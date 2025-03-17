@@ -64,21 +64,25 @@ const Dropdown = ({
         className="border-border-primary py-sm px-lg bg-bg-primary flex cursor-pointer items-center justify-between rounded-sm border"
         onClick={toggleDropdown}
       >
-        <span
-          className={cn(
-            selectedOption ? 'text-text-info' : 'text-text-secondary',
-          )}
-        >
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
-        <Icon
-          iconName="chevronsDown"
-          fill="text-icon-secondary"
-          className={cn(
-            'transtion-transform duration-300',
-            isOpen && 'rotate-180',
-          )}
-        />
+        <div className="line-clamp-2 flex-1 overflow-hidden pr-2 break-words">
+          <span
+            className={cn(
+              selectedOption ? 'text-text-info' : 'text-text-secondary',
+            )}
+          >
+            {selectedOption ? selectedOption.label : placeholder}
+          </span>
+        </div>
+        <div className="flex-shrink-0">
+          <Icon
+            iconName="chevronsDown"
+            fill="text-icon-secondary"
+            className={cn(
+              'transtion-transform duration-300',
+              isOpen && 'rotate-180',
+            )}
+          />
+        </div>
       </div>
 
       {isOpen && (

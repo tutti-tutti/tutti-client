@@ -5,14 +5,15 @@ import { useRef, useId } from 'react';
 import { Icon } from '@/components';
 import { cn } from '@/utils';
 
-interface CheckboxProps {
+interface CheckboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'type' | 'onChange'
+  > {
   label?: string;
   checked?: boolean;
-  disabled?: boolean;
   onChange?: (checked: boolean) => void;
   className?: string;
-  name?: string;
-  required?: boolean;
   ref?: React.Ref<HTMLInputElement>;
 }
 
@@ -23,8 +24,10 @@ const Checkbox = ({
   onChange,
   className = '',
   name,
+  value,
   required = false,
   ref,
+  ...props
 }: CheckboxProps) => {
   const checkboxRef = useRef<HTMLInputElement>(null);
 
@@ -84,6 +87,8 @@ const Checkbox = ({
     >
       <input
         id={id}
+        name={name}
+        value={value}
         type="checkbox"
         checked={checked}
         disabled={disabled}
@@ -93,6 +98,7 @@ const Checkbox = ({
           onChange && onChange(e.target.checked)
         }
         className="sr-only"
+        {...props}
       />
 
       <div className={cn(checkboxBaseClass, currentCheckboxClass)}>

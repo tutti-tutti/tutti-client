@@ -13,7 +13,6 @@ const {
 const PoliciesInput = ({ error }: PoliciesInputProps) => {
   return (
     <>
-      <div className="text-red-500">{error}</div>
       <div className="gap-md flex flex-col">
         <div className="font-style-subHeading text-text-secondary">
           <input type="checkbox" className="mr-sm" />
@@ -23,8 +22,9 @@ const PoliciesInput = ({ error }: PoliciesInputProps) => {
         <div className="font-style-info text-text-secondary">
           {ANNOUNCEMENT}
         </div>
-        <div className="border-border-primary mb-md flex-grow border-t"></div>
+        <hr className="border-border-primary mb-md flex-grow border-t" />
       </div>
+      <div className="text-red-500">{error}</div>
       <div className="gap-sm flex flex-col">
         {ESSENTIALS.POLICY.map((essential, index) => (
           <div

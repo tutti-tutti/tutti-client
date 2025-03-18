@@ -69,12 +69,13 @@ const SigninForm = () => {
           </Button>
         </fieldset>
       </form>
+
       <div className="mb-sm flex items-center">
-        <div className="border-border-primary flex-grow border-t"></div>
+        <hr className="border-border-primary flex-grow border-t" />
         <span className="text-text-secondary font-style-paragraph mx-4">
           {SOCIAL_SIGNIN}
         </span>
-        <div className="border-border-primary flex-grow border-t"></div>
+        <hr className="border-border-primary flex-grow border-t" />
       </div>
       <SocialLoginButton />
       <ClickText

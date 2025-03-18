@@ -32,7 +32,7 @@ const ScrollToTopButton = () => {
   return (
     <div
       className={cn(
-        'px-lg fixed right-0 bottom-10 transition-all duration-300 ease-in-out',
+        'px-lg fixed right-0 bottom-10 z-10 transition-all duration-300 ease-in-out',
         isVisible
           ? 'translate-y-0 opacity-100'
           : 'pointer-events-none translate-y-10 opacity-0',
@@ -52,7 +52,7 @@ const ScrollToTopButton = () => {
         }}
         onClick={scrollToTop}
         variant="primaryShadow"
-        className="h-32 w-16 rounded-full"
+        className="h-16 w-8 rounded-full md:h-32 md:w-16"
       />
     </div>
   );

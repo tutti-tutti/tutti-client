@@ -18,6 +18,27 @@ const products = [
         updatedAt: null,
         freeDelivery: true,
         almostOutOfStock: true,
+        options: [
+          {
+            name: '색상',
+            values: [
+              { name: '용달블루', additionalPrice: 0 },
+              {
+                name: '스페이스그레이',
+                additionalPrice: 500,
+              },
+            ],
+          },
+          {
+            name: '사이즈',
+            values: [
+              { name: 'S', additionalPrice: 0 },
+              { name: 'M', additionalPrice: 100 },
+              { name: 'L', additionalPrice: 200 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 5,
       },
       {
         productId: 2,
@@ -34,6 +55,16 @@ const products = [
         updatedAt: '2025-03-05 11:20:33',
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '색상',
+            values: [
+              { name: '미스틱 블랙', additionalPrice: 0 },
+              { name: '미스틱 실버', additionalPrice: 50000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 3,
@@ -50,6 +81,26 @@ const products = [
         updatedAt: null,
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '렌즈 키트',
+            values: [
+              { name: '바디 온리', additionalPrice: 0 },
+              {
+                name: 'RF 24-105mm F4-7.1 IS STM 키트',
+                additionalPrice: 450000,
+              },
+            ],
+          },
+          {
+            name: '추가 옵션',
+            values: [
+              { name: '추가 배터리', additionalPrice: 120000 },
+              { name: '삼각대', additionalPrice: 150000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 4,
@@ -66,6 +117,16 @@ const products = [
         updatedAt: '2025-03-06 14:22:18',
         freeDelivery: true,
         almostOutOfStock: true,
+        options: [
+          {
+            name: '모델',
+            values: [
+              { name: '에어팟 프로 2세대', additionalPrice: 0 },
+              { name: '에어팟 프로 맥스', additionalPrice: 350000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 5,
@@ -82,6 +143,8 @@ const products = [
         updatedAt: null,
         freeDelivery: false,
         almostOutOfStock: false,
+        options: [],
+        maxPurchaseQuantity: 5,
       },
       {
         productId: 6,
@@ -98,6 +161,24 @@ const products = [
         updatedAt: '2025-03-07 09:15:45',
         freeDelivery: true,
         almostOutOfStock: true,
+        options: [
+          {
+            name: '에디션',
+            values: [
+              { name: '디지털 에디션', additionalPrice: 0 },
+              { name: '디스크 드라이브 에디션', additionalPrice: 100000 },
+            ],
+          },
+          {
+            name: '번들',
+            values: [
+              { name: '본품만', additionalPrice: 0 },
+              { name: '추가 컨트롤러 포함', additionalPrice: 75000 },
+              { name: '게임 3종 포함', additionalPrice: 150000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 7,
@@ -114,6 +195,23 @@ const products = [
         updatedAt: '2025-03-02 11:25:10',
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '저장공간',
+            values: [
+              { name: '512GB', additionalPrice: 0 },
+              { name: '1TB', additionalPrice: 200000 },
+            ],
+          },
+          {
+            name: '메모리',
+            values: [
+              { name: '16GB', additionalPrice: 0 },
+              { name: '32GB', additionalPrice: 300000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 5,
       },
       {
         productId: 8,
@@ -130,6 +228,8 @@ const products = [
         updatedAt: '2025-03-01 10:35:20',
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 9,
@@ -146,6 +246,16 @@ const products = [
         updatedAt: '2025-03-05 14:20:15',
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '용량',
+            values: [
+              { name: '5.5L', additionalPrice: 0 },
+              { name: '7.2L', additionalPrice: 30000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 10,
@@ -162,6 +272,13 @@ const products = [
         updatedAt: '2025-03-08 15:30:25',
         freeDelivery: true,
         almostOutOfStock: true,
+        options: [
+          {
+            name: '컬러',
+            values: [{ name: '화이트', additionalPrice: 0 }],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 11,
@@ -178,6 +295,27 @@ const products = [
         updatedAt: '2025-03-09 09:45:15',
         freeDelivery: false,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '사이즈',
+            values: [
+              { name: '250mm', additionalPrice: 0 },
+              { name: '255mm', additionalPrice: 0 },
+              { name: '260mm', additionalPrice: 0 },
+              { name: '265mm', additionalPrice: 0 },
+              { name: '270mm', additionalPrice: 0 },
+            ],
+          },
+          {
+            name: '컬러',
+            values: [
+              { name: '블랙/화이트', additionalPrice: 0 },
+              { name: '그레이/블루', additionalPrice: 5000 },
+              { name: '레드/블랙', additionalPrice: 10000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
       {
         productId: 12,
@@ -194,6 +332,24 @@ const products = [
         updatedAt: '2025-03-06 16:40:20',
         freeDelivery: true,
         almostOutOfStock: false,
+        options: [
+          {
+            name: '구성',
+            values: [
+              { name: '바디 온리', additionalPrice: 0 },
+              { name: '28-70mm 렌즈 키트', additionalPrice: 500000 },
+            ],
+          },
+          {
+            name: '보증기간',
+            values: [
+              { name: '1년', additionalPrice: 0 },
+              { name: '2년', additionalPrice: 150000 },
+              { name: '3년', additionalPrice: 250000 },
+            ],
+          },
+        ],
+        maxPurchaseQuantity: 3,
       },
     ],
   },

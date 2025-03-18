@@ -61,28 +61,32 @@ const Dropdown = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div
-        className="border-border-primary py-sm px-lg bg-bg-primary flex cursor-pointer items-center justify-between border"
+        className="border-border-primary py-sm px-lg bg-bg-primary flex cursor-pointer items-center justify-between rounded-sm border"
         onClick={toggleDropdown}
       >
-        <span
-          className={cn(
-            selectedOption ? 'text-text-info' : 'text-text-secondary',
-          )}
-        >
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
-        <Icon
-          iconName="chevronsDown"
-          fill="text-icon-secondary"
-          className={cn(
-            'transtion-transform duration-300',
-            isOpen && 'rotate-180',
-          )}
-        />
+        <div className="line-clamp-2 flex-1 overflow-hidden pr-2 break-words">
+          <span
+            className={cn(
+              selectedOption ? 'text-text-info' : 'text-text-secondary',
+            )}
+          >
+            {selectedOption ? selectedOption.label : placeholder}
+          </span>
+        </div>
+        <div className="flex-shrink-0">
+          <Icon
+            iconName="chevronsDown"
+            fill="text-icon-secondary"
+            className={cn(
+              'transtion-transform duration-300',
+              isOpen && 'rotate-180',
+            )}
+          />
+        </div>
       </div>
 
       {isOpen && (
-        <div className="animate-dropdown bg-bg-tertiary gap-2xs border-border-secondary shadow-custom-effect absolute z-10 mt-1 flex max-h-60 w-full origin-top flex-col overflow-y-auto rounded-sm border transition-all duration-300">
+        <div className="animate-dropdown bg-bg-tertiary gap-2xs border-border-secondary shadow-custom-effect mt-xs absolute z-10 flex max-h-60 w-full origin-top flex-col overflow-y-auto rounded-sm border transition-all duration-300">
           {options.length > 0 &&
             options.map((option, index) => (
               <RadioOption

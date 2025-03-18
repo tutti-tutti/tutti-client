@@ -72,7 +72,7 @@ const RecommendCarousel = ({ products }: { products?: Product[] }) => {
   };
 
   return (
-    <ul className="pb-10">
+    <ul className="pb-lg">
       <Slider {...settings}>{renderItems()}</Slider>
     </ul>
   );

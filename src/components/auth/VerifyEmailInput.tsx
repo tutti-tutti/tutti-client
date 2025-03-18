@@ -1,6 +1,6 @@
 'use client';
 
-import { Input } from '@/components/common';
+import { Input } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
 
 interface VerifyEmailProps {

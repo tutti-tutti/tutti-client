@@ -1,4 +1,4 @@
-import { Input } from '@/components/common';
+import { Input } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
 import React from 'react';
 

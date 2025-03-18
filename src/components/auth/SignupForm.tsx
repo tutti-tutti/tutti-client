@@ -6,7 +6,7 @@ import {
   requestVerificationCodeAction,
   signupAction,
   verifyCodeAction,
-} from '@/actions';
+} from '@/server-actions';
 import { Button } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
 import { EmailVerificationState } from '@/types';

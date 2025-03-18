@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 
-import { signinAction } from '@/actions';
+import { signinAction } from '@/server-actions';
 import { Button, ClickText, Input } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
 import { EmailVerificationState } from '@/types';

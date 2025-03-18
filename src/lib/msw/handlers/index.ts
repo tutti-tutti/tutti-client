@@ -1,4 +1,4 @@
-import { userHandlers } from './userHandlers';
+import { authHandlers } from './authHandlers';
 import {
   productsHandlers,
   recommendedProductsHandlers,
@@ -6,7 +6,7 @@ import {
 } from './productsHandlers';
 
 export const handlers = [
-  ...userHandlers,
+  ...authHandlers,
   ...productsHandlers,
   ...recommendedProductsHandlers,
   ...productDetailHandlers,

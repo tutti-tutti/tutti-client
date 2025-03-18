@@ -1,29 +1,34 @@
 export const AUTH_CONSTANTS = {
-  LOGIN: '로그인',
+  SIGNIN: '로그인',
   SIGNUP: '회원가입',
   RESET_PW: '비밀번호 재설정',
-  AUTO_LOGIN: '자동 로그인',
+  AUTO_SIGNIN: '자동 로그인',
   FORGOT_PW: '비밀번호를 잊어버렸나요?',
-  SOCIAL_LOGIN: '소셜로 로그인하기',
-  TO_LOGIN: '아직 회원이 아니신가요?',
+  SOCIAL_SIGNIN: '소셜로 로그인하기',
+  TO_SIGNUP: '아직 회원이 아니신가요?',
   VERIFY_EMAIL_BUTTON: '이메일 인증하기',
   CHECK_VERIFY_CODE_BUTTON: '인증번호 확인',
   RESEND_EMAIL: '인증번호가 오지 않았나요? 인증메일 다시 받기',
   EMAIL_INPUT: {
     LABEL: '이메일 입력',
     PLACEHOLDER: '이메일을 입력해주세요',
+    ERROR: '유효한 이메일 주소를 입력해주세요.',
   },
   VERIFY_EMAIL_INPUT: {
     LABEL: '인증번호 입력',
     PLACEHOLDER: '이메일로 전송된 인증번호를 입력해주세요',
+    ERROR: '이메일 인증 코드를 입력해주세요.',
   },
   PW_INPUT: {
     LABEL: '비밀번호 입력',
     PLACEHOLDER: '비밀번호를 입력해주세요',
+    ERROR: '비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다.',
+    SIGNIN_ERROR: '비밀번호를 입력해주세요.',
   },
   CHECK_PW_INPUT: {
     LABEL: '비밀번호 확인',
     PLACEHOLDER: '비밀번호를 다시 입력해주세요',
+    ERROR: '비밀번호가 일치하지 않습니다.',
   },
   NEW_PW_INPUT: {
     LABEL: '새로운 비밀번호 입력',
@@ -46,6 +51,7 @@ export const AUTH_CONSTANTS = {
         '개인정보 수집 및 이용 동의',
         '개인정보 제 3자 제공 동의',
       ],
+      ERROR: '필수 약관에 동의해주세요.',
     },
     OPTIONS: {
       PREFIX: '[선택]',

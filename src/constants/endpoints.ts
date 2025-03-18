@@ -1,9 +1,20 @@
-export const SERVER_API_BASE_URL = process.env.SERVER_API_BASE_URL;
-export const SERVER_API_VERSION_V1 = process.env.SERVER_API_VERSION_V1;
-export const API_ROUTE_BASE_URL = process.env.API_ROUTE_BASE_URL;
+export const {
+  SERVER_API_BASE_URL,
+  SERVER_API_VERSION_V1,
+  API_ROUTE_BASE_URL,
+} = process.env;
+export const SERVER_API_V1_BASE_URL = `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}`;
 
-export const USERS_ENDPOINTS = {
-  LIST: `${SERVER_API_BASE_URL}${SERVER_API_VERSION_V1}/users`,
+const API_RESOURCES = {
+  MEMBERS: '/members',
+};
+
+export const AUTH_ENDPOINTS = {
+  EMAIL_VERIFY: `${API_RESOURCES.MEMBERS}/email/verify`,
+  EMAIL_CONFIRM: `${API_RESOURCES.MEMBERS}/email/confirm`,
+  SIGNUP_EMAIL: `${API_RESOURCES.MEMBERS}/signup/email`,
+  RESET_PW: `${API_RESOURCES.MEMBERS}/password/reset`,
+  SIGNIN_EMAIL: `${API_RESOURCES.MEMBERS}/login/email`,
 };
 
 export const PRODUCT_PATHS = {

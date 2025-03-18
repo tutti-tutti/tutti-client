@@ -1,8 +1,8 @@
 'use server';
 
 import { verifyEmailSchema } from '@/schemas';
-import type { EmailVerificationState } from '@/types';
 import { verifyCode } from '@/services';
+import type { EmailVerificationState } from '@/types';
 
 export const verifyCodeAction = async (
   prevState: EmailVerificationState,

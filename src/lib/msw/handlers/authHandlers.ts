@@ -1,7 +1,8 @@
+import { http, HttpResponse } from 'msw';
+
+import { getMswEndpoint } from '@/utils';
 import { AUTH_ENDPOINTS } from '@/constants';
 import { AUTH_REQUEST } from '@/mocks';
-import { getMswEndpoint } from '@/utils';
-import { http, HttpResponse } from 'msw';
 
 export const authHandlers = [
   http.post(

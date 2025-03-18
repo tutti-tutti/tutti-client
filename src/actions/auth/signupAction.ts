@@ -1,8 +1,8 @@
 'use server';
 
-import { signupSchema } from '@/schemas/auth/signupSchema';
+import { signupSchema } from '@/schemas';
 import { signup } from '@/services';
-import { EmailVerificationState } from '@/types';
+import type { EmailVerificationState } from '@/types';
 
 export const signupAction = async (
   prevState: EmailVerificationState,

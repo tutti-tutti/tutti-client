@@ -1,6 +1,6 @@
 'use server';
 
-import { verifyEmailSchema } from '@/schemas/auth/verifyEmailSchema';
+import { verifyEmailSchema } from '@/schemas';
 import { verifyEmail } from '@/services';
 import type { EmailVerificationState } from '@/types';
 

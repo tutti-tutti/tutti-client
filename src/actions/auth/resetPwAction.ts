@@ -1,8 +1,8 @@
 'use server';
 
+import { resetPwSchema } from '@/schemas';
 import { resetPw } from '@/services';
-import { EmailVerificationState } from '@/types';
-import { resetPwSchema } from '@/schemas/auth/resetPwSchema';
+import type { EmailVerificationState } from '@/types';
 
 export const resetPwAction = async (
   prevState: EmailVerificationState,

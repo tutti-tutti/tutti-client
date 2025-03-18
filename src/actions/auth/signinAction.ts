@@ -2,7 +2,7 @@
 
 import { signinSchema } from '@/schemas';
 import { signin } from '@/services';
-import { EmailVerificationState } from '@/types';
+import type { EmailVerificationState } from '@/types';
 
 export const signinAction = async (
   prevState: EmailVerificationState,

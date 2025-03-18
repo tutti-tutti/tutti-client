@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef, useId } from 'react';
+
 import { Icon } from '@/components';
 import { cn } from '@/utils';
 
@@ -9,6 +11,9 @@ interface CheckboxProps {
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
   className?: string;
+  name?: string;
+  required?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 const Checkbox = ({
@@ -17,7 +22,12 @@ const Checkbox = ({
   disabled = false,
   onChange,
   className = '',
+  name,
+  required = false,
+  ref,
 }: CheckboxProps) => {
+  const checkboxRef = useRef<HTMLInputElement>(null);
+
   const checkboxBaseClass =
     'p-2xs flex h-[var(--space-lg)] w-[var(--space-lg)] items-center justify-center rounded-md border-[1.5px] transition-colors duration-300';
 
@@ -54,8 +64,15 @@ const Checkbox = ({
   const handleClick = () => {
     if (!disabled && onChange) {
       onChange(!checked);
+
+      if (checkboxRef.current) {
+        checkboxRef.current.focus();
+      }
     }
   };
+
+  const uniqueId = useId();
+  const id = name || `checkbox-${uniqueId}`;
 
   return (
     <div
@@ -65,6 +82,19 @@ const Checkbox = ({
       )}
       onClick={handleClick}
     >
+      <input
+        id={id}
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        ref={ref || checkboxRef}
+        required={required}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange && onChange(e.target.checked)
+        }
+        className="sr-only"
+      />
+
       <div className={cn(checkboxBaseClass, currentCheckboxClass)}>
         <Icon
           iconName="check"
@@ -72,10 +102,14 @@ const Checkbox = ({
           color={getIconColor()}
         />
       </div>
+
       {label && (
-        <span className={cn(labelBaseClass, labelStateClass, className)}>
+        <label
+          htmlFor={id}
+          className={cn(labelBaseClass, labelStateClass, className)}
+        >
           {label}
-        </span>
+        </label>
       )}
     </div>
   );

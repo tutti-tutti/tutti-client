@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { authSchema } from '@/schemas';
+import { authSchema } from './authSchema';
 
 export const verifyEmailSchema = z.object({
   email: authSchema.shape.email,

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { AUTH_CONSTANTS } from '@/constants';
-import { authSchema } from '@/schemas';
+import { authSchema } from './authSchema';
 
 const { CHECK_PW_INPUT } = AUTH_CONSTANTS;
 

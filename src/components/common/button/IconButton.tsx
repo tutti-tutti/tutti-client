@@ -5,7 +5,7 @@ import Button, { type ButtonVariant } from './Button';
 export interface IconButtonProps {
   icon: IconType;
   variant?: ButtonVariant;
-  onClick: () => void;
+  onClick?: () => void;
   iconProps?: React.SVGProps<SVGSVGElement>;
   className?: string;
 }

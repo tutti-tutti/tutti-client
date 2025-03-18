@@ -1,17 +1,14 @@
-import { Icon, IconButton } from '@/components';
+import { Icon } from '@/components';
 import { cn } from '@/utils';
 
 type Step = string;
 
 interface StepProgressBarProps {
   currentStep: Step;
-  steps?: Step[];
+  steps: Step[];
 }
 
-const StepProgressBar = ({
-  currentStep,
-  steps = ['장바구니', '주문결제', '주문완료'],
-}: StepProgressBarProps) => {
+const StepProgressBar = ({ currentStep, steps }: StepProgressBarProps) => {
   return (
     <div className="gap-sm flex w-full items-center justify-center">
       {steps.map((step, index) => {
@@ -21,11 +18,23 @@ const StepProgressBar = ({
         return (
           <div key={index} className="gap-sm flex items-center">
             <div className="gap-sm flex items-center">
-              <IconButton
-                className="hidden md:block"
-                icon="check"
-                variant={isActive ? 'primaryOutline' : 'tertiaryOutline'}
-              />
+              <div
+                className={cn(
+                  'p-xs flex items-center justify-center rounded-full border-[1.25px] md:block',
+                  isActive
+                    ? 'border-border-primaryInteraction'
+                    : 'border-border-disabled',
+                )}
+              >
+                <Icon
+                  iconName="check"
+                  iconProps={{
+                    color: isActive
+                      ? 'var(--color-icon-primaryInteraction)'
+                      : 'var(--color-icon-tertiary)',
+                  }}
+                />
+              </div>
               <span
                 className={cn(
                   'font-style-subHeading',

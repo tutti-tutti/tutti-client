@@ -73,12 +73,13 @@ export const IconMap: Record<
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {
   iconName: IconType;
+  iconProps?: React.SVGProps<SVGSVGElement>;
 }
 
-const Icon = ({ iconName, ...props }: IconComponentProps) => {
+const Icon = ({ iconName, iconProps, ...props }: IconComponentProps) => {
   const IconComponent = IconMap[iconName];
 
-  return <IconComponent {...props} />;
+  return <IconComponent {...iconProps} {...props} />;
 };
 
 export default Icon;

@@ -5,7 +5,7 @@ import {
   SERVER_API_BASE_URL,
   SERVER_API_VERSION_V1,
 } from '@/constants';
-import { getAccessToken, refreshAccessToken, removeTokens } from '@/services';
+import { getAccessToken, renewAccessToken, removeTokens } from '@/services';
 
 const isServer = typeof window === 'undefined';
 
@@ -42,7 +42,7 @@ if (isServer) {
         error.config._retry = true;
 
         try {
-          const newAccessToken = await refreshAccessToken();
+          const newAccessToken = await renewAccessToken();
 
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;
 

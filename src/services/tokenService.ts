@@ -1,3 +1,6 @@
+'use server';
+// import 'server-only';
+
 import { cookies } from 'next/headers';
 
 import { axiosInstance } from '@/lib';

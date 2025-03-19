@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 
 import { axiosInstance } from '@/lib';
 
-export const getAccessTokens = async () => {
+export const getAccessToken = async () => {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('access_token')?.value;
 
@@ -11,7 +11,7 @@ export const getAccessTokens = async () => {
   return accessToken;
 };
 
-export const getRefreshTokens = async () => {
+export const getRefreshToken = async () => {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get('refresh_token')?.value;
 
@@ -20,7 +20,7 @@ export const getRefreshTokens = async () => {
   return refreshToken;
 };
 
-export const setAccessTokens = async (accessToken: string) => {
+export const setAccessToken = async (accessToken: string) => {
   const cookieStore = await cookies();
 
   cookieStore.set('access_token', accessToken, {
@@ -31,7 +31,7 @@ export const setAccessTokens = async (accessToken: string) => {
   });
 };
 
-export const setRefreshTokens = async (refreshToken: string) => {
+export const setRefreshToken = async (refreshToken: string) => {
   const cookieStore = await cookies();
 
   cookieStore.set('refresh_token', refreshToken, {
@@ -44,13 +44,13 @@ export const setRefreshTokens = async (refreshToken: string) => {
 
 export const refreshAccessToken = async () => {
   try {
-    const refreshToken = getRefreshTokens();
+    const refreshToken = getRefreshToken();
     const { data } = await axiosInstance.post('/members/temp-endpoint', {
       refresh_token: refreshToken,
     });
     const { access_token: accessToken } = data;
 
-    await setAccessTokens(accessToken);
+    await setAccessToken(accessToken);
   } catch (error) {
     console.error(error);
     await removeTokens();

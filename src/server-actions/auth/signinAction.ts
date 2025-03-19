@@ -2,7 +2,7 @@
 
 import { signinSchema } from '@/schemas';
 import { signin } from '@/services';
-import { setAccessTokens, setRefreshTokens } from '@/services/tokenService';
+import { setAccessToken, setRefreshToken } from '@/services/tokenService';
 import type { EmailVerificationState } from '@/types';
 
 export const signinAction = async (
@@ -44,8 +44,8 @@ export const signinAction = async (
       validatedData.data?.pw || '',
     );
 
-    await setAccessTokens(response.access_token);
-    await setRefreshTokens(response.refresh_token);
+    await setAccessToken(response.access_token);
+    await setRefreshToken(response.refresh_token);
 
     return {
       ...prevState,

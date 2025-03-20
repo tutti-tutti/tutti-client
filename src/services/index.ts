@@ -1,4 +1,4 @@
-export * from './fetchProducts';
+export * from './productService';
 export * from './authService';
-export * from './fetchCart';
+export * from './cartService';
 export * from './tokenService';

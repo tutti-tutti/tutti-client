@@ -18,6 +18,15 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['public'],
+  webpackFinal: async config => {
+    process.env.STORYBOOK = 'true';
+    config.module?.rules?.push({
+      test: /src\/services\/tokenService\.ts$/,
+      use: 'null-loader',
+    });
+
+    return config;
+  },
 };
 
 export default config;

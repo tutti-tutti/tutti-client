@@ -3,7 +3,7 @@ import { queryOptions } from '@tanstack/react-query';
 import { Product } from "@/types";
 import { fetchProducts, fetchRecommededProducts, fetchProductById } from "@/services";
 
-export const getProductsQueryOptions = queryOptions({
+export const productsQueryOptions = queryOptions({
     queryKey: ['products', 'list'],
     queryFn: async () => {
         const res = await fetchProducts();
@@ -12,7 +12,7 @@ export const getProductsQueryOptions = queryOptions({
     }
 });
 
-export const getRecommededProductsQueryOptions = queryOptions({
+export const recommededProductsQueryOptions = queryOptions({
     queryKey: ['products', 'recommeded-list'],
     queryFn: async () => {
         const res = await fetchRecommededProducts();
@@ -21,7 +21,7 @@ export const getRecommededProductsQueryOptions = queryOptions({
     }
 });
 
-export const getProductByIdQueryOptions = (productId: string) => queryOptions({
+export const productByIdQueryOptions = (productId: string) => queryOptions({
     queryKey: ['products', productId],
     queryFn: async () => {
         const res : Product = await fetchProductById(productId);

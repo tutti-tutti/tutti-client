@@ -7,14 +7,14 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { getRecommededProductsQueryOptions } from '@/queries';
+import { recommededProductsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
 import { RecommendProductItemSkeleton } from '@/components';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
 
 const RecommendCarousel = () => {
-  const { data, isError, error } = useSuspenseQuery(getRecommededProductsQueryOptions);
+  const { data, isError, error } = useSuspenseQuery(recommededProductsQueryOptions);
   const products = data[0].latestList || [];
 
   const [slidesToShow, setSlidesToShow] = useState(6);

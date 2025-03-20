@@ -2,12 +2,12 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { getProductsQueryOptions } from '@/queries';
+import { productsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
 
 const ProductListClientTemp = () => {
-  const { data, isError, error } = useSuspenseQuery(getProductsQueryOptions);
+  const { data, isError, error } = useSuspenseQuery(productsQueryOptions);
   const productItems = data[0].latestList || [];
 
   if (isError && error) return 'An error has occurred: ' + error.message;

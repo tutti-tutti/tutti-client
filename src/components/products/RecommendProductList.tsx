@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { getQueryClient } from "@/lib/tanstack";
-import { getRecommededProductsQueryOptions } from '@/queries';
+import { recommededProductsQueryOptions } from '@/queries';
 import { PRODUCTS_CONSTANTS } from '@/constants';
 import { RecommendProductListSkeleton } from '@/components';
 import RecommendCarousel from './RecommendCarousel';
@@ -14,7 +14,7 @@ const RecommendProductList = async ({
 }) => {
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(getRecommededProductsQueryOptions);
+  await queryClient.prefetchQuery(recommededProductsQueryOptions);
   const dehydratedState = dehydrate(queryClient);
 
   return (

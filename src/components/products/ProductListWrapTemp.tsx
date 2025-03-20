@@ -1,9 +1,8 @@
 import { Suspense } from 'react';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import { getProductsQueryOptions } from '@/queries';
 import { getQueryClient } from "@/lib/tanstack";
-
+import { getProductsQueryOptions } from '@/queries';
 import { ProductListSkeleton } from '@/components';
 import ProductListClientTemp from "./ProductListClientTemp";
 
@@ -18,11 +17,11 @@ const ProductListWrapTemp = async () => {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <Suspense fallback={<ProductListSkeleton />}>
       <HydrationBoundary state={dehydratedState}>
-        <ProductListClientTemp />
-      </HydrationBoundary>
-    </Suspense>
+        <Suspense fallback={<ProductListSkeleton />}>
+            <ProductListClientTemp />
+        </Suspense>
+    </HydrationBoundary>
   );
 };
 

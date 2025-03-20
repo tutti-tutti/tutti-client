@@ -1,27 +1,33 @@
 import { Suspense } from 'react';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import { fetchRecommededProducts } from '@/services';
+import { getQueryClient } from "@/lib/tanstack";
+import { getRecommededProductsQueryOptions } from '@/queries';
 import { PRODUCTS_CONSTANTS } from '@/constants';
+import { RecommendProductListSkeleton } from '@/components';
 import RecommendCarousel from './RecommendCarousel';
-import { RecommendProductListSkeleton } from './skeleton/RecommendProductSkeleton';
 
 const RecommendProductList = async ({
   categoryName,
 }: {
   categoryName: string;
 }) => {
-  const data = await fetchRecommededProducts();
-  const productItems = data[0].latestList || [];
+
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(getRecommededProductsQueryOptions);
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <Suspense fallback={<RecommendProductListSkeleton />}>
-      <div className="gap-3xl py-xs border-border-secondary flex flex-col border-y">
-        <h2 className="font-style-subHeading pt-xl text-brand-gradient text-center">
-          {PRODUCTS_CONSTANTS.getRecommendListTitle(categoryName)}
-        </h2>
-        <RecommendCarousel products={productItems} />
-      </div>
-    </Suspense>
+    <HydrationBoundary state={dehydratedState}>
+      <Suspense fallback={<RecommendProductListSkeleton />}>
+        <div className="gap-3xl py-xs border-border-secondary flex flex-col border-y">
+          <h2 className="font-style-subHeading pt-xl text-brand-gradient text-center">
+            {PRODUCTS_CONSTANTS.getRecommendListTitle(categoryName)}
+          </h2>
+          <RecommendCarousel />
+        </div>
+      </Suspense>
+    </HydrationBoundary>
   );
 };
 

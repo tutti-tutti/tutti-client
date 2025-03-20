@@ -31,8 +31,8 @@ export const AUTH_REQUEST = {
   },
   SIGNIN_EMAIL: {
     SUCCESS: {
-      access_token: '',
-      refresh_token: '',
+      access_token: 'temp-access-token',
+      refresh_token: 'temp-refresh-token',
     },
     ERROR: {
       error: '이메일 혹은 비밀번호를 다시 확인해주세요.',

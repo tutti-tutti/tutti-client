@@ -1,17 +1,16 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getProductsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
 
 const ProductListClientTemp = () => {
-  const { isPending, isError, error, data } = useQuery(getProductsQueryOptions);
+  const { data, isError, error } = useSuspenseQuery(getProductsQueryOptions);
   const productItems = data[0].latestList || [];
 
-  if (isPending) return 'Loading...';
-  if (isError) return 'An error has occurred: ' + error.message;
+  if (isError && error) return 'An error has occurred: ' + error.message;
 
   return (
       <section>

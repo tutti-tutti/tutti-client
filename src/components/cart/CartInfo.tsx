@@ -21,7 +21,7 @@ interface CartInfoProps {
 const CartInfo = ({ initialCartItems }: CartInfoProps) => {
   const {
     setCartItems,
-    toggleSelectAll,
+    toggleAllCheckbox,
     removeSelectedItems,
     getCheckedItemsCount,
     getTotalItemsCount,
@@ -50,7 +50,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
               <Checkbox
                 label={`전체선택하기 (${checkedCount}/${totalCount})`}
                 checked={isAllChecked()}
-                onChange={checked => toggleSelectAll(checked)}
+                onChange={checked => toggleAllCheckbox(checked)}
                 disabled={totalCount === 0}
               />
               <ExtraButton

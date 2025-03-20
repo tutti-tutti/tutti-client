@@ -24,7 +24,7 @@ const CartItem = ({
   maxQuantity,
 }: CartProductItem) => {
   const [productQuantity, setProductQuantity] = useState<number>(quantity);
-  const { toggleItemCheck, updateQuantity, removeItem, checkedItems } =
+  const { toggleItemCheckbox, updateQuantity, removeItem, checkedItems } =
     useCartStore();
 
   const isChecked = checkedItems[productId] || false;
@@ -55,7 +55,7 @@ const CartItem = ({
         <div className="absolute top-5 left-5 z-1">
           <Checkbox
             checked={isChecked}
-            onChange={checked => toggleItemCheck(productId, checked)}
+            onChange={checked => toggleItemCheckbox(productId, checked)}
           />
         </div>
         <ProductThumbnail

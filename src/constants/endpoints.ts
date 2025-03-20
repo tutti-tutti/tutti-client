@@ -23,7 +23,6 @@ export const PRODUCTS_ENDPOINTS = {
   LIST: `${API_RESOURCES.PRODUCTS}`,
   LATEST: `${API_RESOURCES.PRODUCTS}/latest`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
-  DETAIL_PATTERN: `${API_RESOURCES.PRODUCTS}/:productId`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
 };
 

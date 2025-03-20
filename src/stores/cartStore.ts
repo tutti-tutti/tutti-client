@@ -6,8 +6,8 @@ interface CartState {
   items: CartProductItem[];
   checkedItems: Record<number, boolean>;
   setCartItems: (items: CartProductItem[]) => void;
-  toggleItemCheck: (productId: number, isChecked: boolean) => void;
-  toggleSelectAll: (isChecked: boolean) => void;
+  toggleItemCheckbox: (productId: number, isChecked: boolean) => void;
+  toggleAllCheckbox: (isChecked: boolean) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   removeItem: (productId: number) => void;
   removeSelectedItems: () => void;
@@ -28,13 +28,13 @@ const useCartStore = create<CartState>((set, get) => ({
 
   setCartItems: items => set({ items }),
 
-  toggleItemCheck: (productId, isChecked) => {
+  toggleItemCheckbox: (productId, isChecked) => {
     set(state => ({
       checkedItems: { ...state.checkedItems, [productId]: isChecked },
     }));
   },
 
-  toggleSelectAll: isChecked => {
+  toggleAllCheckbox: isChecked => {
     set(state => ({
       checkedItems: state.items.reduce(
         (acc, item) => {

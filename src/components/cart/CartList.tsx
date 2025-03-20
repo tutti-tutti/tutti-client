@@ -22,7 +22,7 @@ const CartList = () => {
           <CartItem key={item.productId} {...item} />
         ))}
       </ul>
-      <MoreViewButton />
+      {items.length > 3 && <MoreViewButton />}
     </section>
   );
 };

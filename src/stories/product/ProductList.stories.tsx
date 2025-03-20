@@ -29,6 +29,8 @@ const createProduct = (id: number): Product => ({
   createdAt: new Date(),
   freeDelivery: true,
   almostOutOfStock: true,
+  options: [],
+  maxPurchaseQuantity: 1,
 });
 
 const generateProducts = (count: number): Product[] => {

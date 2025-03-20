@@ -114,6 +114,9 @@ importers:
       msw:
         specifier: ^2.7.3
         version: 2.7.3(@types/node@20.17.19)(typescript@5.7.3)
+      null-loader:
+        specifier: ^4.0.1
+        version: 4.0.1(webpack@5.98.0(esbuild@0.25.0))
       postcss:
         specifier: ^8
         version: 8.5.3
@@ -3537,6 +3540,12 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  null-loader@4.0.1:
+    resolution: {integrity: sha512-pxqVbi4U6N26lq+LmgIbB5XATP0VdZKOG25DhHi8btMmJJefGArFyDg1yc4U3hWCJbMqSrw0qyrz1UQX+qYXqg==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -8603,6 +8612,12 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  null-loader@4.0.1(webpack@5.98.0(esbuild@0.25.0)):
+    dependencies:
+      loader-utils: 2.0.4
+      schema-utils: 3.3.0
+      webpack: 5.98.0(esbuild@0.25.0)
 
   object-assign@4.1.1: {}
 

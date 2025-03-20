@@ -7,6 +7,7 @@ export { default as RecommendCarousel } from './RecommendCarousel';
 export { default as ProductListSkeleton } from './skeleton/ProductListSkeleton';
 export * from './skeleton/RecommendProductSkeleton';
 export * from './skeleton/ProductListSkeleton';
+export * from './skeleton/RecommendProductSkeleton';
 export { default as ProductDetailItem } from './product-detail/ProductDetailItem';
 export { default as ProductListClientTemp } from './ProductListClientTemp';
 export { default as ProductListWrapTemp } from './ProductListWrapTemp';

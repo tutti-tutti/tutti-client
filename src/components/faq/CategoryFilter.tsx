@@ -1,9 +1,9 @@
 import CategoryFilterItems from '@/components/faq/CategoryFilterItem';
 
 const CategoryFilter = async ({
-  categoryQueryParams,
+  categorySearchParams,
 }: {
-  categoryQueryParams?: string;
+  categorySearchParams?: string;
 }) => {
   const categories = [
     { id: '1', name: '카테고리1' },
@@ -18,7 +18,7 @@ const CategoryFilter = async ({
     <div className="gap-3xl border-border-secondary -bott relative box-border flex justify-center border-b">
       <CategoryFilterItems
         isTop
-        isSelected={!categoryQueryParams}
+        isSelected={!categorySearchParams}
         href={'/faq'}
       >
         인기
@@ -26,7 +26,7 @@ const CategoryFilter = async ({
       {categories.map(category => (
         <CategoryFilterItems
           key={category.id}
-          isSelected={categoryQueryParams === category.id}
+          isSelected={categorySearchParams === category.id}
           href={`/faq?category=${category.id}`}
         >
           {category.name}

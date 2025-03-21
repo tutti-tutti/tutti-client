@@ -1,8 +1,8 @@
 import SubCategoryFilterItem from '@/components/faq/SubCategoryFilterItem';
 
 interface SubCategoryFilterProps {
-  categoryQueryParams?: string;
-  subQueryParams?: string;
+  categorySearchParams?: string;
+  subSearchParams?: string;
 }
 
 const subCategories = [
@@ -15,14 +15,14 @@ const subCategories = [
 ];
 
 const SubCategoryFilter = ({
-  categoryQueryParams,
-  subQueryParams,
+  categorySearchParams,
+  subSearchParams,
 }: SubCategoryFilterProps) => {
   return (
     <div className="gap-xl flex justify-center">
       <SubCategoryFilterItem
-        href={`?category=${categoryQueryParams}`}
-        isSelected={!subQueryParams}
+        href={`?category=${categorySearchParams}`}
+        isSelected={!subSearchParams}
       >
         전체
       </SubCategoryFilterItem>
@@ -30,8 +30,8 @@ const SubCategoryFilter = ({
       {subCategories.map(subCategory => (
         <div key={subCategory.id}>
           <SubCategoryFilterItem
-            href={`?category=${categoryQueryParams}&sub=${subCategory.id}`}
-            isSelected={subQueryParams === subCategory.id}
+            href={`?category=${categorySearchParams}&sub=${subCategory.id}`}
+            isSelected={subSearchParams === subCategory.id}
           >
             {subCategory.name}
           </SubCategoryFilterItem>

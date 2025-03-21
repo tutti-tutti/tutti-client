@@ -5,6 +5,7 @@ const API_RESOURCES = {
   MEMBERS: '/members',
   PRODUCTS: '/products',
   CART: '/cart',
+  FAQS: '/faqs',
 };
 
 export const AUTH_ENDPOINTS = {
@@ -25,4 +26,11 @@ export const PRODUCTS_ENDPOINTS = {
 export const CART_ENDPOINTS = {
   LIST: `${API_RESOURCES.CART}`,
   DETAIL: (cartItemId: string) => `${API_RESOURCES.CART}/${cartItemId}`,
+};
+
+export const FAQ_ENDPOINTS = {
+  BASE: API_RESOURCES.FAQS,
+  MAIN_CATEGORIES: `${API_RESOURCES.FAQS}/categories/mainCategories`,
+  SUB_CATEGORIES: (mainCategories: string) =>
+    `${API_RESOURCES.FAQS}/categories/${mainCategories}/subcategories`,
 };

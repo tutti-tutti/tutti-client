@@ -1,3 +1,4 @@
+import { fetchMainCategories } from '@/services';
 import CategoryFilterItems from '@/components/faq/CategoryFilterItem';
 
 const CategoryFilter = async ({
@@ -5,14 +6,7 @@ const CategoryFilter = async ({
 }: {
   categorySearchParams?: string;
 }) => {
-  const categories = [
-    { id: '1', name: '카테고리1' },
-    { id: '2', name: '카테고리2' },
-    { id: '3', name: '카테고리3' },
-    { id: '4', name: '카테고리4' },
-    { id: '5', name: '카테고리5' },
-    { id: '6', name: '카테고리6' },
-  ];
+  const categories = await fetchMainCategories();
 
   return (
     <div className="gap-3xl border-border-secondary -bott relative box-border flex justify-center border-b">
@@ -23,15 +17,19 @@ const CategoryFilter = async ({
       >
         인기
       </CategoryFilterItems>
-      {categories.map(category => (
-        <CategoryFilterItems
-          key={category.id}
-          isSelected={categorySearchParams === category.id}
-          href={`/faq?category=${category.id}`}
-        >
-          {category.name}
-        </CategoryFilterItems>
-      ))}
+      {categories.map((category: string, index: number) => {
+        const encodedCategory = encodeURIComponent(category);
+
+        return (
+          <CategoryFilterItems
+            key={index}
+            isSelected={categorySearchParams === category}
+            href={`?category=${encodedCategory}`}
+          >
+            {category}
+          </CategoryFilterItems>
+        );
+      })}
     </div>
   );
 };

@@ -33,4 +33,13 @@ export const FAQ_ENDPOINTS = {
   MAIN_CATEGORIES: `${API_RESOURCES.FAQS}/categories/mainCategories`,
   SUB_CATEGORIES: (mainCategories: string) =>
     `${API_RESOURCES.FAQS}/categories/${mainCategories}/subcategories`,
+  TOP: `${API_RESOURCES.FAQS}/top`,
+  CATEGORY_FAQS: ({
+    category,
+    subCategory,
+  }: {
+    category: string;
+    subCategory: string;
+  }) =>
+    `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}`,
 };

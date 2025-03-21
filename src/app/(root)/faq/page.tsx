@@ -1,5 +1,4 @@
-import { CategoryFilter, FaqAccordion } from '@/components';
-import SubCategoryFilter from '@/components/faq/SubCategoryFilter';
+import { CategoryFilter, FaqAccordion, SubCategoryFilter } from '@/components';
 
 type SearchParamsProps = {
   searchParams: {
@@ -10,8 +9,11 @@ type SearchParamsProps = {
 };
 
 const FaqPage = async ({ searchParams }: SearchParamsProps) => {
-  const { category: categorySearchParams, sub: subSearchParams } =
-    await searchParams;
+  const {
+    category: categorySearchParams,
+    sub: subSearchParams,
+    faq: faqSearchParams,
+  } = await searchParams;
 
   return (
     <div>
@@ -25,6 +27,7 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
       <FaqAccordion
         categorySearchParams={categorySearchParams}
         subSearchParams={subSearchParams}
+        faqSearchParams={faqSearchParams}
       />
     </div>
   );

@@ -65,10 +65,11 @@ const CartItem = ({
           />
         </div>
         <ProductThumbnail
-          height="h-[150px] md:h-[322px]"
+          height="h-auto"
           width="w-full"
           imageUrl={productImgUrl}
           name={productItemName}
+          className="aspect-square"
         />
       </figure>
 

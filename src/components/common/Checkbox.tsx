@@ -83,7 +83,6 @@ const Checkbox = ({
         'gap-sm flex items-center',
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
       )}
-      onClick={handleClick}
     >
       <input
         id={id}
@@ -101,22 +100,31 @@ const Checkbox = ({
         {...props}
       />
 
-      <div className={cn(checkboxBaseClass, currentCheckboxClass)}>
-        <Icon
-          iconName="check"
-          iconProps={{ width: 16, height: 16 }}
-          color={getIconColor()}
-        />
-      </div>
+      <label
+        htmlFor={id}
+        className={cn(
+          'gap-sm flex cursor-pointer items-center',
+          disabled && 'cursor-not-allowed',
+        )}
+        onClick={e => {
+          e.preventDefault();
+          handleClick();
+        }}
+      >
+        <div className={cn(checkboxBaseClass, currentCheckboxClass)}>
+          <Icon
+            iconName="check"
+            iconProps={{ width: 16, height: 16 }}
+            color={getIconColor()}
+          />
+        </div>
 
-      {label && (
-        <label
-          htmlFor={id}
-          className={cn(labelBaseClass, labelStateClass, className)}
-        >
-          {label}
-        </label>
-      )}
+        {label && (
+          <span className={cn(labelBaseClass, labelStateClass, className)}>
+            {label}
+          </span>
+        )}
+      </label>
     </div>
   );
 };

@@ -20,7 +20,7 @@ const StepProgressBar = ({ currentStep, steps }: StepProgressBarProps) => {
             <div className="gap-sm flex items-center">
               <div
                 className={cn(
-                  'p-xs flex items-center justify-center rounded-full border-[1.25px] md:block',
+                  'p-xs hidden rounded-full border-[1.25px] md:block',
                   isActive
                     ? 'border-border-primaryInteraction'
                     : 'border-border-disabled',

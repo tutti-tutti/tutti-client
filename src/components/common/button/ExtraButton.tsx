@@ -1,19 +1,19 @@
-import Button from '@/components/common/button/Button';
-import type { ReactNode } from 'react';
+import { cn } from '@/utils';
+import Button from './Button';
 
 interface ExtraButtonProps {
-  children: ReactNode;
+  children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
-const ExtraButton = ({ children, onClick }: ExtraButtonProps) => {
+const ExtraButton = ({ children, onClick, className }: ExtraButtonProps) => {
   return (
-    // <Button
-    //   className="py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info shadow-custom-effect bg-[linear-gradient(180deg,_#FFF_17.28%,_#D4D4D4_495.36%)]"
-    //   onClick={onClick}
-    // >
     <Button
-      className="py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info shadow-custom-effect bg-custom-gradient"
+      className={cn(
+        'py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info shadow-custom-effect bg-custom-gradient',
+        className,
+      )}
       onClick={onClick}
     >
       {children}

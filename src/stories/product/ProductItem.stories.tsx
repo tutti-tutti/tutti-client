@@ -36,6 +36,8 @@ const defaultProduct: Product = {
   createdAt: new Date(),
   freeDelivery: false,
   almostOutOfStock: false,
+  options: [],
+  maxPurchaseQuantity: 1,
 };
 
 export const Default: Story = {

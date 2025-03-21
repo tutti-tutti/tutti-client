@@ -7,7 +7,7 @@ import {
   CartIcon,
   UserIcon,
 } from '@/components';
-import { ROUTER_PATH, PATH_NAME } from '@/constants';
+import { PATH_NAME } from '@/constants';
 
 const meta = {
   title: 'Header/NavIcon',
@@ -17,10 +17,6 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    href: {
-      control: 'text',
-      description: '링크 경로',
-    },
     icon: {
       control: { type: 'object' },
       description: '아이콘 컴포넌트',
@@ -37,7 +33,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CountrySetting: Story = {
   args: {
-    href: ROUTER_PATH.COUNTRY_SETTING,
     icon: <NationIcon />,
     label: PATH_NAME.COUNTRY_SETTING,
   },
@@ -45,7 +40,6 @@ export const CountrySetting: Story = {
 
 export const Cart: Story = {
   args: {
-    href: ROUTER_PATH.CART,
     icon: <CartIcon />,
     label: PATH_NAME.CART,
   },
@@ -53,7 +47,6 @@ export const Cart: Story = {
 
 export const MyPage: Story = {
   args: {
-    href: ROUTER_PATH.MY_PAGE,
     icon: <UserIcon />,
     label: PATH_NAME.MY_PAGE,
   },
@@ -61,7 +54,6 @@ export const MyPage: Story = {
 
 export const All: Story = {
   args: {
-    href: '',
     icon: <HeaderNavigation />,
     label: '',
   },

@@ -23,6 +23,8 @@ const generateProducts = (count: number): Product[] => {
       createdAt: new Date(),
       freeDelivery: index % 3 === 0,
       almostOutOfStock: index % 4 === 0,
+      options: [],
+      maxPurchaseQuantity: 1,
     }));
 };
 

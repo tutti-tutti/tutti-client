@@ -4,10 +4,12 @@ import {
   recommendedProductsHandlers,
   productDetailHandlers,
 } from './productsHandlers';
+import { cartHandlers } from './cartHandlers';
 
 export const handlers = [
   ...authHandlers,
   ...productsHandlers,
   ...recommendedProductsHandlers,
   ...productDetailHandlers,
+  ...cartHandlers,
 ];

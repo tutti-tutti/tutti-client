@@ -3,12 +3,10 @@ import localFont from 'next/font/local';
 
 import '@/styles/globals.css';
 
-if (process.env.NODE_ENV === 'development') {
-  (async () => {
-    const { initMsw } = await import('../lib/msw');
-    await initMsw();
-  })();
-}
+(async () => {
+  const { initMsw } = await import('../lib/msw');
+  await initMsw();
+})();
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',

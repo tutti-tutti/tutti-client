@@ -15,19 +15,22 @@ const CategoryFilter = async ({
   ];
 
   return (
-    <div className="gap-3xl flex justify-center">
-      <CategoryFilterItems isSelected={!categoryQueryParams} href={'/faq'}>
-        전체
+    <div className="gap-3xl border-border-secondary -bott relative box-border flex justify-center border-b">
+      <CategoryFilterItems
+        isTop
+        isSelected={!categoryQueryParams}
+        href={'/faq'}
+      >
+        인기
       </CategoryFilterItems>
       {categories.map(category => (
-        <div key={category.id}>
-          <CategoryFilterItems
-            isSelected={categoryQueryParams === category.id}
-            href={`/faq?category=${category.id}`}
-          >
-            {category.name}
-          </CategoryFilterItems>
-        </div>
+        <CategoryFilterItems
+          key={category.id}
+          isSelected={categoryQueryParams === category.id}
+          href={`/faq?category=${category.id}`}
+        >
+          {category.name}
+        </CategoryFilterItems>
       ))}
     </div>
   );

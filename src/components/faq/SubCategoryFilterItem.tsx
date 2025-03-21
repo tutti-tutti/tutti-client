@@ -17,7 +17,7 @@ const SubCategoryFilterItem = ({
     'font-style-paragraph text-text-tertiary flex h-15 items-center';
   const hoverClass = 'hover:text-text-primaryHover';
   const selectedCategoryClass =
-    'text-text-primaryInteraction border-b-4 border-b-border-primaryInteraction';
+    'text-text-primaryInteraction border-b-3 border-b-border-primaryInteraction';
   return (
     <Link
       className={cn(

@@ -13,9 +13,9 @@ const SubCategoryFilter = async ({
   const subCategories = await fetchSubCategories(categorySearchParams || '');
 
   return (
-    <div className="gap-xl flex justify-center">
+    <div className="gap-xl border-border-secondary -mt-lg flex w-full justify-center border-b">
       <SubCategoryFilterItem
-        href={`?category=${categorySearchParams}`}
+        href={`?category=${encodeURIComponent(categorySearchParams || '')}`}
         isSelected={!subSearchParams}
       >
         전체

@@ -34,7 +34,7 @@ const FaqAccordion = async ({
   };
 
   return (
-    <div>
+    <div className="w-full">
       {!categorySearchParams &&
         topFaqs.map((faq: FaqType) => {
           const { id, question, answer, viewCnt } = faq;

@@ -10,8 +10,7 @@ const RecommendProductList = async ({
 }: {
   categoryName: string;
 }) => {
-  const data = await fetchRecommededProducts();
-  const productItems = data[0].latestList || [];
+  const productItems = await fetchRecommededProducts();
 
   return (
     <Suspense fallback={<RecommendProductListSkeleton />}>

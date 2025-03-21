@@ -21,15 +21,10 @@ export const productDetailHandlers = [
     getMswEndpoint(PRODUCTS_ENDPOINTS.DETAIL(':productId')),
     ({ params }) => {
       const { productId } = params;
-      let product;
-      products.forEach(p => {
-        const foundProduct = p.latestList.find(
-          item => item.productId.toString() === productId,
-        );
-        if (foundProduct) {
-          product = foundProduct;
-        }
-      });
+
+      const product = products.find(
+        item => item.productId.toString() === productId,
+      );
 
       if (!product) {
         return new HttpResponse(null, { status: 404 });

@@ -3,14 +3,14 @@ export interface CartProductItem {
   storeName: string;
   productId: number;
   productImgUrl: string;
-  productName: string;
+  productItemName: string;
   originalPrice: number;
   sellingPrice: number;
   quantity: number;
-  optionName1?: string;
-  optionValue1?: string;
-  optionName2?: string;
-  optionValue2?: string;
+  firstOptionName?: string;
+  firstOptionValue?: string;
+  secondOptionName?: string;
+  secondOptionValue?: string;
   soldOut?: boolean;
   maxQuantity: number;
 }

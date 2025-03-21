@@ -3,8 +3,7 @@ import type { Product } from '@/types';
 import ProductItem from './ProductItem';
 
 const ProductList = async () => {
-  const data = await fetchProducts();
-  const productItems = data[0].latestList || [];
+  const productItems = await fetchProducts();
 
   return (
     <section>

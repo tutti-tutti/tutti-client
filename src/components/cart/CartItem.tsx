@@ -11,16 +11,16 @@ import { ProductThumbnail } from '../products';
 
 const CartItem = ({
   productId,
-  productName,
+  productItemName,
   storeName,
   productImgUrl,
   originalPrice,
   sellingPrice,
   quantity,
-  optionName1,
-  optionValue1,
-  optionName2,
-  optionValue2,
+  firstOptionName,
+  firstOptionValue,
+  secondOptionName,
+  secondOptionValue,
   maxQuantity,
 }: CartProductItem) => {
   const [productQuantity, setProductQuantity] = useState<number>(quantity);
@@ -35,7 +35,7 @@ const CartItem = ({
 
   const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
   const totalPrice = sellingPrice * productQuantity;
-  const hasOptions = !!optionName1 || !!optionName2;
+  const hasOptions = !!firstOptionName || !!secondOptionName;
 
   const handleIncrease = () => {
     if (productQuantity < maxQuantity) {
@@ -68,7 +68,7 @@ const CartItem = ({
           height="h-[150px] md:h-[322px]"
           width="w-full"
           imageUrl={productImgUrl}
-          name={productName}
+          name={productItemName}
         />
       </figure>
 
@@ -85,23 +85,23 @@ const CartItem = ({
           </p>
 
           <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
-            {productName}
+            {productItemName}
           </h2>
         </div>
 
         {hasOptions && (
           <div className="gap-sm mb-sm flex items-center">
-            {optionValue1 && (
+            {firstOptionValue && (
               <span className="text-text-tertiary font-style-paragraph">
-                {optionValue1}
+                {firstOptionValue}
               </span>
             )}
-            {optionValue1 && optionValue2 && (
+            {firstOptionValue && secondOptionValue && (
               <div className="bg-bg-disabled h-[var(--space-2xs)] w-[var(--space-2xs)] rounded-full" />
             )}
-            {optionValue2 && (
+            {secondOptionValue && (
               <span className="text-text-tertiary font-style-paragraph">
-                {optionValue2}
+                {secondOptionValue}
               </span>
             )}
           </div>

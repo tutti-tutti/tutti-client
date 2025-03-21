@@ -1,4 +1,3 @@
-
 import { fetchProducts } from '@/services';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
@@ -14,7 +13,7 @@ const ProductList = async () => {
           <ProductItem key={item.productId} {...item} />
         ))}
       </ul>
-  </section>
+    </section>
   );
 };
 

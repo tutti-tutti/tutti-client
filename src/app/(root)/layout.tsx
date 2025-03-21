@@ -1,4 +1,4 @@
-import { QueryProviders } from "@/providers";
+import { QueryProviders } from '@/providers';
 import { Header, Footer, ScrollToTopButton } from '@/components';
 
 import '@/styles/globals.css';

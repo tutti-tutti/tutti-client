@@ -49,6 +49,12 @@ const CartItem = ({
     }
   };
 
+  const handleDelete = () => {
+    if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
+      removeItem(productId);
+    }
+  };
+
   return (
     <li className="py-lg md:py-2xl border-border-secondary gap-sm flex w-full border-t">
       <figure className="relative w-1/2 md:w-2/5">
@@ -68,14 +74,7 @@ const CartItem = ({
 
       <div className="flex w-1/2 flex-col md:w-3/5">
         <div className="flex justify-end">
-          <button
-            className="cursor-pointer"
-            onClick={() => {
-              if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
-                removeItem(productId);
-              }
-            }}
-          >
+          <button className="cursor-pointer" onClick={handleDelete}>
             <Icon iconName="x" color="var(--color-icon-tertiary)" />
           </button>
         </div>
@@ -85,7 +84,7 @@ const CartItem = ({
             <Link href="#">{storeName}</Link>
           </p>
 
-          <h2 className="mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
+          <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
             {productName}
           </h2>
         </div>
@@ -137,7 +136,7 @@ const CartItem = ({
               <IconButton
                 icon="minus"
                 iconProps={{ width: 18, height: 18 }}
-                variant={productQuantity <= 1 ? 'disabled' : undefined}
+                variant={productQuantity <= 1 ? 'disabled' : 'primary'}
                 onClick={handleDecrease}
               />
               <span className="text-text-primary font-style-paragraph md:font-style-heading">
@@ -147,7 +146,7 @@ const CartItem = ({
                 icon="plus"
                 iconProps={{ width: 18, height: 18 }}
                 variant={
-                  productQuantity >= maxQuantity ? 'disabled' : undefined
+                  productQuantity >= maxQuantity ? 'disabled' : 'primary'
                 }
                 onClick={handleIncrease}
               />

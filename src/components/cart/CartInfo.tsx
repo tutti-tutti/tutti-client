@@ -39,6 +39,12 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
   const { totalPrice, discountPrice, deliveryPrice, finalPrice } =
     getPaymentInfo();
 
+  const handleDelete = () => {
+    if (checkedCount > 0 && window.confirm('선택한 상품을 삭제하시겠습니까?')) {
+      removeSelectedItems();
+    }
+  };
+
   return (
     <>
       <CartHeader />
@@ -55,17 +61,10 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
               />
               <ExtraButton
                 className={cn(
-                  'px-xs py-2xs',
+                  '!px-xs !py-2xs md:px-md md:py-xs',
                   checkedCount === 0 && 'cursor-not-allowed',
                 )}
-                onClick={() => {
-                  if (
-                    checkedCount > 0 &&
-                    window.confirm('선택한 상품을 삭제하시겠습니까?')
-                  ) {
-                    removeSelectedItems();
-                  }
-                }}
+                onClick={handleDelete}
               >
                 선택삭제
               </ExtraButton>
@@ -83,7 +82,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
           />
           <Button
             className="font-style-heading"
-            variant={totalCount === 0 ? 'disabled' : undefined}
+            variant={totalCount === 0 ? 'disabled' : 'primary'}
           >
             주문하기({totalCount}개)
           </Button>

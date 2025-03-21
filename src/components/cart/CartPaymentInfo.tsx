@@ -15,7 +15,7 @@ const CartPaymentInfo = ({
     finalPrice ?? totalPrice - discountPrice + deliveryPrice;
 
   return (
-    <div className="border-border-secondary p-xl rounded-2xl border">
+    <div className="border-border-secondary p-md md:p-xl rounded-2xl border">
       <h2 className="px-xs py-sm font-style-heading border-border-secondary mb-lg border-b">
         최종 결제금액
       </h2>

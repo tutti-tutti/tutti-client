@@ -8,7 +8,7 @@ pre-commit:
       run: pnpm exec eslint {staged_files} --fix && echo "ESLint ran on {staged_files}"
       stage_fixed: true
     prettier:
-      glob: '*.{js, ts, jsx, tsx, json, yaml, md}'
+      glob: '**/*.{js,ts,jsx,tsx,json,yaml,md,css}'
       run: pnpm exec prettier --write {staged_files}
       stage_fixed: true
 commit-msg:

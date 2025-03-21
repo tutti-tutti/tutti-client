@@ -1,11 +1,11 @@
 @import 'tailwindcss';
-
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --font-pretendard: var(--font-pretendard);
-}
+@import '../styles/token/colors/primitive.css';
+@import '../styles/token/colors/scale.css';
+@import '../styles/token/colors/semantic.css';
+@import '../styles/token/border.css';
+@import '../styles/token/spacing.css';
+@import '../styles/token/font/primitive.css';
+@import '../styles/fonts.css';
 
 @layer base {
   *,
@@ -13,23 +13,55 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-border-primary, currentColor);
   }
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@utility bg-custom-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-base-white) 17.28%,
+    var(--color-neutral-300) 495.36%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility text-brand-gradient {
+  background:
+    linear-gradient(118deg, #2424ff -6.96%, rgba(36, 36, 255, 0) 86.82%),
+    linear-gradient(31deg, #fa63ff 18.46%, rgba(250, 99, 255, 0) 89.69%),
+    linear-gradient(251deg, #f57291 25.39%, rgba(245, 114, 145, 0) 83.6%), #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+@theme {
+  --font-pretendard: var(--font-pretendard);
+
+  --shadow-custom-effect:
+    0px 4px 8px 0px var(--color-shadow-cast),
+    0px 0px 4px 0px var(--color-shadow-core);
+
+  --animate-dropdown: dropdown 0.2s ease-out forwards;
+
+  @keyframes dropdown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-neutral-900);
+  background: var(--color-base-white);
+}
+
+strong {
+  font-weight: var(--font-weight-medium);
 }

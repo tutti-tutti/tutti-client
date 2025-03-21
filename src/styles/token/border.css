@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Border Width */
+  --border-width: 1px;
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 4px;
+
+  /* Border Style */
+  --border-style: solid;
+
+  /* Border Color */
+  --border-color: var(--color-border-primary);
+
+  /* Border Radius */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+}

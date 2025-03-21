@@ -1,3 +1,15 @@
-import { userHandlers } from '@/lib/msw/handlers/userHandlers';
+import { authHandlers } from './authHandlers';
+import {
+  productsHandlers,
+  recommendedProductsHandlers,
+  productDetailHandlers,
+} from './productsHandlers';
+import { cartHandlers } from './cartHandlers';
 
-export const handlers = [...userHandlers];
+export const handlers = [
+  ...authHandlers,
+  ...productsHandlers,
+  ...recommendedProductsHandlers,
+  ...productDetailHandlers,
+  ...cartHandlers,
+];

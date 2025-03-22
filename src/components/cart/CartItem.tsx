@@ -1,13 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
 import { useCartStore } from '@/stores';
 import type { CartProductItem } from '@/types';
-import { Checkbox, Icon, IconButton } from '../common';
-import { ProductThumbnail } from '../products';
+import CartItemImage from './CartItemImage';
+import CartItemHeader from './CartItemHeader';
+import CartItemOptions from './CartItemOptions';
+import CartItemPrice from './CartItemPrice';
+import CartItemQuantity from './CartItemQuantity';
 
 const CartItem = ({
   productId,
@@ -34,7 +36,6 @@ const CartItem = ({
   }, [productId, productQuantity, updateQuantity]);
 
   const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
-  const totalPrice = sellingPrice * productQuantity;
   const hasOptions = !!firstOptionName || !!secondOptionName;
 
   const handleIncrease = () => {
@@ -57,106 +58,41 @@ const CartItem = ({
 
   return (
     <li className="py-lg md:py-2xl border-border-secondary gap-sm flex w-full border-t">
-      <figure className="relative w-1/2 md:w-2/5">
-        <div className="absolute top-5 left-5 z-1">
-          <Checkbox
-            checked={isChecked}
-            onChange={checked => toggleItemCheckbox(productId, checked)}
-          />
-        </div>
-        <ProductThumbnail
-          height="h-auto"
-          width="w-full"
-          imageUrl={productImgUrl}
-          name={productItemName}
-          className="aspect-square"
-        />
-      </figure>
+      <CartItemImage
+        productId={productId}
+        productImgUrl={productImgUrl}
+        productItemName={productItemName}
+        isChecked={isChecked}
+        toggleItemCheckbox={toggleItemCheckbox}
+      />
 
       <div className="flex w-1/2 flex-col md:w-3/5">
-        <div className="flex justify-end">
-          <button className="cursor-pointer" onClick={handleDelete}>
-            <Icon iconName="x" color="var(--color-icon-tertiary)" />
-          </button>
-        </div>
-
-        <div className="gap-xs flex flex-col">
-          <p className="mb-2xs font-style-info text-text-secondary">
-            <Link href="#">{storeName}</Link>
-          </p>
-
-          <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
-            {productItemName}
-          </h2>
-        </div>
+        <CartItemHeader
+          storeName={storeName}
+          productItemName={productItemName}
+          handleDelete={handleDelete}
+        />
 
         {hasOptions && (
-          <div className="gap-sm mb-sm flex items-center">
-            {firstOptionValue && (
-              <span className="text-text-tertiary font-style-paragraph">
-                {firstOptionValue}
-              </span>
-            )}
-            {firstOptionValue && secondOptionValue && (
-              <div className="bg-bg-disabled h-[var(--space-2xs)] w-[var(--space-2xs)] rounded-full" />
-            )}
-            {secondOptionValue && (
-              <span className="text-text-tertiary font-style-paragraph">
-                {secondOptionValue}
-              </span>
-            )}
-          </div>
+          <CartItemOptions
+            firstOptionValue={firstOptionValue}
+            secondOptionValue={secondOptionValue}
+          />
         )}
 
-        {originalPrice !== sellingPrice ? (
-          <>
-            <span className="font-style-info text-text-tertiaryInfo line-through">
-              {(originalPrice * productQuantity).toLocaleString()}
-            </span>
-            <div className="gap-2xs flex items-center">
-              <span className="font-style-heading text-text-danger">
-                {discountRate}
-              </span>
-              <span className="font-style-heading text-text-primary">
-                {totalPrice.toLocaleString()}원
-              </span>
-            </div>
-          </>
-        ) : (
-          <p className="font-style-heading text-text-primary">
-            {totalPrice.toLocaleString()}원
-          </p>
-        )}
+        <CartItemPrice
+          originalPrice={originalPrice}
+          sellingPrice={sellingPrice}
+          productQuantity={productQuantity}
+          discountRate={discountRate}
+        />
 
-        <div className="flex flex-col">
-          <div className="mt-auto flex items-center justify-start md:justify-end">
-            <span className="mr-md font-style-paragraph md:font-style-heading text-text-secondary">
-              수량
-            </span>
-            <div className="gap-xs md:gap-lg flex items-center">
-              <IconButton
-                icon="minus"
-                iconProps={{ width: 18, height: 18 }}
-                variant={productQuantity <= 1 ? 'disabled' : 'primary'}
-                onClick={handleDecrease}
-              />
-              <span className="text-text-primary font-style-paragraph md:font-style-heading">
-                {productQuantity}
-              </span>
-              <IconButton
-                icon="plus"
-                iconProps={{ width: 18, height: 18 }}
-                variant={
-                  productQuantity >= maxQuantity ? 'disabled' : 'primary'
-                }
-                onClick={handleIncrease}
-              />
-            </div>
-          </div>
-          <span className="text-text-tertiary font-style-info flex justify-start md:justify-end">
-            고객 당 최대 {maxQuantity}개 구매가능
-          </span>
-        </div>
+        <CartItemQuantity
+          productQuantity={productQuantity}
+          maxQuantity={maxQuantity}
+          handleIncrease={handleIncrease}
+          handleDecrease={handleDecrease}
+        />
       </div>
     </li>
   );

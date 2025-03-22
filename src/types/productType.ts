@@ -9,7 +9,6 @@ export interface ProductOption {
   name: string;
   values: OptionValue[];
 }
-
 export interface Product {
   productId: number;
   storeName: string;
@@ -26,4 +25,11 @@ export interface Product {
   almostOutOfStock?: boolean;
   options: ProductOption[];
   maxPurchaseQuantity: number;
+}
+
+export type ProductListAPISchema = ProductListAPISchemaData[];
+export interface ProductListAPISchemaData {
+  code: string;
+  message: string;
+  latestList: Product[];
 }

@@ -17,7 +17,7 @@ const RecommendProductItem = ({
     <li className="px-xs">
       <Link href={`/products/${productId}`}>
         <ProductThumbnail
-          imageUrl={titleUrl}
+          imageUrl={titleUrl || 'null'}
           name={name}
           height="sm:h-[200px] h-auto"
           width="w-full"

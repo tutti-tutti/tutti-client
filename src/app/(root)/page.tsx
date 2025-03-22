@@ -4,6 +4,7 @@ import {
   ProductList,
   RecommendProductList,
   ProductListSkeleton,
+  ProductListWrapTemp,
 } from '@/components';
 
 const HomePage = () => {

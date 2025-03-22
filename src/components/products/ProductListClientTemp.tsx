@@ -7,8 +7,11 @@ import type { Product } from '@/types';
 import ProductItem from './ProductItem';
 
 const ProductListClientTemp = () => {
-  const { data, isError, error } = useSuspenseQuery(productsQueryOptions);
-  const productItems = data;
+  const {
+    data: productItems,
+    isError,
+    error,
+  } = useSuspenseQuery(productsQueryOptions);
 
   if (isError && error) return 'An error has occurred: ' + error.message;
 

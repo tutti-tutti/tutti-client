@@ -14,10 +14,11 @@ import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
 
 const RecommendCarousel = () => {
-  const { data, isError, error } = useSuspenseQuery(
-    recommededProductsQueryOptions,
-  );
-  const products = data;
+  const {
+    data: products,
+    isError,
+    error,
+  } = useSuspenseQuery(recommededProductsQueryOptions);
 
   const [slidesToShow, setSlidesToShow] = useState(6);
 

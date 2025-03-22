@@ -2,8 +2,7 @@ import { fetchCart } from '@/services';
 import { CartInfo, RecommendProductList } from '@/components';
 
 const CartPage = async () => {
-  const data = await fetchCart();
-  const cartItems = data[0]?.items || [];
+  const cartItems = await fetchCart();
 
   return (
     <div className="gap-3xl flex flex-col">

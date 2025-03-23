@@ -1,3 +1,5 @@
+import { RecommendCarousel } from '@/components';
+
 export const RecommendProductItemSkeleton = () => {
   return (
     <li className="px-xs animate-pulse">
@@ -13,7 +15,7 @@ export const RecommendProductListSkeleton = () => {
   return (
     <div className="gap-3xl py-xl pb-xs border-border-secondary flex flex-col border-b">
       <div className="mx-auto h-8 w-2/5 animate-pulse rounded bg-gray-200" />
-      <RecommendProductItemSkeleton />
+      <RecommendCarousel />
     </div>
   );
 };

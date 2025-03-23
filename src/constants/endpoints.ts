@@ -1,5 +1,4 @@
-export const { SERVER_API_BASE_URL, NEXT_PUBLIC_API_ROUTE_BASE_URL } =
-  process.env;
+export const { SERVER_API_BASE_URL } = process.env;
 
 export const API_RESOURCES = {
   MEMBERS: '/members',

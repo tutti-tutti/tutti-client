@@ -32,7 +32,8 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
           name="faqQuery"
           icon="search"
           className="!py-md !px-2xl border-border-info w-[670px] rounded-lg border-2"
-          placeholder="자주 묻는 질문을 입력해주세요"
+          placeholder="질문을 입력해주세요."
+          defaultValue={querySearchParams}
         />
       </form>
       {querySearchParams ? (

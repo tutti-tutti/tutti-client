@@ -11,6 +11,7 @@ interface ProductThumbnailProps {
   onClick?: () => void;
   className?: string;
   isDim?: boolean;
+  productId: number;
 }
 
 const ProductThumbnail = ({
@@ -21,6 +22,7 @@ const ProductThumbnail = ({
   onClick,
   className,
   isDim = false,
+  productId,
 }: ProductThumbnailProps) => {
   return (
     <figure
@@ -42,7 +44,7 @@ const ProductThumbnail = ({
       />
       {isDim && (
         <div className="absolute inset-0 bg-black/35 opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
-          <ProductThumbnailAction />
+          <ProductThumbnailAction productId={productId} />
         </div>
       )}
     </figure>

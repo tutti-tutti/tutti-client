@@ -12,6 +12,7 @@ import ProductActions from './ProductActions';
 import ProductThumbnail from '../ProductThumbnail';
 
 const ProductDetailItem = ({
+  productId,
   titleUrl,
   name,
   storeName,
@@ -73,6 +74,7 @@ const ProductDetailItem = ({
           height="h-[350px] sm:h-[630px]"
           imageUrl={titleUrl}
           name={name}
+          productId={productId}
         />
       </figure>
 
@@ -101,7 +103,7 @@ const ProductDetailItem = ({
           handleIncrease={handleIncrease}
           handleDecrease={handleDecrease}
         />
-        <ProductActions />
+        <ProductActions productId={productId} />
       </section>
     </div>
   );

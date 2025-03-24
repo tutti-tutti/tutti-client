@@ -23,6 +23,7 @@ const RecommendProductItem = ({
           width="w-full"
           isDim
           className="aspect-square"
+          productId={productId}
         />
 
         <h2 className="mt-xs mb-sm font-style-info line-clamp-2 w-full text-ellipsis">

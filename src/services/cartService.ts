@@ -68,16 +68,45 @@ export const fetchCart = async () => {
   }
 };
 
-export const addToLocalCart = (item: CartItem) => {
+export const addToLocalCart = async (item: CartItem) => {
   const currentCart = fetchLocalCart();
 
   const existingItemById = currentCart.findIndex(
     cartItem => cartItem.productItemId === item.productItemId,
   );
 
+  let maxQuantity = 10;
+  try {
+    const product = await fetchProductById(String(item.productItemId));
+    if (product) {
+      maxQuantity = product.maxPurchaseQuantity || 10;
+    }
+  } catch (error) {
+    console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+  }
+
   if (existingItemById >= 0) {
-    currentCart[existingItemById].quantity += item.quantity;
+    const existingItem = currentCart[existingItemById];
+    const newQuantity = existingItem.quantity + item.quantity;
+
+    if (newQuantity > maxQuantity) {
+      return {
+        success: false,
+        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
+        cart: currentCart,
+      };
+    }
+
+    currentCart[existingItemById].quantity = newQuantity;
   } else {
+    if (item.quantity > maxQuantity) {
+      return {
+        success: false,
+        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
+        cart: currentCart,
+      };
+    }
+
     currentCart.push(item);
   }
 

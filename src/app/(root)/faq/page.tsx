@@ -6,6 +6,7 @@ import {
   SubCategoryFilter,
 } from '@/components';
 import { faqSearchAction } from '@/server-actions';
+import { fetchMainCategories, fetchSubCategories } from '@/services';
 
 type SearchParamsProps = {
   searchParams: {
@@ -16,13 +17,38 @@ type SearchParamsProps = {
   };
 };
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
+export const generateStaticParams = async () => {
+  const categories = await fetchMainCategories();
+
+  const paths = [{}];
+
+  const categoryPaths = await Promise.all(
+    categories.map(async (category: string) => {
+      const categoryPath = { category };
+
+      const subCategories = await fetchSubCategories(category);
+
+      const subCategoryPaths = subCategories.map((subCategory: string) => ({
+        category,
+        sub: subCategory,
+      }));
+
+      return [categoryPath, ...subCategoryPaths];
+    }),
+  );
+
+  return [...paths, ...categoryPaths.flat()];
+};
 const FaqPage = async ({ searchParams }: SearchParamsProps) => {
   const {
     category: categorySearchParams,
     sub: subSearchParams,
     faq: faqSearchParams,
     query: querySearchParams,
-  } = await searchParams;
+  } = searchParams;
 
   return (
     <div className="md:px-7xl gap-lg mb-7xl flex flex-col items-center">

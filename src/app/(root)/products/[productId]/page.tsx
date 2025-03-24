@@ -1,5 +1,9 @@
 import { fetchProductById } from '@/services';
-import { RecommendProductList, ProductDetailItem } from '@/components';
+import {
+  RecommendProductList,
+  ProductDetailItem,
+  ProductReview,
+} from '@/components';
 
 interface Params {
   params: Promise<{ productId: string }>;
@@ -44,16 +48,14 @@ const ProductDetailPage = async ({ params }: Params) => {
         </div>
       </section>
 
-      <section className="gap-md flex flex-col">
-        <div>
+      <section className="flex flex-col">
+        <div className="mb-md">
           <h2 className="font-style-subHeading text-text-primary">상품 리뷰</h2>
           <p className="text-text-secondary font-style-paragraph">
             동일한 상품에 대한 고객들의 의견입니다.
           </p>
         </div>
-        <div className="bg-bg-secondary font-style-subHeading text-text-tertiary flex h-[640px] items-center justify-center overflow-y-auto">
-          리뷰영역
-        </div>
+        <ProductReview productId={productId} />
       </section>
     </div>
   );

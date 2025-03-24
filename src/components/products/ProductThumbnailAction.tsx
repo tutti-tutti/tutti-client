@@ -1,18 +1,27 @@
 'use client';
 
+import { addCart } from '@/services';
 import { IconButton } from '../common';
 
-const ProductThumbnailAction = () => {
-  const handleCartClick = () => {
-    console.log('장바구니에 담기'); // 추후 구현
+const ProductThumbnailAction = ({ productId }: { productId: number }) => {
+  const handleCartClick = async () => {
+    await addCart({ productItemId: productId, quantity: 1 });
   };
 
   const handleHeartClick = () => {
     console.log('이 상품을 좋아해요'); // 추후 구현
   };
 
+  const handleContainerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
-    <div className="gap-sm absolute right-4 bottom-4 flex items-center">
+    <div
+      className="gap-sm absolute right-4 bottom-4 flex items-center"
+      onClick={handleContainerClick}
+    >
       <IconButton
         icon="cart"
         variant="primaryShadow"

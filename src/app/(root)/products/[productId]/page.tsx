@@ -4,14 +4,20 @@ import {
   ProductDetailItem,
   ProductReview,
 } from '@/components';
+import { setReviewSort } from '@/utils';
 
 interface Params {
   params: Promise<{ productId: string }>;
+  searchParams: { 'review-sort': string };
 }
 
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({ params, searchParams }: Params) {
   const { productId } = await params;
   const product = await fetchProductById(productId);
+
+  const { 'review-sort': reviewSortSearchParams } = await searchParams;
+
+  setReviewSort(reviewSortSearchParams);
 
   if (!product) return;
 

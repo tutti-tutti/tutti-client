@@ -1,3 +1,4 @@
+import { getReviewSort } from '@/utils';
 import Link from 'next/link';
 
 const REVIEW_FILTERS = [
@@ -9,6 +10,12 @@ const REVIEW_FILTERS = [
 ];
 
 const ReviewFilter = () => {
+  const reviewSortSearchParams = getReviewSort();
+
+  const isSelected = (filterQueryParameter: string) => {
+    return reviewSortSearchParams === filterQueryParameter;
+  };
+
   return (
     <>
       <div className="border-border-secondary pb-md gap-lg flex justify-end border-b">
@@ -17,7 +24,7 @@ const ReviewFilter = () => {
             <Link
               key={filter.id}
               href={`?review-sort=${filter.queryParameter}`}
-              className="font-style-paragraph text-text-tertiary"
+              className={`font-style-paragraph ${isSelected(filter.queryParameter) ? 'text-text-primaryInteraction' : 'text-text-tertiary'} `}
               scroll={false}
               replace={true}
             >

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { /* fetchCategoryFaqs, */ fetchTopCategoryFaqs } from '@/services';
+import { fetchCategoryFaqs, fetchTopCategoryFaqs } from '@/services';
 import FaqAccordionItemQuestion from '@/components/faq/FaqAccordionItemQuestion';
 import FaqAccordionAnswer from '@/components/faq/FaqAccordionAnswer';
 
@@ -20,14 +20,16 @@ interface FaqType {
 
 const FaqAccordion = async ({
   categorySearchParams,
-  /* subSearchParams, */
+  subSearchParams,
   faqSearchParams,
 }: FaqAccordionProps) => {
   const topFaqs = await fetchTopCategoryFaqs();
-  // const faqs = await fetchCategoryFaqs({
-  //   category: encodeURIComponent(categorySearchParams || ''),
-  //   subCategory: encodeURIComponent(subSearchParams || ''),
-  // });
+  const categoryFaqs = await fetchCategoryFaqs({
+    category: encodeURIComponent(categorySearchParams || ''),
+    subCategory: encodeURIComponent(subSearchParams ? subSearchParams : ''),
+    page: 1,
+    size: 100,
+  });
 
   const isSelected = (faqId: number): boolean => {
     return faqSearchParams === faqId.toString();
@@ -52,22 +54,29 @@ const FaqAccordion = async ({
             </Fragment>
           );
         })}
-      {/* categorySearchParams && {faqs.map((faq: FaqType) => {
-        const { id, question, answer, viewCnt } = faq;
 
-        return (
-          <Fragment key={id}>
-            <FaqAccordionItemQuestion
-              href={isSelected(id) ? `/faq` : `?faq=${id}`}
-              isSelected={isSelected(id)}
-              question={question}
-            />
-            {isSelected(id) && (
-              <FaqAccordionAnswer answer={answer} viewCnt={viewCnt} />
-            )}
-          </Fragment>
-        );
-      })} */}
+      {categorySearchParams &&
+        categoryFaqs.map((faq: FaqType) => {
+          console.log('faq: ', faq);
+          const { id, question, answer, viewCnt } = faq;
+
+          return (
+            <Fragment key={id}>
+              <FaqAccordionItemQuestion
+                href={
+                  isSelected(id)
+                    ? `?category=${categorySearchParams}${subSearchParams ? `&sub=${subSearchParams}` : ''}`
+                    : `?category=${categorySearchParams}${subSearchParams ? `&sub=${subSearchParams}` : ''}&faq=${faq.id}`
+                }
+                isSelected={isSelected(id)}
+                question={question}
+              />
+              {isSelected(id) && (
+                <FaqAccordionAnswer answer={answer} viewCnt={viewCnt} />
+              )}
+            </Fragment>
+          );
+        })}
     </div>
   );
 };

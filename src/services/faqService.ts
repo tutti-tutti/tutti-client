@@ -44,12 +44,16 @@ export const fetchSubCategories = async (mainCategory: string) => {
 export const fetchCategoryFaqs = async ({
   category,
   subCategory,
+  size,
+  page,
 }: {
   category: string;
   subCategory: string;
+  size: number;
+  page: number;
 }) => {
   const response = await fetch(
-    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.CATEGORY_FAQS({ category, subCategory })}`,
+    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.CATEGORY_FAQS({ category, subCategory, size, page })}`,
     {
       method: 'GET',
       headers: {
@@ -66,7 +70,7 @@ export const fetchCategoryFaqs = async ({
   }
 
   const data = await response.json();
-  return data;
+  return data.faqSearchResults.faqs;
 };
 
 export const fetchTopCategoryFaqs = async () => {

@@ -37,9 +37,13 @@ export const FAQ_ENDPOINTS = {
   CATEGORY_FAQS: ({
     category,
     subCategory,
+    page,
+    size,
   }: {
     category: string;
     subCategory: string;
+    page: number;
+    size: number;
   }) =>
-    `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}`,
+    `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}&page=${page}&size=${size}`,
 };

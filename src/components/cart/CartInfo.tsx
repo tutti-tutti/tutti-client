@@ -1,8 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
-import { useCartStore } from '@/stores';
 import {
   Checkbox,
   ExtraButton,
@@ -10,40 +7,32 @@ import {
   CartPaymentInfo,
   Button,
 } from '@/components';
-import type { CartProductItem } from '@/types';
 import { cn } from '@/utils';
+import { useCart } from '@/hooks';
 import CartHeader from './CartHeader';
 
-interface CartInfoProps {
-  initialCartItems: CartProductItem[];
-}
-
-const CartInfo = ({ initialCartItems }: CartInfoProps) => {
+const CartInfo = () => {
   const {
-    setCartItems,
-    toggleAllCheckbox,
-    removeSelectedItems,
-    getCheckedItemsCount,
-    getTotalItemsCount,
+    error,
+    checkedCount,
+    totalCount,
     isAllChecked,
-    getPaymentInfo,
-  } = useCartStore();
+    paymentInfo,
+    toggleAllCheckbox,
+    handleDeleteSelected,
+  } = useCart();
 
-  useEffect(() => {
-    setCartItems(initialCartItems);
-  }, [initialCartItems, setCartItems]);
+  if (error) {
+    return (
+      <div className="py-xl text-center">
+        <p className="font-style-heading text-text-danger">
+          {error?.message || String(error)}
+        </p>
+      </div>
+    );
+  }
 
-  const checkedCount = getCheckedItemsCount();
-  const totalCount = getTotalItemsCount();
-
-  const { totalPrice, discountPrice, deliveryPrice, finalPrice } =
-    getPaymentInfo();
-
-  const handleDelete = () => {
-    if (checkedCount > 0 && window.confirm('선택한 상품을 삭제하시겠습니까?')) {
-      removeSelectedItems();
-    }
-  };
+  const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
 
   return (
     <>
@@ -55,7 +44,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
             <div className="py-md flex w-full items-center justify-between">
               <Checkbox
                 label={`전체선택하기 (${checkedCount}/${totalCount})`}
-                checked={isAllChecked()}
+                checked={isAllChecked}
                 onChange={checked => toggleAllCheckbox(checked)}
                 disabled={totalCount === 0}
               />
@@ -64,7 +53,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
                   '!px-xs !py-2xs md:px-md md:py-xs',
                   checkedCount === 0 && 'cursor-not-allowed',
                 )}
-                onClick={handleDelete}
+                onClick={handleDeleteSelected}
               >
                 선택삭제
               </ExtraButton>

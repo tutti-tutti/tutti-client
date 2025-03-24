@@ -3,18 +3,11 @@ import { Fragment } from 'react';
 import { fetchSearchedFaqs } from '@/services';
 import FaqAccordionItemQuestion from '@/components/faq/FaqAccordionItemQuestion';
 import FaqAccordionAnswer from '@/components/faq/FaqAccordionAnswer';
+import type { FaqType } from '@/types';
 
 interface SearchedFaqProps {
   querySearchParams: string;
   faqSearchParams?: string;
-}
-
-interface FaqType {
-  id: number;
-  categoryName: string;
-  question: string;
-  answer: string;
-  viewCnt: number;
 }
 
 const SearchedFaq = async ({

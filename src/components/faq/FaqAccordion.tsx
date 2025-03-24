@@ -3,19 +3,12 @@ import { Fragment } from 'react';
 import { fetchCategoryFaqs, fetchTopCategoryFaqs } from '@/services';
 import FaqAccordionItemQuestion from '@/components/faq/FaqAccordionItemQuestion';
 import FaqAccordionAnswer from '@/components/faq/FaqAccordionAnswer';
+import type { FaqType } from '@/types';
 
 interface FaqAccordionProps {
   categorySearchParams?: string;
   subSearchParams?: string;
   faqSearchParams?: string;
-}
-
-interface FaqType {
-  id: number;
-  categoryName: string;
-  question: string;
-  answer: string;
-  viewCnt: number;
 }
 
 const FaqAccordion = async ({

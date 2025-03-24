@@ -89,3 +89,31 @@ export const fetchTopCategoryFaqs = async () => {
   const data = await response.json();
   return data;
 };
+
+export const fetchSearchedFaqs = async ({
+  query,
+  page,
+  size,
+}: {
+  query: string;
+  page: number;
+  size: number;
+}) => {
+  const response = await fetch(
+    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.SEARCH_FAQS({ query, size, page })}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'force-cache',
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`검색어와 일치하는 FAQ 페칭 실패: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data;
+};

@@ -46,4 +46,13 @@ export const FAQ_ENDPOINTS = {
     size: number;
   }) =>
     `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}&page=${page}&size=${size}`,
+  SEARCH_FAQS: ({
+    query,
+    page,
+    size,
+  }: {
+    query: string;
+    page: number;
+    size: number;
+  }) => `${API_RESOURCES.FAQS}/search?query=${query}&page=${page}&size=${size}`,
 };

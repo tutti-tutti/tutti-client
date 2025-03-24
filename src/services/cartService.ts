@@ -1,10 +1,109 @@
 import { axiosInstance } from '@/lib';
 import { CART_ENDPOINTS } from '@/constants';
+import type { Product } from '@/types';
+import { getAccessToken } from './tokenService';
+import { fetchProductById } from './productService';
+
+interface CartItem {
+  productItemId: number;
+  quantity: number;
+}
+
+export const mapProductToCartItem = (product: Product, quantity: number) => {
+  return {
+    ...product,
+    productItemId: product.productId,
+    productImgUrl: product.titleUrl,
+    productItemName: product.name,
+    maxQuantity: product.maxPurchaseQuantity || 10,
+    quantity,
+  };
+};
+
+export const fetchLocalCart = (): CartItem[] => {
+  if (typeof window === 'undefined') return [];
+
+  const localCart = localStorage.getItem('cart');
+  return localCart ? JSON.parse(localCart) : [];
+};
 
 export const fetchCart = async () => {
-  const response = await axiosInstance.get(CART_ENDPOINTS.LIST);
+  const accessToken = await getAccessToken();
 
-  return response.data;
+  if (accessToken) {
+    try {
+      const response = await axiosInstance.get(CART_ENDPOINTS.LIST);
+      return response.data;
+    } catch (error) {
+      console.error('장바구니를 불러오는 데 실패했습니다.', error);
+      throw error;
+    }
+  } else {
+    const localCart = fetchLocalCart();
+
+    if (localCart.length === 0) {
+      return [];
+    }
+
+    try {
+      const cartItemsWithProducts = await Promise.all(
+        localCart.map(async item => {
+          try {
+            const product = await fetchProductById(String(item.productItemId));
+            if (!product) return null;
+
+            return mapProductToCartItem(product, item.quantity);
+          } catch (error) {
+            console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+            return null;
+          }
+        }),
+      );
+
+      return cartItemsWithProducts.filter(Boolean);
+    } catch (error) {
+      console.error('장바구니 정보를 불러오는 데 실패했습니다.', error);
+      throw error;
+    }
+  }
+};
+
+export const addToLocalCart = (item: CartItem) => {
+  const currentCart = fetchLocalCart();
+
+  const existingItemById = currentCart.findIndex(
+    cartItem => cartItem.productItemId === item.productItemId,
+  );
+
+  if (existingItemById >= 0) {
+    currentCart[existingItemById].quantity += item.quantity;
+  } else {
+    currentCart.push(item);
+  }
+
+  localStorage.setItem('cart', JSON.stringify(currentCart));
+
+  return {
+    success: true,
+    message: '장바구니에 추가되었습니다.',
+    cart: currentCart,
+  };
+};
+
+export const addCart = async (payload: CartItem) => {
+  const accessToken = await getAccessToken();
+
+  if (accessToken) {
+    try {
+      const { data } = await axiosInstance.post(CART_ENDPOINTS.LIST, payload);
+      return data;
+    } catch (error) {
+      console.error('장바구니에 추가하는 데 실패했습니다.', error);
+      throw error;
+    }
+  } else {
+    return addToLocalCart(payload);
+  }
 };
 
 export const patchCartById = async (cartItemId: string) => {

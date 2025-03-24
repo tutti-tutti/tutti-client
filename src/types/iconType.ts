@@ -2,7 +2,7 @@ export type IconType =
   | 'cancelCircle'
   | 'view'
   | 'viewCancel'
-  | 'comment'
+  | 'logo'
   | 'googleLogo'
   | 'naver'
   | 'x'
@@ -29,4 +29,6 @@ export type IconType =
   | 'starGray'
   | 'starHalf'
   | 'starFill'
-  | 'radio';
+  | 'radio'
+  | 'positive'
+  | 'negative';

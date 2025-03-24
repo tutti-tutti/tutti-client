@@ -29,3 +29,5 @@ export { default as StarHalfIcon } from './StarHalfIcon';
 export { default as StarFillIcon } from './StarFillIcon';
 export { default as GoogleLogoIcon } from './GoogleLogoIcon';
 export { default as RadioIcon } from './RadioIcon';
+export { default as GoodIcon } from './PositiveIcon';
+export { default as BadIcon } from './NegativeIcon';

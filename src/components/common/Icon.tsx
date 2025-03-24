@@ -32,6 +32,8 @@ import {
   XIcon,
   GoogleLogoIcon,
   RadioIcon,
+  GoodIcon,
+  BadIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -41,7 +43,7 @@ export const IconMap: Record<
   cancelCircle: CancelCircleIcon,
   view: ViewIcon,
   viewCancel: ViewCancelIcon,
-  comment: JihyeIcon,
+  logo: JihyeIcon,
   naver: NaverLogoIcon,
   x: XIcon,
   right: RightIcon,
@@ -69,6 +71,8 @@ export const IconMap: Record<
   starFill: StarFillIcon,
   googleLogo: GoogleLogoIcon,
   radio: RadioIcon,
+  positive: GoodIcon,
+  negative: BadIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

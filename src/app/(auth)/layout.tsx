@@ -17,7 +17,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
             className="p-sm mb-2xl flex justify-center"
             href={ROUTER_PATH.HOME}
           >
-            <Icon iconName="comment" />
+            <Icon iconName="logo" />
           </Link>
           {children}
         </div>

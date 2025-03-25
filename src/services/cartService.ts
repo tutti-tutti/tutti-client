@@ -1,33 +1,46 @@
 import { axiosInstance } from '@/lib';
 import { CART_ENDPOINTS } from '@/constants';
-import type { Product } from '@/types';
+import type {
+  Product,
+  ProductOption,
+  CartProductItem,
+  LocalCartItem,
+  CartAddRequestSchema,
+} from '@/types';
 import { getAccessToken } from './tokenService';
 import { fetchProductById } from './productService';
 
-interface CartItem {
-  productItemId: number;
-  quantity: number;
-}
-
-export const mapProductToCartItem = (product: Product, quantity: number) => {
+export const mapProductToCartItem = (
+  product: Product,
+  selectedOption: ProductOption,
+  quantity: number,
+): CartProductItem => {
   return {
-    ...product,
-    productItemId: product.productId,
-    productImgUrl: product.titleUrl,
+    cartItemId: -1,
+    storeName: product.storeName,
+    productItemId: selectedOption.productItemId,
+    productImgUrl: product.titleUrl as string,
     productItemName: product.name,
-    maxQuantity: product.maxPurchaseQuantity || 10,
+    originalPrice: product.originalPrice,
+    sellingPrice: product.sellingPrice + (selectedOption.additionalPrice || 0),
     quantity,
+    firstOptionName: selectedOption.firstOptionName,
+    firstOptionValue: selectedOption.firstOptionValue || undefined,
+    secondOptionName: selectedOption.secondOptionName || undefined,
+    secondOptionValue: selectedOption.secondOptionValue || undefined,
+    soldOut: false,
+    maxQuantity: product.maxPurchaseQuantity || 10,
   };
 };
 
-export const fetchLocalCart = (): CartItem[] => {
+export const fetchLocalCart = (): LocalCartItem[] => {
   if (typeof window === 'undefined') return [];
 
   const localCart = localStorage.getItem('cart');
   return localCart ? JSON.parse(localCart) : [];
 };
 
-export const fetchCart = async () => {
+export const fetchCart = async (): Promise<CartProductItem[]> => {
   const accessToken = await getAccessToken();
 
   if (accessToken) {
@@ -49,10 +62,16 @@ export const fetchCart = async () => {
       const cartItemsWithProducts = await Promise.all(
         localCart.map(async item => {
           try {
-            const product = await fetchProductById(String(item.productItemId));
+            const product = await fetchProductById(String(item.productId));
             if (!product) return null;
 
-            return mapProductToCartItem(product, item.quantity);
+            const selectedOption = product.productItems.find(
+              option => option.productItemId === item.productItemId,
+            );
+
+            if (!selectedOption) return null;
+
+            return mapProductToCartItem(product, selectedOption, item.quantity);
           } catch (error) {
             console.error('상품 정보를 불러오는 데 실패했습니다.', error);
             return null;
@@ -60,7 +79,7 @@ export const fetchCart = async () => {
         }),
       );
 
-      return cartItemsWithProducts.filter(Boolean);
+      return cartItemsWithProducts.filter(Boolean) as CartProductItem[];
     } catch (error) {
       console.error('장바구니 정보를 불러오는 데 실패했습니다.', error);
       throw error;
@@ -68,18 +87,34 @@ export const fetchCart = async () => {
   }
 };
 
-export const addToLocalCart = async (item: CartItem) => {
+export const addToLocalCart = async (
+  productId: number,
+  productItemId: number,
+  quantity: number,
+) => {
   const currentCart = fetchLocalCart();
 
   const existingItemById = currentCart.findIndex(
-    cartItem => cartItem.productItemId === item.productItemId,
+    cartItem => cartItem.productItemId === productItemId,
   );
 
   let maxQuantity = 10;
   try {
-    const product = await fetchProductById(String(item.productItemId));
+    const product = await fetchProductById(String(productId));
     if (product) {
       maxQuantity = product.maxPurchaseQuantity || 10;
+
+      const optionExists = product.productItems.some(
+        option => option.productItemId === productItemId,
+      );
+
+      if (!optionExists) {
+        return {
+          success: false,
+          message: '유효하지 않은 상품 옵션입니다.',
+          cart: currentCart,
+        };
+      }
     }
   } catch (error) {
     console.error('상품 정보를 불러오는 데 실패했습니다.', error);
@@ -87,7 +122,7 @@ export const addToLocalCart = async (item: CartItem) => {
 
   if (existingItemById >= 0) {
     const existingItem = currentCart[existingItemById];
-    const newQuantity = existingItem.quantity + item.quantity;
+    const newQuantity = existingItem.quantity + quantity;
 
     if (newQuantity > maxQuantity) {
       return {
@@ -99,7 +134,7 @@ export const addToLocalCart = async (item: CartItem) => {
 
     currentCart[existingItemById].quantity = newQuantity;
   } else {
-    if (item.quantity > maxQuantity) {
+    if (quantity > maxQuantity) {
       return {
         success: false,
         message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
@@ -107,7 +142,11 @@ export const addToLocalCart = async (item: CartItem) => {
       };
     }
 
-    currentCart.push(item);
+    currentCart.push({
+      productId,
+      productItemId,
+      quantity,
+    });
   }
 
   localStorage.setItem('cart', JSON.stringify(currentCart));
@@ -119,19 +158,34 @@ export const addToLocalCart = async (item: CartItem) => {
   };
 };
 
-export const addCart = async (payload: CartItem) => {
+export const addCart = async (
+  productId: number,
+  productItemId: number,
+  quantity: number,
+) => {
   const accessToken = await getAccessToken();
 
   if (accessToken) {
     try {
-      const { data } = await axiosInstance.post(CART_ENDPOINTS.LIST, payload);
+      const apiPayload: CartAddRequestSchema = {
+        cartItems: [
+          {
+            productItemId,
+            quantity,
+          },
+        ],
+      };
+      const { data } = await axiosInstance.post(
+        CART_ENDPOINTS.LIST,
+        apiPayload,
+      );
       return data;
     } catch (error) {
       console.error('장바구니에 추가하는 데 실패했습니다.', error);
       throw error;
     }
   } else {
-    return addToLocalCart(payload);
+    return addToLocalCart(productId, productItemId, quantity);
   }
 };
 

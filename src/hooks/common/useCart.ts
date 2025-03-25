@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { useCartStore } from '@/stores';
 import { fetchCart, removeFromCart } from '@/services';
+import { toast } from '@/utils';
 
 const useCart = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,13 +50,14 @@ const useCart = () => {
           .filter(([_, checked]) => checked)
           .map(([productItemId]) => Number(productItemId));
 
-        await removeFromCart(items, selectedProductItemIds);
+        const result = await removeFromCart(items, selectedProductItemIds);
 
         removeSelectedItems();
+        toast.success(result.message);
       } catch (err) {
         console.error('선택한 상품 삭제 중 오류가 발생했습니다.', err);
         setError(err as Error);
-        alert('선택한 상품 삭제에 실패했습니다.');
+        toast.error('선택한 상품 삭제에 실패했습니다.');
       }
     }
   };

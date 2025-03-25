@@ -1,14 +1,14 @@
 import { StaticImageData } from 'next/image';
 
-export interface OptionValue {
-  name: string;
-  additionalPrice?: number;
+export interface ProductOption {
+  productItemId: number;
+  firstOptionName: string | null;
+  firstOptionValue: string | null;
+  secondOptionName: string | null;
+  secondOptionValue: string | null;
+  additionalPrice: number | null;
 }
 
-export interface ProductOption {
-  name: string;
-  values: OptionValue[];
-}
 export interface Product {
   productId: number;
   storeName: string;
@@ -23,7 +23,7 @@ export interface Product {
   updatedAt?: Date;
   freeDelivery?: boolean;
   almostOutOfStock?: boolean;
-  options: ProductOption[];
+  productItems: ProductOption[];
   maxPurchaseQuantity: number;
 }
 

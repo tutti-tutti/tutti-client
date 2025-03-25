@@ -16,7 +16,7 @@ const CartItemQuantity = ({
   handleDecrease,
 }: CartItemQuantityProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex h-full flex-col">
       <div className="mt-auto flex items-center justify-start md:justify-end">
         <span className="mr-md font-style-paragraph md:font-style-heading text-text-secondary">
           수량

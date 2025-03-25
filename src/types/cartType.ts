@@ -1,7 +1,20 @@
+export interface CartItem {
+  productItemId: number;
+  quantity: number;
+}
+
+export interface LocalCartItem extends CartItem {
+  productId: number;
+}
+
+export interface CartAddRequestSchema {
+  cartItems: CartItem[];
+}
+
 export interface CartProductItem {
   cartItemId: number;
   storeName: string;
-  productId: number;
+  productItemId: number;
   productImgUrl: string;
   productItemName: string;
   originalPrice: number;
@@ -13,8 +26,4 @@ export interface CartProductItem {
   secondOptionValue?: string;
   soldOut?: boolean;
   maxQuantity: number;
-}
-
-export interface Cart {
-  items: CartProductItem[];
 }

@@ -17,3 +17,7 @@ export const PRODUCTS_QUERY_KEY = {
   LATEST: 'latest',
   RECOMMEND: 'recommend',
 };
+
+export const CART_QUERY_KEY = {
+  CART: 'cart',
+};

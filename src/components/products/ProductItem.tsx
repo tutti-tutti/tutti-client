@@ -27,7 +27,6 @@ const ProductItem = ({
             width="w-full"
             isDim
             className="aspect-square"
-            productId={productId}
           />
         </Link>
       </figure>

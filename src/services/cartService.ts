@@ -24,7 +24,7 @@ export const mapProductToCartItem = (
     originalPrice: product.originalPrice,
     sellingPrice: product.sellingPrice + (selectedOption.additionalPrice || 0),
     quantity,
-    firstOptionName: selectedOption.firstOptionName,
+    firstOptionName: selectedOption.firstOptionName || undefined,
     firstOptionValue: selectedOption.firstOptionValue || undefined,
     secondOptionName: selectedOption.secondOptionName || undefined,
     secondOptionValue: selectedOption.secondOptionValue || undefined,

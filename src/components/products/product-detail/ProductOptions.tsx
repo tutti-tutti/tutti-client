@@ -31,10 +31,10 @@ const ProductOptions = ({
         option.secondOptionValue
           ? (option.firstOptionValue ? ', ' : '') + option.secondOptionValue
           : ''
-      } ${
-        option.additionalPrice > 0
+      }${
+        option.additionalPrice && option.additionalPrice > 0
           ? `(+${option.additionalPrice.toLocaleString()}원)`
-          : option.additionalPrice < 0
+          : option.additionalPrice && option.additionalPrice < 0
             ? `(${option.additionalPrice.toLocaleString()}원)`
             : ''
       }`,

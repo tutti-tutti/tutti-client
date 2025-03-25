@@ -2,11 +2,11 @@ import { StaticImageData } from 'next/image';
 
 export interface ProductOption {
   productItemId: number;
-  firstOptionName: string;
+  firstOptionName: string | null;
   firstOptionValue: string | null;
   secondOptionName: string | null;
   secondOptionValue: string | null;
-  additionalPrice: number;
+  additionalPrice: number | null;
 }
 
 export interface Product {

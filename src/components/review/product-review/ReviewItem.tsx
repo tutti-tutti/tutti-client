@@ -1,6 +1,7 @@
 import { Button } from '@/components';
 import ReviewBadge from '@/components/review/product-review/ReviewBadge';
 import StarRating from '@/components/review/product-review/StarRating';
+import { calculateRelativeTime } from '@/utils';
 
 interface ReviewItemProps {
   id: number;
@@ -31,7 +32,7 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
           <StarRating score={review.rating} size={24} />
         </div>
         <div className="font-style-info text-text-tertiaryInfo">
-          {review.createdAt}
+          {calculateRelativeTime(review.createdAt)}
         </div>
       </div>
       <div className="font-style-paragraph text-text-primary ml-2xs">

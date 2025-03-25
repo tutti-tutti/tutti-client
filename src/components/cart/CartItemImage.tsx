@@ -32,7 +32,6 @@ const CartItemImage = ({
         imageUrl={productImgUrl}
         name={productItemName}
         className="aspect-square"
-        productId={productId}
       />
     </figure>
   );

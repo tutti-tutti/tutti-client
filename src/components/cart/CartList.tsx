@@ -32,7 +32,7 @@ const CartList = () => {
     <section>
       <ul className="flex flex-col">
         {items.map(item => (
-          <CartItem key={item.productId} {...item} />
+          <CartItem key={item.productItemId} {...item} />
         ))}
       </ul>
       {items.length > 3 && <MoreViewButton />}

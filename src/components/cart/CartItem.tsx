@@ -12,7 +12,7 @@ import CartItemPrice from './CartItemPrice';
 import CartItemQuantity from './CartItemQuantity';
 
 const CartItem = ({
-  productId,
+  productItemId,
   productItemName,
   storeName,
   productImgUrl,
@@ -29,11 +29,11 @@ const CartItem = ({
   const { toggleItemCheckbox, updateQuantity, removeItem, checkedItems } =
     useCartStore();
 
-  const isChecked = checkedItems[productId] || false;
+  const isChecked = checkedItems[productItemId] || false;
 
   useEffect(() => {
-    updateQuantity(productId, productQuantity);
-  }, [productId, productQuantity, updateQuantity]);
+    updateQuantity(productItemId, productQuantity);
+  }, [productItemId, productQuantity, updateQuantity]);
 
   const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
   const hasOptions = !!firstOptionName || !!secondOptionName;
@@ -52,14 +52,14 @@ const CartItem = ({
 
   const handleDelete = () => {
     if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
-      removeItem(productId);
+      removeItem(productItemId);
     }
   };
 
   return (
     <li className="py-lg md:py-2xl border-border-secondary gap-sm flex w-full border-t">
       <CartItemImage
-        productId={productId}
+        productId={productItemId}
         productImgUrl={productImgUrl}
         productItemName={productItemName}
         isChecked={isChecked}

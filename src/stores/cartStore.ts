@@ -38,7 +38,7 @@ const useCartStore = create<CartState>((set, get) => ({
     set(state => ({
       checkedItems: state.items.reduce(
         (acc, item) => {
-          acc[item.productId] = isChecked;
+          acc[item.productItemId] = isChecked;
           return acc;
         },
         {} as Record<string, boolean>,
@@ -49,7 +49,7 @@ const useCartStore = create<CartState>((set, get) => ({
   updateQuantity: (productId, quantity) => {
     set(state => ({
       items: state.items.map(item =>
-        item.productId === productId ? { ...item, quantity } : item,
+        item.productItemId === productId ? { ...item, quantity } : item,
       ),
     }));
   },
@@ -60,7 +60,7 @@ const useCartStore = create<CartState>((set, get) => ({
       delete newCheckedItems[productId];
 
       return {
-        items: state.items.filter(item => item.productId !== productId),
+        items: state.items.filter(item => item.productItemId !== productId),
         checkedItems: newCheckedItems,
       };
     });
@@ -69,12 +69,12 @@ const useCartStore = create<CartState>((set, get) => ({
   removeSelectedItems: () => {
     set(state => {
       const remainingItems = state.items.filter(
-        item => !state.checkedItems[item.productId],
+        item => !state.checkedItems[item.productItemId],
       );
 
       const newCheckedItems = {} as Record<string, boolean>;
       remainingItems.forEach(item => {
-        newCheckedItems[item.productId] = false;
+        newCheckedItems[item.productItemId] = false;
       });
 
       return {
@@ -90,7 +90,7 @@ const useCartStore = create<CartState>((set, get) => ({
     let discountPrice = 0;
 
     state.items.forEach(item => {
-      if (state.checkedItems[item.productId]) {
+      if (state.checkedItems[item.productItemId]) {
         totalPrice += item.originalPrice * item.quantity;
         discountPrice +=
           (item.originalPrice - item.sellingPrice) * item.quantity;

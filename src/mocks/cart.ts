@@ -2,7 +2,7 @@ const cart = [
   {
     cartItemId: 78901,
     storeName: '깔끔이몰',
-    productId: 1,
+    productItemId: 1,
     productImgUrl:
       'https://ae-pic-a1.aliexpress-media.com/kf/Ad36bb01de72146b4a6f6f1748402bb1fY.jpg_960x960q75.jpg_.avif',
     productItemName:
@@ -20,7 +20,7 @@ const cart = [
   {
     cartItemId: 78902,
     storeName: 'Shop9876543210',
-    productId: 2,
+    productItemId: 2,
     productImgUrl:
       'https://ae-pic-a1.aliexpress-media.com/kf/S3bb61fcf7de648b19170f4c6b6ab7bc1r.jpg_480x480q75.jpg_.avif',
     productItemName: '삼성 갤럭시 북 프로 360 NT950QFG-K71A',
@@ -37,7 +37,7 @@ const cart = [
   {
     cartItemId: 78903,
     storeName: 'Shop2468101214',
-    productId: 3,
+    productItemId: 3,
     productImgUrl:
       'https://ae-pic-a1.aliexpress-media.com/kf/Sc10b21f82eb94c1c8eb0ac96faafe9f3G.jpg_480x480q75.jpg_.avif',
     productItemName: '캐논 EOS R6 Mark II 미러리스 카메라',

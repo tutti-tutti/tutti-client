@@ -54,3 +54,15 @@ export const signin = async (email: string, pw: string) => {
 
   return data;
 };
+
+export const fetchMemberData = async () => {
+  const { data } = await axiosInstance.get(AUTH_ENDPOINTS.MYPAGE);
+
+  return data;
+};
+
+export const getMemberNickname = async () => {
+  const memberData = await fetchMemberData();
+
+  return memberData.nickname;
+};

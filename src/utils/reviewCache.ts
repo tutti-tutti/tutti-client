@@ -1,12 +1,20 @@
 import { cache } from 'react';
 
-let reviewSortValue = '';
+let reviewSortSearchParams = '';
+let productIdParams = '';
 
-export const setReviewSort = cache((value: string) => {
-  reviewSortValue = value;
-  return value;
+export const setReviewSortSearchParams = cache((value: string) => {
+  reviewSortSearchParams = value;
 });
 
-export const getReviewSort = cache(() => {
-  return reviewSortValue || 'latest';
+export const getReviewSortSearchParams = cache(() => {
+  return reviewSortSearchParams || 'latest';
+});
+
+export const setProductIdParams = cache((value: string) => {
+  productIdParams = value;
+});
+
+export const getProductIdParams = cache(() => {
+  return productIdParams;
 });

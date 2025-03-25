@@ -4,7 +4,7 @@ import {
   ProductDetailItem,
   ProductReview,
 } from '@/components';
-import { setReviewSort } from '@/utils';
+import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
 
 interface Params {
   params: Promise<{ productId: string }>;
@@ -17,7 +17,8 @@ export async function generateMetadata({ params, searchParams }: Params) {
 
   const { 'review-sort': reviewSortSearchParams } = await searchParams;
 
-  setReviewSort(reviewSortSearchParams);
+  setProductIdParams(productId);
+  setReviewSortSearchParams(reviewSortSearchParams);
 
   if (!product) return;
 
@@ -61,7 +62,7 @@ const ProductDetailPage = async ({ params }: Params) => {
             동일한 상품에 대한 고객들의 의견입니다.
           </p>
         </div>
-        <ProductReview productId={productId} />
+        <ProductReview />
       </section>
     </div>
   );

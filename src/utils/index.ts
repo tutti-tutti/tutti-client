@@ -3,3 +3,4 @@ export * from './calculateDiscountRate';
 export * from './getMswEndpoint';
 export * from './hydration';
 export * from './reviewCache';
+export * from './calculateRelativeTime';

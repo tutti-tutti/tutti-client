@@ -189,9 +189,70 @@ export const addCart = async (
   }
 };
 
-export const patchCartById = async (cartItemId: string) => {
-  const endpoint = CART_ENDPOINTS.DETAIL(cartItemId);
-  const response = await axiosInstance.patch(endpoint);
+export const removeFromCart = async (
+  cartItems: CartProductItem[],
+  productItemIds: number[],
+) => {
+  const accessToken = await getAccessToken();
+  const isLoggedIn = !!accessToken;
 
-  return response.data;
+  let idsToRemove: number[];
+  if (isLoggedIn) {
+    idsToRemove = cartItems
+      .filter(item => productItemIds.includes(item.productItemId))
+      .map(item => item.cartItemId);
+  } else {
+    idsToRemove = productItemIds;
+  }
+
+  if (isLoggedIn) {
+    try {
+      const deletePromises = idsToRemove.map(id =>
+        axiosInstance.patch(CART_ENDPOINTS.DETAIL(String(id))),
+      );
+
+      await Promise.all(deletePromises);
+
+      return {
+        success: true,
+        message:
+          productItemIds.length > 1
+            ? '선택한 상품이 삭제되었습니다.'
+            : '상품이 삭제되었습니다.',
+      };
+    } catch (error) {
+      console.error('장바구니 상품 삭제에 실패했습니다.', error);
+      throw error;
+    }
+  } else {
+    try {
+      const localCart = localStorage.getItem('cart');
+      if (!localCart) {
+        return {
+          success: false,
+          message: '장바구니 비어있습니다.',
+          cart: [],
+        };
+      }
+
+      const cartItems: LocalCartItem[] = JSON.parse(localCart);
+      const updatedCart = cartItems.filter(
+        item => !idsToRemove.includes(item.productItemId),
+      );
+
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+      return {
+        success: true,
+        message:
+          productItemIds.length > 1
+            ? '선택한 상품이 삭제되었습니다.'
+            : '상품이 삭제되었습니다.',
+        cart: updatedCart,
+      };
+    } catch (error) {
+      console.error('장바구니 삭제에 실패했습니다.', error);
+      throw error;
+    }
+  }
 };

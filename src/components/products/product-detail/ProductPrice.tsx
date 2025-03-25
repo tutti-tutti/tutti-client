@@ -16,7 +16,7 @@ const ProductPrice = ({
       {originalPrice !== finalPrice ? (
         <>
           <p className="text-text-tertiaryInfo font-style-heading line-through">
-            {originalPrice.toLocaleString()}
+            {(originalPrice * quantity).toLocaleString()}
           </p>
           <div className="mt-2xs flex items-center gap-2">
             <p className="text-text-danger font-style-title">{discountRate}</p>

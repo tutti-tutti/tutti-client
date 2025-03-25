@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 import { useCartStore } from '@/stores';
-import { fetchCart } from '@/services';
+import { fetchCart, removeFromCart } from '@/services';
 
 const useCart = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +11,7 @@ const useCart = () => {
 
   const {
     items,
+    checkedItems,
     setCartItems,
     toggleAllCheckbox,
     removeSelectedItems,
@@ -37,10 +38,25 @@ const useCart = () => {
     loadData();
   }, [setCartItems]);
 
-  const handleDeleteSelected = () => {
+  const handleDeleteSelected = async () => {
     const checkedCount = getCheckedItemsCount();
-    if (checkedCount > 0 && window.confirm('선택한 상품을 삭제하시겠습니까?')) {
-      removeSelectedItems();
+    if (checkedCount === 0) return;
+
+    if (window.confirm('선택한 상품을 삭제하시겠습니까?')) {
+      try {
+        const selectedProductItemIds = Object.entries(checkedItems)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .filter(([_, checked]) => checked)
+          .map(([productItemId]) => Number(productItemId));
+
+        await removeFromCart(items, selectedProductItemIds);
+
+        removeSelectedItems();
+      } catch (err) {
+        console.error('선택한 상품 삭제 중 오류가 발생했습니다.', err);
+        setError(err as Error);
+        alert('선택한 상품 삭제에 실패했습니다.');
+      }
     }
   };
 

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { calculateDiscountRate } from '@/utils';
 import { useCartStore } from '@/stores';
 import type { CartProductItem } from '@/types';
+import { removeFromCart } from '@/services';
 import CartItemImage from './CartItemImage';
 import CartItemHeader from './CartItemHeader';
 import CartItemOptions from './CartItemOptions';
@@ -26,8 +27,13 @@ const CartItem = ({
   maxQuantity,
 }: CartProductItem) => {
   const [productQuantity, setProductQuantity] = useState<number>(quantity);
-  const { toggleItemCheckbox, updateQuantity, removeItem, checkedItems } =
-    useCartStore();
+  const {
+    items,
+    toggleItemCheckbox,
+    updateQuantity,
+    removeItem,
+    checkedItems,
+  } = useCartStore();
 
   const isChecked = checkedItems[productItemId] || false;
 
@@ -50,9 +56,16 @@ const CartItem = ({
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
-      removeItem(productItemId);
+      try {
+        await removeFromCart(items, [productItemId]);
+
+        removeItem(productItemId);
+      } catch (error) {
+        console.error('장바구니에서 상품을 삭제하는 데 실패했습니다.', error);
+        alert('상품 삭제에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 

@@ -6,6 +6,8 @@ export interface OrderProductItem {
 }
 
 export interface OrderItem {
+  storeId: number;
+  storeName: string;
   productItemId: number;
   productName: string;
   productImgUrl: string;

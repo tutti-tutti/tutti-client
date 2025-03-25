@@ -54,7 +54,7 @@ export interface OrderDetailResponseAPISchema {
 }
 
 // 주문내역 조회 API 스키마
-export interface OrderListResponseAPISchema {
+export interface OrderHistoryListItem {
   orderId: number;
   orderNumber: string;
   orderName: string;
@@ -63,3 +63,5 @@ export interface OrderListResponseAPISchema {
   orderStatus: string;
   orderItems: OrderItem[];
 }
+
+export type OrderHistoryListResponseAPISchema = OrderHistoryListItem[];

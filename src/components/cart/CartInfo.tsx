@@ -1,5 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
+import { ROUTER_PATH } from '@/constants';
+import { cn } from '@/utils';
+import { useCart } from '@/hooks';
 import {
   Checkbox,
   ExtraButton,
@@ -7,11 +12,10 @@ import {
   CartPaymentInfo,
   Button,
 } from '@/components';
-import { cn } from '@/utils';
-import { useCart } from '@/hooks';
 import CartHeader from './CartHeader';
 
 const CartInfo = () => {
+  const router = useRouter();
   const {
     error,
     checkedCount,
@@ -20,6 +24,7 @@ const CartInfo = () => {
     paymentInfo,
     toggleAllCheckbox,
     handleDeleteSelected,
+    payloadCheckedCartItems,
   } = useCart();
 
   if (error) {
@@ -33,6 +38,14 @@ const CartInfo = () => {
   }
 
   const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
+  const encodedOrderProductItems = encodeURIComponent(
+    JSON.stringify(payloadCheckedCartItems),
+  );
+
+  const handleCheckoutClick = () =>
+    checkedCount === 0
+      ? alert('상품을 선택해주세요')
+      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
 
   return (
     <>
@@ -71,9 +84,10 @@ const CartInfo = () => {
           />
           <Button
             className="font-style-heading"
-            variant={totalCount === 0 ? 'disabled' : 'primary'}
+            variant={checkedCount === 0 ? 'disabled' : 'primary'}
+            onClick={handleCheckoutClick}
           >
-            주문하기({totalCount}개)
+            {finalPrice}원 결제하기
           </Button>
         </section>
       </div>

@@ -1,16 +1,18 @@
 import { OrderProductItem } from './ordersType';
 
-// 결제 수단 타입
-export type PaymentType = 'CARD';
-
 // 주문/결제 요청 API 스키마
 export interface PaymentsRequestAPISchema {
   totalDiscountAmount: number;
   totalProductAmount: number;
   deliveryFee: number;
   totalAmount: number;
-  paymentType: PaymentType;
+  paymentType: string;
   orderItems: OrderProductItem[];
+  recipientName: string;
+  recipientPhone: string;
+  recipientAddress: string;
+  zipCode: string;
+  note: string;
 }
 
 // 결제 승인 API 스키마

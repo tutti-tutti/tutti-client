@@ -1,6 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import { Button } from '@/components';
 import { addCart } from '@/services';
 import { toast } from '@/utils';
+import { cartQueryOptions } from '@/queries';
 
 interface ProductActionsProps {
   productId: number;
@@ -15,12 +18,19 @@ const ProductActions = ({
   quantity,
   disabled,
 }: ProductActionsProps) => {
+  const queryClient = useQueryClient();
+
   const handleCartClick = async () => {
     try {
       const result = await addCart(productId, productItemId, quantity);
 
       if (result.success) {
         toast.success(result.message || '장바구니에 추가되었습니다.');
+
+        await queryClient.invalidateQueries({
+          queryKey: cartQueryOptions.queryKey,
+        });
+        await queryClient.prefetchQuery(cartQueryOptions);
       } else {
         toast.error(result.message || '장바구니에 추가하지 못했습니다.');
       }

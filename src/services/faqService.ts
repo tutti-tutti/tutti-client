@@ -9,6 +9,7 @@ export const fetchMainCategories = async () => {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: 3600 },
     },
   );
 
@@ -30,6 +31,7 @@ export const fetchSubCategories = async (mainCategory: string) => {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: 3600 },
     },
   );
 
@@ -60,6 +62,7 @@ export const fetchCategoryFaqs = async ({
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: 3600 },
     },
   );
 
@@ -80,6 +83,7 @@ export const fetchTopCategoryFaqs = async () => {
       'Content-Type': 'application/json',
     },
     cache: 'force-cache',
+    next: { revalidate: 3600 },
   });
 
   if (!response.ok) {
@@ -107,6 +111,7 @@ export const fetchSearchedFaqs = async ({
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: 3600 },
     },
   );
 

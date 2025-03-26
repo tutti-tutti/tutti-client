@@ -12,7 +12,7 @@ export const verifyEmail = async (email: string) => {
 export const verifyCode = async (email: string, verify: string) => {
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.EMAIL_CONFIRM, {
     email,
-    verification_code: verify,
+    verificationCode: verify,
   });
 
   return data;
@@ -28,9 +28,9 @@ export const signup = async (
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.SIGNUP_EMAIL, {
     email,
     password: pw,
-    password_confirm: checkPw,
-    essential_policy: essentialPolicy,
-    optional_policy: optionalPolicy,
+    passwordConfirm: checkPw,
+    essentialPolicy: essentialPolicy,
+    optionalPolicy: optionalPolicy,
   });
 
   return data;
@@ -40,7 +40,7 @@ export const resetPw = async (email: string, pw: string, checkPw: string) => {
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.RESET_PW, {
     email,
     password: pw,
-    password_confirm: checkPw,
+    passwordConfirm: checkPw,
   });
 
   return data;

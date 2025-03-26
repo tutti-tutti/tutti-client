@@ -26,6 +26,7 @@ const SubCategoryFilterItem = ({
         isSelected && selectedCategoryClass,
       )}
       {...props}
+      scroll={false}
     >
       {children}
     </Link>

@@ -27,11 +27,11 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
   return (
     <div className="md:px-7xl gap-lg mb-7xl flex flex-col items-center">
       <h1 className="font-style-title mb-3xl">자주 묻는 질문</h1>
-      <form action={faqSearchAction}>
+      <form className="w-3/5 max-md:w-5/6 md:min-w-lg" action={faqSearchAction}>
         <Input
           name="faqQuery"
           icon="search"
-          className="!py-md !px-2xl border-border-info w-[670px] rounded-lg border-2"
+          className="!py-md !px-2xl border-border-info rounded-lg border-2"
           placeholder="질문을 입력해주세요."
           defaultValue={querySearchParams}
         />
@@ -42,7 +42,9 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
           faqSearchParams={faqSearchParams}
         />
       ) : (
+        // <div className="w-full overflow-auto">
         <CategoryFilter categorySearchParams={categorySearchParams} />
+        // </div>
       )}
       {categorySearchParams && (
         <SubCategoryFilter

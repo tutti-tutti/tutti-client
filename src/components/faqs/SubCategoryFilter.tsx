@@ -13,24 +13,28 @@ const SubCategoryFilter = async ({
   const subCategories = await fetchSubCategories(categorySearchParams || '');
 
   return (
-    <div className="gap-xl border-border-secondary -mt-lg flex w-full justify-center border-b">
-      <SubCategoryFilterItem
-        href={`?category=${encodeURIComponent(categorySearchParams || '')}`}
-        isSelected={!subSearchParams}
-      >
-        전체
-      </SubCategoryFilterItem>
-
-      {subCategories.map((subCategory: string, index: number) => (
-        <div key={index}>
+    <div className="flex w-full justify-center">
+      <div className="scrollbar-hide border-border-secondary w-full overflow-x-auto border-b">
+        <div className="gap-lg -mt-md flex whitespace-nowrap">
           <SubCategoryFilterItem
-            href={`?category=${encodeURIComponent(categorySearchParams || '')}&sub=${subCategory}`}
-            isSelected={subSearchParams === subCategory}
+            href={`?category=${encodeURIComponent(categorySearchParams || '')}`}
+            isSelected={!subSearchParams}
           >
-            {subCategory}
+            전체
           </SubCategoryFilterItem>
+
+          {subCategories.map((subCategory: string, index: number) => (
+            <div key={index}>
+              <SubCategoryFilterItem
+                href={`?category=${encodeURIComponent(categorySearchParams || '')}&sub=${subCategory}`}
+                isSelected={subSearchParams === subCategory}
+              >
+                {subCategory}
+              </SubCategoryFilterItem>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

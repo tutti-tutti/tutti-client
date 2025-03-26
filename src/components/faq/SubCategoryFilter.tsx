@@ -1,5 +1,5 @@
 import { fetchSubCategories } from '@/services';
-import SubCategoryFilterItem from '@/components/faq/SubCategoryFilterItem';
+import SubCategoryFilterItem from './SubCategoryFilterItem';
 
 interface SubCategoryFilterProps {
   categorySearchParams?: string;

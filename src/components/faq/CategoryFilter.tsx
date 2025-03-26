@@ -1,5 +1,5 @@
 import { fetchMainCategories } from '@/services';
-import CategoryFilterItems from '@/components/faq/CategoryFilterItem';
+import CategoryFilterItems from './CategoryFilterItem';
 
 const CategoryFilter = async ({
   categorySearchParams,

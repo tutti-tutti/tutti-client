@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 
 import { fetchSearchedFaqs } from '@/services';
-import FaqAccordionItemQuestion from '@/components/faq/FaqAccordionItemQuestion';
-import FaqAccordionAnswer from '@/components/faq/FaqAccordionAnswer';
 import type { FaqType } from '@/types';
+import FaqAccordionItemQuestion from './FaqAccordionItemQuestion';
+import FaqAccordionAnswer from './FaqAccordionAnswer';
 
 interface SearchedFaqProps {
   querySearchParams: string;

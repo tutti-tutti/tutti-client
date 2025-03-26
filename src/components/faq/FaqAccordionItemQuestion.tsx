@@ -1,5 +1,6 @@
-import { Icon } from '@/components';
 import Link, { type LinkProps } from 'next/link';
+
+import { Icon } from '@/components';
 
 interface FaqAccordionItemProps extends LinkProps {
   isSelected: boolean;

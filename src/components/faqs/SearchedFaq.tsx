@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 import { fetchSearchedFaqs } from '@/services';
-import type { FaqType } from '@/types';
+import type { FaqItemType } from '@/types';
 import FaqAccordionItemQuestion from './FaqAccordionItemQuestion';
 import FaqAccordionAnswer from './FaqAccordionAnswer';
 
@@ -26,7 +26,7 @@ const SearchedFaq = async ({
 
   return (
     <div className="w-full">
-      {searchedFaqs.faqSearchResults.faqs.map((faq: FaqType) => {
+      {searchedFaqs.faqSearchResults.faqs.map((faq: FaqItemType) => {
         const { id, question, answer, viewCnt } = faq;
 
         return (

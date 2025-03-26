@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 import { fetchCategoryFaqs, fetchTopCategoryFaqs } from '@/services';
-import type { FaqType } from '@/types';
+import type { FaqItemType } from '@/types';
 import FaqAccordionItemQuestion from './FaqAccordionItemQuestion';
 import FaqAccordionAnswer from './FaqAccordionAnswer';
 
@@ -31,7 +31,7 @@ const FaqAccordion = async ({
   return (
     <div className="w-full">
       {!categorySearchParams &&
-        topFaqs.map((faq: FaqType) => {
+        topFaqs.map((faq: FaqItemType) => {
           const { id, question, answer, viewCnt } = faq;
 
           return (
@@ -49,7 +49,7 @@ const FaqAccordion = async ({
         })}
 
       {categorySearchParams &&
-        categoryFaqs.map((faq: FaqType) => {
+        categoryFaqs.map((faq: FaqItemType) => {
           console.log('faq: ', faq);
           const { id, question, answer, viewCnt } = faq;
 

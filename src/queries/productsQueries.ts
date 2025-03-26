@@ -8,17 +8,21 @@ import {
 } from '@/services';
 
 export const productsQueryOptions = queryOptions({
-  queryKey: [QUERY_KEYS_ENDPOINT.PRODUCTS, PRODUCTS_QUERY_KEY.LIST],
-  queryFn: async () => await fetchProducts(),
+  queryKey: [QUERY_KEYS_ENDPOINT.PRODUCTS, PRODUCTS_QUERY_KEY.LATEST],
+  queryFn: fetchProducts,
+  staleTime: 5 * 60 * 1000,
+  gcTime: 30 * 60 * 1000,
 });
 
 export const recommededProductsQueryOptions = queryOptions({
   queryKey: [QUERY_KEYS_ENDPOINT.PRODUCTS, PRODUCTS_QUERY_KEY.RECOMMEND],
-  queryFn: async () => await fetchRecommededProducts(),
+  queryFn: fetchRecommededProducts,
 });
 
 export const productByIdQueryOptions = (productId: string) =>
   queryOptions({
     queryKey: [QUERY_KEYS_ENDPOINT.PRODUCTS, productId],
-    queryFn: async () => await fetchProductById(productId),
+    queryFn: () => fetchProductById(productId),
+    staleTime: 15 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });

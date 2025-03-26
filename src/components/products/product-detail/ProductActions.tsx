@@ -25,13 +25,16 @@ const ProductActions = ({
     JSON.stringify(orderProductItems),
   );
 
-  const noticeSelectOption = () => alert('옵션을 선택해주세요');
+  const noticeSelectOption = () => toast.warning('옵션을 선택해주세요!');
+
   const handleCheckoutClick = () =>
     disabled
       ? noticeSelectOption()
       : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+
   const handleCartClick = async () =>
     disabled ? noticeSelectOption() : await handleAddCart();
+
   const handleAddCart = async () => {
     try {
       const result = await addCart(productId, productItemId, quantity);

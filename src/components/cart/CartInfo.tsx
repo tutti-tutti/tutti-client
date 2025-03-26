@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ROUTER_PATH } from '@/constants';
-import { cn, formatPrice } from '@/utils';
+import { cn, formatPrice, toast } from '@/utils';
 import { useCart } from '@/hooks';
 import {
   Checkbox,
@@ -44,7 +44,7 @@ const CartInfo = () => {
 
   const handleCheckoutClick = () =>
     checkedCount === 0
-      ? alert('상품을 선택해주세요')
+      ? toast.warning('주문할 상품을 선택해주세요!')
       : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
 
   return (

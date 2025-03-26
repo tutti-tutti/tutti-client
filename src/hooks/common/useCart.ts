@@ -24,6 +24,7 @@ const useCart = () => {
     getTotalItemsCount,
     isAllChecked,
     getPaymentInfo,
+    getPayloadCheckedCartItems,
   } = useCartStore();
 
   useEffect(() => {
@@ -91,6 +92,7 @@ const useCart = () => {
     paymentInfo: getPaymentInfo(),
     toggleAllCheckbox,
     handleDeleteSelected,
+    payloadCheckedCartItems: getPayloadCheckedCartItems(),
   };
 };
 

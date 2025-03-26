@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
+
 import { useQueryClient } from '@tanstack/react-query';
 
 import { Button } from '@/components';
 import { addCart } from '@/services';
 import { toast } from '@/utils';
+import { ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
 
 interface ProductActionsProps {
@@ -18,9 +21,25 @@ const ProductActions = ({
   quantity,
   disabled,
 }: ProductActionsProps) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
 
-  const handleCartClick = async () => {
+  const orderProductItems = [{ productItemId, quantity }];
+  const encodedOrderProductItems = encodeURIComponent(
+    JSON.stringify(orderProductItems),
+  );
+
+  const noticeSelectOption = () => toast.warning('옵션을 선택해주세요!');
+
+  const handleCheckoutClick = () =>
+    disabled
+      ? noticeSelectOption()
+      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+
+  const handleCartClick = async () =>
+    disabled ? noticeSelectOption() : await handleAddCart();
+
+  const handleAddCart = async () => {
     try {
       const result = await addCart(productId, productItemId, quantity);
 
@@ -40,23 +59,20 @@ const ProductActions = ({
     }
   };
 
+  const buttonDefaultStyle = 'font-style-subHeading flex-auto';
+
   return (
     <div className="gap-sm grid grid-cols-2">
-      {disabled ? (
-        <Button variant="disabled" className="font-style-subHeading flex-auto">
-          장바구니 담기
-        </Button>
-      ) : (
-        <Button
-          variant="secondaryOutline"
-          className="font-style-subHeading flex-auto"
-          onClick={handleCartClick}
-        >
-          장바구니 담기
-        </Button>
-      )}
-
-      <Button className="font-style-subHeading flex-auto">구매하기</Button>
+      <Button
+        className={buttonDefaultStyle}
+        variant="secondaryOutline"
+        onClick={handleCartClick}
+      >
+        장바구니 담기
+      </Button>
+      <Button className={buttonDefaultStyle} onClick={handleCheckoutClick}>
+        구매하기
+      </Button>
     </div>
   );
 };

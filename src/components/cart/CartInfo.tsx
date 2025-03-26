@@ -87,7 +87,7 @@ const CartInfo = () => {
             variant={checkedCount === 0 ? 'disabled' : 'primary'}
             onClick={handleCheckoutClick}
           >
-            {formatPrice(finalPrice)}원 결제하기
+            {formatPrice(finalPrice)} 결제하기
           </Button>
         </section>
       </div>

@@ -8,5 +8,5 @@ export const formatPrice = (amount: number): string => {
     return '0원';
   }
 
-  return `${amount.toLocaleString()}`;
+  return `${amount.toLocaleString()}원`;
 };

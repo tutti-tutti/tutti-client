@@ -18,6 +18,7 @@ export const createReview = async (
     numberRating,
     content,
     nickname,
+    reviewImages: [''],
   });
 
   return data;

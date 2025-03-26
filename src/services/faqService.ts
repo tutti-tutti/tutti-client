@@ -1,4 +1,4 @@
-import { FAQ_ENDPOINTS, SERVER_API_BASE_URL } from '@/constants';
+import { FAQS_ENDPOINTS, SERVER_API_BASE_URL } from '@/constants';
 import type {
   CategoryFaqsRequestAPISchema,
   SearchFaqsRequestAPISchema,
@@ -6,7 +6,7 @@ import type {
 
 export const fetchMainCategories = async () => {
   const response = await fetch(
-    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.MAIN_CATEGORIES}`,
+    `${SERVER_API_BASE_URL}${FAQS_ENDPOINTS.MAIN_CATEGORIES}`,
     {
       method: 'GET',
       headers: {
@@ -28,7 +28,7 @@ export const fetchMainCategories = async () => {
 
 export const fetchSubCategories = async (mainCategory: string) => {
   const response = await fetch(
-    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.SUB_CATEGORIES(mainCategory)}`,
+    `${SERVER_API_BASE_URL}${FAQS_ENDPOINTS.SUB_CATEGORIES(mainCategory)}`,
     {
       method: 'GET',
       headers: {
@@ -54,7 +54,7 @@ export const fetchCategoryFaqs = async ({
   page,
 }: CategoryFaqsRequestAPISchema) => {
   const response = await fetch(
-    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.CATEGORY_FAQS({ category, subCategory, size, page })}`,
+    `${SERVER_API_BASE_URL}${FAQS_ENDPOINTS.CATEGORY_FAQS({ category, subCategory, size, page })}`,
     {
       method: 'GET',
       headers: {
@@ -76,7 +76,7 @@ export const fetchCategoryFaqs = async ({
 };
 
 export const fetchTopCategoryFaqs = async () => {
-  const response = await fetch(`${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.TOP}`, {
+  const response = await fetch(`${SERVER_API_BASE_URL}${FAQS_ENDPOINTS.TOP}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export const fetchSearchedFaqs = async ({
   size,
 }: SearchFaqsRequestAPISchema) => {
   const response = await fetch(
-    `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.SEARCH_FAQS({ query, size, page })}`,
+    `${SERVER_API_BASE_URL}${FAQS_ENDPOINTS.SEARCH_FAQS({ query, size, page })}`,
     {
       method: 'GET',
       headers: {

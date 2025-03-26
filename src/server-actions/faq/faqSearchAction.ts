@@ -1,5 +1,6 @@
 'use server';
 
+import { FAQS_ENDPOINTS } from '@/constants';
 import { redirect } from 'next/navigation';
 
 export const faqSearchAction = async (formData: FormData) => {
@@ -7,5 +8,5 @@ export const faqSearchAction = async (formData: FormData) => {
 
   if (!query) return;
 
-  redirect(`/faq?query=${encodeURIComponent(query)}`);
+  redirect(`${FAQS_ENDPOINTS.BASE}?query=${encodeURIComponent(query)}`);
 };

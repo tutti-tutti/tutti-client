@@ -33,7 +33,7 @@ export const CART_ENDPOINTS = {
   DETAIL: (cartItemId: string) => `${API_RESOURCES.CART}/${cartItemId}`,
 };
 
-export const FAQ_ENDPOINTS = {
+export const FAQS_ENDPOINTS = {
   BASE: API_RESOURCES.FAQS,
   MAIN_CATEGORIES: `${API_RESOURCES.FAQS}/categories/mainCategories`,
   SUB_CATEGORIES: (mainCategories: string) =>

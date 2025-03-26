@@ -1,5 +1,6 @@
 import { fetchMainCategories } from '@/services';
 import CategoryFilterItems from './CategoryFilterItem';
+import { FAQS_ENDPOINTS } from '@/constants';
 
 const CategoryFilter = async ({
   categorySearchParams,
@@ -13,7 +14,7 @@ const CategoryFilter = async ({
       <CategoryFilterItems
         isTop
         isSelected={!categorySearchParams}
-        href={'/faq'}
+        href={FAQS_ENDPOINTS.BASE}
       >
         인기
       </CategoryFilterItems>

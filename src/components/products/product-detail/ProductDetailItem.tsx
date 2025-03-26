@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
-import type { Product, OptionValue } from '@/types';
+import type { Product, ProductOption } from '@/types';
 import ProductHeader from './ProductHeader';
 import ProductOptions from './ProductOptions';
 import ProductPrice from './ProductPrice';
@@ -12,6 +12,7 @@ import ProductActions from './ProductActions';
 import ProductThumbnail from '../ProductThumbnail';
 
 const ProductDetailItem = ({
+  productId,
   titleUrl,
   name,
   storeName,
@@ -20,34 +21,24 @@ const ProductDetailItem = ({
   likes,
   originalPrice,
   sellingPrice,
-  options,
+  productItems,
   maxPurchaseQuantity,
 }: Product) => {
   const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
 
-  const [selectedOptions, setSelectedOptions] = useState<
-    Record<string, OptionValue>
-  >({});
   const [finalPrice, setFinalPrice] = useState<number>(sellingPrice);
   const [quantity, setQuantity] = useState<number>(1);
+  const [selectedProductItemId, setSelectedProductItemId] = useState<
+    number | null
+  >(null);
 
-  const handleOptionChange = (
-    optionName: string,
-    selectedValue: OptionValue,
-  ) => {
-    const newSelectedOptions = {
-      ...selectedOptions,
-      [optionName]: selectedValue,
-    };
-
-    setSelectedOptions(newSelectedOptions);
+  const handleOptionChange = (selectedOption: ProductOption) => {
+    setSelectedProductItemId(selectedOption.productItemId);
 
     let newPrice = sellingPrice;
-    Object.values(newSelectedOptions).forEach(value => {
-      if (value && value.additionalPrice) {
-        newPrice += value.additionalPrice;
-      }
-    });
+    if (selectedOption && selectedOption.additionalPrice) {
+      newPrice += selectedOption.additionalPrice;
+    }
 
     setFinalPrice(newPrice);
   };
@@ -86,7 +77,7 @@ const ProductDetailItem = ({
           likes={likes}
         />
         <ProductOptions
-          options={options}
+          productItems={productItems}
           handleOptionChange={handleOptionChange}
         />
         <ProductPrice
@@ -100,8 +91,14 @@ const ProductDetailItem = ({
           maxPurchaseQuantity={maxPurchaseQuantity}
           handleIncrease={handleIncrease}
           handleDecrease={handleDecrease}
+          disabled={selectedProductItemId === null}
         />
-        <ProductActions />
+        <ProductActions
+          productItemId={selectedProductItemId ?? 0}
+          quantity={quantity}
+          disabled={selectedProductItemId === null}
+          productId={productId}
+        />
       </section>
     </div>
   );

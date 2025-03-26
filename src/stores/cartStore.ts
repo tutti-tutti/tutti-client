@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-import type { CartProductItem } from '@/types';
+import type { CartProductItem, CartItem } from '@/types';
 
 interface CartState {
   items: CartProductItem[];
   checkedItems: Record<number, boolean>;
   setCartItems: (items: CartProductItem[]) => void;
-  toggleItemCheckbox: (productId: number, isChecked: boolean) => void;
+  toggleItemCheckbox: (productItemId: number, isChecked: boolean) => void;
   toggleAllCheckbox: (isChecked: boolean) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  removeItem: (productId: number) => void;
+  updateQuantity: (productItemId: number, quantity: number) => void;
+  removeItem: (productItemId: number) => void;
   removeSelectedItems: () => void;
   getPaymentInfo: () => {
     totalPrice: number;
@@ -20,6 +20,7 @@ interface CartState {
   getCheckedItemsCount: () => number;
   getTotalItemsCount: () => number;
   isAllChecked: () => boolean;
+  getPayloadCheckedCartItems: () => CartItem[];
 }
 
 const useCartStore = create<CartState>((set, get) => ({
@@ -28,9 +29,9 @@ const useCartStore = create<CartState>((set, get) => ({
 
   setCartItems: items => set({ items }),
 
-  toggleItemCheckbox: (productId, isChecked) => {
+  toggleItemCheckbox: (productItemId, isChecked) => {
     set(state => ({
-      checkedItems: { ...state.checkedItems, [productId]: isChecked },
+      checkedItems: { ...state.checkedItems, [productItemId]: isChecked },
     }));
   },
 
@@ -38,7 +39,7 @@ const useCartStore = create<CartState>((set, get) => ({
     set(state => ({
       checkedItems: state.items.reduce(
         (acc, item) => {
-          acc[item.productId] = isChecked;
+          acc[item.productItemId] = isChecked;
           return acc;
         },
         {} as Record<string, boolean>,
@@ -46,21 +47,21 @@ const useCartStore = create<CartState>((set, get) => ({
     }));
   },
 
-  updateQuantity: (productId, quantity) => {
+  updateQuantity: (productItemId, quantity) => {
     set(state => ({
       items: state.items.map(item =>
-        item.productId === productId ? { ...item, quantity } : item,
+        item.productItemId === productItemId ? { ...item, quantity } : item,
       ),
     }));
   },
 
-  removeItem: productId => {
+  removeItem: productItemId => {
     set(state => {
       const newCheckedItems = { ...state.checkedItems };
-      delete newCheckedItems[productId];
+      delete newCheckedItems[productItemId];
 
       return {
-        items: state.items.filter(item => item.productId !== productId),
+        items: state.items.filter(item => item.productItemId !== productItemId),
         checkedItems: newCheckedItems,
       };
     });
@@ -69,12 +70,12 @@ const useCartStore = create<CartState>((set, get) => ({
   removeSelectedItems: () => {
     set(state => {
       const remainingItems = state.items.filter(
-        item => !state.checkedItems[item.productId],
+        item => !state.checkedItems[item.productItemId],
       );
 
       const newCheckedItems = {} as Record<string, boolean>;
       remainingItems.forEach(item => {
-        newCheckedItems[item.productId] = false;
+        newCheckedItems[item.productItemId] = false;
       });
 
       return {
@@ -90,7 +91,7 @@ const useCartStore = create<CartState>((set, get) => ({
     let discountPrice = 0;
 
     state.items.forEach(item => {
-      if (state.checkedItems[item.productId]) {
+      if (state.checkedItems[item.productItemId]) {
         totalPrice += item.originalPrice * item.quantity;
         discountPrice +=
           (item.originalPrice - item.sellingPrice) * item.quantity;
@@ -123,6 +124,16 @@ const useCartStore = create<CartState>((set, get) => ({
       Object.values(state.checkedItems).filter(Boolean).length ===
         state.items.length && state.items.length > 0
     );
+  },
+
+  getPayloadCheckedCartItems: () => {
+    const state = get();
+    return state.items
+      .filter(item => state.checkedItems[item.productItemId])
+      .map(item => ({
+        productItemId: item.productItemId,
+        quantity: item.quantity,
+      }));
   },
 }));
 

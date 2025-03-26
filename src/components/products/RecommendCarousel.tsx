@@ -1,17 +1,25 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { recommededProductsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
+import { RecommendProductItemSkeleton } from '@/components';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
-import { RecommendProductItemSkeleton } from './skeleton/RecommendProductSkeleton';
 
-const RecommendCarousel = ({ products }: { products?: Product[] }) => {
+const RecommendCarousel = () => {
+  const {
+    data: products,
+    isError,
+    error,
+  } = useSuspenseQuery(recommededProductsQueryOptions);
+
   const [slidesToShow, setSlidesToShow] = useState(6);
 
   useEffect(() => {
@@ -57,6 +65,8 @@ const RecommendCarousel = ({ products }: { products?: Product[] }) => {
     ],
   };
 
+  if (isError && error) return 'An error has occurred: ' + error.message;
+
   const renderItems = () => {
     if (!products || products.length === 0) {
       return Array(12)
@@ -66,7 +76,7 @@ const RecommendCarousel = ({ products }: { products?: Product[] }) => {
         ));
     }
 
-    return products.map(product => (
+    return products.map((product: Product) => (
       <RecommendProductItem key={`product-${product.productId}`} {...product} />
     ));
   };

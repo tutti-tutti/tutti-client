@@ -7,6 +7,7 @@ interface ProductQuantityProps {
   maxPurchaseQuantity: number;
   handleIncrease: () => void;
   handleDecrease: () => void;
+  disabled?: boolean;
 }
 
 const ProductQuantity = ({
@@ -14,6 +15,7 @@ const ProductQuantity = ({
   maxPurchaseQuantity,
   handleIncrease,
   handleDecrease,
+  disabled,
 }: ProductQuantityProps) => {
   return (
     <article className="pb-lg">
@@ -26,7 +28,7 @@ const ProductQuantity = ({
               <IconButton
                 icon="minus"
                 iconProps={{ width: 18, height: 18 }}
-                variant={quantity <= 1 ? 'disabled' : undefined}
+                variant={disabled || quantity <= 1 ? 'disabled' : undefined}
                 onClick={handleDecrease}
               />
               <span className="font-style-heading text-text-primary">
@@ -36,7 +38,9 @@ const ProductQuantity = ({
                 icon="plus"
                 iconProps={{ width: 18, height: 18 }}
                 variant={
-                  quantity >= maxPurchaseQuantity ? 'disabled' : undefined
+                  disabled || quantity >= maxPurchaseQuantity
+                    ? 'disabled'
+                    : undefined
                 }
                 onClick={handleIncrease}
               />

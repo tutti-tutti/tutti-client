@@ -1,7 +1,7 @@
 import { cn } from '@/utils';
 import Icon from './Icon';
 
-type ToastType = 'success' | 'error';
+type ToastType = 'success' | 'error' | 'warning';
 
 interface ToastProps {
   message: string;
@@ -15,11 +15,13 @@ const Toast = ({ message, type = 'success' }: ToastProps) => {
   const bgColorClass = {
     success: 'bg-bg-primaryInteraction',
     error: 'bg-bg-dangerInteraction',
+    warning: 'bg-bg-warningBold',
   }[type];
 
   const Icon = {
     success: SuccessIcon,
     error: ErrorIcon,
+    warning: ErrorIcon,
   }[type];
 
   return (

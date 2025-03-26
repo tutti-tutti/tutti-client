@@ -37,7 +37,7 @@ const useCart = () => {
     };
   }, [wasDeleted, queryClient, resetDeleteFlag]);
 
-  const { isLoading, error, data } = useQuery(cartQueryOptions);
+  const { isPending, error, data } = useQuery(cartQueryOptions);
 
   useEffect(() => {
     if (data) {
@@ -82,7 +82,7 @@ const useCart = () => {
   };
 
   return {
-    isLoading,
+    isPending,
     error,
     items,
     checkedCount: getCheckedItemsCount(),

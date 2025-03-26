@@ -1,3 +1,8 @@
+import type {
+  CategoryFaqsRequestAPISchema,
+  SearchFaqsRequestAPISchema,
+} from '@/types';
+
 export const { SERVER_API_BASE_URL, NEXT_PUBLIC_API_ROUTE_BASE_URL } =
   process.env;
 
@@ -39,20 +44,8 @@ export const FAQ_ENDPOINTS = {
     subCategory,
     page,
     size,
-  }: {
-    category: string;
-    subCategory: string;
-    page: number;
-    size: number;
-  }) =>
+  }: CategoryFaqsRequestAPISchema) =>
     `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}&page=${page}&size=${size}`,
-  SEARCH_FAQS: ({
-    query,
-    page,
-    size,
-  }: {
-    query: string;
-    page: number;
-    size: number;
-  }) => `${API_RESOURCES.FAQS}/search?query=${query}&page=${page}&size=${size}`,
+  SEARCH_FAQS: ({ query, page, size }: SearchFaqsRequestAPISchema) =>
+    `${API_RESOURCES.FAQS}/search?query=${query}&page=${page}&size=${size}`,
 };

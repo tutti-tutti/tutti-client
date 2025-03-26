@@ -1,4 +1,8 @@
 import { FAQ_ENDPOINTS, SERVER_API_BASE_URL } from '@/constants';
+import type {
+  CategoryFaqsRequestAPISchema,
+  SearchFaqsRequestAPISchema,
+} from '@/types';
 
 export const fetchMainCategories = async () => {
   const response = await fetch(
@@ -48,12 +52,7 @@ export const fetchCategoryFaqs = async ({
   subCategory,
   size,
   page,
-}: {
-  category: string;
-  subCategory: string;
-  size: number;
-  page: number;
-}) => {
+}: CategoryFaqsRequestAPISchema) => {
   const response = await fetch(
     `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.CATEGORY_FAQS({ category, subCategory, size, page })}`,
     {
@@ -98,11 +97,7 @@ export const fetchSearchedFaqs = async ({
   query,
   page,
   size,
-}: {
-  query: string;
-  page: number;
-  size: number;
-}) => {
+}: SearchFaqsRequestAPISchema) => {
   const response = await fetch(
     `${SERVER_API_BASE_URL}${FAQ_ENDPOINTS.SEARCH_FAQS({ query, size, page })}`,
     {

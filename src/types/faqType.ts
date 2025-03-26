@@ -5,3 +5,16 @@ export interface FaqItemType {
   answer: string;
   viewCnt: number;
 }
+
+export interface CategoryFaqsRequestAPISchema {
+  category: string;
+  subCategory: string;
+  page: number;
+  size: number;
+}
+
+export interface SearchFaqsRequestAPISchema {
+  query: string;
+  page: number;
+  size: number;
+}

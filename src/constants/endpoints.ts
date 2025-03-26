@@ -9,6 +9,8 @@ export const API_RESOURCES = {
   MEMBERS: '/members',
   PRODUCTS: '/products',
   CART: '/cart',
+  ORDERS: '/orders',
+  PAYMENTS: '/payments',
   FAQS: '/faqs',
 };
 
@@ -30,6 +32,18 @@ export const PRODUCTS_ENDPOINTS = {
 export const CART_ENDPOINTS = {
   LIST: `${API_RESOURCES.CART}`,
   DETAIL: (cartItemId: string) => `${API_RESOURCES.CART}/${cartItemId}`,
+};
+
+export const ORDERS_ENDPOINTS = {
+  CHECKOUT: `${API_RESOURCES.ORDERS}/checkout`,
+  LIST: `${API_RESOURCES.ORDERS}`,
+  DETAIL: (orderId: string) => `${API_RESOURCES.ORDERS}/${orderId}`,
+};
+
+export const PAYMENTS_ENDPOINTS = {
+  CREATE: `${API_RESOURCES.PAYMENTS}`,
+  CONFIRM: `${API_RESOURCES.PAYMENTS}/confirm/success`,
+  DETAIL: (orderId: string) => `${API_RESOURCES.PAYMENTS}/${orderId}`,
 };
 
 export const FAQS_ENDPOINTS = {

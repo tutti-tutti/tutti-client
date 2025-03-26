@@ -21,3 +21,13 @@ export const PRODUCTS_QUERY_KEY = {
 export const CART_QUERY_KEY = {
   CART: 'cart',
 };
+
+export const ORDER_QUERY_KEY = {
+  CHECKOUT: 'checkout',
+  LIST: 'list',
+};
+
+export const PAYMENTS_QUERY_KEY = {
+  CHECKOUT: 'checkout',
+  LIST: 'list',
+};

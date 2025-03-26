@@ -5,5 +5,5 @@ import { CART_QUERY_KEY } from '@/constants';
 
 export const cartQueryOptions = queryOptions({
   queryKey: [CART_QUERY_KEY.CART],
-  queryFn: async () => await fetchCart(),
+  queryFn: fetchCart,
 });

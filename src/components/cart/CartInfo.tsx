@@ -17,7 +17,6 @@ import CartHeader from './CartHeader';
 const CartInfo = () => {
   const router = useRouter();
   const {
-    error,
     checkedCount,
     totalCount,
     isAllChecked,
@@ -26,16 +25,6 @@ const CartInfo = () => {
     handleDeleteSelected,
     payloadCheckedCartItems,
   } = useCart();
-
-  if (error) {
-    return (
-      <div className="py-xl text-center">
-        <p className="font-style-heading text-text-danger">
-          {error?.message || String(error)}
-        </p>
-      </div>
-    );
-  }
 
   const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
   const encodedOrderProductItems = encodeURIComponent(

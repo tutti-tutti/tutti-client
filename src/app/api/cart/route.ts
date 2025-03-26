@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server';
 
-import { addCart } from '@/services';
+import { addCart, fetchCart } from '@/services';
+
+export const GET = async () => {
+  try {
+    const cart = await fetchCart();
+    return NextResponse.json(cart);
+  } catch (error) {
+    return NextResponse.json(
+      { message: (error as Error).message },
+      { status: 500 },
+    );
+  }
+};
 
 export const POST = async (request: Request) => {
   try {

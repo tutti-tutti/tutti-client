@@ -5,9 +5,9 @@ import { MoreViewButton } from '../common';
 import { useCart } from '@/hooks';
 
 const CartList = () => {
-  const { items, isLoading } = useCart();
+  const { items, isPending } = useCart();
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="py-xl text-center">
         <p className="text-text-secondary font-style-heading">

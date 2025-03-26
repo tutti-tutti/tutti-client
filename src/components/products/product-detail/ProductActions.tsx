@@ -1,9 +1,12 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
-import { addCart } from '@/services';
-import { ROUTER_PATH } from '@/constants';
+import { useQueryClient } from '@tanstack/react-query';
+
 import { Button } from '@/components';
+import { addCart } from '@/services';
 import { toast } from '@/utils';
+import { ROUTER_PATH } from '@/constants';
+import { cartQueryOptions } from '@/queries';
 
 interface ProductActionsProps {
   productId: number;
@@ -19,6 +22,7 @@ const ProductActions = ({
   disabled,
 }: ProductActionsProps) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const orderProductItems = [{ productItemId, quantity }];
   const encodedOrderProductItems = encodeURIComponent(
@@ -41,6 +45,11 @@ const ProductActions = ({
 
       if (result.success) {
         toast.success(result.message || '장바구니에 추가되었습니다.');
+
+        await queryClient.invalidateQueries({
+          queryKey: cartQueryOptions.queryKey,
+        });
+        await queryClient.prefetchQuery(cartQueryOptions);
       } else {
         toast.error(result.message || '장바구니에 추가하지 못했습니다.');
       }

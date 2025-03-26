@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ROUTER_PATH } from '@/constants';
-import { cn } from '@/utils';
+import { cn, formatPrice } from '@/utils';
 import { useCart } from '@/hooks';
 import {
   Checkbox,
@@ -87,7 +87,7 @@ const CartInfo = () => {
             variant={checkedCount === 0 ? 'disabled' : 'primary'}
             onClick={handleCheckoutClick}
           >
-            {finalPrice}원 결제하기
+            {formatPrice(finalPrice)}원 결제하기
           </Button>
         </section>
       </div>

@@ -5,12 +5,14 @@ import type { CartProductItem } from '@/types';
 interface CartState {
   items: CartProductItem[];
   checkedItems: Record<number, boolean>;
+  wasDeleted: boolean;
   setCartItems: (items: CartProductItem[]) => void;
   toggleItemCheckbox: (productId: number, isChecked: boolean) => void;
   toggleAllCheckbox: (isChecked: boolean) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   removeItem: (productId: number) => void;
   removeSelectedItems: () => void;
+  resetDeleteFlag: () => void;
   getPaymentInfo: () => {
     totalPrice: number;
     discountPrice: number;
@@ -25,6 +27,7 @@ interface CartState {
 const useCartStore = create<CartState>((set, get) => ({
   items: [],
   checkedItems: {},
+  wasDeleted: false,
 
   setCartItems: items => set({ items }),
 
@@ -62,6 +65,7 @@ const useCartStore = create<CartState>((set, get) => ({
       return {
         items: state.items.filter(item => item.productItemId !== productId),
         checkedItems: newCheckedItems,
+        wasDeleted: true,
       };
     });
   },
@@ -80,8 +84,13 @@ const useCartStore = create<CartState>((set, get) => ({
       return {
         items: remainingItems,
         checkedItems: newCheckedItems,
+        wasDeleted: true,
       };
     });
+  },
+
+  resetDeleteFlag: () => {
+    set({ wasDeleted: false });
   },
 
   getPaymentInfo: () => {

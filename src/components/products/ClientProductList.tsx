@@ -1,9 +1,10 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+
+import { productsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
-import { productsQueryOptions } from '@/queries';
 
 const ClientProductList = ({
   initialProducts,

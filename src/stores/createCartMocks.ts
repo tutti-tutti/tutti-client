@@ -78,6 +78,6 @@ export const createMockCartItems = (): CartProductItem[] => {
     maxQuantity: item.maxQuantity,
     cartItemId: item.cartItemId,
     storeName: item.storeName,
-    checked: false,
+    checked: true,
   }));
 };

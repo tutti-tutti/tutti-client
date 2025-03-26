@@ -1,5 +1,6 @@
 import { Button } from '@/components';
 import { addCart } from '@/services';
+import { toast } from '@/utils';
 
 interface ProductActionsProps {
   productId: number;
@@ -15,7 +16,18 @@ const ProductActions = ({
   disabled,
 }: ProductActionsProps) => {
   const handleCartClick = async () => {
-    await addCart(productId, productItemId, quantity);
+    try {
+      const result = await addCart(productId, productItemId, quantity);
+
+      if (result.success) {
+        toast.success(result.message || '장바구니에 추가되었습니다.');
+      } else {
+        toast.error(result.message || '장바구니에 추가하지 못했습니다.');
+      }
+    } catch (error) {
+      console.error('장바구니 담기 중 오류가 발생했습니다.', error);
+      toast.error('장바구니 담기에 실패했습니다.');
+    }
   };
 
   return (

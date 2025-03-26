@@ -6,6 +6,7 @@ import { calculateDiscountRate } from '@/utils';
 import { useCartStore } from '@/stores';
 import type { CartProductItem } from '@/types';
 import { removeFromCart } from '@/services';
+import { toast } from '@/utils';
 import CartItemImage from './CartItemImage';
 import CartItemHeader from './CartItemHeader';
 import CartItemOptions from './CartItemOptions';
@@ -59,12 +60,13 @@ const CartItem = ({
   const handleDelete = async () => {
     if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
       try {
-        await removeFromCart(items, [productItemId]);
+        const result = await removeFromCart(items, [productItemId]);
 
         removeItem(productItemId);
+        toast.success(result.message);
       } catch (error) {
         console.error('장바구니에서 상품을 삭제하는 데 실패했습니다.', error);
-        alert('상품 삭제에 실패했습니다. 다시 시도해주세요.');
+        toast.error('장바구니에서 상품을 삭제하는 데 실패했습니다.');
       }
     }
   };

@@ -15,7 +15,14 @@ export interface PaymentsRequestAPISchema {
   note: string;
 }
 
-// 결제 승인 API 스키마
+// 주문/결제 응답 API 스키마
+export interface PaymentsResponseAPISchema {
+  orderNumber: string;
+  orderName: string;
+  amount: number;
+}
+
+// 결제 승인 요청 API 스키마
 export interface PaymentsApproveRequestAPISchema {
   paymentKey: string;
   orderId: string;

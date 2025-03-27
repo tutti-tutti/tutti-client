@@ -43,7 +43,10 @@ export const ORDERS_ENDPOINTS = {
 export const PAYMENTS_ENDPOINTS = {
   CREATE: `${API_RESOURCES.PAYMENTS}`,
   CONFIRM: `${API_RESOURCES.PAYMENTS}/confirm/success`,
-  DETAIL: (orderId: string) => `${API_RESOURCES.PAYMENTS}/${orderId}`,
+  DETAIL_BY_ORDER_ID: (orderId: string) =>
+    `${API_RESOURCES.PAYMENTS}/orderId/${orderId}`,
+  DETAIL_BY_PAYMENT_ID: (paymentId: string) =>
+    `${API_RESOURCES.PAYMENTS}/paymentId/${paymentId}`,
 };
 
 export const FAQS_ENDPOINTS = {

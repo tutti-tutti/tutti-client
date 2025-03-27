@@ -4,7 +4,7 @@ import { QUERY_KEYS_ENDPOINT, ORDER_QUERY_KEY } from '@/constants';
 import {
   requestPayment,
   confirmPayApproveSuccess,
-  fetchPaymentDetail,
+  fetchPaymentDetailByOrderId,
 } from '@/services';
 import {
   PaymentsRequestAPISchema,
@@ -25,8 +25,8 @@ export const confirmPayApproveSuccessQueryOptions = (
     queryFn: async () => await confirmPayApproveSuccess(payload),
   });
 
-export const fetchPaymentDetailQueryOptions = (orderId: number) =>
+export const fetchPaymentDetailQueryOptions = (orderId: string) =>
   queryOptions({
     queryKey: [QUERY_KEYS_ENDPOINT.PAYMENTS, orderId],
-    queryFn: async () => await fetchPaymentDetail(orderId),
+    queryFn: async () => await fetchPaymentDetailByOrderId(orderId),
   });

@@ -11,7 +11,6 @@ const StarClick = () => {
   return (
     <div className="-ml-xs flex">
       <input type="hidden" value={rating} name="rating" />
-      <input type="hidden" />
       {[1, 2, 3, 4, 5].map(position => (
         <Icon
           key={position}

@@ -38,20 +38,17 @@ export const POST = async (request: Request) => {
       );
     }
 
-    if (!cartItem.productId) {
-      return NextResponse.json(
-        { message: 'productId가 필요합니다.' },
-        { status: 400 },
-      );
-    }
-
     const products = await addCart(
       cartItem.productId,
       cartItem.productItemId,
       cartItem.quantity,
     );
 
-    return NextResponse.json(products);
+    return NextResponse.json({
+      success: true,
+      message: '장바구니에 추가되었습니다.',
+      data: products,
+    });
   } catch (error) {
     return NextResponse.json(
       { message: (error as Error).message },

@@ -10,6 +10,7 @@ export const ROUTER_PATH = {
     `/checkout?orderProductItems=${orderProductItems}`,
   CHECKOUT_SUCCESS: '/checkout/success',
   CHECKOUT_FAIL: '/checkout/fail',
+  ORDERS_HISTORY: '/orders-history',
 };
 
 export const PATH_NAME = {

@@ -4,27 +4,6 @@ import { setAccessToken, setRefreshToken, socialSignin } from '@/services';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      provider?: string;
-      socialId?: string;
-      accessToken?: string;
-      email?: string;
-      name?: string;
-      image?: string;
-    };
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    provider?: string;
-    accessToken?: string;
-    socialId?: string;
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({

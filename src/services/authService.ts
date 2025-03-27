@@ -54,3 +54,19 @@ export const signin = async (email: string, pw: string) => {
 
   return data;
 };
+
+export const socialSignin = async (
+  email: string,
+  provider: string,
+  socialId: string,
+  accessToken: string,
+) => {
+  const { data } = await axiosInstance.post(AUTH_ENDPOINTS.SOCIAL_LOGIN, {
+    email,
+    provider,
+    socialId,
+    accessToken,
+  });
+
+  return data;
+};

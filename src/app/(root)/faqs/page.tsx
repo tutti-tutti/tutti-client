@@ -42,9 +42,7 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
           faqSearchParams={faqSearchParams}
         />
       ) : (
-        // <div className="w-full overflow-auto">
         <CategoryFilter categorySearchParams={categorySearchParams} />
-        // </div>
       )}
       {categorySearchParams && (
         <SubCategoryFilter

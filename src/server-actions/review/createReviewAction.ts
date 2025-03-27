@@ -1,6 +1,6 @@
 'use server';
 
-import { createReviewSchame } from '@/schemas';
+import { createReviewSchema } from '@/schemas';
 import { createReview, getMemberNickname } from '@/services';
 import { CreateReviewState } from '@/types';
 
@@ -14,7 +14,7 @@ export const createReviewAction = async (
     const rating = formData.get('rating');
     const reviewContent = formData.get('reviewContent');
 
-    const validatedData = createReviewSchame.safeParse({
+    const validatedData = createReviewSchema.safeParse({
       rating,
       reviewContent,
     });

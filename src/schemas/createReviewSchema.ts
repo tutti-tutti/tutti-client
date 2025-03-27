@@ -4,7 +4,7 @@ import { REVIEW_CONSTANTS } from '@/constants';
 
 const { RATING, REVIEW_CONTENT } = REVIEW_CONSTANTS;
 
-export const createReviewSchame = z.object({
+export const createReviewSchema = z.object({
   rating: z
     .string()
     .transform(Number)

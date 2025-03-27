@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useRef, useState } from 'react';
 
 import { createReviewAction } from '@/server-actions';
 import { cn } from '@/utils';
@@ -22,6 +22,7 @@ const { RATING, REVIEW_CONTENT } = REVIEW_CONSTANTS;
 
 const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
   const [characterCnt, setCharacterCnt] = useState(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const boundCreateReviewAction = createReviewAction.bind(
     null,
@@ -33,6 +34,12 @@ const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
     boundCreateReviewAction,
     initialCreateReviewState,
   );
+
+  const handleRatingClick = () => {
+    if (!textareaRef.current) return;
+
+    textareaRef.current.focus();
+  };
 
   return (
     <form
@@ -51,7 +58,7 @@ const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
             {createReviewState.ratingError}
           </p>
         </div>
-        <StarClick />
+        <StarClick onRatingClick={handleRatingClick} />
       </fieldset>
       <fieldset className="gap-xs mb-5xl flex w-full flex-col items-start">
         <div className="flex w-full items-center justify-between">
@@ -76,6 +83,7 @@ const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
           </div>
         </div>
         <textarea
+          ref={textareaRef}
           className="border-border-primary px-md py-sm h-80 w-full resize-none rounded-md border outline-0"
           placeholder={REVIEW_CONTENT.PLACEHOLDER}
           onChange={e => setCharacterCnt(e.target.value.length)}

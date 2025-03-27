@@ -4,9 +4,18 @@ import { useState } from 'react';
 
 import { Icon } from '@/components';
 
-const StarClick = () => {
+interface StarClickProps {
+  onRatingClick: () => void;
+}
+
+const StarClick = ({ onRatingClick }: StarClickProps) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
+  const handleRatingClick = (position: number) => {
+    setRating(position);
+    onRatingClick();
+  };
 
   return (
     <div className="-ml-xs flex">
@@ -17,7 +26,7 @@ const StarClick = () => {
           iconName={(hover || rating) >= position ? 'starFill' : 'starGray'}
           width={72}
           height={72}
-          onClick={() => setRating(position)}
+          onClick={() => handleRatingClick(position)}
           onMouseEnter={() => setHover(position)}
           onMouseLeave={() => setHover(0)}
           className="cursor-pointer"

@@ -3,3 +3,4 @@ export * from './auth/verifyCodeAction';
 export * from './auth/signupAction';
 export * from './auth/resetPwAction';
 export * from './auth/signinAction';
+export * from './faq/faqSearchAction';

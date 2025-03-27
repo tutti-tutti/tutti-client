@@ -2,14 +2,15 @@ import { Suspense } from 'react';
 
 import {
   ProductList,
-  ProductListSkeleton,
   RecommendProductList,
+  ProductListSkeleton,
 } from '@/components';
 
 const HomePage = () => {
   return (
     <>
       <RecommendProductList categoryName="식료품" />
+
       <Suspense fallback={<ProductListSkeleton />}>
         <ProductList />
       </Suspense>

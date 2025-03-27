@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import '@/styles/globals.css';
+import { Toaster } from 'sonner';
 
-(async () => {
-  const { initMsw } = await import('../lib/msw');
-  await initMsw();
-})();
+import '@/styles/globals.css';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -30,6 +27,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard font-style-paragraph flex min-h-screen flex-col items-center`}
       >
+        <Toaster position="bottom-right" />
         {children}
       </body>
     </html>

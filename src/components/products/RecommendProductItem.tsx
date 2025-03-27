@@ -17,11 +17,12 @@ const RecommendProductItem = ({
     <li className="px-xs">
       <Link href={`/products/${productId}`}>
         <ProductThumbnail
-          imageUrl={titleUrl}
+          imageUrl={titleUrl || 'null'}
           name={name}
-          height="sm:h-[240px] h-[170px]"
+          height="sm:h-[200px] h-auto"
           width="w-full"
           isDim
+          className="aspect-square"
         />
 
         <h2 className="mt-xs mb-sm font-style-info line-clamp-2 w-full text-ellipsis">

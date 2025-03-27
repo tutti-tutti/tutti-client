@@ -63,7 +63,21 @@ export const restoreCartStore = () => {
 };
 
 export const createMockCartItems = (): CartProductItem[] => {
-  const templates: CartProductItem[] = cart[0].items;
-
-  return templates;
+  return cart.map(item => ({
+    productItemId: item.productItemId,
+    productItemName: item.productItemName,
+    productImgUrl: item.productImgUrl,
+    originalPrice: item.originalPrice,
+    sellingPrice: item.sellingPrice,
+    quantity: item.quantity,
+    firstOptionName: item.firstOptionName ?? undefined,
+    firstOptionValue: item.firstOptionValue ?? undefined,
+    secondOptionName: item.secondOptionName ?? undefined,
+    secondOptionValue: item.secondOptionValue ?? undefined,
+    soldOut: item.soldOut,
+    maxQuantity: item.maxQuantity,
+    cartItemId: item.cartItemId,
+    storeName: item.storeName,
+    checked: true,
+  }));
 };

@@ -1,4 +1,4 @@
-import RecommendCarousel from '../RecommendCarousel';
+import { RecommendCarousel } from '@/components';
 
 export const RecommendProductItemSkeleton = () => {
   return (

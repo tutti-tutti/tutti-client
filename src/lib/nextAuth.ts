@@ -1,4 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
+
+import { setAccessToken, setRefreshToken, socialSignin } from '@/services';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 
@@ -34,23 +36,23 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.NAVER_SECRET || '',
     }),
   ],
-  callbacks: {
-    async jwt({ token, account }) {
-      if (account) {
-        token.provider = account.provider;
-        token.accessToken = account.access_token;
-        token.socialId = account.providerAccountId;
+  events: {
+    async signIn({ user, account }) {
+      if (account?.provider && user.email) {
+        try {
+          const response = await socialSignin(
+            user.email,
+            account.provider,
+            account.providerAccountId,
+            account.access_token || '',
+          );
+
+          await setAccessToken(response.accessToken);
+          await setRefreshToken(response.refreshToken);
+        } catch (error) {
+          console.error('백엔드 JWT 발급 오류:', error);
+        }
       }
-      return token;
     },
-    async session({ session, token }) {
-      session.user.provider = token.provider;
-      session.user.accessToken = token.accessToken;
-      session.user.socialId = token.socialId;
-      return session;
-    },
-  },
-  session: {
-    strategy: 'jwt',
   },
 };

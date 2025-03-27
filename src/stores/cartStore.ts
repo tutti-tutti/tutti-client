@@ -30,7 +30,18 @@ const useCartStore = create<CartState>((set, get) => ({
   checkedItems: {},
   wasDeleted: false,
 
-  setCartItems: items => set({ items }),
+  setCartItems: items => {
+    set({
+      items,
+      checkedItems: items.reduce(
+        (acc, item) => {
+          acc[item.productItemId] = true;
+          return acc;
+        },
+        {} as Record<string, boolean>,
+      ),
+    });
+  },
 
   toggleItemCheckbox: (productItemId, isChecked) => {
     set(state => ({

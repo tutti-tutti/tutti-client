@@ -22,7 +22,7 @@ export const AUTH_ENDPOINTS = {
 
 export const PRODUCTS_ENDPOINTS = {
   LIST: `${API_RESOURCES.PRODUCTS}`,
-  LATEST: `${API_RESOURCES.PRODUCTS}/latest`,
+  LATEST: `${API_RESOURCES.PRODUCTS}/latest-list`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
 };

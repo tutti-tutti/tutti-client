@@ -30,6 +30,7 @@ export const mapProductToCartItem = (
     secondOptionValue: selectedOption.secondOptionValue || undefined,
     soldOut: false,
     maxQuantity: product.maxPurchaseQuantity || 10,
+    checked: true,
   };
 };
 

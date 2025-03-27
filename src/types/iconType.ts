@@ -29,4 +29,9 @@ export type IconType =
   | 'starGray'
   | 'starHalf'
   | 'starFill'
-  | 'radio';
+  | 'radio'
+  | 'grocery'
+  | 'clothes'
+  | 'necessity'
+  | 'digital'
+  | 'cosmetic';

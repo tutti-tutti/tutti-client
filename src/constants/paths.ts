@@ -14,7 +14,7 @@ export const PATH_NAME = {
   SIGNUP: '회원가입',
   LOGIN: '로그인',
   LOGOUT: '로그아웃',
-  SUPPORT: '고객센터',
+  FAQS: '자주 묻는 질문',
   CART: '장바구니',
   MY_PAGE: '마이지혜',
   CURRENT_COUNTRY: '현재 국가',

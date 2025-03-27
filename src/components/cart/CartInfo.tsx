@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useCartStore } from '@/stores';
+import { ROUTER_PATH } from '@/constants';
+import { cn, formatPrice, toast } from '@/utils';
+import { useCart } from '@/hooks';
 import {
   Checkbox,
   ExtraButton,
@@ -10,40 +12,29 @@ import {
   CartPaymentInfo,
   Button,
 } from '@/components';
-import type { CartProductItem } from '@/types';
-import { cn } from '@/utils';
 import CartHeader from './CartHeader';
 
-interface CartInfoProps {
-  initialCartItems: CartProductItem[];
-}
-
-const CartInfo = ({ initialCartItems }: CartInfoProps) => {
+const CartInfo = () => {
+  const router = useRouter();
   const {
-    setCartItems,
-    toggleAllCheckbox,
-    removeSelectedItems,
-    getCheckedItemsCount,
-    getTotalItemsCount,
+    checkedCount,
+    totalCount,
     isAllChecked,
-    getPaymentInfo,
-  } = useCartStore();
+    paymentInfo,
+    toggleAllCheckbox,
+    handleDeleteSelected,
+    payloadCheckedCartItems,
+  } = useCart();
 
-  useEffect(() => {
-    setCartItems(initialCartItems);
-  }, [initialCartItems, setCartItems]);
+  const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
+  const encodedOrderProductItems = encodeURIComponent(
+    JSON.stringify(payloadCheckedCartItems),
+  );
 
-  const checkedCount = getCheckedItemsCount();
-  const totalCount = getTotalItemsCount();
-
-  const { totalPrice, discountPrice, deliveryPrice, finalPrice } =
-    getPaymentInfo();
-
-  const handleDelete = () => {
-    if (checkedCount > 0 && window.confirm('선택한 상품을 삭제하시겠습니까?')) {
-      removeSelectedItems();
-    }
-  };
+  const handleCheckoutClick = () =>
+    checkedCount === 0
+      ? toast.warning('주문할 상품을 선택해주세요!')
+      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
 
   return (
     <>
@@ -55,7 +46,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
             <div className="py-md flex w-full items-center justify-between">
               <Checkbox
                 label={`전체선택하기 (${checkedCount}/${totalCount})`}
-                checked={isAllChecked()}
+                checked={isAllChecked}
                 onChange={checked => toggleAllCheckbox(checked)}
                 disabled={totalCount === 0}
               />
@@ -64,7 +55,7 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
                   '!px-xs !py-2xs md:px-md md:py-xs',
                   checkedCount === 0 && 'cursor-not-allowed',
                 )}
-                onClick={handleDelete}
+                onClick={handleDeleteSelected}
               >
                 선택삭제
               </ExtraButton>
@@ -82,9 +73,10 @@ const CartInfo = ({ initialCartItems }: CartInfoProps) => {
           />
           <Button
             className="font-style-heading"
-            variant={totalCount === 0 ? 'disabled' : 'primary'}
+            variant={checkedCount === 0 ? 'disabled' : 'primary'}
+            onClick={handleCheckoutClick}
           >
-            주문하기({totalCount}개)
+            {formatPrice(finalPrice)} 결제하기
           </Button>
         </section>
       </div>

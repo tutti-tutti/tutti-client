@@ -28,8 +28,8 @@ const TextHeader = ({
     <ClickText key="signup" href={ROUTER_PATH.SIGNUP}>
       {PATH_NAME.SIGNUP}
     </ClickText>,
-    <ClickText key="support" href={ROUTER_PATH.SUPPORT}>
-      {PATH_NAME.SUPPORT}
+    <ClickText key="support" href={ROUTER_PATH.FAQS}>
+      {PATH_NAME.FAQS}
     </ClickText>,
     <ClickText key="country" disabled>
       {PATH_NAME.CURRENT_COUNTRY}({country})

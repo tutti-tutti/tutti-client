@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { RecommendCarousel } from '@/components';
+import { recommededProductsQueryOptions } from '@/queries';
 import type { Product } from '@/types';
 
 const sampleImage =
@@ -23,9 +25,33 @@ const generateProducts = (count: number): Product[] => {
       createdAt: new Date(),
       freeDelivery: index % 3 === 0,
       almostOutOfStock: index % 4 === 0,
-      options: [],
+      productItems: [
+        {
+          productItemId: index + 1,
+          firstOptionName: index % 2 === 0 ? '색상' : null,
+          firstOptionValue: index % 2 === 0 ? '블랙' : null,
+          secondOptionName: index % 3 === 0 ? '사이즈' : null,
+          secondOptionValue: index % 3 === 0 ? 'M' : null,
+          additionalPrice: index % 4 === 0 ? 5000 : null,
+        },
+      ],
       maxPurchaseQuantity: 1,
     }));
+};
+
+const createQueryClient = (products: Product[]) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  const queryKey = recommededProductsQueryOptions.queryKey;
+  queryClient.setQueryData(queryKey, products);
+
+  return queryClient;
 };
 
 const meta: Meta<typeof RecommendCarousel> = {
@@ -35,20 +61,24 @@ const meta: Meta<typeof RecommendCarousel> = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <div className="mx-auto max-w-7xl p-6">
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof RecommendCarousel>;
 
 export const Default: Story = {
-  args: {
-    products: generateProducts(12),
-  },
+  decorators: [
+    Story => {
+      const products = generateProducts(12);
+      const queryClient = createQueryClient(products);
+
+      return (
+        <QueryClientProvider client={queryClient}>
+          <div className="mx-auto max-w-7xl p-6">
+            <Story />
+          </div>
+        </QueryClientProvider>
+      );
+    },
+  ],
 };

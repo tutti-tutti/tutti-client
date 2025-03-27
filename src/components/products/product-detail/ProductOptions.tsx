@@ -1,49 +1,71 @@
 'use client';
 
-import { Dropdown } from '@/components/common';
-import type { OptionValue, ProductOption } from '@/types';
+import { useEffect } from 'react';
+
+import { Dropdown } from '@/components';
+import type { ProductOption } from '@/types';
 
 interface ProductOptionsProps {
-  options: ProductOption[];
-  handleOptionChange: (optionName: string, selectedValue: OptionValue) => void;
+  productItems: ProductOption[];
+  handleOptionChange: (selectedOption: ProductOption) => void;
 }
 
 const ProductOptions = ({
-  options,
+  productItems,
   handleOptionChange,
 }: ProductOptionsProps) => {
-  const formatDropdownOptions = (option: ProductOption) => {
-    return option.values.map(value => ({
-      value: value.name,
-      label: value.additionalPrice
-        ? `${value.name} (+${value.additionalPrice.toLocaleString()}원)`
-        : value.name,
-      additionalPrice: value.additionalPrice || 0,
+  const hasOptions = productItems.some(
+    item => item.firstOptionName !== null || item.secondOptionName !== null,
+  );
+
+  useEffect(() => {
+    if (!hasOptions && productItems.length > 0) {
+      handleOptionChange(productItems[0]);
+    }
+  }, [productItems, hasOptions, handleOptionChange]);
+
+  const formatDropdownOptions = (options: ProductOption[]) => {
+    return options.map(option => ({
+      value: option.productItemId.toString(),
+      label: `${option.firstOptionValue || ''}${
+        option.secondOptionValue
+          ? (option.firstOptionValue ? ', ' : '') + option.secondOptionValue
+          : ''
+      }${
+        option.additionalPrice && option.additionalPrice > 0
+          ? `(+${option.additionalPrice.toLocaleString()}원)`
+          : option.additionalPrice && option.additionalPrice < 0
+            ? `(${option.additionalPrice.toLocaleString()}원)`
+            : ''
+      }`,
+      additionalPrice: option.additionalPrice || 0,
     }));
   };
 
+  if (!hasOptions) {
+    return null;
+  }
+
   return (
     <article className="gap-lg pb-lg md:py-xl flex flex-col">
-      {options &&
-        options.map((option, index) => (
-          <div key={index} className="gap-md flex items-center">
-            <label className="font-style-subHeading text-text-secondary min-w-[100px]">
-              {option.name}
-            </label>
-            <Dropdown
-              options={formatDropdownOptions(option)}
-              placeholder={`${option.name} 선택`}
-              onChange={selectedOption => {
-                const selectedValue = option.values.find(
-                  v => v.name === selectedOption.value,
-                );
-                if (selectedValue) {
-                  handleOptionChange(option.name, selectedValue);
-                }
-              }}
-            />
-          </div>
-        ))}
+      <div className="gap-md flex items-center">
+        <label className="font-style-subHeading text-text-secondary min-w-[60px]">
+          옵션
+        </label>
+        <Dropdown
+          options={formatDropdownOptions(productItems)}
+          placeholder="옵션 선택"
+          onChange={selectedOption => {
+            const selectedValue = productItems.find(
+              option =>
+                option.productItemId.toString() === selectedOption.value,
+            );
+            if (selectedValue) {
+              handleOptionChange(selectedValue);
+            }
+          }}
+        />
+      </div>
     </article>
   );
 };

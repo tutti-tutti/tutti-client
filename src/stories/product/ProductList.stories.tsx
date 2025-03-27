@@ -29,7 +29,7 @@ const createProduct = (id: number): Product => ({
   createdAt: new Date(),
   freeDelivery: true,
   almostOutOfStock: true,
-  options: [],
+  productItems: [],
   maxPurchaseQuantity: 1,
 });
 

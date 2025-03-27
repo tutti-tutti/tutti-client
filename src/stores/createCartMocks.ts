@@ -64,18 +64,20 @@ export const restoreCartStore = () => {
 
 export const createMockCartItems = (): CartProductItem[] => {
   return cart.map(item => ({
-    productId: item.productId,
+    productItemId: item.productItemId,
     productItemName: item.productItemName,
     productImgUrl: item.productImgUrl,
     originalPrice: item.originalPrice,
     sellingPrice: item.sellingPrice,
     quantity: item.quantity,
-    firstOptionName: item.firstOptionName || undefined,
-    firstOptionValue: item.firstOptionValue || undefined,
-    secondOptionName: item.secondOptionName || undefined,
-    secondOptionValue: item.secondOptionValue || undefined,
+    firstOptionName: item.firstOptionName ?? undefined,
+    firstOptionValue: item.firstOptionValue ?? undefined,
+    secondOptionName: item.secondOptionName ?? undefined,
+    secondOptionValue: item.secondOptionValue ?? undefined,
+    soldOut: item.soldOut,
     maxQuantity: item.maxQuantity,
     cartItemId: item.cartItemId,
     storeName: item.storeName,
+    checked: true,
   }));
 };

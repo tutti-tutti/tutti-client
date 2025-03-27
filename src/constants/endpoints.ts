@@ -12,6 +12,7 @@ export const AUTH_ENDPOINTS = {
   SIGNUP_EMAIL: `${API_RESOURCES.MEMBERS}/signup/email`,
   RESET_PW: `${API_RESOURCES.MEMBERS}/password/reset`,
   SIGNIN_EMAIL: `${API_RESOURCES.MEMBERS}/login/email`,
+  SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
 };
 
 export const PRODUCTS_ENDPOINTS = {

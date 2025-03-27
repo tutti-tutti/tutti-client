@@ -8,6 +8,8 @@ export const ROUTER_PATH = {
   COUNTRY_SETTING: '/country-setting',
   CHECKOUT: (orderProductItems: string) =>
     `/checkout?orderProductItems=${orderProductItems}`,
+  CHECKOUT_SUCCESS: '/checkout/success',
+  CHECKOUT_FAIL: '/checkout/fail',
 };
 
 export const PATH_NAME = {

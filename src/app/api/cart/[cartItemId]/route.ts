@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { axiosInstance } from '@/lib';
 import { CART_ENDPOINTS } from '@/constants';
-import { getAccessToken } from '@/services/tokenService';
+import { getAccessToken } from '@/services';
 
 interface Params {
   params: Promise<{ cartItemId: number }>;

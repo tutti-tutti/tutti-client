@@ -1,10 +1,10 @@
 import { ReviewContent, ReviewProductInfo } from '@/components';
 
 type CreateReviewPageParams = {
-  params: {
+  params: Promise<{
     orderId: string;
     productItemId: string;
-  };
+  }>;
 };
 
 const CreateReviewPage = async ({ params }: CreateReviewPageParams) => {

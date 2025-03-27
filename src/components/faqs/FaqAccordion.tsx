@@ -50,7 +50,6 @@ const FaqAccordion = async ({
 
       {categorySearchParams &&
         categoryFaqs.map((faq: FaqItemType) => {
-          console.log('faq: ', faq);
           const { id, question, answer, viewCnt } = faq;
 
           return (

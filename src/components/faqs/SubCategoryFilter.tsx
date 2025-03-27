@@ -13,8 +13,8 @@ const SubCategoryFilter = async ({
   const subCategories = await fetchSubCategories(categorySearchParams || '');
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="scrollbar-hide border-border-secondary w-full overflow-x-auto border-b">
+    <div className="border-border-secondary flex w-full justify-center border-b">
+      <div className="scrollbar-hide overflow-x-auto">
         <div className="gap-lg -mt-md flex whitespace-nowrap">
           <SubCategoryFilterItem
             href={`?category=${encodeURIComponent(categorySearchParams || '')}`}

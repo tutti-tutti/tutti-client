@@ -8,12 +8,12 @@ import {
 import { faqSearchAction } from '@/server-actions';
 
 type SearchParamsProps = {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     sub?: string;
     faq?: string;
     query?: string;
-  };
+  }>;
 };
 
 const FaqPage = async ({ searchParams }: SearchParamsProps) => {
@@ -42,9 +42,7 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
           faqSearchParams={faqSearchParams}
         />
       ) : (
-        // <div className="w-full overflow-auto">
         <CategoryFilter categorySearchParams={categorySearchParams} />
-        // </div>
       )}
       {categorySearchParams && (
         <SubCategoryFilter

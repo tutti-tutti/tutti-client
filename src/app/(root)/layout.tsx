@@ -12,7 +12,7 @@ export default function MainLayout({
     <QueryProviders>
       <Header />
       <div className="relative w-full max-w-[1280px] flex-1">
-        <main className="px-container py-md md:mt-header-height mt-header-heightMobile">
+        <main className="px-container pt-md pb-7xl md:mt-header-height mt-header-heightMobile md:pb-[100px]">
           {children}
         </main>
       </div>

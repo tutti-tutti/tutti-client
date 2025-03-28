@@ -11,7 +11,7 @@ interface ReviewBadgeProps {
 
 const ReviewBadge = ({ type, children, textSize }: ReviewBadgeProps) => {
   const defaultClass = {
-    bg: 'gap-xs px-sm py-xs flex items-center rounded-xl',
+    bg: 'gap-xs px-sm py-xs items-center rounded-xl inline-flex',
     text: `font-style-${textSize}`,
   };
 

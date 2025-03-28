@@ -17,7 +17,7 @@ const ReviewRatingBar = ({
           style={{ width: `${getPercentage}%` }}
         />
       </div>
-      <div className="font-style-info text-text-tertiaryInfo">
+      <div className="font-style-info text-text-tertiaryInfo w-24">
         ({reviewCnt})
       </div>
     </>

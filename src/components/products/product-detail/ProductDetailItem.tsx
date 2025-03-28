@@ -20,27 +20,30 @@ const ProductDetailItem = ({
   almostOutOfStock,
   likes,
   originalPrice,
-  sellingPrice,
-  productItems,
+  productOptionItems,
   maxPurchaseQuantity,
 }: Product) => {
-  const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
-
-  const [finalPrice, setFinalPrice] = useState<number>(sellingPrice);
+  const [selectedOption, setSelectedOption] = useState<ProductOption | null>(
+    null,
+  );
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedProductItemId, setSelectedProductItemId] = useState<
     number | null
   >(null);
 
+  const finalPrice = selectedOption
+    ? selectedOption.sellingPrice
+    : originalPrice;
+  const discountRate = selectedOption
+    ? calculateDiscountRate(
+        originalPrice + selectedOption.additionalPrice,
+        selectedOption.sellingPrice,
+      )
+    : '0%';
+
   const handleOptionChange = (selectedOption: ProductOption) => {
+    setSelectedOption(selectedOption);
     setSelectedProductItemId(selectedOption.productItemId);
-
-    let newPrice = sellingPrice;
-    if (selectedOption && selectedOption.additionalPrice) {
-      newPrice += selectedOption.additionalPrice;
-    }
-
-    setFinalPrice(newPrice);
   };
 
   const handleIncrease = () => {
@@ -77,11 +80,15 @@ const ProductDetailItem = ({
           likes={likes}
         />
         <ProductOptions
-          productItems={productItems}
+          productItems={productOptionItems}
           handleOptionChange={handleOptionChange}
         />
         <ProductPrice
-          originalPrice={originalPrice}
+          originalPrice={
+            selectedOption
+              ? originalPrice + selectedOption.additionalPrice
+              : originalPrice
+          }
           finalPrice={finalPrice}
           quantity={quantity}
           discountRate={discountRate}

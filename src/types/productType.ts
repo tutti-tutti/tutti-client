@@ -6,7 +6,9 @@ export interface ProductOption {
   firstOptionValue: string | null;
   secondOptionName: string | null;
   secondOptionValue: string | null;
-  additionalPrice: number | null;
+  sellingPrice: number;
+  discountPrice: number;
+  additionalPrice: number;
 }
 
 export interface Product {
@@ -16,20 +18,13 @@ export interface Product {
   titleUrl: string | StaticImageData;
   description?: string;
   originalPrice: number;
-  sellingPrice: number;
+  sellingPrice?: number;
   adultOnly?: boolean;
   likes: number;
   createdAt: Date;
   updatedAt?: Date;
   freeDelivery?: boolean;
   almostOutOfStock?: boolean;
-  productItems: ProductOption[];
+  productOptionItems: ProductOption[];
   maxPurchaseQuantity: number;
-}
-
-export type ProductListAPISchema = ProductListAPISchemaData[];
-export interface ProductListAPISchemaData {
-  code: string;
-  message: string;
-  latestList: Product[];
 }

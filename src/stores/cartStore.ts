@@ -16,6 +16,7 @@ interface CartState {
   getPaymentInfo: () => {
     totalPrice: number;
     discountPrice: number;
+    additionalPrice: number;
     deliveryPrice: number;
     finalPrice: number;
   };
@@ -109,21 +110,30 @@ const useCartStore = create<CartState>((set, get) => ({
     const state = get();
     let totalPrice = 0;
     let discountPrice = 0;
+    let additionalPrice = 0;
 
     state.items.forEach(item => {
       if (state.checkedItems[item.productItemId]) {
         totalPrice += item.originalPrice * item.quantity;
-        discountPrice +=
-          (item.originalPrice - item.sellingPrice) * item.quantity;
+
+        if (item.sellingPrice > item.originalPrice) {
+          additionalPrice +=
+            (item.sellingPrice - item.originalPrice) * item.quantity;
+        } else if (item.sellingPrice < item.originalPrice) {
+          discountPrice +=
+            (item.originalPrice - item.sellingPrice) * item.quantity;
+        }
       }
     });
 
     const deliveryPrice = totalPrice > 0 ? 3000 : 0; // 배송비 정책에 따라 달라질 예정
-    const finalPrice = totalPrice - discountPrice + deliveryPrice;
+    const finalPrice =
+      totalPrice - discountPrice + additionalPrice + deliveryPrice;
 
     return {
       totalPrice,
       discountPrice,
+      additionalPrice,
       deliveryPrice,
       finalPrice,
     };

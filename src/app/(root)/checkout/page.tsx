@@ -63,8 +63,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  console.log('orderProductItems: ', orderItems);
-
   const address = {
     recipientName: '엘리자베스',
     recipientPhone: '01012344321',

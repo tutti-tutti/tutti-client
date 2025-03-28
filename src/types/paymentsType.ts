@@ -1,3 +1,5 @@
+/**NOTE - ordersType과 paymentsType을 나누는 기준은 endpoint 입니다 */
+
 import { OrderProductItem } from './ordersType';
 
 // 주문/결제 요청 API 스키마

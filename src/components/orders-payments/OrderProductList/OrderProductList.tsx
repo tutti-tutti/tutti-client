@@ -1,4 +1,9 @@
-import { cn } from '@/utils';
+import {
+  cn,
+  formatDateWithDay,
+  formatDateAfterDays,
+  formatAfterDays,
+} from '@/utils';
 import type { OrderItem } from '@/types';
 import { ProductThumbnail } from '@/components';
 import { default as ProductName } from './ProductName';
@@ -9,7 +14,7 @@ interface OrderProductListProps {
 }
 
 const OrderProductList = ({ orderItems }: OrderProductListProps) => {
-  const deliveredAt = '3일 뒤 도착 예상';
+  const deliveredAt = formatDateAfterDays(Math.floor(Math.random() * 5) + 3); // 현재 날짜로 부터 3~7일 뒤 'yyyy-mm-dd'로 배송 날짜 예정
   const paddingStyles = 'py-md md:py-lg pr-md md:pr-lg first:pt-0';
   const gapStyles = `flex gap-md md:gap-lg`;
   const thumbColumnStyles = 'w-5/12 w-[120px] md:w-[200px]';
@@ -18,7 +23,9 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
   return (
     <article className={cn('flex-col', gapStyles)}>
       <div className="gap-xs flex text-xl">
-        <strong className="text-text-info">00월 00일(월)</strong>
+        <strong className="text-text-info">
+          {formatDateWithDay(deliveredAt)}
+        </strong>
         <span>도착 예정</span>
       </div>
       <ul>
@@ -59,7 +66,7 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                deliveredAt={deliveredAt}
+                deliveredAt={formatAfterDays(deliveredAt)}
                 className="justify-center"
               />
             </div>

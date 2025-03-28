@@ -1,12 +1,13 @@
 import Link from 'next/link';
+interface PaymentFailPageProps {
+  searchParams: Promise<{
+    code: string;
+    message: string;
+  }>;
+}
 
-export default function PaymentFailPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const errorCode = searchParams.code as string;
-  const errorMessage = searchParams.message as string;
+const PaymentFailPage = async ({ searchParams }: PaymentFailPageProps) => {
+  const { code: errorCode, message: errorMessage } = await searchParams;
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -14,9 +15,11 @@ export default function PaymentFailPage({
       {errorCode && <p className="mb-2">오류 코드: {errorCode}</p>}
       {errorMessage && <p className="mb-4">오류 메시지: {errorMessage}</p>}
 
-      <Link href="/" className="text-blue-500 hover:underline">
+      <Link href="/" className="text-text-primary hover:underline">
         홈으로 돌아가기
       </Link>
     </div>
   );
-}
+};
+
+export default PaymentFailPage;

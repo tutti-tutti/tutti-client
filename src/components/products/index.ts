@@ -11,3 +11,7 @@ export { default as ProductDetailItem } from './product-detail/ProductDetailItem
 export { default as ProductListClientTemp } from './ProductListClientTemp';
 export { default as ProductListWrapTemp } from './ProductListWrapTemp';
 export { default as ClientProductDetail } from './product-detail/ClientProductDetail';
+export { default as CategoryProductList } from '../category/CategoryProductList';
+export { default as ClientCategoryProductList } from '../category/ClientCategoryProductList';
+export { default as ProductCategory } from '../category/ProductCategory';
+export { default as CategorySkeleton } from '../category/CategorySkeleton';

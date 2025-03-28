@@ -31,3 +31,8 @@ export const PAYMENTS_QUERY_KEY = {
   CHECKOUT: 'checkout',
   LIST: 'list',
 };
+
+export const CATEGORY_QUERY_KEY = {
+  LIST: 'category-list',
+  DETAIL: (categoryId: string) => `category-detail-${categoryId}`,
+};

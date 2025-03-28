@@ -11,6 +11,7 @@ export const ROUTER_PATH = {
   CHECKOUT_SUCCESS: '/checkout/success',
   CHECKOUT_FAIL: '/checkout/fail',
   ORDERS_HISTORY: '/orders-history',
+  PRODUCT_CATEGORY: (categoryId: string) => `/products?category=${categoryId}`,
 };
 
 export const PATH_NAME = {

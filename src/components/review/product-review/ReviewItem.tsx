@@ -1,7 +1,8 @@
-import { Button } from '@/components';
-import ReviewBadge from '@/components/review/product-review/ReviewBadge';
-import StarRating from '@/components/review/product-review/StarRating';
 import { calculateRelativeTime } from '@/utils';
+
+import ReviewBadge from './ReviewBadge';
+import ReviewLikeButton from './ReviewLikeButton';
+import StarRating from './StarRating';
 
 interface ReviewItemProps {
   id: number;
@@ -14,6 +15,7 @@ interface ReviewItemProps {
   sentiment: 'positive' | 'negative';
   sentimentProbability: number;
   createdAt: string;
+  isLiked: boolean;
 }
 
 const ReviewItem = ({ ...review }: ReviewItemProps) => {
@@ -42,10 +44,7 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
         <ReviewBadge textSize="paragraph" type={review.sentiment}>
           {reviewBadgeText}
         </ReviewBadge>
-        <Button icon="smile" variant="tertiaryOutline">
-          도움이 되는 리뷰에요
-        </Button>
-        {/* 👆 이미 눌렀는 지 여부 UI 적용 필요! smile => check   |  tertiaryOutline => primaryOutline */}
+        <ReviewLikeButton isLiked={review.isLiked} id={review.id} />
       </div>
     </div>
   );

@@ -1,33 +1,33 @@
-import ReviewFilter from '@/components/review/product-review/ReviewFilter';
-import ReviewItem from '@/components/review/product-review/ReviewItem';
+import { fetchReviewIsLike, fetchReviews } from '@/services';
+import ReviewFilter from './ReviewFilter';
+import ReviewItem from './ReviewItem';
+import { getProductIdParams } from '@/utils';
 
-type SentimentType = 'positive' | 'negative';
+interface ReviewItemAPISchema {
+  id: number;
+  productItemId: number;
+  nickname: string;
+  content: string;
+  rating: number;
+  reviewImageUrls: string[];
+  likeCount: number;
+  sentiment: 'positive' | 'negative';
+  sentimentProbability: number;
+  createdAt: string;
+}
 
-const temp = {
-  reviews: [
-    {
-      id: 1,
-      productItemId: 1,
-      nickname: 'tutti',
-      content: '배송이 빠르고 좋아요!',
-      rating: 4.5,
-      reviewImageUrls: ['string'],
-      likeCount: 15,
-      sentiment: 'positive' as SentimentType,
-      sentimentProbability: 95.2,
-      createdAt: '2025-03-24T15:44:18.430Z',
-    },
-  ],
-  cursor: 0,
-};
+const ReviewList = async () => {
+  const productIdParams = getProductIdParams();
+  const reviews = await fetchReviews(productIdParams, 10);
 
-const ReviewList = () => {
   return (
     <div>
       <ReviewFilter />
-      {temp.reviews.map(review => (
-        <ReviewItem key={review.id} {...review} />
-      ))}
+      {reviews.reviews.map(async (review: ReviewItemAPISchema) => {
+        const isLiked = await fetchReviewIsLike(review.id);
+
+        return <ReviewItem key={review.id} {...review} isLiked={isLiked} />;
+      })}
     </div>
   );
 };

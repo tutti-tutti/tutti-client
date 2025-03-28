@@ -1,3 +1,5 @@
+import { cn } from '@/utils';
+
 interface SectionHeadingTitleProps {
   children: React.ReactNode;
   className?: string;
@@ -9,7 +11,10 @@ const SectionHeadingTitle = ({
 }: SectionHeadingTitleProps) => {
   return (
     <h2
-      className={`text-text-secondary font-style-subHeading md:font-style-heading ${className}`}
+      className={cn(
+        'text-text-secondary font-style-subHeading md:font-style-heading',
+        className,
+      )}
     >
       {children}
     </h2>

@@ -1,4 +1,4 @@
-import { formatPrice } from '@/utils';
+import { formatPrice, cn } from '@/utils';
 import type { OrderItem } from '@/types';
 import { ProductThumbnail } from '@/components';
 
@@ -14,7 +14,7 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
   const infoColumnStyles = 'w-7/12 md:w-full';
 
   return (
-    <article className={`flex-col ${gapStyles}`}>
+    <article className={cn('flex-col', gapStyles)}>
       <div className="gap-xs flex text-xl">
         <strong className="text-text-info">00월 00일(월)</strong>
         <span>도착 예정</span>
@@ -23,7 +23,11 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
         {orderItems.map(item => (
           <li key={item.productItemId}>
             <article
-              className={`${paddingStyles} ${gapStyles} md:border-border-secondary md:border-b`}
+              className={cn(
+                'md:border-border-secondary md:border-b',
+                paddingStyles,
+                gapStyles,
+              )}
             >
               <div className={thumbColumnStyles}>
                 <ProductThumbnail
@@ -34,11 +38,11 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
                 />
               </div>
               <div
-                className={`${infoColumnStyles} gap-2xs flex flex-1 flex-col`}
+                className={cn('gap-2xs flex flex-1 flex-col', infoColumnStyles)}
               >
                 <ProductName productName={item.productName} />
                 <ProductInfo
-                  className="hidden md:block"
+                  className="hidden md:flex"
                   price={item.price}
                   quantity={item.quantity}
                   deliveredAt={deliveredAt}
@@ -72,7 +76,10 @@ interface ProductNameProps {
 const ProductName = ({ productName, className }: ProductNameProps) => {
   return (
     <h3
-      className={`${className} font-style-subHeading ellipsis-row-2 leading-[1.6] font-normal break-all md:break-keep`}
+      className={cn(
+        'font-style-subHeading ellipsis-row-2 leading-[1.6] font-normal break-all md:break-keep',
+        className,
+      )}
     >
       {productName}
     </h3>
@@ -93,7 +100,7 @@ const ProductInfo = ({
   className,
 }: ProductInfoProps) => {
   return (
-    <div className={`${className} gap-sm flex items-center font-semibold`}>
+    <div className={cn('gap-sm flex items-center font-semibold', className)}>
       <strong className="font-style-heading font-semibold">
         {formatPrice(price)}
       </strong>
@@ -120,7 +127,10 @@ const ProductOption = ({
 }: ProductOptionProps) => {
   return (
     <div
-      className={`${className} gap-sm text-text-tertiary flex text-sm font-normal md:text-base`}
+      className={cn(
+        className,
+        'gap-sm text-text-tertiary flex text-sm font-normal md:text-base',
+      )}
     >
       <span>{firstOptionValue}</span>
       {secondOptionValue ? (

@@ -11,9 +11,9 @@ interface PaymentSuccessPageProps {
   }>;
 }
 
-export default async function PaymentSuccessPage({
+const PaymentSuccessPage = async ({
   searchParams,
-}: PaymentSuccessPageProps) {
+}: PaymentSuccessPageProps) => {
   const { paymentKey, orderId, amount } = await searchParams;
 
   if (!paymentKey || !orderId || !amount) {
@@ -33,4 +33,6 @@ export default async function PaymentSuccessPage({
 
     redirect(ROUTER_PATH.CHECKOUT_FAIL);
   }
-}
+};
+
+export default PaymentSuccessPage;

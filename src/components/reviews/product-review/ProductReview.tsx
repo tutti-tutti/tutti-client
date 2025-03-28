@@ -1,5 +1,5 @@
-import ReviewList from '@/components/review/product-review/ReviewList';
-import AverageReview from '@/components/review/product-review/AverageReview';
+import ReviewList from './ReviewList';
+import AverageReview from './AverageReview';
 
 const ProductReview = async () => {
   return (

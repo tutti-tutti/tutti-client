@@ -1,5 +1,6 @@
-import { getReviewSortSearchParams } from '@/utils';
 import Link from 'next/link';
+
+import { getReviewSortSearchParams } from '@/utils';
 
 const REVIEW_FILTERS = [
   { id: 'LATEST', text: '최신순', queryParameter: 'latest' },

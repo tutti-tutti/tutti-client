@@ -1,7 +1,7 @@
 import { fetchReviewIsLike, fetchReviews } from '@/services';
+import { getProductIdParams } from '@/utils';
 import ReviewFilter from './ReviewFilter';
 import ReviewItem from './ReviewItem';
-import { getProductIdParams } from '@/utils';
 
 interface ReviewItemAPISchema {
   id: number;

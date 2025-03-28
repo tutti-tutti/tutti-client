@@ -1,12 +1,12 @@
-import { getProductIdParams } from '@/utils';
-import StarRating from '@/components/review/product-review/StarRating';
-import ReviewRatingBar from '@/components/review/product-review/ReviewRatingBar';
-import ReviewBadge from '@/components/review/product-review/ReviewBadge';
 import {
   fetchReviewAverage,
   fetchReviewCountStar,
   fetchReviewPositiveAverage,
 } from '@/services';
+import { getProductIdParams } from '@/utils';
+import StarRating from './StarRating';
+import ReviewRatingBar from './ReviewRatingBar';
+import ReviewBadge from './ReviewBadge';
 
 const AverageReview = async () => {
   const productIdParams = getProductIdParams();

@@ -1,9 +1,9 @@
-// ReviewLikeButton.tsx
 'use client';
+
+import { useOptimistic } from 'react';
 
 import { Button } from '@/components';
 import { reviewLikeAction } from '@/server-actions';
-import { useOptimistic } from 'react';
 
 interface ReviewLikeButtonProps {
   id: number;

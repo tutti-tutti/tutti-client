@@ -8,7 +8,7 @@ import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
 
 interface Params {
   params: Promise<{ productId: string }>;
-  searchParams: { 'review-sort': string };
+  searchParams: Promise<{ 'review-sort': string }>;
 }
 
 export async function generateMetadata({ params, searchParams }: Params) {

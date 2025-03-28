@@ -1,8 +1,7 @@
 import ReviewList from '@/components/review/product-review/ReviewList';
 import AverageReview from '@/components/review/product-review/AverageReview';
 
-const ProductReview = async ({ productId }: { productId: string }) => {
-  console.log(productId);
+const ProductReview = async () => {
   return (
     <div>
       <AverageReview />

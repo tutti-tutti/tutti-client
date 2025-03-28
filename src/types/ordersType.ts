@@ -1,11 +1,11 @@
-import { PaymentType } from './paymentsType';
-
 export interface OrderProductItem {
   productItemId: number;
   quantity: number;
 }
 
 export interface OrderItem {
+  storeId: number;
+  storeName: string;
   productItemId: number;
   productName: string;
   productImgUrl: string;
@@ -39,7 +39,7 @@ export interface OrderDetailResponseAPISchema {
   totalProductAmount: number;
   deliveryFee: number;
   totalAmount: number;
-  paymentType: PaymentType;
+  paymentType: string;
   orderedAt: string;
   paidAt: string;
   deliveredAt: string;

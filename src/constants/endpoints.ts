@@ -9,6 +9,7 @@ export const API_RESOURCES = {
   MEMBERS: '/members',
   PRODUCTS: '/products',
   CART: '/cart',
+  REVIEWS: '/reviews',
   FAQS: '/faqs',
 };
 
@@ -18,6 +19,7 @@ export const AUTH_ENDPOINTS = {
   SIGNUP_EMAIL: `${API_RESOURCES.MEMBERS}/signup/email`,
   RESET_PW: `${API_RESOURCES.MEMBERS}/password/reset`,
   SIGNIN_EMAIL: `${API_RESOURCES.MEMBERS}/login/email`,
+  MYPAGE: `${API_RESOURCES.MEMBERS}/mypage`,
   SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
 };
 
@@ -31,6 +33,10 @@ export const PRODUCTS_ENDPOINTS = {
 export const CART_ENDPOINTS = {
   LIST: `${API_RESOURCES.CART}`,
   DETAIL: (cartItemId: string) => `${API_RESOURCES.CART}/${cartItemId}`,
+};
+
+export const REVIEW_ENDPOINTS = {
+  CREATE_REVIEW: API_RESOURCES.REVIEWS,
 };
 
 export const FAQS_ENDPOINTS = {

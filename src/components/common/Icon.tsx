@@ -32,6 +32,11 @@ import {
   XIcon,
   GoogleLogoIcon,
   RadioIcon,
+  GroceryIcon,
+  ClothesIcon,
+  NecessityIcon,
+  DigitalIcon,
+  CosmeticIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -69,6 +74,11 @@ export const IconMap: Record<
   starFill: StarFillIcon,
   googleLogo: GoogleLogoIcon,
   radio: RadioIcon,
+  grocery: GroceryIcon,
+  clothes: ClothesIcon,
+  necessity: NecessityIcon,
+  digital: DigitalIcon,
+  cosmetic: CosmeticIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

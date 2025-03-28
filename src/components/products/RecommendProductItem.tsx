@@ -11,7 +11,10 @@ const RecommendProductItem = ({
   originalPrice,
   sellingPrice,
 }: Product) => {
-  const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
+  const discountRate =
+    originalPrice && sellingPrice
+      ? calculateDiscountRate(originalPrice, sellingPrice)
+      : 0;
 
   return (
     <li className="px-xs">
@@ -29,7 +32,7 @@ const RecommendProductItem = ({
           {name}
         </h2>
 
-        {originalPrice !== sellingPrice ? (
+        {sellingPrice && originalPrice > sellingPrice ? (
           <>
             <span className="text-text-tertiaryInfo mr-xs font-style-info line-through">
               {originalPrice.toLocaleString()}

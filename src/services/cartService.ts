@@ -22,12 +22,12 @@ export const mapProductToCartItem = (
     productImgUrl: product.titleUrl as string,
     productItemName: product.name,
     originalPrice: product.originalPrice,
-    sellingPrice: product.sellingPrice + (selectedOption.additionalPrice || 0),
     quantity,
     firstOptionName: selectedOption.firstOptionName || undefined,
     firstOptionValue: selectedOption.firstOptionValue || undefined,
     secondOptionName: selectedOption.secondOptionName || undefined,
     secondOptionValue: selectedOption.secondOptionValue || undefined,
+    sellingPrice: selectedOption.sellingPrice,
     soldOut: false,
     maxQuantity: product.maxPurchaseQuantity || 10,
     checked: true,
@@ -66,7 +66,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
             const product = await fetchProductById(String(item.productId));
             if (!product) return null;
 
-            const selectedOption = product.productItems.find(
+            const selectedOption = product.productOptionItems.find(
               option => option.productItemId === item.productItemId,
             );
 
@@ -105,7 +105,7 @@ export const addToLocalCart = async (
     if (product) {
       maxQuantity = product.maxPurchaseQuantity || 10;
 
-      const optionExists = product.productItems.some(
+      const optionExists = product.productOptionItems.some(
         option => option.productItemId === productItemId,
       );
 

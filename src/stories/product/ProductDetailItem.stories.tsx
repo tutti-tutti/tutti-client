@@ -30,9 +30,8 @@ export const Default: Story = {
     almostOutOfStock: false,
     likes: 128,
     originalPrice: 38000,
-    sellingPrice: 28500,
     maxPurchaseQuantity: 5,
-    productItems: [
+    productOptionItems: [
       {
         productItemId: 1,
         firstOptionName: '크기',
@@ -40,6 +39,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '초콜릿',
         additionalPrice: 0,
+        discountPrice: 0,
+        sellingPrice: 28500,
       },
       {
         productItemId: 2,
@@ -48,6 +49,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '바닐라',
         additionalPrice: 0,
+        discountPrice: 0,
+        sellingPrice: 28500,
       },
       {
         productItemId: 3,
@@ -55,7 +58,9 @@ export const Default: Story = {
         firstOptionValue: '1호 (15cm)',
         secondOptionName: '맛',
         secondOptionValue: '딸기',
-        additionalPrice: 2000,
+        additionalPrice: 1000,
+        discountPrice: 0,
+        sellingPrice: 29500,
       },
       {
         productItemId: 4,
@@ -63,7 +68,9 @@ export const Default: Story = {
         firstOptionValue: '2호 (18cm)',
         secondOptionName: '맛',
         secondOptionValue: '초콜릿',
-        additionalPrice: 5000,
+        additionalPrice: 2000,
+        discountPrice: 0,
+        sellingPrice: 30500,
       },
       {
         productItemId: 5,
@@ -72,6 +79,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '바닐라',
         additionalPrice: 5000,
+        discountPrice: 0,
+        sellingPrice: 33500,
       },
       {
         productItemId: 6,
@@ -79,7 +88,9 @@ export const Default: Story = {
         firstOptionValue: '2호 (18cm)',
         secondOptionName: '맛',
         secondOptionValue: '딸기',
-        additionalPrice: 7000,
+        additionalPrice: 5000,
+        discountPrice: 0,
+        sellingPrice: 35500,
       },
       {
         productItemId: 7,
@@ -88,6 +99,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '초콜릿',
         additionalPrice: 10000,
+        discountPrice: 0,
+        sellingPrice: 38500,
       },
       {
         productItemId: 8,
@@ -96,6 +109,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '바닐라',
         additionalPrice: 10000,
+        discountPrice: 0,
+        sellingPrice: 38500,
       },
       {
         productItemId: 9,
@@ -104,6 +119,8 @@ export const Default: Story = {
         secondOptionName: '맛',
         secondOptionValue: '딸기',
         additionalPrice: 12000,
+        discountPrice: 0,
+        sellingPrice: 40500,
       },
     ],
   },
@@ -112,14 +129,16 @@ export const Default: Story = {
 export const NoOptions: Story = {
   args: {
     ...Default.args,
-    productItems: [
+    productOptionItems: [
       {
         productItemId: 10,
         firstOptionName: null,
         firstOptionValue: null,
         secondOptionName: null,
         secondOptionValue: null,
-        additionalPrice: null,
+        additionalPrice: 0,
+        discountPrice: 0,
+        sellingPrice: 28500,
       },
     ],
   },

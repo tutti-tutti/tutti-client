@@ -1,6 +1,8 @@
-import { formatPrice, cn } from '@/utils';
+import { cn } from '@/utils';
 import type { OrderItem } from '@/types';
 import { ProductThumbnail } from '@/components';
+import { default as ProductName } from './ProductName';
+import { default as ProductAmoutInfo } from './ProductAmoutInfo';
 
 interface OrderProductListProps {
   orderItems: OrderItem[];
@@ -41,7 +43,7 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
                 className={cn('gap-2xs flex flex-1 flex-col', infoColumnStyles)}
               >
                 <ProductName productName={item.productName} />
-                <ProductInfo
+                <ProductAmoutInfo
                   className="hidden md:flex"
                   price={item.price}
                   quantity={item.quantity}
@@ -54,7 +56,7 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
               </div>
             </article>
             <div className="md:hidden">
-              <ProductInfo
+              <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
                 deliveredAt={deliveredAt}
@@ -65,52 +67,6 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
         ))}
       </ul>
     </article>
-  );
-};
-
-interface ProductNameProps {
-  productName: string;
-  className?: string;
-}
-
-const ProductName = ({ productName, className }: ProductNameProps) => {
-  return (
-    <h3
-      className={cn(
-        'font-style-subHeading ellipsis-row-2 leading-[1.6] font-normal break-all md:break-keep',
-        className,
-      )}
-    >
-      {productName}
-    </h3>
-  );
-};
-
-interface ProductInfoProps {
-  price: number;
-  quantity: number;
-  deliveredAt: string;
-  className?: string;
-}
-
-const ProductInfo = ({
-  price,
-  quantity,
-  deliveredAt,
-  className,
-}: ProductInfoProps) => {
-  return (
-    <div className={cn('gap-sm flex items-center font-semibold', className)}>
-      <strong className="font-style-heading font-semibold">
-        {formatPrice(price)}
-      </strong>
-      <span className="before:pr-sm after:pl-sm text-text-tertiaryInfo before:content-['·'] after:content-['·']">
-        {quantity}
-      </span>
-      <strong className="text-text-primaryInteraction text-base font-semibold md:text-lg">
-        {deliveredAt}
-      </strong>
-    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { getReviewSortSearchParams } from '@/utils';
+import { cn, getReviewSortSearchParams } from '@/utils';
 
 const REVIEW_FILTERS = [
   { id: 'LATEST', text: '최신순', queryParameter: 'latest' },
@@ -15,6 +15,9 @@ const ReviewFilter = () => {
     return reviewSortSearchParams === filterQueryParameter;
   };
 
+  const isSelectedClass = (queryParameter: string) =>
+    `${isSelected(queryParameter) ? 'text-text-primaryInteraction' : 'text-text-tertiary'}`;
+
   return (
     <>
       <div className="border-border-secondary pb-md gap-lg flex justify-end border-b">
@@ -23,7 +26,10 @@ const ReviewFilter = () => {
             <Link
               key={filter.id}
               href={`?review-sort=${filter.queryParameter}`}
-              className={`font-style-paragraph ${isSelected(filter.queryParameter) ? 'text-text-primaryInteraction' : 'text-text-tertiary'} `}
+              className={cn(
+                'font-style-paragraph',
+                isSelectedClass(filter.queryParameter),
+              )}
               scroll={false}
               replace={true}
             >

@@ -2,11 +2,13 @@ import { redirect } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
 import {
-  OrderProductItem,
+  OrderProductList,
   CheckoutHeader,
   DeliveryAddress,
   PaymentMethodSelector,
   PaymentSummary,
+  SectionHeadingTitle,
+  Divider,
 } from '@/components';
 
 interface OrderCheckoutPageProps {
@@ -27,7 +29,7 @@ export async function generateMetadata({
   };
 }
 
-/**NOTE - 구현 순서
+/**TODO
  * 0. 인증 인가 확인 -> 인증 안되어 있으면 로그인 페이지로 이동
  * 1. 쿼리 파라미터로 상품 productId, 수량, 장바구니인지 즉시구매인지 확인하기
  * 2. 상품 정보 api 호출 -> 데이터 fetch
@@ -46,7 +48,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   const decodedProductItemsJson = decodeURIComponent(
     productItemsJson as string,
   );
-  console.log('decodedProductItemsJson: ', decodedProductItemsJson);
 
   /**TODO - 쿼리 형태 타입 가드 추가 예정 */
   if (!decodedProductItemsJson) {
@@ -54,7 +55,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   }
 
   const payload = JSON.parse(decodedProductItemsJson);
-  console.log('orderProductItems: ', payload);
   const {
     totalDiscountAmount,
     totalProductAmount,
@@ -74,25 +74,38 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     recipientEmail: 'goldegg127@gmail.com',
   };
 
+  const adressContainerStyles = 'flex flex-col gap-sm';
+
   return (
-    <div className="gap-5xl flex flex-col">
+    <div className="gap-4xl mx-auto flex max-w-[630px] flex-col">
       <CheckoutHeader />
-      <DeliveryAddress />
-      <section>
-        <h2>결제 상품 정보</h2>
-        <div>
-          <strong>00월 00일(월)</strong> <span>도착 예정</span>
-        </div>
-        <ul>
-          {orderItems.map(item => (
-            <li key={item.productItemId}>
-              <OrderProductItem {...item} />
-            </li>
-          ))}
-        </ul>
+
+      <section className={adressContainerStyles}>
+        <SectionHeadingTitle>받는 사람 정보</SectionHeadingTitle>
+        <DeliveryAddress className={adressContainerStyles} />
       </section>
+
+      <Divider />
+
+      <section className="gap-lg flex flex-col">
+        <SectionHeadingTitle className="leading-none">
+          결제 상품 정보
+        </SectionHeadingTitle>
+        <OrderProductList orderItems={orderItems} />
+      </section>
+
       <section>
-        <h2 className="">결제 수단</h2>
+        <SectionHeadingTitle>결제 예상 가격</SectionHeadingTitle>
+        <PaymentSummary
+          totalProductAmount={totalProductAmount}
+          totalDiscountAmount={totalDiscountAmount}
+          deliveryFee={deliveryFee}
+          totalAmount={totalAmount}
+        />
+      </section>
+
+      <section className="h-[510px] md:h-[580px]">
+        <SectionHeadingTitle>결제 수단</SectionHeadingTitle>
         <PaymentMethodSelector
           totalDiscountAmount={totalDiscountAmount}
           totalProductAmount={totalProductAmount}
@@ -100,15 +113,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
           totalAmount={totalAmount}
           orderItems={orderItems}
           {...address}
-        />
-      </section>
-      <section className="">
-        <h2 className="">결제 예상 가격</h2>
-        <PaymentSummary
-          totalProductAmount={totalProductAmount}
-          totalDiscountAmount={totalDiscountAmount}
-          deliveryFee={deliveryFee}
-          totalAmount={totalAmount}
         />
       </section>
     </div>

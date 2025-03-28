@@ -4,4 +4,5 @@ export * from './cartService';
 export * from './tokenService';
 export * from './ordersService';
 export * from './paymentsService';
+export * from './reviewService';
 export * from './faqService';

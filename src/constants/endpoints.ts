@@ -11,6 +11,7 @@ export const API_RESOURCES = {
   CART: '/cart',
   ORDERS: '/orders',
   PAYMENTS: '/payments',
+  REVIEWS: '/reviews',
   FAQS: '/faqs',
 };
 
@@ -20,6 +21,8 @@ export const AUTH_ENDPOINTS = {
   SIGNUP_EMAIL: `${API_RESOURCES.MEMBERS}/signup/email`,
   RESET_PW: `${API_RESOURCES.MEMBERS}/password/reset`,
   SIGNIN_EMAIL: `${API_RESOURCES.MEMBERS}/login/email`,
+  MYPAGE: `${API_RESOURCES.MEMBERS}/mypage`,
+  SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
 };
 
 export const PRODUCTS_ENDPOINTS = {
@@ -47,6 +50,10 @@ export const PAYMENTS_ENDPOINTS = {
     `${API_RESOURCES.PAYMENTS}/orderId/${orderId}`,
   DETAIL_BY_PAYMENT_ID: (paymentId: string) =>
     `${API_RESOURCES.PAYMENTS}/paymentId/${paymentId}`,
+};
+
+export const REVIEW_ENDPOINTS = {
+  CREATE_REVIEW: API_RESOURCES.REVIEWS,
 };
 
 export const FAQS_ENDPOINTS = {

@@ -1,16 +1,14 @@
-import { getReviewSort } from '@/utils';
+import { getReviewSortSearchParams } from '@/utils';
 import Link from 'next/link';
 
 const REVIEW_FILTERS = [
   { id: 'LATEST', text: '최신순', queryParameter: 'latest' },
-  { id: 'BEST', text: '베스트순', queryParameter: 'best' },
-  { id: 'EARLIEST', text: '오래된순', queryParameter: 'earliest' },
-  { id: 'HIGHEST', text: '평점높은순', queryParameter: 'highest' },
-  { id: 'LOWEST', text: '평점낮은순', queryParameter: 'lowest' },
+  { id: 'LIKE', text: '도움돼요순', queryParameter: 'like' },
+  { id: 'RATING', text: '평점순', queryParameter: 'rating' },
 ];
 
 const ReviewFilter = () => {
-  const reviewSortSearchParams = getReviewSort();
+  const reviewSortSearchParams = getReviewSortSearchParams();
 
   const isSelected = (filterQueryParameter: string) => {
     return reviewSortSearchParams === filterQueryParameter;

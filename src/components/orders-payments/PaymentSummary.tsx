@@ -47,7 +47,6 @@ const PaymentSummary = ({
             </td>
           </tr>
         </tbody>
-        <tfoot></tfoot>
       </table>
     </div>
   );

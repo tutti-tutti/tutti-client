@@ -116,8 +116,12 @@ const PaymentMethodSelector = ({
 
       // 결제를 요청하기 전에 백엔드 서버에 저장
       // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도
-      const { orderNumber, orderName } =
+      const { orderNumber, orderName, amount } =
         await requestPayment(paymentRequestData);
+
+      console.log('orderNumber: ', orderNumber);
+      console.log('orderName', orderName);
+      console.log('amount ', amount);
 
       await widgets?.requestPayment({
         orderId: orderNumber,
@@ -148,21 +152,23 @@ const PaymentMethodSelector = ({
   ]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper mx-[-30px]">
       <div className="box_section">
         {/* 결제 UI */}
         <div id="payment-method" />
         {/* 이용약관 UI */}
         <div id="agreement" />
 
-        <Button
-          type="button"
-          variant={!ready ? 'disabled' : 'primary'}
-          onClick={handlePaymentRequest}
-          className="w-full"
-        >
-          결제하기
-        </Button>
+        <div className="px-[30px]">
+          <Button
+            type="button"
+            variant={!ready ? 'disabled' : 'primary'}
+            onClick={handlePaymentRequest}
+            className="font-style-heading w-full"
+          >
+            결제하기
+          </Button>
+        </div>
       </div>
     </div>
   );

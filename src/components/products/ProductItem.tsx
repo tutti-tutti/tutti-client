@@ -14,7 +14,10 @@ const ProductItem = ({
   freeDelivery,
   almostOutOfStock,
 }: Product) => {
-  const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
+  const discountRate =
+    originalPrice && sellingPrice
+      ? calculateDiscountRate(originalPrice, sellingPrice)
+      : 0;
 
   return (
     <li className="gap-sm flex w-full flex-row md:flex-col md:gap-0">
@@ -55,7 +58,7 @@ const ProductItem = ({
             )}
           </div>
 
-          {originalPrice !== sellingPrice ? (
+          {sellingPrice && originalPrice > sellingPrice ? (
             <>
               <span className="text-text-tertiaryInfo font-style-info line-through">
                 {originalPrice.toLocaleString()}
@@ -71,7 +74,7 @@ const ProductItem = ({
             </>
           ) : (
             <p className="text-text-primary font-style-heading">
-              {originalPrice.toLocaleString()}원
+              {(sellingPrice ?? 0).toLocaleString()}원
             </p>
           )}
         </Link>

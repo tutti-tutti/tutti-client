@@ -11,6 +11,7 @@ export const API_RESOURCES = {
   CART: '/cart',
   REVIEWS: '/reviews',
   FAQS: '/faqs',
+  CATEGORIES: '/categories',
 };
 
 export const AUTH_ENDPOINTS = {
@@ -78,4 +79,10 @@ export const FAQS_ENDPOINTS = {
     `${API_RESOURCES.FAQS}?category=${category}${subCategory && `&subcategory=${subCategory}`}&page=${page}&size=${size}`,
   SEARCH_FAQS: ({ query, page, size }: SearchFaqsRequestAPISchema) =>
     `${API_RESOURCES.FAQS}/search?query=${query}&page=${page}&size=${size}`,
+};
+
+export const CATEGORIES_ENDPOINTS = {
+  LIST: `${API_RESOURCES.CATEGORIES}`,
+  DETAIL: (categoryId: string) =>
+    `${API_RESOURCES.CATEGORIES}/${categoryId}/products`,
 };

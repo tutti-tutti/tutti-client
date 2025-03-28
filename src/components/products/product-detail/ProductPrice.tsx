@@ -2,7 +2,7 @@ interface ProductPriceProps {
   originalPrice: number;
   finalPrice: number;
   quantity: number;
-  discountRate: string;
+  discountRate: string | null;
 }
 
 const ProductPrice = ({

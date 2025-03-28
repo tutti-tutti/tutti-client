@@ -34,6 +34,11 @@ import {
   RadioIcon,
   GoodIcon,
   BadIcon,
+  GroceryIcon,
+  ClothesIcon,
+  NecessityIcon,
+  DigitalIcon,
+  CosmeticIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -73,6 +78,11 @@ export const IconMap: Record<
   radio: RadioIcon,
   positive: GoodIcon,
   negative: BadIcon,
+  grocery: GroceryIcon,
+  clothes: ClothesIcon,
+  necessity: NecessityIcon,
+  digital: DigitalIcon,
+  cosmetic: CosmeticIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

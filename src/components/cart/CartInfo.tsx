@@ -26,7 +26,13 @@ const CartInfo = () => {
     payloadCheckedCartItems,
   } = useCart();
 
-  const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
+  const {
+    totalPrice,
+    discountPrice,
+    additionalPrice,
+    deliveryPrice,
+    finalPrice,
+  } = paymentInfo;
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(payloadCheckedCartItems),
   );
@@ -68,6 +74,7 @@ const CartInfo = () => {
           <CartPaymentInfo
             totalPrice={totalPrice}
             discountPrice={discountPrice}
+            additionalPrice={additionalPrice}
             deliveryPrice={deliveryPrice}
             finalPrice={finalPrice}
           />

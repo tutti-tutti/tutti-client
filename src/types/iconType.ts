@@ -31,4 +31,9 @@ export type IconType =
   | 'starFill'
   | 'radio'
   | 'positive'
-  | 'negative';
+  | 'negative'
+  | 'grocery'
+  | 'clothes'
+  | 'necessity'
+  | 'digital'
+  | 'cosmetic';

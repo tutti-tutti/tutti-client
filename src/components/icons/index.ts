@@ -31,3 +31,8 @@ export { default as GoogleLogoIcon } from './GoogleLogoIcon';
 export { default as RadioIcon } from './RadioIcon';
 export { default as GoodIcon } from './PositiveIcon';
 export { default as BadIcon } from './NegativeIcon';
+export { default as GroceryIcon } from './GroceryIcon';
+export { default as ClothesIcon } from './ClothesIcon';
+export { default as NecessityIcon } from './NecessityIcon';
+export { default as DigitalIcon } from './DigitalIcon';
+export { default as CosmeticIcon } from './CosmeticIcon';

@@ -17,7 +17,7 @@ const AverageReview = async () => {
 
   return (
     <div className="gap-md my-5xl flex">
-      <div className="px-xl py-2xl border-border-primary gap-xs flex w-full flex-col rounded-2xl border">
+      <article className="px-xl py-2xl border-border-primary gap-xs flex w-full flex-col rounded-2xl border">
         <div className="ml-xs flex">
           <div className="font-style-title text-text-primary">
             {reviewAverage.avg}
@@ -32,43 +32,17 @@ const AverageReview = async () => {
             {reviewPositiveAverage.positivePer}%의 고객이 긍정적인 반응을 보여요
           </ReviewBadge>
         </div>
-      </div>
+      </article>
       <div className="px-lg py-xl border-border-primary flex w-full flex-col justify-between rounded-2xl border">
-        <div className="gap-xs flex items-center">
-          <StarRating score={1} size={24} />
-          <ReviewRatingBar
-            reviewCnt={reviewCountStar.reviewRatings['1']}
-            totalReviewCnt={reviewCountStar.totalCount}
-          />
-        </div>
-        <div className="gap-xs flex items-center">
-          <StarRating score={2} size={24} />
-          <ReviewRatingBar
-            reviewCnt={reviewCountStar.reviewRatings['2']}
-            totalReviewCnt={reviewCountStar.totalCount}
-          />
-        </div>
-        <div className="gap-xs flex items-center">
-          <StarRating score={3} size={24} />
-          <ReviewRatingBar
-            reviewCnt={reviewCountStar.reviewRatings['3']}
-            totalReviewCnt={reviewCountStar.totalCount}
-          />
-        </div>
-        <div className="gap-xs flex items-center">
-          <StarRating score={4} size={24} />
-          <ReviewRatingBar
-            reviewCnt={reviewCountStar.reviewRatings['4']}
-            totalReviewCnt={reviewCountStar.totalCount}
-          />
-        </div>
-        <div className="gap-xs flex items-center">
-          <StarRating score={5} size={24} />
-          <ReviewRatingBar
-            reviewCnt={reviewCountStar.reviewRatings['5']}
-            totalReviewCnt={reviewCountStar.totalCount}
-          />
-        </div>
+        {[1, 2, 3, 4, 5].map(rating => (
+          <div key={rating} className="gap-xs flex items-center">
+            <StarRating score={rating} size={24} />
+            <ReviewRatingBar
+              reviewCnt={reviewCountStar.reviewRatings[rating]}
+              totalReviewCnt={reviewCountStar.totalCount}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

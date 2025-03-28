@@ -2,17 +2,19 @@ export const ROUTER_PATH = {
   HOME: '/',
   SIGNUP: '/signup',
   LOGIN: '/signin',
-  SUPPORT: '/support',
+  FAQS: '/faqs',
   CART: '/cart',
   MY_PAGE: '/my-page',
   COUNTRY_SETTING: '/country-setting',
+  CHECKOUT: (orderProductItems: string) =>
+    `/checkout?orderProductItems=${orderProductItems}`,
 };
 
 export const PATH_NAME = {
   SIGNUP: '회원가입',
   LOGIN: '로그인',
   LOGOUT: '로그아웃',
-  SUPPORT: '고객센터',
+  FAQS: '자주 묻는 질문',
   CART: '장바구니',
   MY_PAGE: '마이지혜',
   CURRENT_COUNTRY: '현재 국가',

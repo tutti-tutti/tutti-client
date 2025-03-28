@@ -1,7 +1,7 @@
 const ProductItemSkeleton = () => {
   return (
-    <li className="animate-pulse">
-      <div className="mb-xs h-[360px] w-full rounded-md bg-gray-200" />
+    <li className="py-lg md:py-7xl animate-pulse">
+      <div className="mb-xs aspect-square w-full rounded-md bg-gray-200" />
 
       <div className="my-xs h-4 w-1/3 rounded-sm bg-gray-200" />
 
@@ -24,7 +24,7 @@ const ProductItemSkeleton = () => {
 
 const ProductListSkeleton = () => {
   return (
-    <ul className="gap-x-md gap-y-6xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <ul className="gap-x-md gap-y-6xl grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
       {Array(9)
         .fill(0)
         .map((_, index) => (

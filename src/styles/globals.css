@@ -25,6 +25,16 @@
   );
 }
 
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 @utility text-brand-gradient {
   background:
     linear-gradient(118deg, #2424ff -6.96%, rgba(36, 36, 255, 0) 86.82%),

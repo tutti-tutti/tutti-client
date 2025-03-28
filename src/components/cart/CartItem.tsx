@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { calculateDiscountRate } from '@/utils';
 import { useCartStore } from '@/stores';
 import type { CartProductItem } from '@/types';
+import { removeFromCart } from '@/services';
+import { toast } from '@/utils';
 import CartItemImage from './CartItemImage';
 import CartItemHeader from './CartItemHeader';
 import CartItemOptions from './CartItemOptions';
@@ -12,7 +14,7 @@ import CartItemPrice from './CartItemPrice';
 import CartItemQuantity from './CartItemQuantity';
 
 const CartItem = ({
-  productId,
+  productItemId,
   productItemName,
   storeName,
   productImgUrl,
@@ -26,14 +28,19 @@ const CartItem = ({
   maxQuantity,
 }: CartProductItem) => {
   const [productQuantity, setProductQuantity] = useState<number>(quantity);
-  const { toggleItemCheckbox, updateQuantity, removeItem, checkedItems } =
-    useCartStore();
+  const {
+    items,
+    toggleItemCheckbox,
+    updateQuantity,
+    removeItem,
+    checkedItems,
+  } = useCartStore();
 
-  const isChecked = checkedItems[productId] || false;
+  const isChecked = checkedItems[productItemId] || false;
 
   useEffect(() => {
-    updateQuantity(productId, productQuantity);
-  }, [productId, productQuantity, updateQuantity]);
+    updateQuantity(productItemId, productQuantity);
+  }, [productItemId, productQuantity, updateQuantity]);
 
   const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
   const hasOptions = !!firstOptionName || !!secondOptionName;
@@ -50,16 +57,24 @@ const CartItem = ({
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
-      removeItem(productId);
+      try {
+        const result = await removeFromCart(items, [productItemId]);
+
+        removeItem(productItemId);
+        toast.success(result.message);
+      } catch (error) {
+        console.error('장바구니에서 상품을 삭제하는 데 실패했습니다.', error);
+        toast.error('장바구니에서 상품을 삭제하는 데 실패했습니다.');
+      }
     }
   };
 
   return (
     <li className="py-lg md:py-2xl border-border-secondary gap-sm flex w-full border-t">
       <CartItemImage
-        productId={productId}
+        productId={productItemId}
         productImgUrl={productImgUrl}
         productItemName={productItemName}
         isChecked={isChecked}

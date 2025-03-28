@@ -1,7 +1,7 @@
 import { fetchProductById } from '@/services';
 import {
   RecommendProductList,
-  ProductDetailItem,
+  ClientProductDetail,
   ProductReview,
 } from '@/components';
 import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
@@ -36,11 +36,14 @@ export async function generateMetadata({ params, searchParams }: Params) {
 
 const ProductDetailPage = async ({ params }: Params) => {
   const { productId } = await params;
-  const product = await fetchProductById(productId);
+  const initialProduct = await fetchProductById(productId);
 
   return (
     <div className="gap-5xl flex flex-col">
-      <ProductDetailItem {...product} />
+      <ClientProductDetail
+        initialProduct={initialProduct}
+        productId={productId}
+      />
 
       <RecommendProductList categoryName="식료품" />
 

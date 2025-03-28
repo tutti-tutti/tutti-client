@@ -1,20 +1,30 @@
+export interface CartItem {
+  productItemId: number;
+  quantity: number;
+}
+
+export interface LocalCartItem extends CartItem {
+  productId: number;
+}
+
+export interface CartAddRequestSchema {
+  cartItems: CartItem[];
+}
+
 export interface CartProductItem {
   cartItemId: number;
   storeName: string;
-  productId: number;
-  productImgUrl: string;
+  productItemId: number;
   productItemName: string;
-  originalPrice: number;
-  sellingPrice: number;
-  quantity: number;
+  productImgUrl: string;
   firstOptionName?: string;
   firstOptionValue?: string;
   secondOptionName?: string;
   secondOptionValue?: string;
-  soldOut?: boolean;
+  originalPrice: number;
+  sellingPrice: number;
+  quantity: number;
   maxQuantity: number;
-}
-
-export interface Cart {
-  items: CartProductItem[];
+  soldOut?: boolean;
+  checked: boolean;
 }

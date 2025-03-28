@@ -10,3 +10,4 @@ export * from './skeleton/ProductListSkeleton';
 export { default as ProductDetailItem } from './product-detail/ProductDetailItem';
 export { default as ProductListClientTemp } from './ProductListClientTemp';
 export { default as ProductListWrapTemp } from './ProductListWrapTemp';
+export { default as ClientProductDetail } from './product-detail/ClientProductDetail';

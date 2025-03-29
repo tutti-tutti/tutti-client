@@ -26,12 +26,18 @@ export const signup = async (
   essentialPolicy: string[],
   optionalPolicy: FormDataEntryValue[],
 ) => {
+  const termsAgreement = [...essentialPolicy, ...optionalPolicy].map(
+    termId => ({
+      termId: Number(termId),
+      agreed: true,
+    }),
+  );
+
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.SIGNUP_EMAIL, {
     email,
     password: pw,
     passwordConfirm: checkPw,
-    essentialPolicy: essentialPolicy,
-    optionalPolicy: optionalPolicy,
+    termsAgreement,
   });
 
   return data;

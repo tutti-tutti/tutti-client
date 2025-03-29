@@ -1,9 +1,10 @@
 import { axiosInstance } from '@/lib';
 import { AUTH_ENDPOINTS } from '@/constants';
 
-export const verifyEmail = async (email: string) => {
+export const verifyEmail = async (email: string, type: 'signup' | 'reset') => {
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.EMAIL_VERIFY, {
     email,
+    type,
   });
 
   return data;

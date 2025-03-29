@@ -37,14 +37,17 @@ const SignupForm = () => {
   );
 
   const action = !emailVerificationState.emailVerified
-    ? requestVerificationCodeFormAction
+    ? async (formData: FormData) => {
+        formData.append('type', 'signup');
+        return requestVerificationCodeFormAction(formData);
+      }
     : !codeVerificationState.codeVerified
       ? async (formData: FormData) => {
-          formData.append('email', emailVerificationState.email?.data || '');
+          formData.append('email', emailVerificationState.email || '');
           return verifyCodeFormAction(formData);
         }
       : async (formData: FormData) => {
-          formData.append('email', emailVerificationState.email?.data || '');
+          formData.append('email', emailVerificationState.email || '');
           return signupFormAction(formData);
         };
 
@@ -60,7 +63,7 @@ const SignupForm = () => {
         <legend className="mb-sm font-style-heading">{SIGNUP}</legend>
         <div className="gap-sm mb-5xl flex flex-col">
           <VerifyEmailInput
-            email={emailVerificationState.email?.data || ''}
+            email={emailVerificationState.email || ''}
             error={emailVerificationState.error!}
             isRequest={emailVerificationState.emailVerified!}
             success={

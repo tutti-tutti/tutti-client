@@ -37,13 +37,11 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
               >
                 <ProductName productName={item.productName} />
 
-                {item.firstOptionValue ? (
+                {item.firstOptionValue && (
                   <ProductOptionInfo
                     firstOptionValue={item.firstOptionValue}
                     secondOptionValue={item.secondOptionValue}
                   />
-                ) : (
-                  ''
                 )}
 
                 <ProductAmoutInfo

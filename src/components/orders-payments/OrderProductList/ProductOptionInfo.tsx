@@ -19,13 +19,11 @@ const ProductOptionInfo = ({
       )}
     >
       <span>{firstOptionValue}</span>
-      {secondOptionValue ? (
+      {secondOptionValue && (
         <>
           <i>·</i>
           <span>{secondOptionValue}</span>
         </>
-      ) : (
-        ''
       )}
     </div>
   );

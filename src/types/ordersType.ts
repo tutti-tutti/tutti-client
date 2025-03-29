@@ -9,12 +9,18 @@ export interface OrderItem {
   productItemId: number;
   productName: string;
   productImgUrl: string;
-  firstOptionName: string;
-  firstOptionValue: string;
-  secondOptionName: string;
-  secondOptionValue: string;
+  firstOptionName: string | null;
+  firstOptionValue: string | null;
+  secondOptionName: string | null;
+  secondOptionValue: string | null;
   quantity: number;
   price: number;
+  deliveredAt: string;
+}
+
+export interface GroupedOrderItemByDeliveredAt {
+  deliveredAt: string;
+  items: OrderItem[];
 }
 
 // 주문서 요청 API 스키마
@@ -44,7 +50,7 @@ export interface OrderDetailResponseAPISchema {
   paidAt: string;
   deliveredAt: string;
   completedAt: string;
-  orderItems: OrderItem[];
+  orderItems: Omit<OrderItem[], 'deliveredAt'>;
   recipientName: string;
   recipientPhone: string;
   recipientAddress: string;

@@ -50,7 +50,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
                   className="hidden sm:flex"
                   price={item.price}
                   quantity={item.quantity}
-                  deliveredAt={item.deliveredAt}
+                  deliveredAt={formatAfterDays(item.deliveredAt)}
                 />
               </div>
             </div>

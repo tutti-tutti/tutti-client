@@ -30,46 +30,51 @@ const OrderProductList = ({ orderItems }: OrderProductListProps) => {
       </div>
       <ul>
         {orderItems.map(item => (
-          <li key={item.productItemId}>
-            <article
-              className={cn(
-                'md:border-border-secondary md:border-b',
-                paddingStyles,
-                gapStyles,
-              )}
-            >
-              <div className={thumbColumnStyles}>
-                <ProductThumbnail
-                  width="w-full"
-                  className="aspect-200/175"
-                  imageUrl={item.productImgUrl}
-                  name={item.productName}
-                />
+          <li
+            key={item.productItemId}
+            className={cn(
+              paddingStyles,
+              'md:border-border-secondary md:border-b',
+            )}
+          >
+            <article>
+              <div className={gapStyles}>
+                <div className={thumbColumnStyles}>
+                  <ProductThumbnail
+                    width="w-full"
+                    className="aspect-200/175"
+                    imageUrl={item.productImgUrl}
+                    name={item.productName}
+                  />
+                </div>
+                <div
+                  className={cn(
+                    'gap-2xs flex flex-1 flex-col',
+                    infoColumnStyles,
+                  )}
+                >
+                  <ProductName productName={item.productName} />
+                  <ProductAmoutInfo
+                    className="hidden md:flex"
+                    price={item.price}
+                    quantity={item.quantity}
+                    deliveredAt={deliveredAt}
+                  />
+                  <ProductOption
+                    firstOptionValue={item.firstOptionValue}
+                    secondOptionValue={item.secondOptionValue}
+                  />
+                </div>
               </div>
-              <div
-                className={cn('gap-2xs flex flex-1 flex-col', infoColumnStyles)}
-              >
-                <ProductName productName={item.productName} />
+              <div className="md:hidden">
                 <ProductAmoutInfo
-                  className="hidden md:flex"
                   price={item.price}
                   quantity={item.quantity}
-                  deliveredAt={deliveredAt}
-                />
-                <ProductOption
-                  firstOptionValue={item.firstOptionValue}
-                  secondOptionValue={item.secondOptionValue}
+                  deliveredAt={formatAfterDays(deliveredAt)}
+                  className="justify-center"
                 />
               </div>
             </article>
-            <div className="md:hidden">
-              <ProductAmoutInfo
-                price={item.price}
-                quantity={item.quantity}
-                deliveredAt={formatAfterDays(deliveredAt)}
-                className="justify-center"
-              />
-            </div>
           </li>
         ))}
       </ul>
@@ -91,8 +96,8 @@ const ProductOption = ({
   return (
     <div
       className={cn(
-        className,
         'gap-sm text-text-tertiary flex text-sm font-normal md:text-base',
+        className,
       )}
     >
       <span>{firstOptionValue}</span>

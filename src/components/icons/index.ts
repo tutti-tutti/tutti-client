@@ -36,3 +36,4 @@ export { default as ClothesIcon } from './ClothesIcon';
 export { default as NecessityIcon } from './NecessityIcon';
 export { default as DigitalIcon } from './DigitalIcon';
 export { default as CosmeticIcon } from './CosmeticIcon';
+export { default as NotFoundIcon } from './NotFoundIcon';

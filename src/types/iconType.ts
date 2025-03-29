@@ -36,4 +36,5 @@ export type IconType =
   | 'clothes'
   | 'necessity'
   | 'digital'
-  | 'cosmetic';
+  | 'cosmetic'
+  | 'notFound';

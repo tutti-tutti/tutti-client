@@ -9,14 +9,13 @@ import {
 
 const HomePage = () => {
   return (
-    <>
+    <div className="gap-lg md:gap-7xl flex flex-col">
       <Suspense fallback={<CategorySkeleton />}>
         <ProductCategory isMainPage />
       </Suspense>
       <RecommendProductList categoryName="식료품" />
-
       <ProductList />
-    </>
+    </div>
   );
 };
 

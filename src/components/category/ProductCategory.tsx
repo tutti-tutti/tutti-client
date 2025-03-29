@@ -40,7 +40,7 @@ const ProductCategory = ({ isMainPage = false }: { isMainPage?: boolean }) => {
   return (
     <div
       className={cn(
-        'flex flex-col',
+        'mt-xl flex flex-col md:mt-0',
         isMainPage ? 'gap-sm md:gap-4xl' : 'gap-md md:gap-xl',
       )}
     >

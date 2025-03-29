@@ -4,6 +4,7 @@ import {
   ProductCategory,
   CategoryProductList,
   ProductListSkeleton,
+  RecommendProductList,
 } from '@/components';
 
 type SearchParamsProps = {
@@ -17,7 +18,10 @@ const ProductPage = async ({ searchParams }: SearchParamsProps) => {
 
   return (
     <>
-      <ProductCategory />
+      <div className="gap-md md:gap-4xl flex flex-col">
+        <ProductCategory />
+        <RecommendProductList categoryName="식료품" />
+      </div>
       <Suspense fallback={<ProductListSkeleton />}>
         <CategoryProductList categoryId={categoryId} />
       </Suspense>

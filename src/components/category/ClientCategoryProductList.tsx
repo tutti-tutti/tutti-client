@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { categoryByIdQueryOptions } from '@/queries';
 import type { Product } from '@/types';
-import { ProductItem } from '../products';
+import { ProductItem, ProductListSkeleton } from '../products';
 
 interface ClientCategoryProductListProps {
   initialProducts: Product[];
@@ -22,11 +22,7 @@ const ClientCategoryProductList = ({
   });
 
   if (isPending) {
-    return (
-      <div className="text-text-danger py-4 text-center">
-        카테고리 상품을 불러오는 중입니다...
-      </div>
-    );
+    return <ProductListSkeleton />;
   }
 
   return (

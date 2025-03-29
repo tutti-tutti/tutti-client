@@ -1,25 +1,34 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { useQuery } from '@tanstack/react-query';
 
 import { categoryQueryOptions } from '@/queries';
 import { ROUTER_PATH } from '@/constants';
 import { cn } from '@/utils';
-import { Icon } from '../common';
+import type { CategoryResponseAPISchema } from '@/types';
 import CategorySkeleton from './CategorySkeleton';
+import { Icon } from '../common';
 
-const ProductCategory = ({ isMainPage = false }: { isMainPage?: boolean }) => {
+interface ProductCategoryProps {
+  initialCategories?: CategoryResponseAPISchema[];
+  currentCategoryId?: string;
+  isMainPage?: boolean;
+}
+
+const ProductCategory = ({
+  initialCategories,
+  currentCategoryId,
+  isMainPage,
+}: ProductCategoryProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentCategoryId = searchParams.get('category');
 
   const {
     data: productCategories,
     isPending,
     error,
-  } = useQuery(categoryQueryOptions);
+  } = useQuery({ ...categoryQueryOptions, initialData: initialCategories });
 
   const handleCategoryClick = (categoryId: number) => {
     router.push(ROUTER_PATH.PRODUCT_CATEGORY(String(categoryId)));

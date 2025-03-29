@@ -39,6 +39,7 @@ import {
   NecessityIcon,
   DigitalIcon,
   CosmeticIcon,
+  NotFoundIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -83,6 +84,7 @@ export const IconMap: Record<
   necessity: NecessityIcon,
   digital: DigitalIcon,
   cosmetic: CosmeticIcon,
+  notFound: NotFoundIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

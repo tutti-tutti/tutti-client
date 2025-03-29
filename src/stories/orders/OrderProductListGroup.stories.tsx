@@ -11,11 +11,8 @@ const OrderProductListGroupMock = ({
   return <OrderProductListGroup orderItems={orderItems} />;
 };
 
-const sampleImage1 =
+const sampleImage =
   'https://cdn-optimized.imweb.me/upload/S20240328110100ace0842/55757f8d5f03e.jpg';
-
-const sampleImage2 =
-  'https://shopping-phinf.pstatic.net/main_8903804/89038041158.jpg';
 
 const createOrderItems = (): OrderItem[] => [
   {
@@ -23,7 +20,7 @@ const createOrderItems = (): OrderItem[] => [
     storeName: '라이프스타일 트렌드',
     productItemId: 11,
     productName: '풀커버 강화유리 액정보호필름 갤럭시노트20, 2매입',
-    productImgUrl: sampleImage1,
+    productImgUrl: sampleImage,
     firstOptionName: '사생활보호',
     firstOptionValue: '유',
     secondOptionName: '모서리',
@@ -37,14 +34,14 @@ const createOrderItems = (): OrderItem[] => [
     storeName: '꼼꼼이몰',
     productItemId: 22,
     productName: '캐논 G3910 정품 무한잉크',
-    productImgUrl: sampleImage2,
+    productImgUrl: sampleImage,
     firstOptionName: '색상',
     firstOptionValue: '보라',
     secondOptionName: null,
     secondOptionValue: null,
     quantity: 1,
     price: 35310,
-    deliveredAt: '2025-04-03',
+    deliveredAt: '2025-04-05',
   },
   {
     storeId: 4,
@@ -52,45 +49,42 @@ const createOrderItems = (): OrderItem[] => [
     productItemId: 8,
     productName:
       '케이스 카드 2장 포켓 수납 파스텔 카메라 풀커버 실리콘 젤리 라벤더, 갤럭시S25 플러스',
-    productImgUrl:
-      'https://shopping-phinf.pstatic.net/main_8883236/88832360690.jpg',
+    productImgUrl: sampleImage,
     firstOptionName: null,
     firstOptionValue: null,
     secondOptionName: null,
     secondOptionValue: null,
     quantity: 1,
     price: 14770,
-    deliveredAt: '2025-04-03',
+    deliveredAt: '2025-04-04',
   },
   {
     storeId: 3,
     storeName: 'Marshall 공식몰',
     productItemId: 320,
     productName: '[본사최신제품]인셀덤 크림 엑티브 50ml EX 수분 이엑스',
-    productImgUrl:
-      'https://shopping-phinf.pstatic.net/main_8597946/85979463969.jpg',
+    productImgUrl: sampleImage,
     firstOptionName: null,
     firstOptionValue: null,
     secondOptionName: null,
     secondOptionValue: null,
     quantity: 1,
     price: 49790,
-    deliveredAt: '2025-04-03',
+    deliveredAt: '2025-04-10',
   },
   {
     storeId: 4,
     storeName: '홈 & 테크 쇼핑몰',
     productItemId: 447,
     productName: '프로쉬 알로에베라 고농축 세탁세제 3L',
-    productImgUrl:
-      'https://shopping-phinf.pstatic.net/main_2835180/28351801555.20230727161156.jpg',
+    productImgUrl: sampleImage,
     firstOptionName: null,
     firstOptionValue: null,
     secondOptionName: null,
     secondOptionValue: null,
     quantity: 2,
     price: 10480,
-    deliveredAt: '2025-04-03',
+    deliveredAt: '2025-04-10',
   },
   {
     storeId: 7,
@@ -98,15 +92,14 @@ const createOrderItems = (): OrderItem[] => [
     productItemId: 370,
     productName:
       '르네 디종 프렌치 머스타드 850g 식자재 식료품 가공식품 수입식품 수입식재료',
-    productImgUrl:
-      'https://shopping-phinf.pstatic.net/main_8865835/88658359418.jpg',
+    productImgUrl: sampleImage,
     firstOptionName: null,
     firstOptionValue: null,
     secondOptionName: null,
     secondOptionValue: null,
     quantity: 1,
     price: 14910,
-    deliveredAt: '2025-04-03',
+    deliveredAt: '2025-04-04',
   },
 ];
 

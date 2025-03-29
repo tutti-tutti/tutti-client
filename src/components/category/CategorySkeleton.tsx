@@ -1,10 +1,9 @@
 const CategorySkeleton = () => {
   return (
-    <div className="gap-xl flex flex-col">
-      <h3 className="text-text-primary font-style-heading text-center">
-        지혜 쇼핑몰 카테고리
-      </h3>
-      <div className="gap-6xl flex animate-pulse items-center justify-center">
+    <div className="gap-xl flex flex-col items-center justify-center">
+      <div className="h-10 w-40 animate-pulse rounded-lg bg-gray-200 md:h-12 md:w-52"></div>
+
+      <div className="gap-md md:gap-6xl grid w-full animate-pulse grid-cols-3 md:flex md:items-center md:justify-center">
         {Array.from({ length: 5 }, (_, index) => (
           <div key={index} className="flex flex-col items-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-200"></div>

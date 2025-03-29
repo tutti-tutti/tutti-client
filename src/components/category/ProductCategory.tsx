@@ -14,15 +14,14 @@ import { Icon } from '../common';
 interface ProductCategoryProps {
   initialCategories?: CategoryResponseAPISchema[];
   currentCategoryId?: string;
-  isMainPage?: boolean;
 }
 
 const ProductCategory = ({
   initialCategories,
   currentCategoryId,
-  isMainPage,
 }: ProductCategoryProps) => {
   const router = useRouter();
+  const isMainPage = !currentCategoryId;
 
   const {
     data: productCategories,

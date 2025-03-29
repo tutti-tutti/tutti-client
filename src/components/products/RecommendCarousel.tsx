@@ -18,7 +18,11 @@ const RecommendCarousel = ({
 }: {
   recommendedProducts: Product;
 }) => {
-  const { data: products, isPending } = useSuspenseQuery({
+  const {
+    data: products,
+    isPending,
+    isError,
+  } = useSuspenseQuery({
     ...recommededProductsQueryOptions,
     initialData: recommendedProducts,
   });
@@ -69,6 +73,14 @@ const RecommendCarousel = ({
   };
 
   const renderItems = () => {
+    if (isError) {
+      return (
+        <div className="text-text-danger py-4 text-center">
+          추천 상품을 불러오는 중 오류가 발생했습니다.
+        </div>
+      );
+    }
+
     if (isPending) {
       return Array(12)
         .fill(0)

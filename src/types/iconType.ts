@@ -37,4 +37,5 @@ export type IconType =
   | 'necessity'
   | 'digital'
   | 'cosmetic'
-  | 'notFound';
+  | 'notFound'
+  | 'tinyLogo';

@@ -83,3 +83,9 @@ export const socialSignin = async (
 
   return data;
 };
+
+export const fetchSignupTerms = async () => {
+  const { data } = await axiosInstance.get(AUTH_ENDPOINTS.TERMS);
+
+  return data;
+};

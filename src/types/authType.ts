@@ -10,3 +10,11 @@ export interface EmailVerificationState {
   checkPwError?: string;
   essentialPolicyError?: string;
 }
+
+export interface SignupTerm {
+  id: number;
+  displayName: string;
+  content: string;
+  required: boolean;
+  termsType: string;
+}

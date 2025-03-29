@@ -24,6 +24,7 @@ export const AUTH_ENDPOINTS = {
   SIGNIN_EMAIL: `${API_RESOURCES.MEMBERS}/login/email`,
   MYPAGE: `${API_RESOURCES.MEMBERS}/mypage`,
   SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
+  TERMS: `${API_RESOURCES.MEMBERS}/terms`,
 };
 
 export const PRODUCTS_ENDPOINTS = {

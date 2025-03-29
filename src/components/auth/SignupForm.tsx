@@ -9,11 +9,15 @@ import {
 } from '@/server-actions';
 import { Button } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
-import { EmailVerificationState } from '@/types';
-import PoliciesInput from '@/components/auth/PoliciesInput';
+import { EmailVerificationState, SignupTerm } from '@/types';
 import PwInput from '@/components/auth/PwInput';
 import VerifyCodeInput from '@/components/auth/VerifyCodeInput';
 import VerifyEmailInput from '@/components/auth/VerifyEmailInput';
+import TermsInput from './TermsInput';
+
+interface SignupFormProps {
+  signupTerms: SignupTerm[];
+}
 
 const initialVerificationState: EmailVerificationState = {
   success: false,
@@ -24,7 +28,7 @@ const initialVerificationState: EmailVerificationState = {
 const { SIGNUP, VERIFY_EMAIL_BUTTON, CHECK_VERIFY_CODE_BUTTON } =
   AUTH_CONSTANTS;
 
-const SignupForm = () => {
+const SignupForm = ({ signupTerms }: SignupFormProps) => {
   const [emailVerificationState, requestVerificationCodeFormAction] =
     useActionState(requestVerificationCodeAction, initialVerificationState);
   const [codeVerificationState, verifyCodeFormAction] = useActionState(
@@ -83,7 +87,10 @@ const SignupForm = () => {
                   pwError={signupState?.pwError || ''}
                   checkPwError={signupState.checkPwError || ''}
                 />
-                <PoliciesInput error={signupState.essentialPolicyError || ''} />
+                <TermsInput
+                  signupTerms={signupTerms}
+                  error={signupState.essentialPolicyError || ''}
+                />
               </>
             )}
         </div>

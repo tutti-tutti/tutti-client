@@ -23,9 +23,7 @@ export const authSchema = z.object({
     message: PW_INPUT.ERROR,
   }),
   checkPw: z.string(),
-  essentialPolicy: z
-    .array(z.string())
-    .refine(values => values.length === ESSENTIALS.POLICY.length, {
-      message: ESSENTIALS.ERROR,
-    }),
+  essentialPolicy: z.array(z.string()).refine(values => values.length === 5, {
+    message: ESSENTIALS.ERROR,
+  }),
 });

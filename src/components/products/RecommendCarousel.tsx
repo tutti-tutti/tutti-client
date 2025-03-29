@@ -13,12 +13,15 @@ import { RecommendProductItemSkeleton } from '@/components';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
 
-const RecommendCarousel = () => {
-  const {
-    data: products,
-    isError,
-    error,
-  } = useSuspenseQuery(recommededProductsQueryOptions);
+const RecommendCarousel = ({
+  recommendedProducts,
+}: {
+  recommendedProducts: Product;
+}) => {
+  const { data: products, isPending } = useSuspenseQuery({
+    ...recommededProductsQueryOptions,
+    initialData: recommendedProducts,
+  });
 
   const [slidesToShow, setSlidesToShow] = useState(6);
 
@@ -65,10 +68,8 @@ const RecommendCarousel = () => {
     ],
   };
 
-  if (isError && error) return 'An error has occurred: ' + error.message;
-
   const renderItems = () => {
-    if (!products || products.length === 0) {
+    if (isPending) {
       return Array(12)
         .fill(0)
         .map((_, index) => (

@@ -1,25 +1,33 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { useQuery } from '@tanstack/react-query';
 
 import { categoryQueryOptions } from '@/queries';
 import { ROUTER_PATH } from '@/constants';
 import { cn } from '@/utils';
-import { Icon } from '../common';
+import type { CategoryResponseAPISchema } from '@/types';
 import CategorySkeleton from './CategorySkeleton';
+import { Icon } from '../common';
 
-const ProductCategory = ({ isMainPage = false }: { isMainPage?: boolean }) => {
+interface ProductCategoryProps {
+  initialCategories?: CategoryResponseAPISchema[];
+  currentCategoryId?: string;
+}
+
+const ProductCategory = ({
+  initialCategories,
+  currentCategoryId,
+}: ProductCategoryProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentCategoryId = searchParams.get('category');
+  const isMainPage = !currentCategoryId;
 
   const {
     data: productCategories,
     isPending,
     error,
-  } = useQuery(categoryQueryOptions);
+  } = useQuery({ ...categoryQueryOptions, initialData: initialCategories });
 
   const handleCategoryClick = (categoryId: number) => {
     router.push(ROUTER_PATH.PRODUCT_CATEGORY(String(categoryId)));
@@ -40,7 +48,7 @@ const ProductCategory = ({ isMainPage = false }: { isMainPage?: boolean }) => {
   return (
     <div
       className={cn(
-        'flex flex-col',
+        'mt-xl flex flex-col md:mt-0',
         isMainPage ? 'gap-sm md:gap-4xl' : 'gap-md md:gap-xl',
       )}
     >

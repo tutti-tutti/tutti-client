@@ -1,22 +1,16 @@
-import { Suspense } from 'react';
-
 import {
   ProductList,
   RecommendProductList,
   ProductCategory,
-  CategorySkeleton,
 } from '@/components';
 
 const HomePage = () => {
   return (
-    <>
-      <Suspense fallback={<CategorySkeleton />}>
-        <ProductCategory isMainPage />
-      </Suspense>
+    <div className="gap-lg md:gap-7xl flex flex-col">
+      <ProductCategory />
       <RecommendProductList categoryName="식료품" />
-
       <ProductList />
-    </>
+    </div>
   );
 };
 

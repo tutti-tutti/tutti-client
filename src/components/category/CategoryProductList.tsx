@@ -1,4 +1,7 @@
+import { Suspense } from 'react';
+
 import { fetchCategoriesById } from '@/services';
+import { ProductListSkeleton } from '../products';
 import ClientCategoryProductList from './ClientCategoryProductList';
 
 const CategoryProductList = async ({ categoryId }: { categoryId?: string }) => {
@@ -7,10 +10,12 @@ const CategoryProductList = async ({ categoryId }: { categoryId?: string }) => {
   const initialProducts = await fetchCategoriesById(id);
 
   return (
-    <ClientCategoryProductList
-      initialProducts={initialProducts}
-      categoryId={id}
-    />
+    <Suspense fallback={<ProductListSkeleton />}>
+      <ClientCategoryProductList
+        initialProducts={initialProducts}
+        categoryId={id}
+      />
+    </Suspense>
   );
 };
 

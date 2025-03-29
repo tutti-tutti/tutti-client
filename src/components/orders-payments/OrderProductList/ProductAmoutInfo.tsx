@@ -15,11 +15,11 @@ const ProductAmoutInfo = ({
 }: ProductAmoutInfoProps) => {
   return (
     <div className={cn('gap-sm flex items-center font-semibold', className)}>
-      <strong className="font-style-heading font-semibold">
+      <strong className="font-style-heading leading-none font-semibold">
         {formatPrice(price)}
       </strong>
       <span className="before:pr-sm after:pl-sm text-text-tertiaryInfo before:content-['·'] after:content-['·']">
-        {quantity}
+        {quantity} 개
       </span>
       <strong className="text-text-primaryInteraction text-base font-semibold md:text-lg">
         {deliveredAt}

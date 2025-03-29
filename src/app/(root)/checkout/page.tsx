@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
+import { formatDateAfterDays } from '@/utils';
 import {
-  OrderProductList,
+  OrderProductListGroup,
   CheckoutHeader,
   DeliveryAddress,
   PaymentMethodSelector,
@@ -63,13 +64,23 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
+  // 현재 날짜로 부터 3~7일 뒤 'yyyy-mm-dd'로 배송 날짜 예정
+  const getDeliveredAt = () =>
+    formatDateAfterDays(Math.floor(Math.random() * 5) + 3);
+
+  const updatedOrderItems = orderItems.map(item =>
+    !item.deliveredAt
+      ? { ...item, ...{ deliveredAt: getDeliveredAt() } }
+      : item,
+  );
+
   const address = {
     recipientName: '엘리자베스',
     recipientPhone: '01012344321',
     recipientAddress: '깐따비야 안드로메다 행성',
     zipCode: '99999',
     note: '안전한 우주 배송 화이팅!!',
-    recipientEmail: 'goldegg127@gmail.com',
+    recipientEmail: 'XXX@gmail.com',
   };
 
   const adressContainerStyles = 'flex flex-col gap-sm';
@@ -89,7 +100,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
         <SectionHeadingTitle className="leading-none">
           결제 상품 정보
         </SectionHeadingTitle>
-        <OrderProductList orderItems={orderItems} />
+        <OrderProductListGroup orderItems={updatedOrderItems} />
       </section>
 
       <section>
@@ -102,14 +113,14 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
         />
       </section>
 
-      <section className="h-[510px] md:h-[580px]">
+      <section className="h-[610px] md:h-[680px]">
         <SectionHeadingTitle>결제 수단</SectionHeadingTitle>
         <PaymentMethodSelector
           totalDiscountAmount={totalDiscountAmount}
           totalProductAmount={totalProductAmount}
           deliveryFee={deliveryFee}
           totalAmount={totalAmount}
-          orderItems={orderItems}
+          orderItems={updatedOrderItems}
           {...address}
         />
       </section>

@@ -16,12 +16,12 @@ const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
 
   return (
     <ul className={cn('flex-col', gapStyles)}>
-      {updatedOrderItems.map(({ deliveredAt, items }) => (
-        <li key={deliveredAt}>
+      {updatedOrderItems.map(({ expectedArrivalAt, items }) => (
+        <li key={expectedArrivalAt}>
           <article className={cn('flex-col', gapStyles)}>
             <div className="gap-xs flex text-xl">
               <strong className="text-text-info">
-                {formatDateWithDay(deliveredAt)}
+                {formatDateWithDay(expectedArrivalAt)}
               </strong>
               <span>도착 예정</span>
             </div>

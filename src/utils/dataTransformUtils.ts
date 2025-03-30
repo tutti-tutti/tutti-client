@@ -1,17 +1,22 @@
-import type { OrderItem, GroupedOrderItemByDeliveredAt } from '@/types';
+import type {
+  OrderItem,
+  GroupedOrderItemByExpectedArrivalAt,
+  OrderHistoryItem,
+  GroupedOrderHistoryItemByOrderId,
+} from '@/types';
 
 /**
- * deliveredAt 속성을 기준으로 데이터를 그룹화하여 변환
- * @param data
- * @returns 날짜별로 그룹화된 객체 배열
+ * deliveredAt 속성을 기준으로 OrderItem[] 데이터를 그룹화하여 변환
+ * @param orderItems OrderItem[]
+ * @returns 날짜별로 그룹화된 객체 배열 GroupedOrderItemByExpectedArrivalAt[]
  */
 export const getGroupedOrderItemsByDeliveredAt = (
-  data: OrderItem[],
-): GroupedOrderItemByDeliveredAt[] => {
+  orderItems: OrderItem[],
+): GroupedOrderItemByExpectedArrivalAt[] => {
   const groupedByDate: { [key: string]: OrderItem[] } = {};
 
-  data.forEach(item => {
-    const date = item.deliveredAt;
+  orderItems.forEach(item => {
+    const date = item.expectedArrivalAt as string;
 
     if (!groupedByDate[date]) {
       groupedByDate[date] = [];
@@ -20,16 +25,42 @@ export const getGroupedOrderItemsByDeliveredAt = (
     groupedByDate[date].push(item);
   });
 
-  const result: GroupedOrderItemByDeliveredAt[] = Object.entries(
+  const result: GroupedOrderItemByExpectedArrivalAt[] = Object.entries(
     groupedByDate,
   ).map(([date, items]) => {
     return {
-      deliveredAt: date,
+      expectedArrivalAt: date,
       items: items,
     };
   });
 
-  result.sort((a, b) => a.deliveredAt.localeCompare(b.deliveredAt));
+  result.sort((a, b) => a.expectedArrivalAt.localeCompare(b.expectedArrivalAt));
 
   return result;
+};
+
+/**
+ * orderId 속성을 기준으로 OrderHistoryItem[] 데이터를 그룹화하여 변환
+ * @param orderHistoryItems OrderHistoryItem[]
+ * @returns GroupedOrderHistoryItemByOrderId[]
+ */
+export const getGroupOrderHistoryItemsByOrderId = (
+  orderHistoryItems: OrderHistoryItem[],
+): GroupedOrderHistoryItemByOrderId[] => {
+  const groupedByOrderId = orderHistoryItems.reduce<
+    Record<number, OrderHistoryItem[]>
+  >((acc, item) => {
+    if (!acc[item.orderId]) {
+      acc[item.orderId] = [];
+    }
+
+    acc[item.orderId].push(item);
+
+    return acc;
+  }, {});
+
+  return Object.entries(groupedByOrderId).map(([orderId, items]) => ({
+    orderId: Number(orderId),
+    items,
+  }));
 };

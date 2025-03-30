@@ -65,12 +65,12 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   } = await checkoutOrder(payload);
 
   // 현재 날짜로 부터 3~7일 뒤 'yyyy-mm-dd'로 배송 날짜 예정
-  const getDeliveredAt = () =>
+  const getExpectedArrivalAt = () =>
     formatDateAfterDays(Math.floor(Math.random() * 5) + 3);
 
   const updatedOrderItems = orderItems.map(item =>
-    !item.deliveredAt
-      ? { ...item, ...{ deliveredAt: getDeliveredAt() } }
+    !item.expectedArrivalAt
+      ? { ...item, ...{ expectedArrivalAt: getExpectedArrivalAt() } }
       : item,
   );
 

@@ -1,5 +1,5 @@
 import { fetchReviewIsLike, fetchReviews } from '@/services';
-import { getProductIdParams } from '@/utils';
+import { reviewServerStore } from '@/stores';
 import ReviewFilter from './ReviewFilter';
 import ReviewItem from './ReviewItem';
 
@@ -17,7 +17,8 @@ interface ReviewItemAPISchema {
 }
 
 const ReviewList = async () => {
-  const productIdParams = getProductIdParams();
+  const { getParams } = reviewServerStore();
+  const { productIdParams } = getParams();
   const reviews = await fetchReviews(productIdParams, 10);
 
   return (

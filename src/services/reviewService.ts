@@ -1,6 +1,6 @@
 import { REVIEW_ENDPOINTS } from '@/constants';
 import { axiosInstance } from '@/lib';
-import { getReviewSortSearchParams } from '@/utils';
+import { reviewServerStore } from '@/stores';
 
 const fetchReviewsLatest = async (
   productId: string,
@@ -46,17 +46,18 @@ export const fetchReviews = async (
   reviewId?: number,
   extraData?: number,
 ) => {
-  const sort = getReviewSortSearchParams();
+  const { getParams } = reviewServerStore();
+  const { reviewSortSearchParams } = getParams();
 
-  if (sort === 'latest') {
+  if (reviewSortSearchParams === 'latest') {
     return await fetchReviewsLatest(productId, size, reviewId);
   }
 
-  if (sort === 'like') {
+  if (reviewSortSearchParams === 'like') {
     return await fetchReviewsLike(productId, size, reviewId, extraData);
   }
 
-  if (sort === 'rating') {
+  if (reviewSortSearchParams === 'rating') {
     return await fetchReviewsRating(productId, size, reviewId, extraData);
   }
 

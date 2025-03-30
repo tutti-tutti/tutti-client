@@ -4,21 +4,16 @@ import {
   ClientProductDetail,
   ProductReview,
 } from '@/components';
-import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
+import { reviewServerStore } from '@/stores';
 
 interface Params {
   params: Promise<{ productId: string }>;
   searchParams: Promise<{ 'review-sort': string }>;
 }
 
-export async function generateMetadata({ params, searchParams }: Params) {
+export async function generateMetadata({ params }: Params) {
   const { productId } = await params;
   const product = await fetchProductById(productId);
-
-  const { 'review-sort': reviewSortSearchParams } = await searchParams;
-
-  setProductIdParams(productId);
-  setReviewSortSearchParams(reviewSortSearchParams);
 
   if (!product) return;
 
@@ -34,9 +29,13 @@ export async function generateMetadata({ params, searchParams }: Params) {
   };
 }
 
-const ProductDetailPage = async ({ params }: Params) => {
+const ProductDetailPage = async ({ params, searchParams }: Params) => {
   const { productId } = await params;
   const initialProduct = await fetchProductById(productId);
+  const { 'review-sort': reviewSortSearchParams } = await searchParams;
+  const { setParams } = reviewServerStore();
+
+  setParams({ productIdParams: productId, reviewSortSearchParams });
 
   return (
     <div className="gap-5xl flex flex-col">

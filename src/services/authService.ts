@@ -46,8 +46,8 @@ export const signup = async (
 export const resetPw = async (email: string, pw: string, checkPw: string) => {
   const { data } = await axiosInstance.post(AUTH_ENDPOINTS.RESET_PW, {
     email,
-    password: pw,
-    passwordConfirm: checkPw,
+    newPassword: pw,
+    newPasswordConfirm: checkPw,
   });
 
   return data;

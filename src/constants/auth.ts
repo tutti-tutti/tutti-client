@@ -3,6 +3,7 @@ export const AUTH_CONSTANTS = {
   SIGNUP: '회원가입',
   SIGNUP_LOADING: '회원가입 중',
   RESET_PW: '비밀번호 재설정',
+  RESET_PW_LOADING: '비밀번호 재설정 중',
   AUTO_SIGNIN: '자동 로그인',
   FORGOT_PW: '비밀번호를 잊어버렸나요?',
   SOCIAL_SIGNIN: '소셜로 로그인하기',

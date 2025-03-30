@@ -1,13 +1,16 @@
 export const AUTH_CONSTANTS = {
   SIGNIN: '로그인',
   SIGNUP: '회원가입',
+  SIGNUP_LOADING: '회원가입 중',
   RESET_PW: '비밀번호 재설정',
   AUTO_SIGNIN: '자동 로그인',
   FORGOT_PW: '비밀번호를 잊어버렸나요?',
   SOCIAL_SIGNIN: '소셜로 로그인하기',
   TO_SIGNUP: '아직 회원이 아니신가요?',
   VERIFY_EMAIL_BUTTON: '이메일 인증하기',
+  VERIFY_EMAIL_BUTTON_LOADING: '이메일 인증 중',
   CHECK_VERIFY_CODE_BUTTON: '인증번호 확인',
+  CHECK_VERIFY_CODE_BUTTON_LOADING: '인증번호 확인 중',
   RESEND_EMAIL: '인증번호가 오지 않았나요? 인증메일 다시 받기',
   EMAIL_INPUT: {
     LABEL: '이메일 입력',

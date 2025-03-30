@@ -1,7 +1,8 @@
-import type { InputHTMLAttributes } from 'react';
-import Icon from '@/components/common/Icon';
+import type { InputHTMLAttributes, Ref } from 'react';
+
 import type { IconType } from '@/types';
 import { cn } from '@/utils';
+import Icon from '@/components/common/Icon';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -11,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   success?: string;
   className?: string;
   iconProps?: React.SVGProps<SVGSVGElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 const defaultInputClass =

@@ -12,9 +12,3 @@ export const getOrderItemsWithExpectedArrivalAt = (orderItems: OrderItem[]) =>
       ? { ...item, ...{ expectedArrivalAt: getExpectedArrivalAt() } }
       : item,
   );
-
-// export const getOrderHistoryListWithExpectedArrivalAt: OrderHistoryItem[] = (orderHistoryList: ) => orderHistoryList
-//   .map((item): OrderHistoryItem => ({
-//     ...item,
-//     orderItems: getOrderItemsWithExpectedArrivalAt(item.orderItems as OrderItem[])
-//   }));

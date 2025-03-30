@@ -3,6 +3,10 @@ export interface EmailVerificationState {
   emailVerified?: boolean;
   codeVerified?: boolean;
   email?: string;
+  pw?: string;
+  checkPw?: string;
+  essentialPolicy?: string[];
+  optionalPolicy?: string[];
   message?: string;
   error?: string;
   emailError?: string;

@@ -84,10 +84,14 @@ const SignupForm = ({ signupTerms }: SignupFormProps) => {
             codeVerificationState.codeVerified && (
               <>
                 <PwInput
+                  pw={signupState.pw || ''}
+                  checkPw={signupState.checkPw || ''}
                   pwError={signupState?.pwError || ''}
                   checkPwError={signupState.checkPwError || ''}
                 />
                 <TermsInput
+                  essentialPolicy={signupState.essentialPolicy || []}
+                  optionalPolicy={signupState.optionalPolicy || []}
                   signupTerms={signupTerms}
                   error={signupState.essentialPolicyError || ''}
                 />

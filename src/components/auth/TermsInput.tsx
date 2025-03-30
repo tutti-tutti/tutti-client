@@ -7,6 +7,8 @@ import TermItem from './TermItem';
 import { useState, useMemo } from 'react';
 
 interface PoliciesInputProps {
+  essentialPolicy: string[];
+  optionalPolicy: string[];
   signupTerms: SignupTerm[];
   error: string;
 }
@@ -15,8 +17,20 @@ const {
   CHECK_POLICY: { ANNOUNCEMENT, ALL, ESSENTIALS, OPTIONALS },
 } = AUTH_CONSTANTS;
 
-const TermsInput = ({ signupTerms, error }: PoliciesInputProps) => {
-  const [checkedIds, setCheckedIds] = useState<Set<number>>(new Set());
+const TermsInput = ({
+  essentialPolicy,
+  optionalPolicy,
+  signupTerms,
+  error,
+}: PoliciesInputProps) => {
+  const initialCheckedIds = useMemo(() => {
+    const ids = new Set<number>();
+    essentialPolicy.forEach(id => ids.add(Number(id)));
+    optionalPolicy.forEach(id => ids.add(Number(id)));
+    return ids;
+  }, [essentialPolicy, optionalPolicy]);
+
+  const [checkedIds, setCheckedIds] = useState<Set<number>>(initialCheckedIds);
 
   const { essentialIds, optionalIds, allIds } = useMemo(() => {
     const essential = new Set(
@@ -43,7 +57,7 @@ const TermsInput = ({ signupTerms, error }: PoliciesInputProps) => {
 
   return (
     <div>
-      <article className="gap-md mt-lg flex flex-col">
+      <section className="gap-md mt-lg flex flex-col">
         <div className="font-style-subHeading text-text-secondary gap-xs flex">
           <Checkbox
             checked={isAllChecked(allIds)}
@@ -53,9 +67,9 @@ const TermsInput = ({ signupTerms, error }: PoliciesInputProps) => {
         </div>
         <div className="font-style-info text-text-tertiary">{ANNOUNCEMENT}</div>
         <hr className="border-border-primary mb-md flex-grow border-t" />
-      </article>
+      </section>
 
-      <article>
+      <section>
         <div className="font-style-subHeading text-text-secondary gap-xs flex">
           <Checkbox
             checked={isAllChecked(essentialIds)}
@@ -72,9 +86,9 @@ const TermsInput = ({ signupTerms, error }: PoliciesInputProps) => {
             handleGroupCheck(new Set([id]), checked)
           }
         />
-      </article>
+      </section>
 
-      <article className="mt-lg">
+      <section className="mt-lg">
         <div className="font-style-subHeading text-text-secondary gap-xs flex">
           <Checkbox
             checked={isAllChecked(optionalIds)}
@@ -90,7 +104,7 @@ const TermsInput = ({ signupTerms, error }: PoliciesInputProps) => {
             handleGroupCheck(new Set([id]), checked)
           }
         />
-      </article>
+      </section>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import { AUTH_CONSTANTS } from '@/constants';
 import React from 'react';
 
 interface VerifyCodeInputProps {
+  pw: string;
+  checkPw: string;
   pwError: string;
   checkPwError: string;
   isNewPw?: boolean;
@@ -11,7 +13,13 @@ interface VerifyCodeInputProps {
 const { PW_INPUT, CHECK_PW_INPUT, NEW_PW_INPUT, CHECK_NEW_PW_INPUT } =
   AUTH_CONSTANTS;
 
-const PwInput = ({ pwError, checkPwError, isNewPw }: VerifyCodeInputProps) => {
+const PwInput = ({
+  pw,
+  checkPw,
+  pwError,
+  checkPwError,
+  isNewPw,
+}: VerifyCodeInputProps) => {
   return (
     <>
       <Input
@@ -21,6 +29,7 @@ const PwInput = ({ pwError, checkPwError, isNewPw }: VerifyCodeInputProps) => {
         placeholder={!isNewPw ? PW_INPUT.PLACEHOLDER : NEW_PW_INPUT.PLACEHOLDER}
         icon="viewCancel"
         error={pwError}
+        defaultValue={pw}
       />
       <Input
         label={!isNewPw ? CHECK_PW_INPUT.LABEL : CHECK_NEW_PW_INPUT.LABEL}
@@ -31,6 +40,7 @@ const PwInput = ({ pwError, checkPwError, isNewPw }: VerifyCodeInputProps) => {
         }
         icon="viewCancel"
         error={checkPwError}
+        defaultValue={checkPw}
       />
     </>
   );

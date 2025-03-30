@@ -11,7 +11,6 @@ export const requestVerificationCodeAction = async (
   try {
     const email = formData.get('email');
     const type = formData.get('type');
-    console.log(type);
     const validatedData = requestVerifySchema.safeParse({
       email,
       type,
@@ -23,11 +22,10 @@ export const requestVerificationCodeAction = async (
         success: false,
         emailVerified: false,
         codeVerified: false,
+        email: email as string,
         error: validatedData.error.errors[0]?.message,
       };
     }
-
-    console.log(validatedData.data.type);
 
     const response = await verifyEmail(
       validatedData.data.email,

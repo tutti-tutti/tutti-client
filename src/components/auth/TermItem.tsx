@@ -3,8 +3,8 @@ import { AUTH_CONSTANTS } from '@/constants';
 import { SignupTerm } from '@/types';
 
 interface TermItemProps {
-  signupTerms: SignupTerm[];
   type: 'essential' | 'optional';
+  signupTerms: SignupTerm[];
   checkedIds: Set<number>;
   onCheckChange: (termId: number, checked: boolean) => void;
 }
@@ -14,8 +14,8 @@ const {
 } = AUTH_CONSTANTS;
 
 const TermItem = ({
-  signupTerms,
   type,
+  signupTerms,
   checkedIds,
   onCheckChange,
 }: TermItemProps) => {

@@ -6,9 +6,9 @@ import {
   ProductAmoutInfo,
   ProductOptionInfo,
   OrdersActions,
-  ExtraButton,
   Badge,
 } from '@/components';
+import { default as OrdersExtraActions } from './OrdersExtraActions';
 
 interface OrderProductListProps {
   orderId: number;
@@ -51,7 +51,7 @@ const OrderHistoryList = ({
                   )}
                 >
                   <Badge variant="successOutlineSquare">결제완료</Badge>
-                  <div className="gap-md flex flex-1 flex-col">
+                  <div className="gap-xs flex flex-1 flex-col">
                     <ProductName
                       className="w-full"
                       productName={item.productName}
@@ -73,12 +73,7 @@ const OrderHistoryList = ({
                     />
                   </div>
 
-                  <div className="flex w-full justify-between">
-                    <span className="text-text-tertiary inline-flex items-center text-base">
-                      주문번호 : {orderId}
-                    </span>
-                    <ExtraButton>장바구니 담기</ExtraButton>
-                  </div>
+                  <OrdersExtraActions orderId={orderId} />
                 </div>
               </article>
               <div className="hidden sm:flex">

@@ -6,7 +6,7 @@ interface OrdersActionsProps {
 }
 
 const OrdersActions = ({ className }: OrdersActionsProps) => {
-  const buttonStyles = 'h-[40px] sm:h-[60px] w-full';
+  const buttonStyles = 'h-[40px] sm:h-[60px] w-full sm:w-[147px]';
 
   return (
     <article

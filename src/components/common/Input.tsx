@@ -1,3 +1,5 @@
+'use client';
+
 import type { InputHTMLAttributes, Ref } from 'react';
 
 import type { IconType } from '@/types';
@@ -13,6 +15,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   iconProps?: React.SVGProps<SVGSVGElement>;
   ref?: Ref<HTMLInputElement>;
+  onIconClick?: () => void;
 }
 
 const defaultInputClass =
@@ -32,6 +35,7 @@ const Input = ({
   success,
   className,
   iconProps,
+  onIconClick,
   ...props
 }: InputProps) => {
   return (
@@ -58,7 +62,10 @@ const Input = ({
           {...props}
         />
         {icon && (
-          <div className="pr-sm absolute inset-y-0 right-0 flex items-center">
+          <div
+            className="pr-sm absolute inset-y-0 right-0 flex cursor-pointer items-center"
+            onClick={onIconClick}
+          >
             <Icon iconName={icon} {...iconProps} />
           </div>
         )}

@@ -6,7 +6,7 @@ interface OrdersExtraActionsProps {
 
 const OrdersExtraActions = ({ orderId }: OrdersExtraActionsProps) => {
   return (
-    <article className="w-full sm:flex sm:justify-between">
+    <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
         주문번호 : {orderId}
       </div>

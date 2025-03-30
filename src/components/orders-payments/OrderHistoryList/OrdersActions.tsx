@@ -6,12 +6,12 @@ interface OrdersActionsProps {
 }
 
 const OrdersActions = ({ className }: OrdersActionsProps) => {
-  const buttonStyles = 'h-[40px] sm:h-[60px] w-full sm:w-[147px]';
+  const buttonStyles = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
 
   return (
     <article
       className={cn(
-        'gap-xs sm:gap-md flex sm:basis-[147px] sm:flex-col',
+        'gap-xs md:gap-md flex md:basis-[147px] md:flex-col',
         className,
       )}
     >

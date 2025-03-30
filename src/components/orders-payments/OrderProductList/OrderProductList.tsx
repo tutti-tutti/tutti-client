@@ -13,7 +13,7 @@ interface OrderProductListProps {
 }
 
 const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
-  const paddingStyles = 'py-md sm:py-lg pr-md sm:pr-lg first:pt-0';
+  const paddingStyles = 'py-md sm:py-lg sm:pr-lg first:pt-0';
   const thumbColumnStyles = 'w-5/12 w-[120px] sm:w-[200px]';
   const infoColumnStyles = 'w-7/12 sm:w-full';
 

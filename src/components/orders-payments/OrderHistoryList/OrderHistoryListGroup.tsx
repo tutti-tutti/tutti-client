@@ -14,7 +14,7 @@ const OrderHistoryListGroup = ({
 }: OrderHistoryListGroupProps) => {
   const groupedOrderItems: GroupedOrderItemByOrderId[] =
     getGroupOrderItemsByOrderId(orderHistoryList);
-  const gapStyles = `flex gap-md sm:gap-lg`;
+  const gapStyles = `flex gap-md md:gap-lg`;
 
   console.log('groupedOrderItems: ', groupedOrderItems);
 

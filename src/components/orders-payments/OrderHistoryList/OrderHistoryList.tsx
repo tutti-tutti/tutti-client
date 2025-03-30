@@ -21,9 +21,9 @@ const OrderHistoryList = ({
   orderItems,
   gapStyles,
 }: OrderProductListProps) => {
-  const paddingStyles = 'py-md sm:py-lg pr-md sm:pr-lg first:pt-0';
-  const thumbColumnStyles = 'w-[120px] sm:w-[288px]';
-  const infoColumnStyles = 'w-full sm:w-full';
+  const paddingStyles = 'py-md md:py-lg md:pr-lg first:pt-0';
+  const thumbColumnStyles = 'w-[120px] md:w-[288px]';
+  const infoColumnStyles = 'w-full md:w-full';
 
   return (
     <ul>
@@ -66,7 +66,7 @@ const OrderHistoryList = ({
                     )}
 
                     <ProductAmoutInfo
-                      className="hidden w-full items-center sm:flex"
+                      className="hidden w-full items-center md:flex"
                       price={item.price}
                       quantity={item.quantity}
                       deliveredAt={formatAfterDays(item.expectedArrivalAt)}
@@ -76,13 +76,13 @@ const OrderHistoryList = ({
                   <OrdersExtraActions orderId={orderId} />
                 </div>
               </article>
-              <div className="hidden sm:flex">
+              <div className="hidden md:flex">
                 <OrdersActions />
               </div>
             </div>
 
             {/**NOTE - Mobile 용 */}
-            <div className="gap-md flex flex-col sm:hidden">
+            <div className="gap-md flex flex-col md:hidden">
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}

@@ -14,7 +14,7 @@ import { Icon } from '@/components';
 interface ReviewBadgeProps {
   type: 'positive' | 'negative';
   textSize: 'subHeading' | 'paragraph';
-  reviewText: string;
+  reviewText?: string;
   children: ReactNode;
 }
 
@@ -79,7 +79,7 @@ const ReviewBadge = ({
       startTransition(() => {
         setOptimisticFeedback(!optimisticFeedback);
 
-        sentimentFeedbackAction(reviewText, type).catch(error => {
+        sentimentFeedbackAction(reviewText || '', type).catch(error => {
           console.error('피드백 제출 실패:', error);
           setOptimisticFeedback(optimisticFeedback);
         });

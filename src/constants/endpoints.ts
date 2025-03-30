@@ -79,6 +79,7 @@ export const REVIEW_ENDPOINTS = {
   REVIEW_DETAIL: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}`,
   LIKE: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}/reviewLike`,
   CREATE_REVIEW: API_RESOURCES.REVIEWS,
+  REVIEW_FEEDBACK: `${API_RESOURCES.REVIEWS}/feedback`,
 };
 
 export const FAQS_ENDPOINTS = {

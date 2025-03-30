@@ -128,3 +128,16 @@ export const createReview = async (
 
   return data;
 };
+
+export const feedbackIncorrectSentiment = async (
+  reviewText: string,
+  sentiment: 'positive' | 'negative',
+) => {
+  const { data } = await axiosInstance.post(REVIEW_ENDPOINTS.REVIEW_FEEDBACK, {
+    review_text: reviewText,
+    sentiment,
+    feedback: 'Incorrect',
+  });
+
+  return data;
+};

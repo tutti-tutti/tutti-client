@@ -15,7 +15,7 @@ interface ReviewItemProps {
   sentiment: 'positive' | 'negative';
   sentimentProbability: number;
   createdAt: string;
-  isLiked: boolean;
+  liked?: boolean;
 }
 
 const ReviewItem = ({ ...review }: ReviewItemProps) => {
@@ -44,7 +44,7 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
         <ReviewBadge textSize="paragraph" type={review.sentiment}>
           {reviewBadgeText}
         </ReviewBadge>
-        <ReviewLikeButton isLiked={review.isLiked} id={review.id} />
+        <ReviewLikeButton liked={review.liked} id={review.id} />
       </div>
     </div>
   );

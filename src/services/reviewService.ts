@@ -64,20 +64,6 @@ export const fetchReviews = async (
   return;
 };
 
-const fetchReviewDetail = async (reviewId: number) => {
-  const { data } = await axiosInstance.get(
-    REVIEW_ENDPOINTS.REVIEW_DETAIL(reviewId),
-  );
-
-  return data;
-};
-
-export const fetchReviewIsLike = async (reviewId: number) => {
-  const { liked } = await fetchReviewDetail(reviewId);
-
-  return liked;
-};
-
 export const reviewLike = async (reviewId: number) => {
   const { data } = await axiosInstance.post(REVIEW_ENDPOINTS.LIKE(reviewId));
 

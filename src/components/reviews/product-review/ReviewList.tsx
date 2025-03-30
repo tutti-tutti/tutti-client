@@ -1,4 +1,4 @@
-import { fetchReviewIsLike, fetchReviews } from '@/services';
+import { fetchReviews } from '@/services';
 import { reviewServerStore } from '@/stores';
 import ReviewFilter from './ReviewFilter';
 import ReviewItem from './ReviewItem';
@@ -14,6 +14,7 @@ interface ReviewItemAPISchema {
   sentiment: 'positive' | 'negative';
   sentimentProbability: number;
   createdAt: string;
+  liked?: boolean;
 }
 
 const ReviewList = async () => {
@@ -24,11 +25,9 @@ const ReviewList = async () => {
   return (
     <div>
       <ReviewFilter />
-      {reviews.reviews.map(async (review: ReviewItemAPISchema) => {
-        const isLiked = await fetchReviewIsLike(review.id);
-
-        return <ReviewItem key={review.id} {...review} isLiked={isLiked} />;
-      })}
+      {reviews.reviews.map((review: ReviewItemAPISchema) => (
+        <ReviewItem key={review.id} {...review} />
+      ))}
     </div>
   );
 };

@@ -76,7 +76,6 @@ export const REVIEW_ENDPOINTS = {
     `${API_RESOURCES.REVIEWS}/${productId}/countStar`,
   REVIEW_POSITIVE_AVERAGE: (productId: string) =>
     `${API_RESOURCES.REVIEWS}/${productId}/positiv`,
-  REVIEW_DETAIL: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}`,
   LIKE: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}/reviewLike`,
   CREATE_REVIEW: API_RESOURCES.REVIEWS,
 };

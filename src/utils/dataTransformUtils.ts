@@ -2,7 +2,7 @@ import type {
   OrderItem,
   GroupedOrderItemByExpectedArrivalAt,
   OrderHistoryItem,
-  GroupedOrderHistoryItemByOrderId,
+  GroupedOrderItemByOrderId,
 } from '@/types';
 
 /**
@@ -40,13 +40,13 @@ export const getGroupedOrderItemsByDeliveredAt = (
 };
 
 /**
- * orderId 속성을 기준으로 OrderHistoryItem[] 데이터를 그룹화하여 변환
+ * orderId 속성을 기준으로 OrderItem[] 데이터를 그룹화하여 변환
  * @param orderHistoryItems OrderHistoryItem[]
- * @returns GroupedOrderHistoryItemByOrderId[]
+ * @returns GroupedOrderItemByOrderId[]
  */
-export const getGroupOrderHistoryItemsByOrderId = (
+export const getGroupOrderItemsByOrderId = (
   orderHistoryItems: OrderHistoryItem[],
-): GroupedOrderHistoryItemByOrderId[] => {
+): GroupedOrderItemByOrderId[] => {
   const groupedByOrderId = orderHistoryItems.reduce<
     Record<number, OrderHistoryItem[]>
   >((acc, item) => {
@@ -61,6 +61,6 @@ export const getGroupOrderHistoryItemsByOrderId = (
 
   return Object.entries(groupedByOrderId).map(([orderId, items]) => ({
     orderId: Number(orderId),
-    items,
+    items: items.flatMap(item => item.orderItems || []),
   }));
 };

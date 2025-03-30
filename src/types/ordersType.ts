@@ -52,9 +52,9 @@ export interface OrderHistoryItem {
 }
 
 // 주문번호 별 데이터 그룹화
-export interface GroupedOrderHistoryItemByOrderId {
+export interface GroupedOrderItemByOrderId {
   orderId: number;
-  items: OrderHistoryItem[];
+  items: OrderItem[];
 }
 
 // 주문내역 상세 조회 API 스키마

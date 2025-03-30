@@ -10,7 +10,7 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div className="m-5xl md:p-6xl md:shadow-cast md:shadow-custom-effect max-md:p-3xl max-sm:p-lg flex h-full flex-col items-center justify-center rounded-2xl max-md:w-full md:w-[632px]">
+    <div className="m-5xl md:p-6xl max-md:p-3xl max-sm:p-lg flex h-full flex-col items-center justify-center rounded-2xl max-md:w-full md:w-[632px]">
       <div className="w-full">
         <Link
           className="p-sm mb-2xl flex justify-center"

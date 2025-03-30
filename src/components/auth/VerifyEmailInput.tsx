@@ -7,10 +7,10 @@ import { AUTH_CONSTANTS } from '@/constants';
 
 interface VerifyEmailProps {
   email: string;
-  emailRef: Ref<HTMLInputElement>;
-  error: string;
-  isRequest: boolean;
-  success: string;
+  emailRef?: Ref<HTMLInputElement>;
+  error?: string;
+  isRequest?: boolean;
+  success?: string;
 }
 
 const { EMAIL_INPUT } = AUTH_CONSTANTS;

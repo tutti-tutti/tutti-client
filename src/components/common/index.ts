@@ -19,3 +19,4 @@ export { default as Divider } from './Divider';
 export { default as PageTitle } from './PageTitle';
 export { default as SectionTitle } from './SectionTitle';
 export { default as Badge } from './Badge';
+export { default as Breadcrumb } from './Breadcrumb';

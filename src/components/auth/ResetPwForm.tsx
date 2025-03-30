@@ -131,7 +131,7 @@ const ResetPwForm = () => {
         </div>
         <Button
           type="submit"
-          className="my-lg"
+          className="my-lg font-style-subHeading"
           variant={isPending ? 'disabled' : 'primary'}
         >
           {isPending ? loadingText : buttonText}

@@ -56,7 +56,7 @@ const SigninForm = () => {
           </div>
           <Button
             type="submit"
-            className="my-lg"
+            className="my-lg font-style-subHeading"
             variant={isSigninPending ? 'disabled' : 'primary'}
           >
             {signinButtonText}

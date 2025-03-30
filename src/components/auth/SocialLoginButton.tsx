@@ -9,7 +9,7 @@ const SocialLoginButton = () => {
   };
 
   return (
-    <div className="gap-sm mb-2xl flex justify-between max-sm:flex-col">
+    <div className="gap-sm mb-2xl font-style-subHeading flex justify-between max-sm:flex-col">
       <Button
         icon="naver"
         className="bg-logo-naver hover:bg-logo-naver active:bg-logo-naver flex-auto"

@@ -40,7 +40,7 @@ const Button = ({
   iconProps,
 }: ButtonProps) => {
   const defaultClass =
-    'px-lg py-md flex gap-sm rounded-lg transition-all duration-300 justify-center items-center cursor-pointer';
+    'px-lg py-md flex gap-sm rounded-lg transition-all duration-300 justify-center items-center cursor-pointer font-style-subHeading';
   const variantClass = {
     primary:
       'bg-bg-primaryInteraction text-text-inverse hover:bg-bg-primaryHover active:bg-bg-primaryPressed',

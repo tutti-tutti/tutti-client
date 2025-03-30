@@ -1,9 +1,11 @@
 import { cn, formatAfterDays } from '@/utils';
 import type { OrderItem } from '@/types';
-import { ProductThumbnail } from '@/components';
-import { default as ProductName } from './ProductName';
-import { default as ProductAmoutInfo } from './ProductAmoutInfo';
-import { default as ProductOptionInfo } from './ProductOptionInfo';
+import {
+  ProductThumbnail,
+  ProductName,
+  ProductAmoutInfo,
+  ProductOptionInfo,
+} from '@/components';
 
 interface OrderProductListProps {
   orderItems: Required<OrderItem>[];

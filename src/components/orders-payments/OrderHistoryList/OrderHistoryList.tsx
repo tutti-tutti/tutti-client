@@ -5,6 +5,9 @@ import {
   ProductName,
   ProductAmoutInfo,
   ProductOptionInfo,
+  OrdersActions,
+  ExtraButton,
+  Badge,
 } from '@/components';
 
 interface OrderProductListProps {
@@ -19,8 +22,8 @@ const OrderHistoryList = ({
   gapStyles,
 }: OrderProductListProps) => {
   const paddingStyles = 'py-md sm:py-lg pr-md sm:pr-lg first:pt-0';
-  const thumbColumnStyles = 'w-5/12 w-[120px] sm:w-[200px]';
-  const infoColumnStyles = 'w-7/12 sm:w-full';
+  const thumbColumnStyles = 'w-[120px] sm:w-[288px]';
+  const infoColumnStyles = 'w-full sm:w-full';
 
   return (
     <ul>
@@ -30,42 +33,68 @@ const OrderHistoryList = ({
           className={cn(paddingStyles, 'border-border-secondary border-b')}
         >
           <article className={cn('flex-col', gapStyles)}>
-            <div className={cn(gapStyles, 'items-center')}>
-              <div className={thumbColumnStyles}>
-                <ProductThumbnail
-                  width="w-full"
-                  className="aspect-200/175"
-                  imageUrl={item.productImgUrl}
-                  name={item.productName}
-                />
-              </div>
-              <div
-                className={cn('gap-md flex flex-1 flex-col', infoColumnStyles)}
-              >
-                <ProductName productName={item.productName} />
-
-                {item.firstOptionValue && (
-                  <ProductOptionInfo
-                    firstOptionValue={item.firstOptionValue}
-                    secondOptionValue={item.secondOptionValue}
+            <div className="gap-4xl flex justify-between">
+              <article className={cn(gapStyles, 'flex-1')}>
+                <div className={thumbColumnStyles}>
+                  <ProductThumbnail
+                    width="w-full"
+                    className="aspect-200/175"
+                    imageUrl={item.productImgUrl}
+                    name={item.productName}
                   />
-                )}
+                </div>
 
-                <ProductAmoutInfo
-                  className="hidden sm:flex"
-                  price={item.price}
-                  quantity={item.quantity}
-                  deliveredAt={formatAfterDays(item.expectedArrivalAt)}
-                />
+                <div
+                  className={cn(
+                    infoColumnStyles,
+                    'gap-2xs items-between flex flex-col',
+                  )}
+                >
+                  <Badge variant="successOutlineSquare">결제완료</Badge>
+                  <div className="gap-md flex flex-1 flex-col">
+                    <ProductName
+                      className="w-full"
+                      productName={item.productName}
+                    />
+
+                    {item.firstOptionValue && (
+                      <ProductOptionInfo
+                        className="w-full"
+                        firstOptionValue={item.firstOptionValue}
+                        secondOptionValue={item.secondOptionValue}
+                      />
+                    )}
+
+                    <ProductAmoutInfo
+                      className="hidden w-full items-center sm:flex"
+                      price={item.price}
+                      quantity={item.quantity}
+                      deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                    />
+                  </div>
+
+                  <div className="flex w-full justify-between">
+                    <span className="text-text-tertiary inline-flex items-center text-base">
+                      주문번호 : {orderId}
+                    </span>
+                    <ExtraButton>장바구니 담기</ExtraButton>
+                  </div>
+                </div>
+              </article>
+              <div className="hidden sm:flex">
+                <OrdersActions />
               </div>
             </div>
-            <div className="sm:hidden">
+
+            {/**NOTE - Mobile 용 */}
+            <div className="gap-md flex flex-col sm:hidden">
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
                 deliveredAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
+              <OrdersActions />
             </div>
           </article>
         </li>

@@ -16,6 +16,7 @@ const initialVerificationState: EmailVerificationState = {
 
 const {
   SIGNIN,
+  SIGNIN_LOADING,
   EMAIL_INPUT,
   PW_INPUT,
   AUTO_SIGNIN,
@@ -25,10 +26,12 @@ const {
 } = AUTH_CONSTANTS;
 
 const SigninForm = () => {
-  const [signinState, signinFormAction] = useActionState(
+  const [signinState, signinFormAction, isSigninPending] = useActionState(
     signinAction,
     initialVerificationState,
   );
+
+  const signinButtonText = isSigninPending ? SIGNIN_LOADING : SIGNIN;
 
   return (
     <>
@@ -64,8 +67,12 @@ const SigninForm = () => {
               {FORGOT_PW}
             </ClickText>
           </div>
-          <Button type="submit" className="my-lg">
-            {SIGNIN}
+          <Button
+            type="submit"
+            className="my-lg"
+            variant={isSigninPending ? 'disabled' : 'primary'}
+          >
+            {signinButtonText}
           </Button>
         </fieldset>
       </form>

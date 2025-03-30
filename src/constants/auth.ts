@@ -1,5 +1,6 @@
 export const AUTH_CONSTANTS = {
   SIGNIN: '로그인',
+  SIGNIN_LOADING: '로그인 중',
   SIGNUP: '회원가입',
   SIGNUP_LOADING: '회원가입 중',
   RESET_PW: '비밀번호 재설정',

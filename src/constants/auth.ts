@@ -10,7 +10,7 @@ export const AUTH_CONSTANTS = {
   SOCIAL_SIGNIN: '소셜로 로그인하기',
   TO_SIGNUP: '아직 회원이 아니신가요?',
   VERIFY_EMAIL_BUTTON: '이메일 인증하기',
-  VERIFY_EMAIL_BUTTON_LOADING: '이메일 인증 중',
+  VERIFY_EMAIL_BUTTON_LOADING: '인증번호 전송 중',
   CHECK_VERIFY_CODE_BUTTON: '인증번호 확인',
   CHECK_VERIFY_CODE_BUTTON_LOADING: '인증번호 확인 중',
   RESEND_EMAIL: '인증번호가 오지 않았나요? 인증메일 다시 받기',

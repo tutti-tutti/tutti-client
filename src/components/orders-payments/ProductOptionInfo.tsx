@@ -14,7 +14,7 @@ const ProductOptionInfo = ({
   return (
     <div
       className={cn(
-        'gap-sm text-text-tertiary flex text-sm font-normal md:text-base',
+        'gap-sm text-text-tertiary flex text-lg font-normal md:text-base',
         className,
       )}
     >

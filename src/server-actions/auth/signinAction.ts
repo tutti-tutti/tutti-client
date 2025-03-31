@@ -34,6 +34,8 @@ export const signinAction = async (
 
       return {
         ...prevState,
+        email: email as string,
+        pw: pw as string,
         success: false,
         ...fieldErrors,
       };

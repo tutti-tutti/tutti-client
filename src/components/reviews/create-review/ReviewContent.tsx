@@ -30,10 +30,11 @@ const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
     productItemId,
   );
 
-  const [createReviewState, boundCreateReviewFormAction] = useActionState(
-    boundCreateReviewAction,
-    initialCreateReviewState,
-  );
+  const [
+    createReviewState,
+    boundCreateReviewFormAction,
+    isCreateReviewPending,
+  ] = useActionState(boundCreateReviewAction, initialCreateReviewState);
 
   const handleRatingClick = () => {
     if (!textareaRef.current) return;
@@ -91,7 +92,7 @@ const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
           name="reviewContent"
         />
       </fieldset>
-      <CreateReviewButtonBox />
+      <CreateReviewButtonBox isCreateReviewPending={isCreateReviewPending} />
     </form>
   );
 };

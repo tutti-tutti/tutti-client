@@ -94,6 +94,21 @@ export const addToLocalCart = async (
   quantity: number,
 ) => {
   const currentCart = fetchLocalCart();
+  const MAX_CART_ITEMS_COUNT = 10;
+
+  if (currentCart.length >= MAX_CART_ITEMS_COUNT) {
+    const existingItemIndex = currentCart.findIndex(
+      cartItem => cartItem.productItemId === productItemId,
+    );
+
+    if (existingItemIndex < 0) {
+      return {
+        success: false,
+        message: `비회원은 최대 ${MAX_CART_ITEMS_COUNT}개 상품만 담을 수 있습니다.`,
+        cart: currentCart,
+      };
+    }
+  }
 
   const existingItemById = currentCart.findIndex(
     cartItem => cartItem.productItemId === productItemId,

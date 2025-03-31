@@ -11,20 +11,15 @@ import { toast } from '@/utils';
 import { requestPayment } from '@/services';
 import { ROUTER_PATH } from '@/constants';
 import { useShippingAddressStore } from '@/stores';
-import type { OrderItem, PaymentsRequestAPISchema } from '@/types';
+import type {
+  OrderItem,
+  PaymentsRequestAPISchema,
+  ShippingAddress,
+} from '@/types';
 import { Button } from '@/components';
 
 const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY || '';
 const customerKey = 'bhiy_d4GLTR_4gsaPxpvz'; // toss 에서 제공하는 테스트 key
-
-interface ShippingAddress {
-  recipientName: string;
-  recipientPhone: string;
-  recipientAddress: string;
-  zipCode: string;
-  note: string;
-  recipientEmail: string;
-}
 
 type PaymentMethodSelectorProps = {
   orderItems: OrderItem[];
@@ -41,6 +36,7 @@ const PaymentMethodSelector = ({
   orderItems,
 }: PaymentMethodSelectorProps) => {
   const { formData } = useShippingAddressStore();
+  console.log(formData);
 
   const [amount] = useState({
     currency: 'KRW',
@@ -106,15 +102,18 @@ const PaymentMethodSelector = ({
       recipientName,
       recipientPhone,
       recipientAddress,
+      recipientAddressDetail,
       zipCode,
       note,
       recipientEmail,
     } = formData;
 
+    const recipientAddressTotal = `${recipientAddress} ${recipientAddressDetail}`;
+
     if (
       !recipientName ||
       !recipientPhone ||
-      !recipientAddress ||
+      !recipientAddressTotal ||
       !zipCode ||
       !note
     ) {
@@ -137,9 +136,9 @@ const PaymentMethodSelector = ({
         totalAmount,
         paymentType: 'CARD',
         orderItems: orderProductItems,
-        recipientName: recipientName,
-        recipientPhone: recipientPhone,
-        recipientAddress: recipientAddress,
+        recipientName,
+        recipientPhone,
+        recipientAddress: recipientAddressTotal,
         zipCode: zipCode,
         note: note,
       };

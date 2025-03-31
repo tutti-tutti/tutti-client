@@ -2,7 +2,9 @@
 
 import { create } from 'zustand';
 
-export interface ShippingAddressFormData {
+import { ShippingAddress } from '@/types';
+
+export interface ShippingAddressFormData extends ShippingAddress {
   [key: string]: string;
 }
 
@@ -13,8 +15,18 @@ interface ShippingAddressState {
   resetForm: () => void;
 }
 
+const initialState: ShippingAddressFormData = {
+  recipientName: '',
+  recipientPhone: '',
+  recipientAddress: '',
+  zipCode: '',
+  note: '',
+  recipientEmail: '',
+  recipientAddressDetail: '',
+};
+
 export const useShippingAddressStore = create<ShippingAddressState>(set => ({
-  formData: {},
+  formData: initialState,
   updateField: (name, value) =>
     set(state => ({
       formData: {
@@ -22,5 +34,5 @@ export const useShippingAddressStore = create<ShippingAddressState>(set => ({
         [name]: value,
       },
     })),
-  resetForm: () => set({ formData: {} }),
+  resetForm: () => set({ formData: initialState }),
 }));

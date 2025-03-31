@@ -31,17 +31,8 @@ export async function generateMetadata({
 }
 
 /**TODO
- * 0. 인증 인가 확인 -> 인증 안되어 있으면 로그인 페이지로 이동
- * 1. 쿼리 파라미터로 상품 productId, 수량, 장바구니인지 즉시구매인지 확인하기
- * 2. 상품 정보 api 호출 -> 데이터 fetch
- * 3. 회원 정보 api 호출 -> 데이터 fetch
- * 4. 배송지 정보 api 호출 -> 데이터 fetch
- * 5. 결제 수단 정보 api 호출 -> 데이터 fetch
- * 6. 상품 정보, 회원 정보, 배송지 정보, 결제 수단 선택 아이프레임을 화면에 렌더링
- * 7. 배송지 정보가 없을 경우 배송지 정보 입력 후 배송지 api 호출하여 저장
- * 8. 결제하기 버튼 클릭 시 주문 생성 api 호출 -> fetch 결제 정보
- * 9. fetch한 결제 정보로 결제 요청 api 호출 -> toss payments flow
- * 10. 결제 완료 시 주문 완료 페이지로 이동 -> 주문 내역을 바로 확인
+ * 인증 인가 확인 -> 인증 안되어 있으면 로그인 페이지로 이동
+ * 결제 완료 시 주문 완료 페이지로 이동 -> 주문 내역을 바로 확인
  */
 
 const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
@@ -66,15 +57,15 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
 
   const updatedOrderItems = getOrderItemsWithExpectedArrivalAt(orderItems);
 
-  const adressContainerStyles = 'flex flex-col gap-sm';
+  const adressGapStyles = 'flex flex-col gap-sm';
 
   return (
     <div className="gap-4xl mx-auto flex max-w-[630px] flex-col">
       <CheckoutHeader />
 
-      <section className={adressContainerStyles}>
+      <section className={adressGapStyles}>
         <SectionTitle>받는 사람 정보</SectionTitle>
-        <ShippingAddressForm className={adressContainerStyles} />
+        <ShippingAddressForm gapStyles={adressGapStyles} />
       </section>
 
       <Divider />

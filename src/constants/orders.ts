@@ -9,6 +9,13 @@ export const SHIPPING_ADRESS_INPUT_ITEMS: AddressInputItem[] = [
     vaildType: 'name',
   },
   {
+    label: '이메일',
+    name: 'recipientEmail',
+    type: 'email',
+    placeholder: '이메일',
+    vaildType: 'email',
+  },
+  {
     label: '전화번호',
     name: 'recipientPhone',
     type: 'text',
@@ -30,17 +37,17 @@ export const SHIPPING_ADRESS_INPUT_ITEMS: AddressInputItem[] = [
     vaildType: 'address',
   },
   {
+    label: '상세 주소',
+    name: 'recipientAddressDetail',
+    type: 'text',
+    placeholder: '상세 주소',
+    vaildType: 'address',
+  },
+  {
     label: '배송 요청 사항',
     name: 'note',
     type: 'text',
     placeholder: '배송 요청 사항',
     vaildType: 'note',
-  },
-  {
-    label: '이메일',
-    name: 'recipientEmail',
-    type: 'email',
-    placeholder: '이메일',
-    vaildType: 'email',
   },
 ];

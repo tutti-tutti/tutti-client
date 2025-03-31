@@ -2,6 +2,17 @@
 
 import { OrderProductItem } from './ordersType';
 
+// 주문/결제 배송지 입력 값
+export interface ShippingAddress {
+  recipientName: string;
+  recipientPhone: string;
+  recipientAddress: string;
+  recipientAddressDetail: string;
+  zipCode: string;
+  note: string;
+  recipientEmail: string;
+}
+
 // 주문/결제 요청 API 스키마
 export interface PaymentsRequestAPISchema {
   totalDiscountAmount: number;

@@ -1,9 +1,9 @@
-import { JihyeIcon } from '@/components';
+import { TuttiIcon } from '@/components';
 
 const FooterLogo = () => {
   return (
     <div className="p-sm">
-      <JihyeIcon />
+      <TuttiIcon />
     </div>
   );
 };

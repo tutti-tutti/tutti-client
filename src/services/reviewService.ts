@@ -1,6 +1,5 @@
 import { REVIEW_ENDPOINTS } from '@/constants';
 import { axiosInstance } from '@/lib';
-import { reviewServerStore } from '@/stores';
 
 const fetchReviewsLatest = async (
   productId: string,
@@ -18,7 +17,7 @@ const fetchReviewsLike = async (
   productId: string,
   size: number,
   reviewId?: number,
-  likeCount?: number,
+  likeCount?: string,
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_LIKE(productId, size, reviewId, likeCount),
@@ -31,7 +30,7 @@ const fetchReviewsRating = async (
   productId: string,
   size: number,
   reviewId?: number,
-  rating?: number,
+  rating?: string,
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_RATING(productId, size, reviewId, rating),
@@ -42,26 +41,19 @@ const fetchReviewsRating = async (
 
 export const fetchReviews = async (
   productId: string,
+  reviewSort: string,
   size: number,
   reviewId?: number,
-  extraData?: number,
+  extraData?: string,
 ) => {
-  const { getParams } = reviewServerStore();
-  const { reviewSortSearchParams } = getParams();
-
-  if (reviewSortSearchParams === 'latest') {
+  if (reviewSort === 'latest')
     return await fetchReviewsLatest(productId, size, reviewId);
-  }
 
-  if (reviewSortSearchParams === 'like') {
+  if (reviewSort === 'like')
     return await fetchReviewsLike(productId, size, reviewId, extraData);
-  }
 
-  if (reviewSortSearchParams === 'rating') {
+  if (reviewSort === 'rating')
     return await fetchReviewsRating(productId, size, reviewId, extraData);
-  }
-
-  return;
 };
 
 export const reviewLike = async (reviewId: number) => {

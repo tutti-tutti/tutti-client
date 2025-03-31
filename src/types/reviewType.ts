@@ -5,11 +5,6 @@ export interface CreateReviewState {
   error?: string;
 }
 
-export interface ReviewPageParam {
-  reviewId?: number;
-  extraData?: number;
-}
-
 export interface ReviewItemAPISchema {
   id: number;
   productItemId: number;
@@ -22,6 +17,20 @@ export interface ReviewItemAPISchema {
   sentimentProbability: number;
   createdAt: string;
   liked?: boolean;
+}
+
+export interface CreateReviewState {
+  success: boolean;
+  ratingError?: string;
+  reviewContentError?: string;
+  error?: string;
+}
+
+export interface ReviewPageParam {
+  reviewId?: number;
+  likeCount?: number;
+  rating?: number;
+  extraData?: string;
 }
 
 export interface ReviewsResponse {

@@ -60,16 +60,16 @@ export const REVIEW_ENDPOINTS = {
     productId: string,
     size: number,
     reviewId?: number,
-    likeCount?: number,
+    likeCount?: string,
   ) =>
-    `${API_RESOURCES.REVIEWS}/${productId}/like?size=${size}${reviewId ? `&reviewId=${reviewId}` : ''}${likeCount ? `&likeCount=${likeCount}` : ''}`,
+    `${API_RESOURCES.REVIEWS}/${productId}/like?size=${size}${reviewId && likeCount ? `&reviewId=${reviewId}&likeCount=${likeCount.toString()}` : ''}`,
   REVIEWS_RATING: (
     productId: string,
     size: number,
     reviewId?: number,
-    rating?: number,
+    rating?: string,
   ) =>
-    `${API_RESOURCES.REVIEWS}/${productId}/rating?size=${size}${reviewId ? `&reviewId=${reviewId}` : ''}${rating ? `&rating=${rating}` : ''}`,
+    `${API_RESOURCES.REVIEWS}/${productId}/rating?size=${size}${reviewId && rating ? `&reviewId=${reviewId}&rating=${rating.toString()}` : ''}`,
   REVIEW_AVERAGE: (productId: string) =>
     `${API_RESOURCES.REVIEWS}/${productId}/average`,
   REVIEW_COUNTSTAR: (productId: string) =>

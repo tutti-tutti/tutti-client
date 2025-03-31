@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn, getGroupOrderItemsByOrderId } from '@/utils';
+import { getGroupOrderItemsByOrderId } from '@/utils';
 import type { OrderHistoryItem, GroupedOrderItemByOrderId } from '@/types';
 import { Icon } from '@/components';
 import { default as OrderHistoryList } from './OrderHistoryList';
@@ -14,27 +14,22 @@ const OrderHistoryListGroup = ({
 }: OrderHistoryListGroupProps) => {
   const groupedOrderItems: GroupedOrderItemByOrderId[] =
     getGroupOrderItemsByOrderId(orderHistoryList);
-  const gapStyles = `flex gap-md md:gap-lg`;
 
   return (
-    <ul className={cn('flex-col', gapStyles)}>
+    <ul className="gap-2xl flex flex-col">
       {groupedOrderItems.map(({ orderId, items }) => (
-        <li key={orderId}>
-          <article className={cn('flex-col', gapStyles)}>
+        <li key={orderId} className="md:-pl-xl">
+          <article>
             <div className="gap-xs flex text-xl">
               <strong>주문번호 {orderId}</strong>
               <Link
-                href={`my/orders/${orderId}`}
+                href={`/my/orders/${orderId}`}
                 className="text-text-info flex items-center"
               >
                 주문 상세 보기 <Icon iconName="right" />
               </Link>
             </div>
-            <OrderHistoryList
-              orderId={orderId}
-              orderItems={items}
-              gapStyles={gapStyles}
-            />
+            <OrderHistoryList orderId={orderId} orderItems={items} />
           </article>
         </li>
       ))}

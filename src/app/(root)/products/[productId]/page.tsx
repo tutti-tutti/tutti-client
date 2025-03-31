@@ -3,6 +3,7 @@ import {
   RecommendProductList,
   ClientProductDetail,
   ProductReview,
+  ProductDetailInfo,
 } from '@/components';
 import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
 
@@ -53,9 +54,7 @@ const ProductDetailPage = async ({ params }: Params) => {
 
       <section className="gap-md flex flex-col">
         <h2 className="font-style-subHeading text-text-primary">상품 정보</h2>
-        <div className="bg-bg-secondary font-style-subHeading text-text-tertiary flex h-[640px] items-center justify-center overflow-y-auto">
-          상품정보영역
-        </div>
+        <ProductDetailInfo initialProduct={initialProduct} />
       </section>
 
       <section className="flex flex-col">

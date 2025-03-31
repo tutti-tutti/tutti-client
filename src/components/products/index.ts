@@ -13,3 +13,4 @@ export { default as CategoryProductList } from '../category/CategoryProductList'
 export { default as ClientCategoryProductList } from '../category/ClientCategoryProductList';
 export { default as ProductCategory } from '../category/ProductCategory';
 export { default as CategorySkeleton } from '../category/CategorySkeleton';
+export { default as ProductDetailInfo } from './product-detail/ProductDetailInfo';

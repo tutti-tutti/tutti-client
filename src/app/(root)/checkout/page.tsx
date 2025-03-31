@@ -64,15 +64,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  const address = {
-    recipientName: '',
-    recipientPhone: '',
-    recipientAddress: '',
-    zipCode: '99999',
-    note: '',
-    recipientEmail: '',
-  };
-
   const updatedOrderItems = getOrderItemsWithExpectedArrivalAt(orderItems);
 
   const adressContainerStyles = 'flex flex-col gap-sm';
@@ -111,7 +102,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
           deliveryFee={deliveryFee}
           totalAmount={totalAmount}
           orderItems={updatedOrderItems}
-          {...address}
         />
       </section>
     </div>

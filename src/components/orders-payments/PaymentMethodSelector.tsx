@@ -7,18 +7,31 @@ import {
   TossPaymentsWidgets,
 } from '@tosspayments/tosspayments-sdk';
 
+import { toast } from '@/utils';
 import { requestPayment } from '@/services';
 import { ROUTER_PATH } from '@/constants';
+import { useShippingAddressStore } from '@/stores';
 import type { OrderItem, PaymentsRequestAPISchema } from '@/types';
 import { Button } from '@/components';
 
 const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY || '';
 const customerKey = 'bhiy_d4GLTR_4gsaPxpvz'; // toss 에서 제공하는 테스트 key
 
+interface ShippingAddress {
+  recipientName: string;
+  recipientPhone: string;
+  recipientAddress: string;
+  zipCode: string;
+  note: string;
+  recipientEmail: string;
+}
+
 type PaymentMethodSelectorProps = {
   orderItems: OrderItem[];
-  recipientEmail: string;
-} & Omit<PaymentsRequestAPISchema, 'orderItems' | 'paymentType'>;
+} & Omit<
+  PaymentsRequestAPISchema,
+  'orderItems' | 'paymentType' | keyof ShippingAddress
+>;
 
 const PaymentMethodSelector = ({
   totalDiscountAmount,
@@ -26,13 +39,9 @@ const PaymentMethodSelector = ({
   deliveryFee,
   totalAmount,
   orderItems,
-  recipientName,
-  recipientPhone,
-  recipientAddress,
-  zipCode,
-  note,
-  recipientEmail,
 }: PaymentMethodSelectorProps) => {
+  const { formData } = useShippingAddressStore();
+
   const [amount] = useState({
     currency: 'KRW',
     value: totalAmount,
@@ -93,6 +102,27 @@ const PaymentMethodSelector = ({
 
   // '결제하기' 버튼 누르면 결제창 띄우기
   const handlePaymentRequest = useCallback(async () => {
+    const {
+      recipientName,
+      recipientPhone,
+      recipientAddress,
+      zipCode,
+      note,
+      recipientEmail,
+    } = formData;
+
+    if (
+      !recipientName ||
+      !recipientPhone ||
+      !recipientAddress ||
+      !zipCode ||
+      !note
+    ) {
+      toast.warning('배송지 정보를 모두 입력해주세요!');
+
+      return;
+    }
+
     try {
       const orderProductItems = orderItems.map(item => ({
         productItemId: item.productItemId,
@@ -107,21 +137,17 @@ const PaymentMethodSelector = ({
         totalAmount,
         paymentType: 'CARD',
         orderItems: orderProductItems,
-        recipientName,
-        recipientPhone,
-        recipientAddress,
-        zipCode,
-        note,
+        recipientName: recipientName,
+        recipientPhone: recipientPhone,
+        recipientAddress: recipientAddress,
+        zipCode: zipCode,
+        note: note,
       };
 
       // 결제를 요청하기 전에 백엔드 서버에 저장
       // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도
-      const { orderNumber, orderName, amount } =
+      const { orderNumber, orderName } =
         await requestPayment(paymentRequestData);
-
-      console.log('orderNumber: ', orderNumber);
-      console.log('orderName', orderName);
-      console.log('amount ', amount);
 
       await widgets?.requestPayment({
         orderId: orderNumber,
@@ -134,21 +160,18 @@ const PaymentMethodSelector = ({
       });
     } catch (error) {
       console.error('Payment failed:', error);
+
+      toast.error('예기치 못한 오류가 발생했습니다. 다시 시도해주세요!');
       alert(error);
     }
   }, [
     widgets,
-    recipientName,
     totalDiscountAmount,
     totalProductAmount,
     deliveryFee,
     totalAmount,
     orderItems,
-    recipientEmail,
-    recipientPhone,
-    recipientAddress,
-    zipCode,
-    note,
+    formData,
   ]);
 
   return (

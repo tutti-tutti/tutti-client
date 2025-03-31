@@ -14,7 +14,13 @@ const ProductReview = async () => {
   const { getParams } = reviewServerStore();
   const { productIdParams, reviewSortSearchParams } = getParams();
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+      },
+    },
+  });
 
   await queryClient.prefetchInfiniteQuery({
     queryKey: [

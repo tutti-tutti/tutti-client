@@ -11,7 +11,7 @@ const ExtraButton = ({ children, onClick, className }: ExtraButtonProps) => {
   return (
     <Button
       className={cn(
-        'py-xs px-md border-border-tertiaryInteraction text-text-secondary font-style-info shadow-custom-effect bg-custom-gradient',
+        'py-2xs px-sm border-border-tertiaryInteraction text-text-secondary font-style-info bg-custom-gradient h-[32px] border-1',
         className,
       )}
       onClick={onClick}

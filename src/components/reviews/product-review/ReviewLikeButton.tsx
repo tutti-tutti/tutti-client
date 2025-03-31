@@ -1,6 +1,6 @@
 'use client';
 
-import { useOptimistic } from 'react';
+import { useOptimistic, startTransition } from 'react';
 
 import { Button } from '@/components';
 import { reviewLikeAction } from '@/server-actions';
@@ -19,21 +19,23 @@ const ReviewLikeButton = ({
     (newIsLiked: boolean) => newIsLiked,
   );
 
-  const handleLikeClick = async () => {
-    try {
+  const handleLikeClick = () => {
+    startTransition(() => {
       setOptimisticIsLiked(!optimisticIsLiked);
-      const newIsLiked = await reviewLikeAction(id);
-      setOptimisticIsLiked(newIsLiked);
-    } catch (error) {
-      console.error('좋아요 업데이트 실패:', error);
-      setOptimisticIsLiked(optimisticIsLiked);
-    }
+
+      reviewLikeAction(id).catch(error => {
+        console.error('좋아요 업데이트 실패:', error);
+        setOptimisticIsLiked(optimisticIsLiked);
+      });
+    });
   };
 
   return (
     <Button
       icon={optimisticIsLiked ? 'check' : 'smile'}
-      variant={optimisticIsLiked ? 'primaryOutline' : 'tertiaryOutline'}
+      variant={
+        optimisticIsLiked ? 'primaryOutline' : 'tertiaryOutlineInteraction'
+      }
       onClick={handleLikeClick}
     >
       도움이 되는 리뷰에요

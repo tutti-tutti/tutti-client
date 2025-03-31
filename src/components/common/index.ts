@@ -16,3 +16,7 @@ export { default as StepProgressBar } from './StepProgressBar';
 export { default as Checkbox } from './Checkbox';
 export { default as Toast } from './Toast';
 export { default as Divider } from './Divider';
+export { default as PageTitle } from './PageTitle';
+export { default as SectionTitle } from './SectionTitle';
+export { default as Badge } from './Badge';
+export { default as Breadcrumb } from './Breadcrumb';

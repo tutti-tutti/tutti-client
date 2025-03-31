@@ -31,13 +31,29 @@ type Story = StoryObj<typeof CartInfo>;
 
 export const Default: Story = {
   args: {
-    initialCartItems: mockCartItems,
+    isLoggedIn: false,
   },
+  decorators: [
+    Story => {
+      mockCartStore({
+        items: mockCartItems,
+        checkedItems: mockCartItems.reduce(
+          (acc, item) => ({
+            ...acc,
+            [item.productItemId]: true,
+          }),
+          {},
+        ),
+      });
+
+      return <Story />;
+    },
+  ],
 };
 
 export const EmptyCart: Story = {
   args: {
-    initialCartItems: [],
+    isLoggedIn: false,
   },
   decorators: [
     Story => {

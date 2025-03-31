@@ -41,7 +41,11 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
         {review.content}
       </div>
       <div className="gap-xl flex justify-end">
-        <ReviewBadge textSize="paragraph" type={review.sentiment}>
+        <ReviewBadge
+          textSize="paragraph"
+          type={review.sentiment}
+          reviewText={review.content}
+        >
           {reviewBadgeText}
         </ReviewBadge>
         <ReviewLikeButton liked={review.liked} id={review.id} />

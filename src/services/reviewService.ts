@@ -86,6 +86,12 @@ export const fetchReviewPositiveAverage = async (productId: string) => {
   return data;
 };
 
+const analyzeSentiment = async (reviewText: string) => {
+  await axiosInstance.post(REVIEW_ENDPOINTS.ANALYZE_SENTIMENT, {
+    review_text: reviewText,
+  });
+};
+
 export const createReview = async (
   orderId: string,
   productItemId: string,
@@ -103,6 +109,21 @@ export const createReview = async (
     content,
     nickname,
     reviewImages: [''],
+  });
+
+  await analyzeSentiment(content);
+
+  return data;
+};
+
+export const feedbackIncorrectSentiment = async (
+  reviewText: string,
+  sentiment: 'positive' | 'negative',
+) => {
+  const { data } = await axiosInstance.post(REVIEW_ENDPOINTS.REVIEW_FEEDBACK, {
+    review_text: reviewText,
+    sentiment,
+    feedback: 'Incorrect',
   });
 
   return data;

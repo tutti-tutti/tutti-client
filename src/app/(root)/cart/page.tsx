@@ -1,9 +1,12 @@
 import { CartInfo, RecommendProductList } from '@/components';
+import { getAccessToken } from '@/services';
 
-const CartPage = () => {
+const CartPage = async () => {
+  const isLoggedIn = !!(await getAccessToken());
+
   return (
     <div className="gap-3xl flex flex-col">
-      <CartInfo />
+      <CartInfo isLoggedIn={isLoggedIn} />
       <div className="mb-7xl">
         <RecommendProductList categoryName="식료품" />
       </div>

@@ -14,6 +14,7 @@ export type ButtonVariant =
   | 'secondaryOutline'
   | 'disabled'
   | 'tertiaryOutline'
+  | 'tertiaryOutlineInteraction'
   | 'transparent'
   | 'likeOn'
   | 'likeOff';
@@ -55,6 +56,8 @@ const Button = ({
     disabled: 'bg-bg-disabled text-text-disabled cursor-not-allowed',
     tertiaryOutline:
       'border border-border-disabled bg-bg-primary text-text-disabled',
+    tertiaryOutlineInteraction:
+      'border border-border-disabled bg-bg-primary text-text-disabled hover:border-border-primaryHover hover:text-text-primaryHover active:border-border-primaryPressed active:text-text-primaryPressed',
     transparent: 'text-text-secondaryInteration',
     likeOn: 'border-bg-subBrand text-text-visited border',
     likeOff: 'border border-border-primary text-secondaryInteration',

@@ -1,8 +1,8 @@
-import { JihyeIcon } from '../icons';
+import { TuttiIcon } from '../icons';
 
 const Logo = () => {
   return (
-    <JihyeIcon className="w-[104px] md:w-[208px]" aria-label="쇼핑몰 명" />
+    <TuttiIcon className="w-[104px] md:w-[208px]" aria-label="쇼핑몰 명" />
   );
 };
 

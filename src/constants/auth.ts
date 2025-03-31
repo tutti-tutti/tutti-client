@@ -1,13 +1,18 @@
 export const AUTH_CONSTANTS = {
   SIGNIN: '로그인',
+  SIGNIN_LOADING: '로그인 중',
   SIGNUP: '회원가입',
+  SIGNUP_LOADING: '회원가입 중',
   RESET_PW: '비밀번호 재설정',
+  RESET_PW_LOADING: '비밀번호 재설정 중',
   AUTO_SIGNIN: '자동 로그인',
   FORGOT_PW: '비밀번호를 잊어버렸나요?',
   SOCIAL_SIGNIN: '소셜로 로그인하기',
   TO_SIGNUP: '아직 회원이 아니신가요?',
   VERIFY_EMAIL_BUTTON: '이메일 인증하기',
+  VERIFY_EMAIL_BUTTON_LOADING: '인증번호 전송 중',
   CHECK_VERIFY_CODE_BUTTON: '인증번호 확인',
+  CHECK_VERIFY_CODE_BUTTON_LOADING: '인증번호 확인 중',
   RESEND_EMAIL: '인증번호가 오지 않았나요? 인증메일 다시 받기',
   EMAIL_INPUT: {
     LABEL: '이메일 입력',
@@ -40,26 +45,16 @@ export const AUTH_CONSTANTS = {
   },
   CHECK_POLICY: {
     ANNOUNCEMENT:
-      '전체 동의는 필수 및 선택 정보에 대한 동의가 포함 되어 있습니다. 개별적으로 동의를 선택하실 수 있습니다. 선택 항목에 대한 동의를 거부하시는 경우에도 서비스 이용이 가능합니다. 단 할인 및 이벤트 관련 소식을 받지 못합니다.',
-    ALL: '모두 동의하기',
+      '모두 동의는 필수 및 선택 정보에 대한 동의가 포함 되어 있습니다. 개별적으로 동의를 선택하실 수 있습니다. 선택 항목에 대한 동의를 거부하시는 경우에도 서비스 이용이 가능합니다. 단 할인 및 이벤트 관련 소식을 받지 못합니다.',
+    ALL: '전체 동의하기',
     ESSENTIALS: {
+      ALL: '필수 동의하기',
       PREFIX: '[필수]',
-      POLICY: [
-        '만 14세 이상입니다.',
-        '지혜 이용약관 동의',
-        '전자금융거래 이용약관 동의',
-        '개인정보 수집 및 이용 동의',
-        '개인정보 제 3자 제공 동의',
-      ],
       ERROR: '필수 약관에 동의해주세요.',
     },
-    OPTIONS: {
+    OPTIONALS: {
+      ALL: '선택 동의하기',
       PREFIX: '[선택]',
-      POLICY: [
-        '마케팅 수신 이메일 동의',
-        '마케팅 수신 SMS, SNS 수신 동의',
-        '앱 푸시 수신 동의',
-      ],
     },
   },
 };

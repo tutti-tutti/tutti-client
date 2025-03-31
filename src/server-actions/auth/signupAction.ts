@@ -7,13 +7,13 @@ import type { EmailVerificationState } from '@/types';
 export const signupAction = async (
   prevState: EmailVerificationState,
   formData: FormData,
-) => {
+): Promise<EmailVerificationState> => {
   try {
     const email = formData.get('email');
     const pw = formData.get('pw');
     const checkPw = formData.get('checkPw');
     const essentialPolicy = formData.getAll('essentialPolicy');
-    const optinalPolicy = formData.getAll('optionalPolicy');
+    const optionalPolicy = formData.getAll('optionalPolicy');
 
     const validatedData = signupSchema.safeParse({
       email,
@@ -45,6 +45,10 @@ export const signupAction = async (
         ...prevState,
         success: false,
         ...fieldErrors,
+        pw: pw as string,
+        checkPw: checkPw as string,
+        essentialPolicy: essentialPolicy as string[],
+        optionalPolicy: optionalPolicy as string[],
       };
     }
 
@@ -53,7 +57,7 @@ export const signupAction = async (
       validatedData.data?.pw || '',
       validatedData.data?.checkPw || '',
       validatedData.data?.essentialPolicy || [],
-      optinalPolicy,
+      optionalPolicy,
     );
 
     return {

@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
-import { getOrderItemsWithExpectedArrivalAt } from '@/utils';
 import {
   OrderProductListGroup,
   CheckoutHeader,
@@ -55,8 +54,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  const updatedOrderItems = getOrderItemsWithExpectedArrivalAt(orderItems);
-
   const adressGapStyles = 'flex flex-col gap-sm';
 
   return (
@@ -72,7 +69,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
 
       <section className="gap-lg flex flex-col">
         <SectionTitle className="leading-none">결제 상품 정보</SectionTitle>
-        <OrderProductListGroup orderItems={updatedOrderItems} />
+        <OrderProductListGroup orderItems={orderItems} />
       </section>
 
       <section>
@@ -92,7 +89,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
           totalProductAmount={totalProductAmount}
           deliveryFee={deliveryFee}
           totalAmount={totalAmount}
-          orderItems={updatedOrderItems}
+          orderItems={orderItems}
         />
       </section>
     </div>

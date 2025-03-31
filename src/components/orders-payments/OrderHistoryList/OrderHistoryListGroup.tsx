@@ -16,8 +16,6 @@ const OrderHistoryListGroup = ({
     getGroupOrderItemsByOrderId(orderHistoryList);
   const gapStyles = `flex gap-md md:gap-lg`;
 
-  console.log('groupedOrderItems: ', groupedOrderItems);
-
   return (
     <ul className={cn('flex-col', gapStyles)}>
       {groupedOrderItems.map(({ orderId, items }) => (

@@ -5,7 +5,7 @@ interface inputItem {
   placeholder: string;
 }
 
-export const DELIVERY_ADRESS_INPUT_ITEMS: inputItem[] = [
+export const SHIPPING_ADRESS_INPUT_ITEMS: inputItem[] = [
   {
     label: '이름',
     name: 'recipientName',
@@ -35,5 +35,11 @@ export const DELIVERY_ADRESS_INPUT_ITEMS: inputItem[] = [
     name: 'note',
     type: 'text',
     placeholder: '배송 요청 사항',
+  },
+  {
+    label: '이메일',
+    name: 'recipientEmail',
+    type: 'email',
+    placeholder: '이메일',
   },
 ];

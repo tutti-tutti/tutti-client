@@ -1,16 +1,16 @@
 'use client';
 
-import { DELIVERY_ADRESS_INPUT_ITEMS } from '@/constants';
+import { SHIPPING_ADRESS_INPUT_ITEMS } from '@/constants';
 import { Input } from '@/components';
 
-interface DeliveryAddressProps {
+interface ShippingAddressFormProps {
   className: string;
 }
 
-const DeliveryAddress = ({ className }: DeliveryAddressProps) => {
+const ShippingAddressForm = ({ className }: ShippingAddressFormProps) => {
   return (
     <form className={className}>
-      {DELIVERY_ADRESS_INPUT_ITEMS.map((item, index) => (
+      {SHIPPING_ADRESS_INPUT_ITEMS.map((item, index) => (
         <fieldset key={`${item.name}-${index}`}>
           <legend className="absolute opacity-0">{item.label}</legend>
           <Input
@@ -25,4 +25,4 @@ const DeliveryAddress = ({ className }: DeliveryAddressProps) => {
   );
 };
 
-export default DeliveryAddress;
+export default ShippingAddressForm;

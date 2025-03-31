@@ -5,7 +5,7 @@ import { getOrderItemsWithExpectedArrivalAt } from '@/utils';
 import {
   OrderProductListGroup,
   CheckoutHeader,
-  DeliveryAddress,
+  ShippingAddressForm,
   PaymentMethodSelector,
   PaymentSummary,
   SectionTitle,
@@ -65,12 +65,12 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   } = await checkoutOrder(payload);
 
   const address = {
-    recipientName: '엘리자베스',
-    recipientPhone: '01012344321',
-    recipientAddress: '깐따비야 안드로메다 행성',
+    recipientName: '',
+    recipientPhone: '',
+    recipientAddress: '',
     zipCode: '99999',
-    note: '안전한 우주 배송 화이팅!!',
-    recipientEmail: 'XXX@gmail.com',
+    note: '',
+    recipientEmail: '',
   };
 
   const updatedOrderItems = getOrderItemsWithExpectedArrivalAt(orderItems);
@@ -83,7 +83,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
 
       <section className={adressContainerStyles}>
         <SectionTitle>받는 사람 정보</SectionTitle>
-        <DeliveryAddress className={adressContainerStyles} />
+        <ShippingAddressForm className={adressContainerStyles} />
       </section>
 
       <Divider />

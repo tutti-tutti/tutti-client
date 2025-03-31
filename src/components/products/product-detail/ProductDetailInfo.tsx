@@ -19,34 +19,34 @@ const ProductDetailInfo = ({ initialProduct }: ProductInfoTableProps) => {
 
   const tableRows = [
     {
-      label1: '스토어명',
-      value1: storeName,
-      label2: '상품상태',
-      value2: '신상품',
+      firstLabel: '스토어명',
+      firstValue: storeName,
+      secondLabel: '상품상태',
+      secondValue: '신상품',
     },
     {
-      label1: '성인인증',
-      value1: adultOnly ? '필요' : '불필요',
-      label2: '모델명',
-      value2: name,
+      firstLabel: '성인인증',
+      firstValue: adultOnly ? '필요' : '불필요',
+      secondLabel: '모델명',
+      secondValue: name,
     },
     {
-      label1: '이벤트',
-      value1: '정상배송',
-      label2: '사은품',
-      value2: '상세페이지참조',
+      firstLabel: '이벤트',
+      firstValue: '정상배송',
+      secondLabel: '사은품',
+      secondValue: '상세페이지참조',
     },
     {
-      label1: '옵션종류',
-      value1: `${productOptionItems.length}종류`,
-      label2: '출시년일',
-      value2: formatDateWithKorean(createdAt),
+      firstLabel: '옵션종류',
+      firstValue: `${productOptionItems.length}종류`,
+      secondLabel: '출시년일',
+      secondValue: formatDateWithKorean(createdAt),
     },
   ];
 
   const flattenedRows = tableRows.flatMap(row => [
-    { label: row.label1, value: row.value1 },
-    { label: row.label2, value: row.value2 },
+    { label: row.firstLabel, value: row.firstValue },
+    { label: row.secondLabel, value: row.secondValue },
   ]);
 
   return (
@@ -56,18 +56,16 @@ const ProductDetailInfo = ({ initialProduct }: ProductInfoTableProps) => {
           {tableRows.map((row, index) => (
             <tr key={index} className="hidden md:table-row">
               <td className="border-border-secondary text-text-primary bg-bg-secondary px-md py-sm w-1/6 border-y">
-                {row.label1}
+                {row.firstLabel}
               </td>
               <td className="border-border-secondary text-text-secondary px-md py-sm w-1/3 border-y">
-                {row.value1}
+                {row.firstValue}
               </td>
               <td className="border-border-secondary text-text-primary bg-bg-secondary px-md py-sm w-1/6 border-y">
-                {row.label2}
+                {row.secondLabel}
               </td>
               <td className="border-border-secondary text-text-secondary px-md py-sm w-1/3 border-y">
-                {row.value2 instanceof Date
-                  ? row.value2.toLocaleDateString('ko-KR')
-                  : row.value2}
+                {row.secondValue}
               </td>
             </tr>
           ))}
@@ -78,9 +76,7 @@ const ProductDetailInfo = ({ initialProduct }: ProductInfoTableProps) => {
                 {item.label}
               </td>
               <td className="border-border-secondary text-text-secondary px-md py-sm w-2/3 border-y">
-                {item.value instanceof Date
-                  ? item.value.toLocaleDateString('ko-KR')
-                  : item.value}
+                {item.value}
               </td>
             </tr>
           ))}

@@ -6,6 +6,7 @@
 @import '../styles/token/spacing.css';
 @import '../styles/token/font/primitive.css';
 @import '../styles/fonts.css';
+@import '../styles/layout.css';
 
 @layer base {
   *,

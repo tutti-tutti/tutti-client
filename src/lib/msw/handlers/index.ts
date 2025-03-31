@@ -1,17 +1,17 @@
-import { authHandlers } from './authHandlers';
+// import { authHandlers } from './authHandlers';
 import {
-  productsHandlers,
+  // productsHandlers,
   recommendedProductsHandlers,
-  productDetailHandlers,
+  // productDetailHandlers,
 } from './productsHandlers';
-import { cartHandlers } from './cartHandlers';
-import { orderHistoryHandlers } from './ordersHandlers';
+// import { cartHandlers } from './cartHandlers';
+// import { orderHistoryHandlers } from './ordersHandlers';
 
 export const handlers = [
-  ...authHandlers,
-  ...productsHandlers,
+  // ...authHandlers,
+  // ...productsHandlers,
   ...recommendedProductsHandlers,
-  ...productDetailHandlers,
-  ...cartHandlers,
-  ...orderHistoryHandlers,
+  // ...productDetailHandlers,
+  // ...cartHandlers,
+  // ...orderHistoryHandlers,
 ];

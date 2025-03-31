@@ -68,11 +68,10 @@ export const formatAfterDays = (dateString: string): string => {
  * @param dateString 'yyyy-mm-dd' 형식의 날짜
  * @returns 'yyyy년 mm월 dd일' 형식의 문자열
  */
-export const formatDateWithKorean = (dateString: Date) => {
+export const formatDateWithKorean = (dateString: string | Date): string => {
   if (!dateString) return '';
 
   const date = new Date(dateString);
-  if (isNaN(date.getTime())) return dateString;
 
   const year = date.getFullYear();
   const month = date.getMonth() + 1;

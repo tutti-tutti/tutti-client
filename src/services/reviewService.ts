@@ -149,3 +149,13 @@ export const feedbackIncorrectSentiment = async (
 
   return data;
 };
+
+export const fetchProductReviewInfo = async (productId: string) => {
+  const reviewAverage = await fetchReviewAverage(productId);
+  const { totalCount } = await fetchReviewCountStar(productId);
+
+  return {
+    ...reviewAverage,
+    totalCount,
+  };
+};

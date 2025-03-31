@@ -22,6 +22,7 @@ const ProductDetailItem = ({
   originalPrice,
   productOptionItems,
   maxPurchaseQuantity,
+  productReviewInfo,
 }: Product) => {
   const [selectedOption, setSelectedOption] = useState<ProductOption | null>(
     null,
@@ -79,6 +80,9 @@ const ProductDetailItem = ({
           freeDelivery={freeDelivery}
           almostOutOfStock={almostOutOfStock}
           likes={likes}
+          productReviewInfo={
+            productReviewInfo || { productId, avg: '', totalCount: 0 }
+          }
         />
         <ProductOptions
           productItems={productOptionItems}

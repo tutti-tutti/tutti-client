@@ -1,4 +1,4 @@
-import { fetchProductById } from '@/services';
+import { fetchProductById, fetchProductReviewInfo } from '@/services';
 import {
   RecommendProductList,
   ClientProductDetail,
@@ -38,12 +38,14 @@ export async function generateMetadata({ params, searchParams }: Params) {
 const ProductDetailPage = async ({ params }: Params) => {
   const { productId } = await params;
   const initialProduct = await fetchProductById(productId);
+  const productReviewInfo = await fetchProductReviewInfo(productId);
 
   return (
     <div className="gap-5xl flex flex-col">
       <ClientProductDetail
         initialProduct={initialProduct}
         productId={productId}
+        productReviewInfo={productReviewInfo}
       />
 
       <RecommendProductList categoryName="식료품" />

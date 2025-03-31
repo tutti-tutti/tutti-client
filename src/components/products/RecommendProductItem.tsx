@@ -22,7 +22,7 @@ const RecommendProductItem = ({
         <ProductThumbnail
           imageUrl={titleUrl || 'null'}
           name={name}
-          height="sm:h-[200px] h-auto"
+          height="h-auto"
           width="w-full"
           isDim
           className="aspect-square"

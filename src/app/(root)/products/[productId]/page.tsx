@@ -25,7 +25,7 @@ export async function generateMetadata({ params, searchParams }: Params) {
 
   return {
     title: product.name,
-    siteName: 'Jihye',
+    siteName: 'Tutti',
     description: product.description,
     openGraph: {
       title: product.name,

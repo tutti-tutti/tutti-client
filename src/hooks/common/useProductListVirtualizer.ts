@@ -56,7 +56,7 @@ const useProductListVirtualizer = ({ products }: { products: Product[] }) => {
   const rowVirtualizer = useWindowVirtualizer({
     count: groupedRows.length,
     estimateSize: () => layoutConfig.estimatedSize,
-    overscan: 5,
+    overscan: layoutConfig.overscan,
     gap: layoutConfig.gap,
   });
 

@@ -14,7 +14,7 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: 'Tutti',
-  description: 'Tutti의 프론트엔드입니다.',
+  description: 'Tutti는 당신의 쇼핑을 더 편리하게 만들어주는 서비스입니다.',
 };
 
 export default function RootLayout({

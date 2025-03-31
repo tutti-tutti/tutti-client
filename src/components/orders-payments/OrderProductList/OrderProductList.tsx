@@ -1,9 +1,11 @@
 import { cn, formatAfterDays } from '@/utils';
 import type { OrderItem } from '@/types';
-import { ProductThumbnail } from '@/components';
-import { default as ProductName } from './ProductName';
-import { default as ProductAmoutInfo } from './ProductAmoutInfo';
-import { default as ProductOptionInfo } from './ProductOptionInfo';
+import {
+  ProductThumbnail,
+  ProductName,
+  ProductAmoutInfo,
+  ProductOptionInfo,
+} from '@/components';
 
 interface OrderProductListProps {
   orderItems: Required<OrderItem>[];
@@ -11,7 +13,7 @@ interface OrderProductListProps {
 }
 
 const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
-  const paddingStyles = 'py-md sm:py-lg pr-md sm:pr-lg first:pt-0';
+  const paddingStyles = 'py-md sm:py-lg sm:pr-lg first:pt-0';
   const thumbColumnStyles = 'w-5/12 w-[120px] sm:w-[200px]';
   const infoColumnStyles = 'w-7/12 sm:w-full';
 
@@ -48,7 +50,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
                   className="hidden sm:flex"
                   price={item.price}
                   quantity={item.quantity}
-                  deliveredAt={formatAfterDays(item.deliveredAt)}
+                  deliveredAt={formatAfterDays(item.expectedArrivalAt)}
                 />
               </div>
             </div>
@@ -56,7 +58,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                deliveredAt={formatAfterDays(item.deliveredAt)}
+                deliveredAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
             </div>

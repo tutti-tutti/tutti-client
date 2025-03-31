@@ -11,17 +11,17 @@ interface OrderProductListProps {
 }
 
 const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
-  const updatedOrderItems = getGroupedOrderItemsByDeliveredAt(orderItems);
+  const groupedOrderItems = getGroupedOrderItemsByDeliveredAt(orderItems);
   const gapStyles = `flex gap-md sm:gap-lg`;
 
   return (
     <ul className={cn('flex-col', gapStyles)}>
-      {updatedOrderItems.map(({ deliveredAt, items }) => (
-        <li key={deliveredAt}>
+      {groupedOrderItems.map(({ expectedArrivalAt, items }) => (
+        <li key={expectedArrivalAt}>
           <article className={cn('flex-col', gapStyles)}>
             <div className="gap-xs flex text-xl">
               <strong className="text-text-info">
-                {formatDateWithDay(deliveredAt)}
+                {formatDateWithDay(expectedArrivalAt)}
               </strong>
               <span>도착 예정</span>
             </div>

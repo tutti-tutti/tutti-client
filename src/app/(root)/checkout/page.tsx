@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
-import { formatDateAfterDays } from '@/utils';
+import { getOrderItemsWithExpectedArrivalAt } from '@/utils';
 import {
   OrderProductListGroup,
   CheckoutHeader,
   DeliveryAddress,
   PaymentMethodSelector,
   PaymentSummary,
-  SectionHeadingTitle,
+  SectionTitle,
   Divider,
 } from '@/components';
 
@@ -64,16 +64,6 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  // 현재 날짜로 부터 3~7일 뒤 'yyyy-mm-dd'로 배송 날짜 예정
-  const getDeliveredAt = () =>
-    formatDateAfterDays(Math.floor(Math.random() * 5) + 3);
-
-  const updatedOrderItems = orderItems.map(item =>
-    !item.deliveredAt
-      ? { ...item, ...{ deliveredAt: getDeliveredAt() } }
-      : item,
-  );
-
   const address = {
     recipientName: '엘리자베스',
     recipientPhone: '01012344321',
@@ -83,6 +73,8 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     recipientEmail: 'XXX@gmail.com',
   };
 
+  const updatedOrderItems = getOrderItemsWithExpectedArrivalAt(orderItems);
+
   const adressContainerStyles = 'flex flex-col gap-sm';
 
   return (
@@ -90,21 +82,19 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
       <CheckoutHeader />
 
       <section className={adressContainerStyles}>
-        <SectionHeadingTitle>받는 사람 정보</SectionHeadingTitle>
+        <SectionTitle>받는 사람 정보</SectionTitle>
         <DeliveryAddress className={adressContainerStyles} />
       </section>
 
       <Divider />
 
       <section className="gap-lg flex flex-col">
-        <SectionHeadingTitle className="leading-none">
-          결제 상품 정보
-        </SectionHeadingTitle>
+        <SectionTitle className="leading-none">결제 상품 정보</SectionTitle>
         <OrderProductListGroup orderItems={updatedOrderItems} />
       </section>
 
       <section>
-        <SectionHeadingTitle>결제 예상 가격</SectionHeadingTitle>
+        <SectionTitle>결제 예상 가격</SectionTitle>
         <PaymentSummary
           totalProductAmount={totalProductAmount}
           totalDiscountAmount={totalDiscountAmount}
@@ -114,7 +104,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
       </section>
 
       <section className="h-[610px] md:h-[680px]">
-        <SectionHeadingTitle>결제 수단</SectionHeadingTitle>
+        <SectionTitle>결제 수단</SectionTitle>
         <PaymentMethodSelector
           totalDiscountAmount={totalDiscountAmount}
           totalProductAmount={totalProductAmount}

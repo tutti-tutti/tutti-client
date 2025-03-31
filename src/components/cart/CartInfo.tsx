@@ -14,7 +14,7 @@ import {
 } from '@/components';
 import CartHeader from './CartHeader';
 
-const CartInfo = () => {
+const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const router = useRouter();
   const {
     checkedCount,
@@ -37,10 +37,18 @@ const CartInfo = () => {
     JSON.stringify(payloadCheckedCartItems),
   );
 
-  const handleCheckoutClick = () =>
-    checkedCount === 0
-      ? toast.warning('주문할 상품을 선택해주세요!')
-      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+  const handleCheckoutClick = () => {
+    if (!isLoggedIn) {
+      toast.warning('로그인 후 이용해주세요!');
+      router.push(ROUTER_PATH.LOGIN);
+      return;
+    }
+    if (checkedCount === 0) {
+      toast.warning('주문할 상품을 선택해주세요!');
+    } else {
+      router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+    }
+  };
 
   return (
     <>

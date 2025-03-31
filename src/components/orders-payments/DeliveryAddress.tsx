@@ -1,3 +1,6 @@
+'use client';
+
+import { DELIVERY_ADRESS_INPUT_ITEMS } from '@/constants';
 import { Input } from '@/components';
 
 interface DeliveryAddressProps {
@@ -5,39 +8,19 @@ interface DeliveryAddressProps {
 }
 
 const DeliveryAddress = ({ className }: DeliveryAddressProps) => {
-  const inputStyles = 'bg-bg-tertiary';
   return (
     <form className={className}>
-      <Input
-        className={inputStyles}
-        name="recipientName"
-        type="text"
-        placeholder="이름"
-      />
-      <Input
-        className={inputStyles}
-        name="recipientPhone"
-        type="tel"
-        placeholder="전화번호"
-      />
-      <Input
-        className={inputStyles}
-        name="zipCode"
-        type="tel"
-        placeholder="우편번호"
-      />
-      <Input
-        className={inputStyles}
-        name="recipientAddress"
-        type="text"
-        placeholder="주소"
-      />
-      <Input
-        className={inputStyles}
-        name="note"
-        type="text"
-        placeholder="배송 요청 사항"
-      />
+      {DELIVERY_ADRESS_INPUT_ITEMS.map((item, index) => (
+        <fieldset key={`${item.name}-${index}`}>
+          <legend className="absolute opacity-0">{item.label}</legend>
+          <Input
+            className="bg-bg-tertiary"
+            name={item.name}
+            type={item.type}
+            placeholder={item.placeholder}
+          />
+        </fieldset>
+      ))}
     </form>
   );
 };

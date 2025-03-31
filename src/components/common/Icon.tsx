@@ -41,6 +41,8 @@ import {
   CosmeticIcon,
   NotFoundIcon,
   TinyLogoIcon,
+  MainPageChatbotDesktopIcon,
+  MainPageChatbotMobileIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -87,6 +89,8 @@ export const IconMap: Record<
   cosmetic: CosmeticIcon,
   notFound: NotFoundIcon,
   tinyLogo: TinyLogoIcon,
+  mainChatbotMobile: MainPageChatbotMobileIcon,
+  mainChatbotDesktop: MainPageChatbotDesktopIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

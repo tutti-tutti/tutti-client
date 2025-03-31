@@ -27,7 +27,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: '풀커버',
     quantity: 2,
     price: 10930,
-    deliveredAt: '2025-04-03',
+    expectedArrivalAt: '2025-04-05',
   },
   {
     storeId: 9,
@@ -41,7 +41,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 35310,
-    deliveredAt: '2025-04-05',
+    expectedArrivalAt: '2025-04-05',
   },
   {
     storeId: 4,
@@ -56,7 +56,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 14770,
-    deliveredAt: '2025-04-04',
+    expectedArrivalAt: '2025-04-04',
   },
   {
     storeId: 3,
@@ -70,7 +70,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 49790,
-    deliveredAt: '2025-04-10',
+    expectedArrivalAt: '2025-04-10',
   },
   {
     storeId: 4,
@@ -84,7 +84,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 2,
     price: 10480,
-    deliveredAt: '2025-04-10',
+    expectedArrivalAt: '2025-04-10',
   },
   {
     storeId: 7,
@@ -99,7 +99,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 14910,
-    deliveredAt: '2025-04-04',
+    expectedArrivalAt: '2025-04-04',
   },
 ];
 

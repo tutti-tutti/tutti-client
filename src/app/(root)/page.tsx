@@ -2,8 +2,8 @@ import {
   ProductList,
   RecommendProductList,
   ProductCategory,
+  MainIntroduction,
 } from '@/components';
-import MainIntroduction from '@/components/main/MainIntroduction';
 
 const HomePage = () => {
   return (

@@ -1,1 +1,1 @@
-export * from './MainIntroduction';
+export { default as MainIntroduction } from './MainIntroduction';

@@ -26,7 +26,7 @@ const ProductItem = ({
           <ProductThumbnail
             imageUrl={titleUrl}
             name={name}
-            height="sm:h-[240px] h-auto"
+            height="h-auto"
             width="w-full"
             isDim
             className="aspect-square"

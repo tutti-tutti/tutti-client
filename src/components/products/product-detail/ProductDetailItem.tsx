@@ -64,9 +64,10 @@ const ProductDetailItem = ({
       <figure className="md:w-1/2">
         <ProductThumbnail
           width="w-full"
-          height="h-[350px] sm:h-[630px]"
+          height="h-auto"
           imageUrl={titleUrl}
           name={name}
+          className="aspect-square"
         />
       </figure>
 

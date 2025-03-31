@@ -9,7 +9,6 @@ interface ProductHeaderProps {
   freeDelivery?: boolean;
   almostOutOfStock?: boolean;
   likes: number;
-  productId: number;
   productReviewInfo: ProductReviewInfo;
 }
 
@@ -21,6 +20,17 @@ const ProductHeader = ({
   likes,
   productReviewInfo,
 }: ProductHeaderProps) => {
+  const handleProductReviewInfoClick = (
+    e: React.MouseEvent<HTMLDivElement>,
+    id: string,
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="md:border-border-secondary pb-lg md:border-b">
       <Link href="#" className="text-text-secondary font-style-subHeading">
@@ -46,10 +56,15 @@ const ProductHeader = ({
               </div>
             )}
           </div>
-          <div className="font-style-paragraph flex items-center">
+          <div
+            className="font-style-paragraph group flex cursor-pointer items-center"
+            onClick={e => handleProductReviewInfoClick(e, 'product-review')}
+          >
             <Icon iconName="starFill" />
-            <div className="text-text-primary">{productReviewInfo.avg}</div>
-            <div className="text-text-secondary ml-1">
+            <div className="text-text-primary group-hover:text-text-selected">
+              {productReviewInfo.avg}
+            </div>
+            <div className="text-text-secondary group-hover:text-text-selected ml-1">
               ({productReviewInfo.totalCount})
             </div>
           </div>

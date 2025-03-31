@@ -59,7 +59,7 @@ const ProductDetailPage = async ({ params }: Params) => {
         <ProductDetailInfo initialProduct={initialProduct} />
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col" id="product-review">
         <div className="mb-md">
           <h2 className="font-style-subHeading text-text-primary">상품 리뷰</h2>
           <p className="text-text-secondary font-style-paragraph">

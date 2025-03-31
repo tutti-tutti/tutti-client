@@ -43,6 +43,7 @@ import {
   TinyLogoIcon,
   MainPageChatbotDesktopIcon,
   MainPageChatbotMobileIcon,
+  ThinkingFaceIcon,
 } from '../icons';
 
 export const IconMap: Record<
@@ -91,6 +92,7 @@ export const IconMap: Record<
   tinyLogo: TinyLogoIcon,
   mainChatbotMobile: MainPageChatbotMobileIcon,
   mainChatbotDesktop: MainPageChatbotDesktopIcon,
+  thinkingFace: ThinkingFaceIcon,
 };
 
 interface IconComponentProps extends React.SVGProps<SVGSVGElement> {

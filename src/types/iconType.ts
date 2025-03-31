@@ -40,4 +40,5 @@ export type IconType =
   | 'notFound'
   | 'tinyLogo'
   | 'mainChatbotDesktop'
-  | 'mainChatbotMobile';
+  | 'mainChatbotMobile'
+  | 'thinkingFace';

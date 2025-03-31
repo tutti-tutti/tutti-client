@@ -63,7 +63,11 @@ const ReviewBadge = ({
       ? '소중한 피드백을 전송 완료했어요'
       : hoverText;
 
-  const iconName = !hover ? type : optimisticFeedback ? 'check' : 'view'; // 📌 thinking 아이콘으로 수정 필요!
+  const iconName = !hover
+    ? type
+    : optimisticFeedback
+      ? 'check'
+      : 'thinkingFace';
 
   const handleHover = () => {
     if (textSize === 'subHeading') return;

@@ -38,4 +38,6 @@ export type IconType =
   | 'digital'
   | 'cosmetic'
   | 'notFound'
-  | 'tinyLogo';
+  | 'tinyLogo'
+  | 'mainChatbotDesktop'
+  | 'mainChatbotMobile';

@@ -38,3 +38,5 @@ export { default as DigitalIcon } from './DigitalIcon';
 export { default as CosmeticIcon } from './CosmeticIcon';
 export { default as NotFoundIcon } from './NotFoundIcon';
 export { default as TinyLogoIcon } from './TinyLogoIcon';
+export { default as MainPageChatbotMobileIcon } from './MainPageChatbotMobileIcon';
+export { default as MainPageChatbotDesktopIcon } from './MainPageChatbotDesktopIcon';

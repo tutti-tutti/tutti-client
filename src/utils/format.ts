@@ -62,3 +62,20 @@ export const formatAfterDays = (dateString: string): string => {
 
   return `${diffDays}일 뒤 도착 예상`;
 };
+
+/**
+ * 'yyyy-mm-dd' 형식의 날짜 문자열을 'yyyy년 mm월 dd일' 형식으로 반환하는 함수
+ * @param dateString 'yyyy-mm-dd' 형식의 날짜
+ * @returns 'yyyy년 mm월 dd일' 형식의 문자열
+ */
+export const formatDateWithKorean = (dateString: string | Date): string => {
+  if (!dateString) return '';
+
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}년 ${month}월 ${day}일`;
+};

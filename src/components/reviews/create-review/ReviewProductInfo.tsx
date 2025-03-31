@@ -11,7 +11,7 @@ const tempFetchOrder = async (orderId: string, productItemId: string) => {
     paymentType: 'CARD',
     orderedAt: '2025-03-25T07:20:41.050Z',
     paidAt: '2025-03-25T07:20:41.050Z',
-    deliveredAt: '2025-03-25T07:20:41.050Z',
+    expectedArrivalAt: '2025-03-25T07:20:41.050Z',
     completedAt: '2025-03-25T07:20:41.050Z',
     orderItems: [
       {

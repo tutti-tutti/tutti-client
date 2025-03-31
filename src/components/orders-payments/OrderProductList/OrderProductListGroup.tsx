@@ -1,7 +1,7 @@
 import {
   cn,
   formatDateWithDay,
-  getGroupedOrderItemsByDeliveredAt,
+  getGroupedOrderItemsByExpectedArrivalAt,
 } from '@/utils';
 import type { OrderItem } from '@/types';
 import { default as OrderProductList } from './OrderProductList';
@@ -11,7 +11,7 @@ interface OrderProductListProps {
 }
 
 const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
-  const groupedOrderItems = getGroupedOrderItemsByDeliveredAt(orderItems);
+  const groupedOrderItems = getGroupedOrderItemsByExpectedArrivalAt(orderItems);
   const gapStyles = `flex gap-md sm:gap-lg`;
 
   return (

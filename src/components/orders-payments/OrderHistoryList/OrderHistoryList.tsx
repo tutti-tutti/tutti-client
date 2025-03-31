@@ -69,7 +69,9 @@ const OrderHistoryList = ({
                       className="hidden w-full items-center md:flex"
                       price={item.price}
                       quantity={item.quantity}
-                      deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                      expectedArrivalAt={formatAfterDays(
+                        item.expectedArrivalAt,
+                      )}
                     />
                   </div>
 
@@ -86,7 +88,7 @@ const OrderHistoryList = ({
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
               <OrdersActions />

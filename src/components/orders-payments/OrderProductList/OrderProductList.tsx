@@ -50,7 +50,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
                   className="hidden sm:flex"
                   price={item.price}
                   quantity={item.quantity}
-                  deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                  expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 />
               </div>
             </div>
@@ -58,7 +58,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
             </div>

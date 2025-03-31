@@ -31,7 +31,7 @@ const ReviewBadge = ({
   );
 
   const defaultClass = {
-    bg: 'gap-xs px-sm py-xs items-center rounded-xl inline-flex border border-transparent',
+    bg: 'gap-xs px-sm py-xs items-center rounded-xl inline-flex border border-transparent max-md:px-sm max-md:py-xs',
     text: `font-style-${textSize}`,
   };
 

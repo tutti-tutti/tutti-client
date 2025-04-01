@@ -4,9 +4,8 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-import { fetchReviews } from '@/services';
 import { reviewServerStore } from '@/stores';
-import { QUERY_KEYS_ENDPOINT } from '@/constants';
+import { reviewsPrefetchInfiniteQueryOptions } from '@/queries';
 import ReviewList from './ReviewList';
 import AverageReview from './AverageReview';
 
@@ -22,15 +21,12 @@ const ProductReview = async () => {
     },
   });
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: [
-      QUERY_KEYS_ENDPOINT.REVIEWS,
+  await queryClient.prefetchInfiniteQuery(
+    reviewsPrefetchInfiniteQueryOptions(
       productIdParams,
       reviewSortSearchParams,
-    ],
-    queryFn: () => fetchReviews(productIdParams, reviewSortSearchParams, 10),
-    initialPageParam: null,
-  });
+    ),
+  );
 
   return (
     <div>

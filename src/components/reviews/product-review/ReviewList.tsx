@@ -1,15 +1,10 @@
 'use client';
 
 import { useCallback, useEffect } from 'react';
-import { useInfiniteQuery, type InfiniteData } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { fetchReviewsAction } from '@/server-actions';
-import type {
-  ReviewItemAPISchema,
-  ReviewsResponse,
-  ReviewPageParam,
-} from '@/types';
-import { QUERY_KEYS_ENDPOINT } from '@/constants';
+import { reviewsInfiniteQueryOptions } from '@/queries';
+import type { ReviewItemAPISchema } from '@/types';
 import ReviewFilter from './ReviewFilter';
 import ReviewItem from './ReviewItem';
 
@@ -23,40 +18,9 @@ const ReviewList = ({
   reviewSortSearchParams,
 }: ReviewListProps) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteQuery<
-      ReviewsResponse,
-      Error,
-      InfiniteData<ReviewsResponse>,
-      string[],
-      ReviewPageParam | null
-    >({
-      queryKey: [
-        QUERY_KEYS_ENDPOINT.REVIEWS,
-        productIdParams,
-        reviewSortSearchParams,
-      ],
-      queryFn: ({ pageParam }) => {
-        return fetchReviewsAction(
-          productIdParams,
-          reviewSortSearchParams,
-          10,
-          pageParam?.reviewId,
-          pageParam?.extraData,
-        );
-      },
-      initialPageParam: null,
-      getNextPageParam: (lastPage: ReviewsResponse): ReviewPageParam | null => {
-        if (!lastPage.hasNext) return null;
-
-        return {
-          reviewId: lastPage.cursor.reviewId,
-          extraData:
-            lastPage.cursor.rating?.toString() ||
-            lastPage.cursor.likeCount?.toString(),
-        };
-      },
-      staleTime: 60 * 1000,
-    });
+    useInfiniteQuery(
+      reviewsInfiniteQueryOptions(productIdParams, reviewSortSearchParams),
+    );
 
   const allReviews = data?.pages.flatMap(page => page.reviews) || [];
 

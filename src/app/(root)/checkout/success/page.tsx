@@ -20,8 +20,6 @@ const PaymentSuccessPage = async ({
     redirect(ROUTER_PATH.CHECKOUT_FAIL);
   }
 
-  console.log(paymentKey, orderId, amount);
-
   const data = await confirmPayApproveSuccess({
     paymentKey,
     orderId: orderId,

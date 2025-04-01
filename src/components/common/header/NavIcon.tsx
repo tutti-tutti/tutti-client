@@ -1,12 +1,15 @@
+import type { IconType } from '@/types';
+import Icon from '../Icon';
+
 interface NavIconProps {
-  icon: React.ReactNode;
+  icon: IconType;
   label: string;
 }
 
 const NavIcon = ({ icon, label }: NavIconProps) => {
   return (
     <div className="gap-2xs transition-300 text-text-primary hover:text-text-primaryHover active:text-text-primaryPressed flex cursor-pointer flex-col items-center text-sm transition-colors duration-300">
-      <div>{icon}</div>
+      <Icon iconName={icon} style={{ height: '24px', width: '24px' }} />
       <span
         className="hidden text-sm whitespace-nowrap md:block"
         aria-label={label}

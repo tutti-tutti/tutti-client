@@ -1,5 +1,5 @@
 import { cn } from '@/utils';
-import type { OrderItem } from '@/types';
+import type { OrderItem, OrderStatus } from '@/types';
 import {
   ProductThumbnail,
   ProductName,
@@ -54,7 +54,7 @@ const OrderHistoryList = ({
                     'gap-2xs items-between flex flex-col',
                   )}
                 >
-                  <OrderStatusBadge orderStatus={orderStatus} />
+                  <OrderStatusBadge orderStatus={orderStatus as OrderStatus} />
 
                   <div className="gap-xs flex flex-1 flex-col">
                     <ProductName

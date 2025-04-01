@@ -1,7 +1,5 @@
-import type { BadgeVariant } from '@/types';
+import type { BadgeVariant, OrderStatus } from '@/types';
 import { Badge } from '@/components';
-
-type OrderStatus = 'CANCELED' | 'DONE' | string;
 
 interface OrderStatusBadgeProps {
   orderStatus: OrderStatus;
@@ -14,19 +12,23 @@ interface StatusInfo {
 
 const OrderStatusBadge = ({ orderStatus }: OrderStatusBadgeProps) => {
   const status: Record<OrderStatus, StatusInfo> = {
-    CANCELED: {
-      label: '주문 취소',
-      variant: 'secondaryOutlineSquare',
+    READY: {
+      label: '결제 대기',
+      variant: 'warningOutlineSquare',
     },
     DONE: {
       label: '결제 완료',
       variant: 'successOutlineSquare',
     },
+    CANCELED: {
+      label: '주문 취소',
+      variant: 'secondaryOutlineSquare',
+    },
   };
 
   return (
-    <Badge variant={status[orderStatus]?.variant || 'primaryOutlineSquare'}>
-      {status[orderStatus]?.label || '확인 중'}
+    <Badge orderStatus={orderStatus}>
+      {status[orderStatus]?.label || orderStatus}
     </Badge>
   );
 };

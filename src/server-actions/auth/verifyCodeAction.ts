@@ -49,14 +49,14 @@ export const verifyCodeAction = async (
         return {
           ...prevState,
           success: false,
-          error:
+          serverError:
             serverErrorMessage || '인증 번호 확인 중 서버 오류가 발생했습니다.',
         };
       } else if (error.request) {
         return {
           ...prevState,
           success: false,
-          error: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
+          serverError: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
         };
       }
     }
@@ -65,7 +65,7 @@ export const verifyCodeAction = async (
       ...prevState,
       success: false,
       codeVerified: false,
-      error: '인증 번호 확인 중 알 수 없는 오류가 발생했습니다.',
+      serverError: '인증 번호 확인 중 알 수 없는 오류가 발생했습니다.',
     };
   }
 };

@@ -13,6 +13,7 @@ export interface EmailVerificationState {
   pwError?: string;
   checkPwError?: string;
   essentialPolicyError?: string;
+  serverError?: string;
 }
 
 export interface SignupTerm {

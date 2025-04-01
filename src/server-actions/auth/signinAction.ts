@@ -10,7 +10,7 @@ import type { EmailVerificationState } from '@/types';
 export const signinAction = async (
   prevState: EmailVerificationState,
   formData: FormData,
-) => {
+): Promise<EmailVerificationState> => {
   try {
     const email = formData.get('email');
     const pw = formData.get('pw');
@@ -64,21 +64,21 @@ export const signinAction = async (
         return {
           ...prevState,
           success: false,
-          error:
+          serverError:
             serverErrorMessage || '로그인 요청 중 서버 오류가 발생했습니다.',
         };
       } else if (error.request) {
         return {
           ...prevState,
           success: false,
-          error: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
+          serverError: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
         };
       }
     }
 
     return {
       success: false,
-      error: '로그인 요청 중 알 수 없는 오류가 발생했습니다.',
+      serverError: '로그인 요청 중 알 수 없는 오류가 발생했습니다.',
     };
   }
 };

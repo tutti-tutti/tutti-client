@@ -94,6 +94,11 @@ const ResetPwForm = () => {
       ? isCodeVerificationPending
       : isResetPwPending;
 
+  const serverError =
+    emailVerificationState.serverError ||
+    codeVerificationState.serverError ||
+    resetPwState.serverError;
+
   return (
     <form action={action}>
       <fieldset className="flex flex-col">
@@ -128,6 +133,9 @@ const ResetPwForm = () => {
                 isNewPw
               />
             )}
+        </div>
+        <div className="text-text-danger font-style-info text-center">
+          {serverError}
         </div>
         <Button
           type="submit"

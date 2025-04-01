@@ -18,6 +18,7 @@ export const AUTH_CONSTANTS = {
     LABEL: '이메일 입력',
     PLACEHOLDER: '이메일을 입력해주세요',
     ERROR: '유효한 이메일 주소를 입력해주세요.',
+    SUCCESS: '이메일 인증이 완료되었습니다.',
   },
   VERIFY_EMAIL_INPUT: {
     LABEL: '인증번호 입력',

@@ -6,8 +6,9 @@ import {
 
 import { reviewServerStore } from '@/stores';
 import { reviewsPrefetchInfiniteQueryOptions } from '@/queries';
-import ReviewList from './ReviewList';
 import AverageReview from './AverageReview';
+import ReviewSort from './ReviewSort';
+import ReviewList from './ReviewList';
 
 const ProductReview = async () => {
   const { getParams } = reviewServerStore();
@@ -31,6 +32,7 @@ const ProductReview = async () => {
   return (
     <div>
       <AverageReview />
+      <ReviewSort />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ReviewList
           productIdParams={productIdParams}

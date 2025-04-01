@@ -9,6 +9,7 @@ import { useProductListVirtualizer } from '@/hooks';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
 import { MoreViewButton } from '../common';
+import ProductListSkeleton from './skeleton/ProductListSkeleton';
 
 const ClientProductList = () => {
   const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
@@ -100,11 +101,7 @@ const ClientProductList = () => {
         <MoreViewButton onClick={handleMoreView} />
       )}
 
-      {isFetchingNextPage && (
-        <div className="mt-md py-md font-style-paragraph text-center">
-          추가 상품을 가져오고 있어요...
-        </div>
-      )}
+      {isFetchingNextPage && <ProductListSkeleton />}
     </section>
   );
 };

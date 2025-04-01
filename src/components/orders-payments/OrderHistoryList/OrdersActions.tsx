@@ -43,7 +43,7 @@ const OrdersActions = ({
         className={buttonStyles}
         onClick={handleConfirmShipping}
       >
-        배송조회
+        배송 조회
       </Button>
       <Button
         type="button"
@@ -51,7 +51,7 @@ const OrdersActions = ({
         className={buttonStyles}
         onClick={handleCancelOrder}
       >
-        주문취소
+        주문 취소
       </Button>
     </article>
   );

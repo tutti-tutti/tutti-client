@@ -6,16 +6,18 @@ import { requestRefundPayment } from '@/services';
 import { ROUTER_PATH } from '@/constants';
 import { Icon, ExtraButton } from '@/components';
 
-interface OrderHistoryListGroupProps {
+interface OrderHistoryListGroupHeaderProps {
   orderId: number;
   orderNumber: string;
 }
 
-const OrderHistoryListGroup = ({
+const OrderHistoryListGroupHeader = ({
   orderId,
   orderNumber,
-}: OrderHistoryListGroupProps) => {
+}: OrderHistoryListGroupHeaderProps) => {
   const handleCancelOrder = async () => {
+    confirm('주문 번호의 전체 상품 주문이 취소됩니다. 진행 하시겠습니까?');
+
     await requestRefundPayment({
       orderNumber,
       cancelReason: '',
@@ -39,4 +41,4 @@ const OrderHistoryListGroup = ({
   );
 };
 
-export default OrderHistoryListGroup;
+export default OrderHistoryListGroupHeader;

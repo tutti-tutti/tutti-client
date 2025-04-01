@@ -15,8 +15,8 @@ interface ProductHeaderProps {
 const ProductHeader = ({
   storeName,
   name,
-  freeDelivery = true,
-  almostOutOfStock = true,
+  freeDelivery,
+  almostOutOfStock,
   likes,
   productReviewInfo,
 }: ProductHeaderProps) => {

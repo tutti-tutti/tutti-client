@@ -25,8 +25,8 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
       : '부정적인 반응을 보이는 리뷰에요';
 
   return (
-    <div className="py-lg gap-md border-border-secondary flex flex-col border-b">
-      <div className="mb-sm flex justify-between">
+    <div className="py-lg gap-md border-border-secondary max-md:py-sm flex flex-col border-b">
+      <div className="mb-sm flex justify-between max-md:mb-0">
         <div>
           <div className="font-style-paragraph text-text-secondary ml-2xs">
             {review.nickname}
@@ -40,7 +40,7 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
       <div className="font-style-paragraph text-text-primary ml-2xs">
         {review.content}
       </div>
-      <div className="gap-xl flex justify-end">
+      <div className="gap-xl max-sm:gap-md flex h-auto justify-end max-sm:flex-col max-sm:items-end">
         <ReviewBadge
           textSize="paragraph"
           type={review.sentiment}

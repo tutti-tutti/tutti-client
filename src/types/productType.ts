@@ -1,3 +1,4 @@
+import type { ProductReviewInfo } from '@/types';
 import { StaticImageData } from 'next/image';
 
 export interface ProductOption {
@@ -27,4 +28,5 @@ export interface Product {
   almostOutOfStock?: boolean;
   productOptionItems: ProductOption[];
   maxPurchaseQuantity: number;
+  productReviewInfo?: ProductReviewInfo;
 }

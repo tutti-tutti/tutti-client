@@ -31,7 +31,7 @@ const ReviewBadge = ({
   );
 
   const defaultClass = {
-    bg: 'gap-xs px-sm py-xs items-center rounded-xl inline-flex border border-transparent',
+    bg: 'gap-xs px-sm py-xs items-center rounded-xl inline-flex border border-transparent max-md:px-sm max-md:py-xs',
     text: `font-style-${textSize}`,
   };
 
@@ -51,26 +51,27 @@ const ReviewBadge = ({
     bg: `cursor-pointer border ${type === 'positive' ? 'border-border-success' : 'border-border-danger'}`,
     icon: `fill-current ${type === 'positive' ? 'text-icon-success' : 'text-icon-danger'}`,
   };
+  const badgeClass = hover ? hoverClass : typeClass;
 
   const hoverText =
     type === 'positive'
       ? '긍정적인 반응의 리뷰가 아니에요'
       : '부정적인 반응의 리뷰가 아니에요';
-  const badgeText =
-    !hover && textSize === 'paragraph'
-      ? children
-      : optimisticFeedback
-        ? '소중한 피드백을 전송 완료했어요'
-        : hoverText;
+  const badgeText = !hover
+    ? children
+    : optimisticFeedback
+      ? '소중한 피드백을 전송 완료했어요'
+      : hoverText;
 
-  const iconName =
-    !hover && textSize === 'paragraph'
-      ? type
-      : optimisticFeedback
-        ? 'check'
-        : 'view'; // 📌 thinking 아이콘으로 수정 필요!
+  const iconName = !hover
+    ? type
+    : optimisticFeedback
+      ? 'check'
+      : 'thinkingFace';
 
   const handleHover = () => {
+    if (textSize === 'subHeading') return;
+
     setHover(prev => !prev);
   };
 
@@ -92,12 +93,9 @@ const ReviewBadge = ({
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={handleClick}
-      className={cn(defaultClass.bg, typeClass.bg, hover && hoverClass.bg)}
+      className={cn(defaultClass.bg, badgeClass.bg)}
     >
-      <Icon
-        iconName={iconName}
-        className={cn(typeClass.icon, hover && hoverClass.icon)}
-      />
+      <Icon iconName={iconName} className={cn(badgeClass.icon)} />
       <div className={cn(defaultClass.text, typeClass.text)}>{badgeText}</div>
     </div>
   );

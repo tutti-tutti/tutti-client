@@ -4,3 +4,9 @@ export interface CreateReviewState {
   reviewContentError?: string;
   error?: string;
 }
+
+export interface ProductReviewInfo {
+  productId: number;
+  avg: string;
+  totalCount: number;
+}

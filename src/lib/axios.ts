@@ -15,6 +15,8 @@ export const axiosInstance = axios.create({
     Accept: 'application/json',
   },
   timeout: 10000,
+  adapter: 'fetch',
+  fetchOptions: { cache: 'force-cache', next: { revalidate: 3600 } },
 });
 
 if (isServer) {

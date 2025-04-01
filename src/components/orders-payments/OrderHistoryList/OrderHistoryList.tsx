@@ -12,11 +12,18 @@ import { default as OrdersExtraActions } from './OrdersExtraActions';
 
 interface OrderProductListProps {
   orderId: number;
+  orderNumber: string;
   orderItems: OrderItem[];
 }
 
-const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
-  const paddingStyles = 'py-md md:p-lg';
+const OrderHistoryList = ({
+  orderId,
+  orderNumber,
+  orderItems,
+}: OrderProductListProps) => {
+  const itemsCount = orderItems.length;
+
+  const paddingStyles = 'px-0 py-md md:p-lg';
   const thumbColumnStyles = 'w-[120px] md:w-[288px]';
   const infoColumnStyles = 'w-full md:w-full';
 
@@ -71,11 +78,17 @@ const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
                     />
                   </div>
 
-                  <OrdersExtraActions orderId={orderId} />
+                  <OrdersExtraActions
+                    orderId={orderId}
+                    productItemId={item.productItemId}
+                  />
                 </div>
               </article>
               <div className="hidden md:flex">
-                <OrdersActions />
+                <OrdersActions
+                  itemsCount={itemsCount}
+                  orderNumber={orderNumber}
+                />
               </div>
             </div>
 
@@ -87,7 +100,10 @@ const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
                 expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
-              <OrdersActions />
+              <OrdersActions
+                itemsCount={itemsCount}
+                orderNumber={orderNumber}
+              />
             </div>
           </article>
         </li>

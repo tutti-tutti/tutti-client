@@ -1,18 +1,28 @@
+'use client';
+
+import { redirect } from 'next/navigation';
+import { ROUTER_PATH } from '@/constants';
 import { ExtraButton } from '@/components';
 
 interface OrdersExtraActionsProps {
   orderId: number;
+  productItemId: number;
 }
 
-const OrdersExtraActions = ({ orderId }: OrdersExtraActionsProps) => {
+const OrdersExtraActions = ({
+  orderId,
+  productItemId,
+}: OrdersExtraActionsProps) => {
+  const handleWriteReview = () =>
+    redirect(ROUTER_PATH.REVIEW_PRODUCT(orderId, productItemId));
+
   return (
     <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
         주문번호 : {orderId}
       </div>
       <div className="gap-xs flex justify-end">
-        <ExtraButton>장바구니 담기</ExtraButton>
-        <ExtraButton>리뷰 작성</ExtraButton>
+        <ExtraButton onClick={handleWriteReview}>리뷰 작성</ExtraButton>
       </div>
     </article>
   );

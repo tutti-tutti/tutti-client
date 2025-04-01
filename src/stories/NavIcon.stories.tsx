@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  NavIcon,
-  HeaderNavigation,
-  NationIcon,
-  CartIcon,
-  UserIcon,
-} from '@/components';
+import { NavIcon } from '@/components';
 import { PATH_NAME } from '@/constants';
 
 const meta = {
@@ -18,8 +12,8 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     icon: {
-      control: { type: 'object' },
-      description: '아이콘 컴포넌트',
+      control: { type: 'text' },
+      description: '아이콘 타입 (문자열)',
     },
     label: {
       control: 'text',
@@ -33,29 +27,21 @@ type Story = StoryObj<typeof meta>;
 
 export const CountrySetting: Story = {
   args: {
-    icon: <NationIcon />,
+    icon: 'nation',
     label: PATH_NAME.COUNTRY_SETTING,
   },
 };
 
 export const Cart: Story = {
   args: {
-    icon: <CartIcon />,
+    icon: 'cart',
     label: PATH_NAME.CART,
   },
 };
 
 export const MyPage: Story = {
   args: {
-    icon: <UserIcon />,
+    icon: 'user',
     label: PATH_NAME.MY_PAGE,
   },
-};
-
-export const All: Story = {
-  args: {
-    icon: <HeaderNavigation />,
-    label: '',
-  },
-  render: () => <HeaderNavigation />,
 };

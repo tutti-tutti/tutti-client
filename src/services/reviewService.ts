@@ -1,6 +1,5 @@
 import { REVIEW_ENDPOINTS } from '@/constants';
 import { axiosInstance } from '@/lib';
-import { getReviewSortSearchParams } from '@/utils';
 
 const fetchReviewsLatest = async (
   productId: string,
@@ -18,7 +17,7 @@ const fetchReviewsLike = async (
   productId: string,
   size: number,
   reviewId?: number,
-  likeCount?: number,
+  likeCount?: string,
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_LIKE(productId, size, reviewId, likeCount),
@@ -31,7 +30,7 @@ const fetchReviewsRating = async (
   productId: string,
   size: number,
   reviewId?: number,
-  rating?: number,
+  rating?: string,
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_RATING(productId, size, reviewId, rating),
@@ -42,39 +41,19 @@ const fetchReviewsRating = async (
 
 export const fetchReviews = async (
   productId: string,
+  reviewSort: string,
   size: number,
   reviewId?: number,
-  extraData?: number,
+  extraData?: string,
 ) => {
-  const sort = getReviewSortSearchParams();
-
-  if (sort === 'latest') {
+  if (reviewSort === 'latest')
     return await fetchReviewsLatest(productId, size, reviewId);
-  }
 
-  if (sort === 'like') {
+  if (reviewSort === 'like')
     return await fetchReviewsLike(productId, size, reviewId, extraData);
-  }
 
-  if (sort === 'rating') {
+  if (reviewSort === 'rating')
     return await fetchReviewsRating(productId, size, reviewId, extraData);
-  }
-
-  return;
-};
-
-const fetchReviewDetail = async (reviewId: number) => {
-  const { data } = await axiosInstance.get(
-    REVIEW_ENDPOINTS.REVIEW_DETAIL(reviewId),
-  );
-
-  return data;
-};
-
-export const fetchReviewIsLike = async (reviewId: number) => {
-  const { liked } = await fetchReviewDetail(reviewId);
-
-  return liked;
 };
 
 export const reviewLike = async (reviewId: number) => {
@@ -148,4 +127,14 @@ export const feedbackIncorrectSentiment = async (
   });
 
   return data;
+};
+
+export const fetchProductReviewInfo = async (productId: string) => {
+  const reviewAverage = await fetchReviewAverage(productId);
+  const { totalCount } = await fetchReviewCountStar(productId);
+
+  return {
+    ...reviewAverage,
+    totalCount,
+  };
 };

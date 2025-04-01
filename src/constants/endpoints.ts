@@ -61,23 +61,22 @@ export const REVIEW_ENDPOINTS = {
     productId: string,
     size: number,
     reviewId?: number,
-    likeCount?: number,
+    likeCount?: string,
   ) =>
-    `${API_RESOURCES.REVIEWS}/${productId}/like?size=${size}${reviewId ? `&reviewId=${reviewId}` : ''}${likeCount ? `&likeCount=${likeCount}` : ''}`,
+    `${API_RESOURCES.REVIEWS}/${productId}/like?size=${size}${reviewId && likeCount ? `&reviewId=${reviewId}&likeCount=${likeCount.toString()}` : ''}`,
   REVIEWS_RATING: (
     productId: string,
     size: number,
     reviewId?: number,
-    rating?: number,
+    rating?: string,
   ) =>
-    `${API_RESOURCES.REVIEWS}/${productId}/rating?size=${size}${reviewId ? `&reviewId=${reviewId}` : ''}${rating ? `&rating=${rating}` : ''}`,
+    `${API_RESOURCES.REVIEWS}/${productId}/rating?size=${size}${reviewId && rating ? `&reviewId=${reviewId}&rating=${rating.toString()}` : ''}`,
   REVIEW_AVERAGE: (productId: string) =>
     `${API_RESOURCES.REVIEWS}/${productId}/average`,
   REVIEW_COUNTSTAR: (productId: string) =>
     `${API_RESOURCES.REVIEWS}/${productId}/countStar`,
   REVIEW_POSITIVE_AVERAGE: (productId: string) =>
     `${API_RESOURCES.REVIEWS}/${productId}/positiv`,
-  REVIEW_DETAIL: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}`,
   LIKE: (reviewId: number) => `${API_RESOURCES.REVIEWS}/${reviewId}/reviewLike`,
   CREATE_REVIEW: API_RESOURCES.REVIEWS,
   ANALYZE_SENTIMENT: `${API_RESOURCES.REVIEWS}/analyze-sentiment`,

@@ -6,7 +6,7 @@ export const PRODUCTS_CONSTANTS = {
 };
 
 export const PRODUCT_LIST_LAYOUT_CONFIG = {
-  mobile: { columns: 1, estimatedSize: 170, gap: 24 },
-  tablet: { columns: 3, estimatedSize: 424, gap: 80 },
-  desktop: { columns: 5, estimatedSize: 424, gap: 80 },
+  mobile: { columns: 1, estimatedSize: 200, gap: 24, overscan: 10 },
+  tablet: { columns: 3, estimatedSize: 424, gap: 80, overscan: 5 },
+  desktop: { columns: 5, estimatedSize: 424, gap: 80, overscan: 5 },
 };

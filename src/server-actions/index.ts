@@ -6,4 +6,5 @@ export * from './auth/signinAction';
 export * from './review/reviewLikeAction';
 export * from './review/createReviewAction';
 export * from './faq/faqSearchAction';
+export * from './review/fetchReviewsAction';
 export * from './review/sentimentFeedbackAction';

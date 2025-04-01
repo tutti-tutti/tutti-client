@@ -7,16 +7,16 @@ import { reviewLikeAction } from '@/server-actions';
 
 interface ReviewLikeButtonProps {
   id: number;
-  isLiked: boolean;
+  liked?: boolean;
 }
 
 const ReviewLikeButton = ({
   id,
-  isLiked: initialIsLiked,
+  liked: initialLiked,
 }: ReviewLikeButtonProps) => {
   const [optimisticIsLiked, setOptimisticIsLiked] = useOptimistic(
-    initialIsLiked,
-    (_, newIsLiked: boolean) => newIsLiked,
+    initialLiked || false,
+    (newIsLiked: boolean) => newIsLiked,
   );
 
   const handleLikeClick = () => {
@@ -37,6 +37,7 @@ const ReviewLikeButton = ({
         optimisticIsLiked ? 'primaryOutline' : 'tertiaryOutlineInteraction'
       }
       onClick={handleLikeClick}
+      className="max-md:px-sm! max-md:py-xs!"
     >
       도움이 되는 리뷰에요
     </Button>

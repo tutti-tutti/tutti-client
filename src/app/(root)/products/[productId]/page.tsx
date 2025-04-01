@@ -1,31 +1,26 @@
-import { fetchProductById } from '@/services';
+import { fetchProductById, fetchProductReviewInfo } from '@/services';
 import {
   RecommendProductList,
   ClientProductDetail,
   ProductReview,
   ProductDetailInfo,
 } from '@/components';
-import { setReviewSortSearchParams, setProductIdParams } from '@/utils';
+import { reviewServerStore } from '@/stores';
 
 interface Params {
   params: Promise<{ productId: string }>;
   searchParams: Promise<{ 'review-sort': string }>;
 }
 
-export async function generateMetadata({ params, searchParams }: Params) {
+export async function generateMetadata({ params }: Params) {
   const { productId } = await params;
   const product = await fetchProductById(productId);
-
-  const { 'review-sort': reviewSortSearchParams } = await searchParams;
-
-  setProductIdParams(productId);
-  setReviewSortSearchParams(reviewSortSearchParams);
 
   if (!product) return;
 
   return {
     title: product.name,
-    siteName: 'Jihye',
+    siteName: 'Tutti',
     description: product.description,
     openGraph: {
       title: product.name,
@@ -35,15 +30,21 @@ export async function generateMetadata({ params, searchParams }: Params) {
   };
 }
 
-const ProductDetailPage = async ({ params }: Params) => {
+const ProductDetailPage = async ({ params, searchParams }: Params) => {
   const { productId } = await params;
   const initialProduct = await fetchProductById(productId);
+  const { 'review-sort': reviewSortSearchParams } = await searchParams;
+  const { setParams } = reviewServerStore();
+  const productReviewInfo = await fetchProductReviewInfo(productId);
+  
+  setParams({ productIdParams: productId, reviewSortSearchParams });
 
   return (
     <div className="gap-5xl flex flex-col">
       <ClientProductDetail
         initialProduct={initialProduct}
         productId={productId}
+        productReviewInfo={productReviewInfo}
       />
 
       <RecommendProductList categoryName="식료품" />
@@ -57,7 +58,7 @@ const ProductDetailPage = async ({ params }: Params) => {
         <ProductDetailInfo initialProduct={initialProduct} />
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col" id="product-review">
         <div className="mb-md">
           <h2 className="font-style-subHeading text-text-primary">상품 리뷰</h2>
           <p className="text-text-secondary font-style-paragraph">

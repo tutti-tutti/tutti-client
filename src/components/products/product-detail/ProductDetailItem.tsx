@@ -22,6 +22,7 @@ const ProductDetailItem = ({
   originalPrice,
   productOptionItems,
   maxPurchaseQuantity,
+  productReviewInfo,
 }: Product) => {
   const [selectedOption, setSelectedOption] = useState<ProductOption | null>(
     null,
@@ -64,9 +65,10 @@ const ProductDetailItem = ({
       <figure className="md:w-1/2">
         <ProductThumbnail
           width="w-full"
-          height="h-[350px] sm:h-[630px]"
+          height="h-auto"
           imageUrl={titleUrl}
           name={name}
+          className="aspect-square"
         />
       </figure>
 
@@ -78,6 +80,9 @@ const ProductDetailItem = ({
           freeDelivery={freeDelivery}
           almostOutOfStock={almostOutOfStock}
           likes={likes}
+          productReviewInfo={
+            productReviewInfo || { productId, avg: '', totalCount: 0 }
+          }
         />
         <ProductOptions
           productItems={productOptionItems}

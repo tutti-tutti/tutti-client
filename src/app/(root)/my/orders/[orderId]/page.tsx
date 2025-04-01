@@ -26,7 +26,7 @@ const OrderDetailPage = async ({ params }: Params) => {
   const linkItems = [
     { label: '홈', href: '' },
     { label: '마이페이지', href: '' },
-    { label: '주문 내역', href: '/orders' },
+    { label: '주문 내역', href: '/my/orders' },
     { label: pageTitle, href: `${orderId}`, isCurrent: true },
   ];
 

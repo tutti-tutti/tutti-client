@@ -13,8 +13,8 @@ const OrderHistoryPage = async () => {
   const orderHistoryList = await fetchOrderHistoryList();
 
   const linkItems = [
-    { label: '홈', href: '' },
-    { label: '마이페이지', href: '' },
+    { label: '홈', href: '/' },
+    { label: '마이페이지', href: '', isCurrent: true },
     { label: '주문내역', href: '/orders', isCurrent: true },
   ];
 

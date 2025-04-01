@@ -6,20 +6,22 @@ import {
   ProductAmoutInfo,
   ProductOptionInfo,
   OrdersActions,
-  Badge,
+  OrderStatusBadge,
 } from '@/components';
 import { default as OrdersExtraActions } from './OrdersExtraActions';
 
-interface OrderProductListProps {
+type OrderProductListProps = {
   orderId: number;
   orderNumber: string;
   orderItems: OrderItem[];
-}
+  orderStatus: string;
+};
 
 const OrderHistoryList = ({
   orderId,
   orderNumber,
   orderItems,
+  orderStatus,
 }: OrderProductListProps) => {
   const itemsCount = orderItems.length;
 
@@ -52,7 +54,7 @@ const OrderHistoryList = ({
                     'gap-2xs items-between flex flex-col',
                   )}
                 >
-                  <Badge variant="successOutlineSquare">결제완료</Badge>
+                  <OrderStatusBadge orderStatus={orderStatus} />
 
                   <div className="gap-xs flex flex-1 flex-col">
                     <ProductName

@@ -21,7 +21,7 @@ export async function generateMetadata() {
 const OrderDetailPage = async ({ params }: Params) => {
   const { orderId } = await params;
   const orderDetailInfo = await fetchOrderDetail(orderId);
-  const { orderNumber, orderItems, orderedAt } = orderDetailInfo;
+  const { orderedAt } = orderDetailInfo;
 
   const linkItems = [
     { label: '홈', href: '' },
@@ -42,11 +42,7 @@ const OrderDetailPage = async ({ params }: Params) => {
           </h2>
 
           <section className="bg-bg-tertiary px-5xl py-3xl">
-            <OrderHistoryList
-              orderNumber={orderNumber}
-              orderId={Number(orderId)}
-              orderItems={orderItems}
-            />
+            <OrderHistoryList orderId={Number(orderId)} {...orderDetailInfo} />
           </section>
 
           <OrderTableInfoSection {...orderDetailInfo} className="py-3xl" />

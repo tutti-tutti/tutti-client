@@ -48,10 +48,14 @@ export const getGroupOrderItemsByOrderId = (
   orderHistoryItems: OrderHistoryItem[],
 ): GroupedOrderItemByOrderId[] => {
   const groupedByOrderId = orderHistoryItems.reduce<
-    Record<number, { orderNumber: string; items: OrderItem[] }>
+    Record<
+      number,
+      { orderStatus: string; orderNumber: string; items: OrderItem[] }
+    >
   >((acc, item) => {
     if (!acc[item.orderId]) {
       acc[item.orderId] = {
+        orderStatus: item.orderStatus,
         orderNumber: item.orderNumber,
         items: [],
       };
@@ -64,6 +68,7 @@ export const getGroupOrderItemsByOrderId = (
 
   return Object.entries(groupedByOrderId).map(([orderId, data]) => ({
     orderId: Number(orderId),
+    orderStatus: data.orderStatus,
     orderNumber: data.orderNumber,
     items: data.items,
   }));

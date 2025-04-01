@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useEffect, useRef } from 'react';
-import { SHIPPING_ADRESS_INPUT_ITEMS } from '@/constants';
+import { SHIPPING_ADDRESS_INPUT_ITEMS } from '@/constants';
 import { useShippingAddressStore } from '@/stores';
 import { cn } from '@/utils';
 import type { AddressInputItem } from '@/types';
@@ -95,7 +95,7 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
 
   return (
     <form className={gapStyles}>
-      {SHIPPING_ADRESS_INPUT_ITEMS.map((item, index) => {
+      {SHIPPING_ADDRESS_INPUT_ITEMS.map((item, index) => {
         if (item.name === 'zipCode') {
           return (
             <fieldset key={`${item.name}-${index}`}>

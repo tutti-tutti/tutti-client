@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
 import {
@@ -42,7 +42,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
 
   /**TODO - 쿼리 형태 타입 가드 추가 예정 */
   if (!decodedProductItemsJson) {
-    redirect('checkout/not-found');
+    notFound();
   }
 
   const payload = JSON.parse(decodedProductItemsJson);
@@ -54,15 +54,15 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  const adressGapStyles = 'flex flex-col gap-sm';
+  const addressGapStyles = 'flex flex-col gap-sm';
 
   return (
     <div className="gap-4xl mx-auto flex max-w-[630px] flex-col">
       <CheckoutHeader />
 
-      <section className={adressGapStyles}>
+      <section className={addressGapStyles}>
         <SectionTitle>받는 사람 정보</SectionTitle>
-        <ShippingAddressForm gapStyles={adressGapStyles} />
+        <ShippingAddressForm gapStyles={addressGapStyles} />
       </section>
 
       <Divider />

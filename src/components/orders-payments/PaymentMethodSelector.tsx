@@ -36,7 +36,6 @@ const PaymentMethodSelector = ({
   orderItems,
 }: PaymentMethodSelectorProps) => {
   const { formData } = useShippingAddressStore();
-  console.log(formData);
 
   const [amount] = useState({
     currency: 'KRW',

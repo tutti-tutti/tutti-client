@@ -1,6 +1,6 @@
 import { AddressInputItem } from '@/types';
 
-export const SHIPPING_ADRESS_INPUT_ITEMS: AddressInputItem[] = [
+export const SHIPPING_ADDRESS_INPUT_ITEMS: AddressInputItem[] = [
   {
     label: '이름',
     name: 'recipientName',

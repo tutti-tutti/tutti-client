@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/utils';
 import type { OrderItem, OrderStatus } from '@/types';
 import {
@@ -87,6 +89,7 @@ const OrderHistoryList = ({
               </article>
               <div className="hidden md:flex">
                 <OrdersActions
+                  orderId={orderId}
                   itemsCount={itemsCount}
                   orderNumber={orderNumber}
                   isCanceled={orderStatus === 'CANCELED'}
@@ -103,6 +106,7 @@ const OrderHistoryList = ({
                 className="justify-center"
               />
               <OrdersActions
+                orderId={orderId}
                 itemsCount={itemsCount}
                 orderNumber={orderNumber}
                 isCanceled={orderStatus === 'CANCELED'}

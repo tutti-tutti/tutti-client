@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { OrderProductListGroup } from '@/components';
+import { getExpectedArrivalAt } from '@/utils';
 import type { OrderItem } from '@/types';
+import { OrderProductListGroup } from '@/components';
 
 const OrderProductListGroupMock = ({
   orderItems,
@@ -11,6 +12,7 @@ const OrderProductListGroupMock = ({
   return <OrderProductListGroup orderItems={orderItems} />;
 };
 
+const expectedArrivalAt = getExpectedArrivalAt();
 const sampleImage =
   'https://cdn-optimized.imweb.me/upload/S20240328110100ace0842/55757f8d5f03e.jpg';
 
@@ -27,7 +29,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: '풀커버',
     quantity: 2,
     price: 10930,
-    expectedArrivalAt: '2025-04-05',
+    expectedArrivalAt,
   },
   {
     storeId: 9,
@@ -41,7 +43,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 35310,
-    expectedArrivalAt: '2025-04-05',
+    expectedArrivalAt,
   },
   {
     storeId: 4,
@@ -56,7 +58,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 14770,
-    expectedArrivalAt: '2025-04-04',
+    expectedArrivalAt,
   },
   {
     storeId: 3,
@@ -70,7 +72,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 49790,
-    expectedArrivalAt: '2025-04-10',
+    expectedArrivalAt,
   },
   {
     storeId: 4,
@@ -84,7 +86,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 2,
     price: 10480,
-    expectedArrivalAt: '2025-04-10',
+    expectedArrivalAt,
   },
   {
     storeId: 7,
@@ -99,7 +101,7 @@ const createOrderItems = (): OrderItem[] => [
     secondOptionValue: null,
     quantity: 1,
     price: 14910,
-    expectedArrivalAt: '2025-04-04',
+    expectedArrivalAt,
   },
 ];
 

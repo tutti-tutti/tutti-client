@@ -13,15 +13,10 @@ import { default as OrdersExtraActions } from './OrdersExtraActions';
 interface OrderProductListProps {
   orderId: number;
   orderItems: OrderItem[];
-  gapStyles?: string;
 }
 
-const OrderHistoryList = ({
-  orderId,
-  orderItems,
-  gapStyles,
-}: OrderProductListProps) => {
-  const paddingStyles = 'py-md md:py-lg md:pr-lg first:pt-0';
+const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
+  const paddingStyles = 'py-md md:p-lg';
   const thumbColumnStyles = 'w-[120px] md:w-[288px]';
   const infoColumnStyles = 'w-full md:w-full';
 
@@ -32,9 +27,9 @@ const OrderHistoryList = ({
           key={`${orderId}-${item.productItemId}`}
           className={cn(paddingStyles, 'border-border-secondary border-b')}
         >
-          <article className={cn('flex-col', gapStyles)}>
+          <article className="gap-style-orderList flex-col">
             <div className="gap-4xl flex justify-between">
-              <article className={cn(gapStyles, 'flex-1')}>
+              <article className="gap-style-orderList flex-1">
                 <div className={thumbColumnStyles}>
                   <ProductThumbnail
                     width="w-full"
@@ -51,6 +46,7 @@ const OrderHistoryList = ({
                   )}
                 >
                   <Badge variant="successOutlineSquare">결제완료</Badge>
+
                   <div className="gap-xs flex flex-1 flex-col">
                     <ProductName
                       className="w-full"
@@ -69,7 +65,9 @@ const OrderHistoryList = ({
                       className="hidden w-full items-center md:flex"
                       price={item.price}
                       quantity={item.quantity}
-                      deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                      expectedArrivalAt={formatAfterDays(
+                        item.expectedArrivalAt,
+                      )}
                     />
                   </div>
 
@@ -86,7 +84,7 @@ const OrderHistoryList = ({
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                deliveredAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
               <OrdersActions />

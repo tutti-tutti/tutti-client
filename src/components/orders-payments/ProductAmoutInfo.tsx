@@ -3,14 +3,14 @@ import { cn, formatPrice } from '@/utils';
 interface ProductAmoutInfoProps {
   price: number;
   quantity: number;
-  deliveredAt: string;
+  expectedArrivalAt: string;
   className?: string;
 }
 
 const ProductAmoutInfo = ({
   price,
   quantity,
-  deliveredAt,
+  expectedArrivalAt,
   className,
 }: ProductAmoutInfoProps) => {
   return (
@@ -22,7 +22,7 @@ const ProductAmoutInfo = ({
         {quantity} 개
       </span>
       <strong className="text-text-primaryInteraction text-base font-semibold md:text-lg">
-        {deliveredAt}
+        {expectedArrivalAt}
       </strong>
     </div>
   );

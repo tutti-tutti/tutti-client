@@ -27,11 +27,9 @@ export const fetchOrderHistoryList =
   };
 
 export const fetchOrderDetail = async (
-  orderId: number,
+  orderId: string,
 ): Promise<OrderDetailResponseAPISchema> => {
-  const response = await axiosInstance.get(
-    ORDERS_ENDPOINTS.DETAIL(`${orderId}`),
-  );
+  const response = await axiosInstance.get(ORDERS_ENDPOINTS.DETAIL(orderId));
 
   return response.data;
 };

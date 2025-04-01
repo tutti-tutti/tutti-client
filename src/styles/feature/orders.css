@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@utility gap-style-orderList {
+  /** flex gap-md md:gap-lg */
+
+  display: flex;
+  gap: var(--space-md);
+
+  @media (min-width: 768px) {
+    gap: var(--space-lg);
+  }
+}

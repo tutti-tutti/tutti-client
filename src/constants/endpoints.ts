@@ -32,6 +32,7 @@ export const PRODUCTS_ENDPOINTS = {
   LATEST: `${API_RESOURCES.PRODUCTS}/latest-list`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
+  PAGINATION: `${API_RESOURCES.PRODUCTS}/latest-list/page`,
 };
 
 export const CART_ENDPOINTS = {

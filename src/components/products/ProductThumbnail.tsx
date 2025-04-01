@@ -25,7 +25,7 @@ const ProductThumbnail = ({
   return (
     <figure
       className={cn(
-        'group relative w-full cursor-pointer overflow-hidden rounded-lg',
+        'group relative w-full cursor-pointer overflow-hidden rounded-lg md:rounded-xl',
         height,
         width,
         className,

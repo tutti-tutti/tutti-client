@@ -1,32 +1,11 @@
 import { cn } from '@/utils';
+import type { BadgeVariant } from '@/types';
 
 interface BadgeProps {
   children: React.ReactNode;
   variant?: BadgeVariant;
   className?: string;
 }
-
-export type BadgeVariant =
-  | 'secondary'
-  | 'secondaryOutline'
-  | 'secondaryOutlineSquare'
-  | 'secondaryDot'
-  | 'primary'
-  | 'primaryOutline'
-  | 'primaryOutlineSquare'
-  | 'primaryDot'
-  | 'success'
-  | 'successOutline'
-  | 'successOutlineSquare'
-  | 'successDot'
-  | 'warning'
-  | 'warningOutline'
-  | 'warningOutlineSquare'
-  | 'warningDot'
-  | 'danger'
-  | 'dangerOutline'
-  | 'dangerOutlineSquare'
-  | 'dangerDot';
 
 const Badge = ({ children, variant = 'primary', className }: BadgeProps) => {
   const defaultClass =

@@ -7,16 +7,16 @@ import { reviewLikeAction } from '@/server-actions';
 
 interface ReviewLikeButtonProps {
   id: number;
-  isLiked: boolean;
+  liked?: boolean;
 }
 
 const ReviewLikeButton = ({
   id,
-  isLiked: initialIsLiked,
+  liked: initialLiked,
 }: ReviewLikeButtonProps) => {
   const [optimisticIsLiked, setOptimisticIsLiked] = useOptimistic(
-    initialIsLiked,
-    (_, newIsLiked: boolean) => newIsLiked,
+    initialLiked || false,
+    (newIsLiked: boolean) => newIsLiked,
   );
 
   const handleLikeClick = () => {

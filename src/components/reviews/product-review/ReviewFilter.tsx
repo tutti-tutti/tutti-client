@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { cn, getReviewSortSearchParams } from '@/utils';
+import { cn } from '@/utils';
+import { reviewServerStore } from '@/stores';
 
 const REVIEW_FILTERS = [
   { id: 'LATEST', text: '최신순', queryParameter: 'latest' },
@@ -9,7 +10,8 @@ const REVIEW_FILTERS = [
 ];
 
 const ReviewFilter = () => {
-  const reviewSortSearchParams = getReviewSortSearchParams();
+  const { getParams } = reviewServerStore();
+  const { reviewSortSearchParams } = getParams();
 
   const isSelected = (filterQueryParameter: string) => {
     return reviewSortSearchParams === filterQueryParameter;

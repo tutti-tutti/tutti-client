@@ -3,13 +3,14 @@ import {
   fetchReviewCountStar,
   fetchReviewPositiveAverage,
 } from '@/services';
-import { getProductIdParams } from '@/utils';
+import { reviewServerStore } from '@/stores';
 import StarRating from './StarRating';
 import ReviewRatingBar from './ReviewRatingBar';
 import ReviewBadge from './ReviewBadge';
 
 const AverageReview = async () => {
-  const productIdParams = getProductIdParams();
+  const { getParams } = reviewServerStore();
+  const { productIdParams } = getParams();
   const reviewAverage = await fetchReviewAverage(productIdParams);
   const reviewCountStar = await fetchReviewCountStar(productIdParams);
   const reviewPositiveAverage =

@@ -54,6 +54,7 @@ export interface OrderHistoryItem {
 // 주문번호 별 데이터 그룹화
 export interface GroupedOrderItemByOrderId {
   orderId: number;
+  orderNumber: string;
   items: OrderItem[];
 }
 

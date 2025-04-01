@@ -13,8 +13,6 @@ interface StatusInfo {
 }
 
 const OrderStatusBadge = ({ orderStatus }: OrderStatusBadgeProps) => {
-  console.log('orderStatus ', orderStatus);
-
   const status: Record<OrderStatus, StatusInfo> = {
     CANCELED: {
       label: '주문 취소',

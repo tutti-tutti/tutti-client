@@ -7,23 +7,6 @@ import { cn } from '@/utils';
 import type { AddressInputItem } from '@/types';
 import { Input, Button } from '@/components';
 
-declare global {
-  interface Window {
-    daum: {
-      Postcode: new (options: {
-        oncomplete: (data: {
-          address: string;
-          zonecode: string;
-          buildingName?: string;
-          apartment?: string;
-        }) => void;
-      }) => {
-        open: () => void;
-      };
-    };
-  }
-}
-
 interface ShippingAddressFormProps {
   gapStyles: string;
 }
@@ -46,14 +29,12 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
     document.head.appendChild(script);
 
     return () => {
-      // 컴포넌트 언마운트 시 스크립트 제거
       if (script.parentNode) {
         document.head.removeChild(script);
       }
     };
   }, []);
 
-  // 입력 필드 변경 핸들러
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement>,
     vaildType: AddressInputItem['vaildType'],
@@ -68,7 +49,6 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
     }
   };
 
-  // 카카오 주소 검색 모달 열기
   const openAddressSearch = () => {
     if (!window.daum || !scriptLoaded.current) {
       alert('주소 검색 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
@@ -77,7 +57,6 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
 
     new window.daum.Postcode({
       oncomplete: data => {
-        // 주소 정보 저장
         let fullAddress = data.address;
 
         // 건물명이 있으면 추가

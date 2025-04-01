@@ -1,4 +1,4 @@
-import { cn, formatAfterDays } from '@/utils';
+import { cn } from '@/utils';
 import type { OrderItem } from '@/types';
 import {
   ProductThumbnail,
@@ -25,7 +25,7 @@ const OrderHistoryList = ({
 }: OrderProductListProps) => {
   const itemsCount = orderItems.length;
 
-  const paddingStyles = 'px-0 py-md md:p-lg';
+  const paddingStyles = 'px-0 py-md md:py-xl';
   const thumbColumnStyles = 'w-[120px] md:w-[288px]';
   const infoColumnStyles = 'w-full md:w-full';
 
@@ -74,9 +74,7 @@ const OrderHistoryList = ({
                       className="hidden w-full items-center md:flex"
                       price={item.price}
                       quantity={item.quantity}
-                      expectedArrivalAt={formatAfterDays(
-                        item.expectedArrivalAt,
-                      )}
+                      expectedArrivalAt={item.expectedArrivalAt}
                     />
                   </div>
 
@@ -99,7 +97,7 @@ const OrderHistoryList = ({
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={item.expectedArrivalAt}
                 className="justify-center"
               />
               <OrdersActions

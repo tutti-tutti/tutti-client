@@ -16,7 +16,7 @@ const OrderHistoryListGroup = ({
   return (
     <ul className="gap-2xl flex flex-col">
       {groupedOrderItems.map(({ orderId, orderNumber, items, orderStatus }) => (
-        <li key={orderId} className="md:-pl-xl">
+        <li key={orderId}>
           <article>
             <OrderHistoryListGroupHeader
               orderId={orderId}

@@ -37,7 +37,7 @@ const FaqAccordion = async ({
           return (
             <Fragment key={id}>
               <FaqAccordionItemQuestion
-                href={isSelected(id) ? `/faq` : `?faq=${id}`}
+                href={isSelected(id) ? `/faqs` : `?faq=${id}`}
                 isSelected={isSelected(id)}
                 question={question}
               />

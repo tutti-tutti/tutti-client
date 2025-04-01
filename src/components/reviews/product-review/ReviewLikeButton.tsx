@@ -37,6 +37,7 @@ const ReviewLikeButton = ({
         optimisticIsLiked ? 'primaryOutline' : 'tertiaryOutlineInteraction'
       }
       onClick={handleLikeClick}
+      className="max-md:px-sm! max-md:py-xs!"
     >
       도움이 되는 리뷰에요
     </Button>

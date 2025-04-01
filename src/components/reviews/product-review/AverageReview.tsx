@@ -17,8 +17,8 @@ const AverageReview = async () => {
     await fetchReviewPositiveAverage(productIdParams);
 
   return (
-    <div className="gap-md my-5xl flex">
-      <article className="px-xl py-2xl border-border-primary gap-xs flex w-full flex-col rounded-2xl border">
+    <div className="gap-md my-5xl flex max-sm:flex-col">
+      <article className="px-xl py-2xl border-border-primary gap-xs max-md:px-sm max-md:py-md flex w-full flex-col rounded-2xl border">
         <div className="ml-xs flex">
           <div className="font-style-title text-text-primary">
             {reviewAverage.avg}
@@ -30,11 +30,11 @@ const AverageReview = async () => {
         <StarRating score={reviewAverage.avg} size={48} />
         <div className="ml-xs">
           <ReviewBadge textSize="subHeading" type="positive">
-            {reviewPositiveAverage.positivePer}%의 고객이 긍정적인 반응을 보여요
+            {reviewPositiveAverage.positivePer}%의 긍정적인 반응
           </ReviewBadge>
         </div>
       </article>
-      <div className="px-lg py-xl border-border-primary flex w-full flex-col justify-between rounded-2xl border">
+      <article className="px-lg py-xl border-border-primary max-md:px-md max-md:py-lg flex w-full flex-col justify-between rounded-2xl border">
         {[1, 2, 3, 4, 5].map(rating => (
           <div key={rating} className="gap-xs flex items-center">
             <StarRating score={rating} size={24} />
@@ -44,7 +44,7 @@ const AverageReview = async () => {
             />
           </div>
         ))}
-      </div>
+      </article>
     </div>
   );
 };

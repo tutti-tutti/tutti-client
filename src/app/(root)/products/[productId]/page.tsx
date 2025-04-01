@@ -1,4 +1,4 @@
-import { fetchProductById } from '@/services';
+import { fetchProductById, fetchProductReviewInfo } from '@/services';
 import {
   RecommendProductList,
   ClientProductDetail,
@@ -35,7 +35,8 @@ const ProductDetailPage = async ({ params, searchParams }: Params) => {
   const initialProduct = await fetchProductById(productId);
   const { 'review-sort': reviewSortSearchParams } = await searchParams;
   const { setParams } = reviewServerStore();
-
+  const productReviewInfo = await fetchProductReviewInfo(productId);
+  
   setParams({ productIdParams: productId, reviewSortSearchParams });
 
   return (
@@ -43,6 +44,7 @@ const ProductDetailPage = async ({ params, searchParams }: Params) => {
       <ClientProductDetail
         initialProduct={initialProduct}
         productId={productId}
+        productReviewInfo={productReviewInfo}
       />
 
       <RecommendProductList categoryName="식료품" />
@@ -56,7 +58,7 @@ const ProductDetailPage = async ({ params, searchParams }: Params) => {
         <ProductDetailInfo initialProduct={initialProduct} />
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col" id="product-review">
         <div className="mb-md">
           <h2 className="font-style-subHeading text-text-primary">상품 리뷰</h2>
           <p className="text-text-secondary font-style-paragraph">

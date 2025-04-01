@@ -38,3 +38,9 @@ export interface ReviewsResponse {
   cursor: ReviewPageParam;
   hasNext: boolean;
 }
+
+export interface ProductReviewInfo {
+  productId: number;
+  avg: string;
+  totalCount: number;
+}

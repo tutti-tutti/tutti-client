@@ -7,12 +7,14 @@ import { Button } from '@/components';
 interface OrdersActionsProps {
   orderNumber: string;
   itemsCount: number;
+  isCanceled?: boolean;
   className?: string;
 }
 
 const OrdersActions = ({
   orderNumber,
   itemsCount,
+  isCanceled = false,
   className,
 }: OrdersActionsProps) => {
   const buttonStyles = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
@@ -33,7 +35,7 @@ const OrdersActions = ({
   return (
     <article
       className={cn(
-        'gap-xs md:gap-md flex md:basis-[147px] md:flex-col',
+        'gap-xs md:gap-md md:py-xl flex md:basis-[147px] md:flex-col',
         className,
       )}
     >
@@ -45,14 +47,16 @@ const OrdersActions = ({
       >
         배송 조회
       </Button>
-      <Button
-        type="button"
-        variant="tertiaryOutline"
-        className={buttonStyles}
-        onClick={handleCancelOrder}
-      >
-        주문 취소
-      </Button>
+      {!isCanceled && (
+        <Button
+          type="button"
+          variant="tertiaryOutline"
+          className={buttonStyles}
+          onClick={handleCancelOrder}
+        >
+          주문 취소
+        </Button>
+      )}
     </article>
   );
 };

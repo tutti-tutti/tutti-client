@@ -81,6 +81,7 @@ const OrderHistoryList = ({
                   <OrdersExtraActions
                     orderId={orderId}
                     productItemId={item.productItemId}
+                    isCanceled={orderStatus === 'CANCELED'}
                   />
                 </div>
               </article>
@@ -88,6 +89,7 @@ const OrderHistoryList = ({
                 <OrdersActions
                   itemsCount={itemsCount}
                   orderNumber={orderNumber}
+                  isCanceled={orderStatus === 'CANCELED'}
                 />
               </div>
             </div>
@@ -103,6 +105,7 @@ const OrderHistoryList = ({
               <OrdersActions
                 itemsCount={itemsCount}
                 orderNumber={orderNumber}
+                isCanceled={orderStatus === 'CANCELED'}
               />
             </div>
           </article>

@@ -1,16 +1,24 @@
-import { Suspense } from 'react';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import ProductListSkeleton from './skeleton/ProductListSkeleton';
-import { fetchProducts } from '@/services';
+import { productServerStore } from '@/stores';
+import { productsPrefetchInfiniteQueryOptions } from '@/queries';
+import { getQueryClient } from '@/lib';
 import ClientProductList from './ClientProductList';
 
 const ProductList = async () => {
-  const initialProducts = await fetchProducts();
+  const { getParams } = productServerStore();
+  const { cursorId, size } = getParams();
+
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchInfiniteQuery(
+    productsPrefetchInfiniteQueryOptions(cursorId, size),
+  );
 
   return (
-    <Suspense fallback={<ProductListSkeleton />}>
-      <ClientProductList initialProducts={initialProducts} />
-    </Suspense>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ClientProductList />
+    </HydrationBoundary>
   );
 };
 

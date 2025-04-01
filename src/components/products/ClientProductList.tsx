@@ -1,24 +1,63 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useCallback, useEffect, useState } from 'react';
 
-import { productsQueryOptions } from '@/queries';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+import { productsInfiniteQueryOptions } from '@/queries';
 import { useProductListVirtualizer } from '@/hooks';
 import type { Product } from '@/types';
 import ProductItem from './ProductItem';
+import { MoreViewButton } from '../common';
 
-const ClientProductList = ({
-  initialProducts,
-}: {
-  initialProducts: Product[];
-}) => {
-  const { data: productItems } = useQuery({
-    ...productsQueryOptions,
-    initialData: initialProducts,
-  });
+const ClientProductList = () => {
+  const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
+    useInfiniteQuery(productsInfiniteQueryOptions(20));
+
+  const products = data?.pages.flatMap(page => page.content) || [];
 
   const { groupedRows, totalSize, virtualRows, rowVirtualizer } =
-    useProductListVirtualizer({ products: productItems });
+    useProductListVirtualizer({ products });
+
+  const handleMoreView = () => {
+    fetchNextPage().then(() => {
+      setIsFirstPageLoaded(true);
+    });
+  };
+
+  const prefetchNextPage = useCallback(() => {
+    if (
+      isFirstPageLoaded &&
+      hasNextPage &&
+      !isFetching &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  }, [
+    isFirstPageLoaded,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  ]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const scrollThreshold = document.documentElement.scrollHeight - 1500;
+
+      if (scrollPosition > scrollThreshold) {
+        prefetchNextPage();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prefetchNextPage]);
 
   return (
     <section className="relative">
@@ -56,6 +95,16 @@ const ClientProductList = ({
           );
         })}
       </div>
+
+      {!isFirstPageLoaded && hasNextPage && (
+        <MoreViewButton onClick={handleMoreView} />
+      )}
+
+      {isFetchingNextPage && (
+        <div className="mt-md py-md font-style-paragraph text-center">
+          추가 상품을 가져오고 있어요...
+        </div>
+      )}
     </section>
   );
 };

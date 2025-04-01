@@ -7,7 +7,10 @@ const ReviewRatingBar = ({
   reviewCnt,
   totalReviewCnt,
 }: ReviewRatingBarProps) => {
-  const getPercentage = (reviewCnt / totalReviewCnt) * 100;
+  const getPercentage =
+    reviewCnt === 0 && totalReviewCnt === 0
+      ? 0
+      : (reviewCnt / totalReviewCnt) * 100;
 
   return (
     <>

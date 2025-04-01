@@ -21,7 +21,7 @@ export const orderHistoryListQueryOptions = queryOptions({
   queryFn: async () => await fetchOrderHistoryList(),
 });
 
-export const orderDetailQueryOptions = (orderId: number) =>
+export const orderDetailQueryOptions = (orderId: string) =>
   queryOptions({
     queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
     queryFn: async () => await fetchOrderDetail(orderId),

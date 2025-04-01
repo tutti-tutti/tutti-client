@@ -25,14 +25,17 @@ const generateProducts = (count: number): Product[] => {
       createdAt: new Date(),
       freeDelivery: index % 3 === 0,
       almostOutOfStock: index % 4 === 0,
-      productItems: [
+      productOptionItems: [
         {
           productItemId: index + 1,
           firstOptionName: index % 2 === 0 ? '색상' : null,
           firstOptionValue: index % 2 === 0 ? '블랙' : null,
           secondOptionName: index % 3 === 0 ? '사이즈' : null,
           secondOptionValue: index % 3 === 0 ? 'M' : null,
-          additionalPrice: index % 4 === 0 ? 5000 : null,
+          additionalPrice: index % 4 === 0 ? 5000 : 0,
+          discountPrice: index % 5 === 0 ? 10000 : 0,
+          sellingPrice:
+            index % 2 === 0 ? 90000 + index * 1000 : 80000 + index * 2000,
         },
       ],
       maxPurchaseQuantity: 1,

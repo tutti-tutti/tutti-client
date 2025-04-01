@@ -6,7 +6,7 @@ import ProductThumbnailAction from './ProductThumbnailAction';
 interface ProductThumbnailProps {
   imageUrl: string | StaticImageData;
   name: string;
-  height: string;
+  height?: string;
   width: string;
   onClick?: () => void;
   className?: string;

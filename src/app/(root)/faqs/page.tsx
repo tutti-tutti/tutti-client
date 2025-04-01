@@ -25,8 +25,8 @@ const FaqPage = async ({ searchParams }: SearchParamsProps) => {
   } = await searchParams;
 
   return (
-    <div className="md:px-7xl gap-lg mb-7xl flex flex-col items-center">
-      <h1 className="font-style-title mb-3xl">자주 묻는 질문</h1>
+    <div className="gap-lg mb-7xl flex flex-col items-center">
+      <h1 className="font-style-title md:mb-3xl mb-0">자주 묻는 질문</h1>
       <form className="w-3/5 max-md:w-5/6 md:min-w-lg" action={faqSearchAction}>
         <Input
           name="faqQuery"

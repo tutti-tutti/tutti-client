@@ -11,7 +11,10 @@ const RecommendProductItem = ({
   originalPrice,
   sellingPrice,
 }: Product) => {
-  const discountRate = calculateDiscountRate(originalPrice, sellingPrice);
+  const discountRate =
+    originalPrice && sellingPrice
+      ? calculateDiscountRate(originalPrice, sellingPrice)
+      : 0;
 
   return (
     <li className="px-xs">
@@ -19,7 +22,7 @@ const RecommendProductItem = ({
         <ProductThumbnail
           imageUrl={titleUrl || 'null'}
           name={name}
-          height="sm:h-[200px] h-auto"
+          height="h-auto"
           width="w-full"
           isDim
           className="aspect-square"
@@ -29,7 +32,7 @@ const RecommendProductItem = ({
           {name}
         </h2>
 
-        {originalPrice !== sellingPrice ? (
+        {sellingPrice && originalPrice > sellingPrice ? (
           <>
             <span className="text-text-tertiaryInfo mr-xs font-style-info line-through">
               {originalPrice.toLocaleString()}

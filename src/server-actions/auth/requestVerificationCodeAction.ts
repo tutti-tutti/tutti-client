@@ -1,6 +1,6 @@
 'use server';
 
-import { verifyEmailSchema } from '@/schemas';
+import { requestVerifySchema } from '@/schemas/auth/requestVerifySchema';
 import { verifyEmail } from '@/services';
 import type { EmailVerificationState } from '@/types';
 
@@ -10,25 +10,33 @@ export const requestVerificationCodeAction = async (
 ): Promise<EmailVerificationState> => {
   try {
     const email = formData.get('email');
-    const validatedEmail = verifyEmailSchema.shape.email.safeParse(email);
+    const type = formData.get('type');
+    const validatedData = requestVerifySchema.safeParse({
+      email,
+      type,
+    });
 
-    if (!validatedEmail.success) {
+    if (!validatedData.success) {
       return {
         ...prevState,
         success: false,
         emailVerified: false,
         codeVerified: false,
-        error: validatedEmail.error.errors[0]?.message,
+        email: email as string,
+        error: validatedData.error.errors[0]?.message,
       };
     }
 
-    const response = await verifyEmail(validatedEmail.data);
+    const response = await verifyEmail(
+      validatedData.data.email,
+      validatedData.data.type,
+    );
 
     return {
       success: true,
       emailVerified: true,
       codeVerified: false,
-      email: validatedEmail,
+      email: validatedData.data.email,
       message: response.message,
     };
   } catch (error) {

@@ -1,6 +1,7 @@
 interface CartPaymentInfoProps {
   totalPrice: number;
   discountPrice: number;
+  additionalPrice?: number;
   deliveryPrice: number;
   finalPrice?: number;
 }
@@ -8,6 +9,7 @@ interface CartPaymentInfoProps {
 const CartPaymentInfo = ({
   totalPrice,
   discountPrice,
+  additionalPrice = 0,
   deliveryPrice,
   finalPrice,
 }: CartPaymentInfoProps) => {
@@ -29,14 +31,27 @@ const CartPaymentInfo = ({
         </span>
       </div>
 
-      <div className="p-xs flex items-center justify-between">
-        <span className="text-text-secondary font-style-paragraph">
-          할인금액
-        </span>
-        <span className="text-text-danger font-style-paragraph">
-          -{discountPrice.toLocaleString()}원
-        </span>
-      </div>
+      {discountPrice > 0 && (
+        <div className="p-xs flex items-center justify-between">
+          <span className="text-text-secondary font-style-paragraph">
+            할인금액
+          </span>
+          <span className="text-text-danger font-style-paragraph">
+            {discountPrice.toLocaleString()}원
+          </span>
+        </div>
+      )}
+
+      {additionalPrice > 0 && (
+        <div className="p-xs flex items-center justify-between">
+          <span className="text-text-secondary font-style-paragraph">
+            추가금액
+          </span>
+          <span className="text-text-info font-style-paragraph">
+            {additionalPrice.toLocaleString()}원
+          </span>
+        </div>
+      )}
 
       <div className="p-xs pb-md flex items-center justify-between">
         <span className="text-text-secondary font-style-paragraph">배송비</span>

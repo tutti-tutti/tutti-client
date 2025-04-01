@@ -14,7 +14,7 @@ import {
 } from '@/components';
 import CartHeader from './CartHeader';
 
-const CartInfo = () => {
+const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const router = useRouter();
   const {
     checkedCount,
@@ -26,15 +26,29 @@ const CartInfo = () => {
     payloadCheckedCartItems,
   } = useCart();
 
-  const { totalPrice, discountPrice, deliveryPrice, finalPrice } = paymentInfo;
+  const {
+    totalPrice,
+    discountPrice,
+    additionalPrice,
+    deliveryPrice,
+    finalPrice,
+  } = paymentInfo;
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(payloadCheckedCartItems),
   );
 
-  const handleCheckoutClick = () =>
-    checkedCount === 0
-      ? toast.warning('주문할 상품을 선택해주세요!')
-      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+  const handleCheckoutClick = () => {
+    if (!isLoggedIn) {
+      toast.warning('로그인 후 이용해주세요!');
+      router.push(ROUTER_PATH.LOGIN);
+      return;
+    }
+    if (checkedCount === 0) {
+      toast.warning('주문할 상품을 선택해주세요!');
+    } else {
+      router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+    }
+  };
 
   return (
     <>
@@ -64,10 +78,11 @@ const CartInfo = () => {
           <CartList />
         </section>
 
-        <section className="gap-md flex flex-col md:w-1/3">
+        <section className="gap-md flex flex-col md:sticky md:top-52 md:w-1/3 md:self-start">
           <CartPaymentInfo
             totalPrice={totalPrice}
             discountPrice={discountPrice}
+            additionalPrice={additionalPrice}
             deliveryPrice={deliveryPrice}
             finalPrice={finalPrice}
           />

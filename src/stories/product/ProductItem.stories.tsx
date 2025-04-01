@@ -36,7 +36,7 @@ const defaultProduct: Product = {
   createdAt: new Date(),
   freeDelivery: false,
   almostOutOfStock: false,
-  productItems: [],
+  productOptionItems: [],
   maxPurchaseQuantity: 1,
 };
 

@@ -1,11 +1,8 @@
 @import 'tailwindcss';
-@import '../styles/token/colors/primitive.css';
-@import '../styles/token/colors/scale.css';
-@import '../styles/token/colors/semantic.css';
-@import '../styles/token/border.css';
-@import '../styles/token/spacing.css';
-@import '../styles/token/font/primitive.css';
-@import '../styles/fonts.css';
+@import './token/index.css';
+@import './fonts.css';
+@import './layout.css';
+@import './feature/index.css';
 
 @layer base {
   *,

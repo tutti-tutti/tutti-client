@@ -3,10 +3,12 @@
 import { useActionState } from 'react';
 
 import { signinAction } from '@/server-actions';
-import { Button, ClickText, Input } from '@/components';
+import { Button, Checkbox, ClickText } from '@/components';
 import { AUTH_CONSTANTS } from '@/constants';
 import { EmailVerificationState } from '@/types';
 import SocialLoginButton from '@/components/auth/SocialLoginButton';
+import PwInput from '@/components/auth/PwInput';
+import VerifyEmailInput from '@/components/auth/VerifyEmailInput';
 
 const initialVerificationState: EmailVerificationState = {
   success: false,
@@ -16,8 +18,7 @@ const initialVerificationState: EmailVerificationState = {
 
 const {
   SIGNIN,
-  EMAIL_INPUT,
-  PW_INPUT,
+  SIGNIN_LOADING,
   AUTO_SIGNIN,
   FORGOT_PW,
   SOCIAL_SIGNIN,
@@ -25,10 +26,12 @@ const {
 } = AUTH_CONSTANTS;
 
 const SigninForm = () => {
-  const [signinState, signinFormAction] = useActionState(
+  const [signinState, signinFormAction, isSigninPending] = useActionState(
     signinAction,
     initialVerificationState,
   );
+
+  const signinButtonText = isSigninPending ? SIGNIN_LOADING : SIGNIN;
 
   return (
     <>
@@ -36,26 +39,13 @@ const SigninForm = () => {
         <fieldset className="flex flex-col">
           <legend className="mb-xs font-style-heading">{SIGNIN}</legend>
           <div className="gap-md mb-sm flex flex-col">
-            <Input
-              label={EMAIL_INPUT.LABEL}
-              name="email"
-              placeholder={EMAIL_INPUT.PLACEHOLDER}
-              error={signinState.emailError}
-            />
-            <Input
-              label={PW_INPUT.LABEL}
-              name="pw"
-              type="password"
-              placeholder={PW_INPUT.PLACEHOLDER}
-              icon="viewCancel"
-              error={signinState.pwError}
-            />
+            <VerifyEmailInput email={signinState.email || ''} />
+            <PwInput isSignin pw={signinState.pw || ''} />
           </div>
           <div className="flex justify-between">
-            <div className="font-style-paragraph text-text-tertiary">
-              <input type="checkbox" className="mr-sm" />
-              {/* 📌 체크박스 컴포넌트로 수정 필요! */}
-              {AUTO_SIGNIN}
+            <div className="font-style-paragraph text-text-tertiary gap-xs flex">
+              <Checkbox />
+              <div>{AUTO_SIGNIN}</div>
             </div>
             <ClickText
               href="/reset-password"
@@ -64,8 +54,12 @@ const SigninForm = () => {
               {FORGOT_PW}
             </ClickText>
           </div>
-          <Button type="submit" className="my-lg">
-            {SIGNIN}
+          <Button
+            type="submit"
+            className="my-lg font-style-subHeading"
+            variant={isSigninPending ? 'disabled' : 'primary'}
+          >
+            {signinButtonText}
           </Button>
         </fieldset>
       </form>

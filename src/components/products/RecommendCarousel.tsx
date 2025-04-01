@@ -13,12 +13,19 @@ import { RecommendProductItemSkeleton } from '@/components';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
 
-const RecommendCarousel = () => {
+const RecommendCarousel = ({
+  recommendedProducts,
+}: {
+  recommendedProducts: Product;
+}) => {
   const {
     data: products,
+    isPending,
     isError,
-    error,
-  } = useSuspenseQuery(recommededProductsQueryOptions);
+  } = useSuspenseQuery({
+    ...recommededProductsQueryOptions,
+    initialData: recommendedProducts,
+  });
 
   const [slidesToShow, setSlidesToShow] = useState(6);
 
@@ -65,10 +72,16 @@ const RecommendCarousel = () => {
     ],
   };
 
-  if (isError && error) return 'An error has occurred: ' + error.message;
-
   const renderItems = () => {
-    if (!products || products.length === 0) {
+    if (isError) {
+      return (
+        <div className="text-text-danger py-4 text-center">
+          추천 상품을 불러오는 중 오류가 발생했습니다.
+        </div>
+      );
+    }
+
+    if (isPending) {
       return Array(12)
         .fill(0)
         .map((_, index) => (

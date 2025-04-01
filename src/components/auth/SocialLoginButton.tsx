@@ -1,29 +1,26 @@
 'use client';
 
 import { Button } from '@/components/common';
+import { signIn } from 'next-auth/react';
 
 const SocialLoginButton = () => {
-  const handleNaverLogin = () => {
-    // 📌 네이버 로그인 로직
-  };
-
-  const handleGoogleLogin = () => {
-    // 📌 구글 로그인 로직
+  const handleSocialLogin = (provider: 'naver' | 'google') => {
+    signIn(provider, { callbackUrl: '/' });
   };
 
   return (
-    <div className="gap-sm mb-2xl font-style-subHeading flex justify-between">
+    <div className="gap-sm mb-2xl font-style-subHeading flex justify-between max-sm:flex-col">
       <Button
         icon="naver"
         className="bg-logo-naver hover:bg-logo-naver active:bg-logo-naver flex-auto"
-        onClick={handleNaverLogin}
+        onClick={() => handleSocialLogin('naver')}
       >
         네이버로 로그인
       </Button>
       <Button
         icon="googleLogo"
         className="text-text-tertiary border-border-primary bg-bg-primary flex-auto border hover:bg-transparent active:bg-transparent"
-        onClick={handleGoogleLogin}
+        onClick={() => handleSocialLogin('google')}
       >
         Google로 로그인
       </Button>

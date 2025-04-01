@@ -1,7 +1,17 @@
+/**NOTE - ordersType과 paymentsType을 나누는 기준은 endpoint 입니다 */
+
 import { OrderProductItem } from './ordersType';
 
-// 결제 수단 타입
-export type PaymentType = 'CARD';
+// 주문/결제 배송지 입력 값
+export interface ShippingAddress {
+  recipientName: string;
+  recipientPhone: string;
+  recipientAddress: string;
+  recipientAddressDetail: string;
+  zipCode: string;
+  note: string;
+  recipientEmail: string;
+}
 
 // 주문/결제 요청 API 스키마
 export interface PaymentsRequestAPISchema {
@@ -9,11 +19,23 @@ export interface PaymentsRequestAPISchema {
   totalProductAmount: number;
   deliveryFee: number;
   totalAmount: number;
-  paymentType: PaymentType;
+  paymentType: string;
   orderItems: OrderProductItem[];
+  recipientName: string;
+  recipientPhone: string;
+  recipientAddress: string;
+  zipCode: string;
+  note: string;
 }
 
-// 결제 승인 API 스키마
+// 주문/결제 응답 API 스키마
+export interface PaymentsResponseAPISchema {
+  orderNumber: string;
+  orderName: string;
+  amount: number;
+}
+
+// 결제 승인 요청 API 스키마
 export interface PaymentsApproveRequestAPISchema {
   paymentKey: string;
   orderId: string;

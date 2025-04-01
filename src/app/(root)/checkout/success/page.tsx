@@ -20,19 +20,19 @@ const PaymentSuccessPage = async ({
     redirect(ROUTER_PATH.CHECKOUT_FAIL);
   }
 
-  try {
-    await confirmPayApproveSuccess({
-      paymentKey,
-      orderId,
-      amount: Number(amount),
-    });
+  console.log(paymentKey, orderId, amount);
 
-    redirect(ROUTER_PATH.ORDERS_HISTORY);
-  } catch (error) {
-    console.error('결제 승인 중 오류가 발생했습니다', error);
+  const data = await confirmPayApproveSuccess({
+    paymentKey,
+    orderId: orderId,
+    amount: Number(amount),
+  });
 
+  if (!data.orderId) {
     redirect(ROUTER_PATH.CHECKOUT_FAIL);
   }
+
+  redirect(ROUTER_PATH.ORDERS_DETAIL(data.orderId));
 };
 
 export default PaymentSuccessPage;

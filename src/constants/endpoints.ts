@@ -11,6 +11,7 @@ export const API_RESOURCES = {
   CART: '/cart',
   ORDERS: '/orders',
   PAYMENTS: '/payments',
+  REFUND: '/refund',
   REVIEWS: '/reviews',
   FAQS: '/faqs',
   CATEGORIES: '/categories',
@@ -52,6 +53,10 @@ export const PAYMENTS_ENDPOINTS = {
     `${API_RESOURCES.PAYMENTS}/orderId/${orderId}`,
   DETAIL_BY_PAYMENT_ID: (paymentId: string) =>
     `${API_RESOURCES.PAYMENTS}/paymentId/${paymentId}`,
+};
+
+export const REFUND_ENDPOINTS = {
+  REQUEST: `${API_RESOURCES.REFUND}/request`,
 };
 
 export const REVIEW_ENDPOINTS = {

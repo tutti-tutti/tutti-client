@@ -52,3 +52,10 @@ export interface PaymentsDetailResponseAPISchema {
   orderId: number;
   paymentMethodName: string;
 }
+
+// 환불 요청 API 스키마
+
+export interface RefundRequestAPISSchema {
+  orderNumber: string;
+  cancelReason: string;
+}

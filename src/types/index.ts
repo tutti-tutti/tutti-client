@@ -8,3 +8,4 @@ export * from './ordersType';
 export * from './paymentsType';
 export * from './categoryType';
 export * from './formDataType';
+export * from './badgeType';

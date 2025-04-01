@@ -1,12 +1,34 @@
+'use client';
+
 import { cn } from '@/utils';
+import { requestRefundPayment } from '@/services';
 import { Button } from '@/components';
 
 interface OrdersActionsProps {
+  orderNumber: string;
+  itemsCount: number;
   className?: string;
 }
 
-const OrdersActions = ({ className }: OrdersActionsProps) => {
+const OrdersActions = ({
+  orderNumber,
+  itemsCount,
+  className,
+}: OrdersActionsProps) => {
   const buttonStyles = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
+
+  const handleCancelOrder = async () => {
+    if (itemsCount > 0) {
+      confirm('현재는 전체 주문 취소만 가능합니다. 진행하시겠습니까?');
+
+      return;
+    }
+
+    await requestRefundPayment({ orderNumber, cancelReason: '' });
+  };
+
+  const handleConfirmShipping = async () =>
+    alert('지금은 배송 현황을 확인할 수 없습니다.');
 
   return (
     <article
@@ -15,10 +37,20 @@ const OrdersActions = ({ className }: OrdersActionsProps) => {
         className,
       )}
     >
-      <Button type="button" variant="primaryOutline" className={buttonStyles}>
+      <Button
+        type="button"
+        variant="primaryOutline"
+        className={buttonStyles}
+        onClick={handleConfirmShipping}
+      >
         배송조회
       </Button>
-      <Button type="button" variant="tertiaryOutline" className={buttonStyles}>
+      <Button
+        type="button"
+        variant="tertiaryOutline"
+        className={buttonStyles}
+        onClick={handleCancelOrder}
+      >
         주문취소
       </Button>
     </article>

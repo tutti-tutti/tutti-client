@@ -6,17 +6,26 @@ import {
   ProductAmoutInfo,
   ProductOptionInfo,
   OrdersActions,
-  Badge,
+  OrderStatusBadge,
 } from '@/components';
 import { default as OrdersExtraActions } from './OrdersExtraActions';
 
-interface OrderProductListProps {
+type OrderProductListProps = {
   orderId: number;
+  orderNumber: string;
   orderItems: OrderItem[];
-}
+  orderStatus: string;
+};
 
-const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
-  const paddingStyles = 'py-md md:p-lg';
+const OrderHistoryList = ({
+  orderId,
+  orderNumber,
+  orderItems,
+  orderStatus,
+}: OrderProductListProps) => {
+  const itemsCount = orderItems.length;
+
+  const paddingStyles = 'px-0 py-md md:p-lg';
   const thumbColumnStyles = 'w-[120px] md:w-[288px]';
   const infoColumnStyles = 'w-full md:w-full';
 
@@ -45,7 +54,7 @@ const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
                     'gap-2xs items-between flex flex-col',
                   )}
                 >
-                  <Badge variant="successOutlineSquare">결제완료</Badge>
+                  <OrderStatusBadge orderStatus={orderStatus} />
 
                   <div className="gap-xs flex flex-1 flex-col">
                     <ProductName
@@ -71,11 +80,17 @@ const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
                     />
                   </div>
 
-                  <OrdersExtraActions orderId={orderId} />
+                  <OrdersExtraActions
+                    orderId={orderId}
+                    productItemId={item.productItemId}
+                  />
                 </div>
               </article>
               <div className="hidden md:flex">
-                <OrdersActions />
+                <OrdersActions
+                  itemsCount={itemsCount}
+                  orderNumber={orderNumber}
+                />
               </div>
             </div>
 
@@ -87,7 +102,10 @@ const OrderHistoryList = ({ orderId, orderItems }: OrderProductListProps) => {
                 expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
                 className="justify-center"
               />
-              <OrdersActions />
+              <OrdersActions
+                itemsCount={itemsCount}
+                orderNumber={orderNumber}
+              />
             </div>
           </article>
         </li>

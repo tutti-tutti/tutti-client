@@ -47,10 +47,7 @@ export const setRefreshToken = async (refreshToken: string) => {
 
 export const renewAccessToken = async () => {
   try {
-    const refreshToken = getRefreshToken();
-    const { data } = await axiosInstance.post('/members/temp-endpoint', {
-      refresh_token: refreshToken,
-    });
+    const { data } = await axiosInstance.post('/members/temp-endpoint');
     const { access_token: accessToken } = data;
 
     await setAccessToken(accessToken);

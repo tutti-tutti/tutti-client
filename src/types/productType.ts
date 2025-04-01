@@ -30,3 +30,10 @@ export interface Product {
   maxPurchaseQuantity: number;
   productReviewInfo?: ProductReviewInfo;
 }
+
+export interface PaginatedProductsAPIResponse {
+  hasNext: boolean;
+  nextCursorId: number | null;
+  contentSize: number;
+  content: Product[];
+}

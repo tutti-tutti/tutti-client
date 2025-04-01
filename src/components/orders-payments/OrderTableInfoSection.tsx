@@ -19,7 +19,7 @@ const OrderTableInfoSection = async ({
 }: OrderTableInfoProps) => {
   const tableItems = [
     {
-      cpation: '받는 사람 정보',
+      caption: '받는 사람 정보',
       fields: [
         {
           fieldName: '받는 사람',
@@ -40,7 +40,7 @@ const OrderTableInfoSection = async ({
       ],
     },
     {
-      cpation: '결제 정보',
+      caption: '결제 정보',
       fields: [
         {
           fieldName: '결제 완료일',
@@ -71,10 +71,10 @@ const OrderTableInfoSection = async ({
     },
   ];
 
-  return tableItems.map(({ cpation, fields }, index) => (
-    <section key={`${cpation}-${index}`} className={cn('py-lg', className)}>
+  return tableItems.map(({ caption, fields }, index) => (
+    <section key={`${caption}-${index}`} className={cn('py-lg', className)}>
       <h3 className="text-text-primary py-md font-style-subHeading text-left">
-        {cpation}
+        {caption}
       </h3>
       <table className="border-border-primary w-full border-t-1 border-b-1 text-left">
         <tbody className="py-lg">

@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/lib';
 import { PRODUCTS_ENDPOINTS } from '@/constants';
-import { Product, PaginatedProductsAPIResponse } from '@/types';
+import { Product, PaginatedProductsResponseAPISchema } from '@/types';
 
 export const fetchProducts = async () => {
   const response = await axiosInstance.get(PRODUCTS_ENDPOINTS.LATEST);
@@ -24,7 +24,7 @@ export const fetchProductById = async (productId: string): Promise<Product> => {
 export const fetchProductsWithPagination = async (
   cursorId?: number,
   size: number = 20,
-): Promise<PaginatedProductsAPIResponse> => {
+): Promise<PaginatedProductsResponseAPISchema> => {
   const params: Record<string, string | number> = { size };
 
   if (cursorId !== undefined) {

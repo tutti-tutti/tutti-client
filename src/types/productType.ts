@@ -31,7 +31,7 @@ export interface Product {
   productReviewInfo?: ProductReviewInfo;
 }
 
-export interface PaginatedProductsAPIResponse {
+export interface PaginatedProductsResponseAPISchema {
   hasNext: boolean;
   nextCursorId: number | null;
   contentSize: number;

@@ -78,7 +78,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <CartList />
         </section>
 
-        <section className="gap-md flex flex-col md:sticky md:top-52 md:w-1/3 md:self-start">
+        <section className="gap-md flex flex-col md:sticky md:top-36 md:w-1/3 md:self-start">
           <CartPaymentInfo
             totalPrice={totalPrice}
             discountPrice={discountPrice}

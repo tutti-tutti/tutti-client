@@ -1,21 +1,21 @@
 'use client';
 
-import Link from 'next/link';
-import { ROUTER_PATH } from '@/constants';
+import { formatDateWithKorean } from '@/utils';
 import { useRefundMutation } from '@/hooks';
-import { Icon, ExtraButton } from '@/components';
+import { ExtraButton } from '@/components';
 
-interface OrderHistoryListGroupHeaderProps {
+interface OrderDetailListGroupHeaderProps {
   orderId: number;
   orderNumber: string;
+  orderedAt: string;
   isCanceled: boolean;
 }
 
-const OrderHistoryListGroupHeader = ({
-  orderId,
+const OrderDetailListGroupHeader = ({
   orderNumber,
+  orderedAt,
   isCanceled,
-}: OrderHistoryListGroupHeaderProps) => {
+}: OrderDetailListGroupHeaderProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation();
 
   const onCancelOrder = () => {
@@ -29,16 +29,11 @@ const OrderHistoryListGroupHeader = ({
 
   return (
     <header className="flex w-full items-center justify-between">
-      <div className="gap-xs flex items-center text-xl">
-        {/**TODO - 주문내역 API 응답 값에 주문일자가 포함될 경우 적용 */}
-        {/* <strong>주문 일자 {}</strong> */}
-        <Link
-          href={ROUTER_PATH.ORDERS_DETAIL(orderId)}
-          className="text-text-info flex items-center"
-        >
-          주문 상세 보기 <Icon iconName="right" />
-        </Link>
-      </div>
+      <h2 className="gap-sm flex">
+        <span>{formatDateWithKorean(orderedAt)} 주문</span>
+        <span className="text-text-tertiary">주문번호 : {orderNumber}</span>
+      </h2>
+
       {!isCanceled ? (
         <ExtraButton onClick={onCancelOrder}>
           {isPending ? '처리 중...' : '전체 주문 취소'}
@@ -52,4 +47,4 @@ const OrderHistoryListGroupHeader = ({
   );
 };
 
-export default OrderHistoryListGroupHeader;
+export default OrderDetailListGroupHeader;

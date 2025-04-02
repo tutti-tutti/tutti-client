@@ -2,7 +2,7 @@ import { fetchOrderDetail } from '@/services';
 import { formatDateWithKorean } from '@/utils';
 import {
   MypageHeader,
-  OrderHistoryList,
+  OrderDetailClientWrapper,
   OrderTableInfoSection,
 } from '@/components';
 
@@ -26,7 +26,7 @@ const OrderDetailPage = async ({ params }: Params) => {
   const linkItems = [
     { label: '홈', href: '' },
     { label: '마이페이지', href: '' },
-    { label: '주문 내역', href: '/orders' },
+    { label: '주문 내역', href: '/my/orders' },
     { label: pageTitle, href: `${orderId}`, isCurrent: true },
   ];
 
@@ -42,7 +42,10 @@ const OrderDetailPage = async ({ params }: Params) => {
           </h2>
 
           <section className="bg-bg-tertiary px-5xl py-3xl">
-            <OrderHistoryList orderId={Number(orderId)} {...orderDetailInfo} />
+            <OrderDetailClientWrapper
+              orderId={Number(orderId)}
+              initialOrderDetailInfo={orderDetailInfo}
+            />
           </section>
 
           <OrderTableInfoSection {...orderDetailInfo} className="py-3xl" />

@@ -7,11 +7,13 @@ import { ExtraButton } from '@/components';
 interface OrdersExtraActionsProps {
   orderId: number;
   productItemId: number;
+  isCanceled: boolean;
 }
 
 const OrdersExtraActions = ({
   orderId,
   productItemId,
+  isCanceled,
 }: OrdersExtraActionsProps) => {
   const handleWriteReview = () =>
     redirect(ROUTER_PATH.REVIEW_PRODUCT(orderId, productItemId));
@@ -21,9 +23,11 @@ const OrdersExtraActions = ({
       <div className="text-text-tertiary inline-flex items-center text-base">
         주문번호 : {orderId}
       </div>
-      <div className="gap-xs flex justify-end">
-        <ExtraButton onClick={handleWriteReview}>리뷰 작성</ExtraButton>
-      </div>
+      {!isCanceled && (
+        <div className="gap-xs flex justify-end">
+          <ExtraButton onClick={handleWriteReview}>리뷰 작성</ExtraButton>
+        </div>
+      )}
     </article>
   );
 };

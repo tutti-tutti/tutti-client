@@ -1,5 +1,7 @@
-import { cn, formatAfterDays } from '@/utils';
-import type { OrderItem } from '@/types';
+'use client';
+
+import { cn } from '@/utils';
+import type { OrderItem, OrderStatus } from '@/types';
 import {
   ProductThumbnail,
   ProductName,
@@ -25,7 +27,7 @@ const OrderHistoryList = ({
 }: OrderProductListProps) => {
   const itemsCount = orderItems.length;
 
-  const paddingStyles = 'px-0 py-md md:p-lg';
+  const paddingStyles = 'px-0 py-md md:py-xl';
   const thumbColumnStyles = 'w-[120px] md:w-[288px]';
   const infoColumnStyles = 'w-full md:w-full';
 
@@ -54,7 +56,7 @@ const OrderHistoryList = ({
                     'gap-2xs items-between flex flex-col',
                   )}
                 >
-                  <OrderStatusBadge orderStatus={orderStatus} />
+                  <OrderStatusBadge orderStatus={orderStatus as OrderStatus} />
 
                   <div className="gap-xs flex flex-1 flex-col">
                     <ProductName
@@ -74,22 +76,23 @@ const OrderHistoryList = ({
                       className="hidden w-full items-center md:flex"
                       price={item.price}
                       quantity={item.quantity}
-                      expectedArrivalAt={formatAfterDays(
-                        item.expectedArrivalAt,
-                      )}
+                      expectedArrivalAt={item.expectedArrivalAt}
                     />
                   </div>
 
                   <OrdersExtraActions
                     orderId={orderId}
                     productItemId={item.productItemId}
+                    isCanceled={orderStatus === 'CANCELED'}
                   />
                 </div>
               </article>
               <div className="hidden md:flex">
                 <OrdersActions
+                  orderId={orderId}
                   itemsCount={itemsCount}
                   orderNumber={orderNumber}
+                  isCanceled={orderStatus === 'CANCELED'}
                 />
               </div>
             </div>
@@ -99,12 +102,14 @@ const OrderHistoryList = ({
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={item.expectedArrivalAt}
                 className="justify-center"
               />
               <OrdersActions
+                orderId={orderId}
                 itemsCount={itemsCount}
                 orderNumber={orderNumber}
+                isCanceled={orderStatus === 'CANCELED'}
               />
             </div>
           </article>

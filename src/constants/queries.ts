@@ -16,6 +16,7 @@ export const PRODUCTS_QUERY_KEY = {
   LIST: 'list',
   LATEST: 'latest',
   RECOMMEND: 'recommend',
+  PAGINATION: 'pagination',
 };
 
 export const CART_QUERY_KEY = {

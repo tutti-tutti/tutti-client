@@ -1,5 +1,7 @@
 'use server';
 
+import { AxiosError } from 'axios';
+
 import { resetPwSchema } from '@/schemas';
 import { resetPw } from '@/services';
 import type { EmailVerificationState } from '@/types';
@@ -7,7 +9,7 @@ import type { EmailVerificationState } from '@/types';
 export const resetPwAction = async (
   prevState: EmailVerificationState,
   formData: FormData,
-) => {
+): Promise<EmailVerificationState> => {
   try {
     const email = formData.get('email');
     const pw = formData.get('pw');
@@ -53,11 +55,30 @@ export const resetPwAction = async (
       success: false,
     };
   } catch (error) {
-    console.error(error); // 📌 추후에 서버 에러 처리 예정!
+    if (error instanceof AxiosError) {
+      if (error.response) {
+        const serverErrorMessage =
+          error.response.data?.message || error.response.data?.error;
+
+        return {
+          ...prevState,
+          success: false,
+          serverError:
+            serverErrorMessage ||
+            '비밀번호 재설정 요청 중 서버 오류가 발생했습니다.',
+        };
+      } else if (error.request) {
+        return {
+          ...prevState,
+          success: false,
+          serverError: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
+        };
+      }
+    }
 
     return {
       success: false,
-      error: '비밀번호 재설정 중 오류가 발생했습니다.',
+      serverError: '비밀번호 재설정 중 알 수 없는 오류가 발생했습니다.',
     };
   }
 };

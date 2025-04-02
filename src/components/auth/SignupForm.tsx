@@ -32,6 +32,7 @@ const {
   SIGNUP_LOADING,
   VERIFY_EMAIL_BUTTON_LOADING,
   CHECK_VERIFY_CODE_BUTTON_LOADING,
+  EMAIL_INPUT,
 } = AUTH_CONSTANTS;
 
 const SignupForm = ({ signupTerms }: SignupFormProps) => {
@@ -99,11 +100,16 @@ const SignupForm = ({ signupTerms }: SignupFormProps) => {
       ? isCodeVerificationPending
       : isSignupPending;
 
+  const serverError =
+    emailVerificationState.serverError ||
+    codeVerificationState.serverError ||
+    signupState.serverError;
+
   return (
     <form action={action}>
       <fieldset className="flex flex-col">
         <legend className="mb-sm font-style-heading">{SIGNUP}</legend>
-        <div className="gap-sm mb-5xl flex flex-col">
+        <div className="gap-sm mb-xl flex flex-col">
           <VerifyEmailInput
             email={emailVerificationState.email || ''}
             emailRef={emailRef}
@@ -112,7 +118,7 @@ const SignupForm = ({ signupTerms }: SignupFormProps) => {
             success={
               !codeVerificationState.codeVerified
                 ? emailVerificationState.message!
-                : '이메일 인증이 완료되었습니다.'
+                : EMAIL_INPUT.SUCCESS
             }
           />
           {emailVerificationState.emailVerified &&
@@ -141,9 +147,12 @@ const SignupForm = ({ signupTerms }: SignupFormProps) => {
               </>
             )}
         </div>
+        <div className="text-text-danger font-style-info text-center">
+          {serverError}
+        </div>
         <Button
           type="submit"
-          className="my-lg font-style-subHeading"
+          className="font-style-subHeading"
           variant={isPending ? 'disabled' : 'primary'}
         >
           {isPending ? loadingText : buttonText}

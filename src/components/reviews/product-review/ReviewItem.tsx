@@ -49,7 +49,11 @@ const ReviewItem = ({ isLogin, ...review }: ReviewItemProps) => {
         >
           {reviewBadgeText}
         </ReviewBadge>
-        {isLogin && <ReviewLikeButton liked={review.liked} id={review.id} />}
+        <ReviewLikeButton
+          isLogin={isLogin}
+          liked={review.liked}
+          id={review.id}
+        />
       </div>
     </div>
   );

@@ -64,9 +64,9 @@ const ProductDetailPage = async ({ params, searchParams }: Params) => {
 
       <RecommendProductList />
 
-      <section className="bg-bg-secondary font-style-subHeading text-text-tertiary flex h-[640px] items-center justify-center overflow-y-auto">
+      {/* <section className="bg-bg-secondary font-style-subHeading text-text-tertiary flex h-[640px] items-center justify-center overflow-y-auto">
         챗봇영역
-      </section>
+      </section> */}
 
       <section className="gap-md flex flex-col">
         <h2 className="font-style-subHeading text-text-primary">상품 정보</h2>

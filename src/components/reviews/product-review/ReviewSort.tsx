@@ -20,8 +20,6 @@ const ReviewSort = () => {
   const isSelectedClass = (queryParameter: string) =>
     `${isSelected(queryParameter) ? 'text-text-primaryInteraction' : 'text-text-tertiary'}`;
 
-  console.log(reviewSortSearchParams);
-
   return (
     <>
       <div className="border-border-secondary pb-md gap-lg flex justify-end border-b">

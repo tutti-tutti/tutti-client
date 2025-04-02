@@ -8,6 +8,15 @@ const baseURL = isServer
   ? SERVER_API_BASE_URL
   : `${window.location.origin}/api`;
 
+export const staticAxios = axios.create({
+  baseURL: SERVER_API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+  timeout: 10000,
+});
+
 export const axiosInstance = axios.create({
   baseURL,
   headers: {

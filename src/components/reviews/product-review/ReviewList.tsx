@@ -5,15 +5,16 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { reviewsInfiniteQueryOptions } from '@/queries';
 import type { ReviewItemAPISchema } from '@/types';
-import ReviewFilter from './ReviewFilter';
 import ReviewItem from './ReviewItem';
 
 interface ReviewListProps {
+  isLogin: boolean;
   productIdParams: string;
   reviewSortSearchParams: string;
 }
 
 const ReviewList = ({
+  isLogin,
   productIdParams,
   reviewSortSearchParams,
 }: ReviewListProps) => {
@@ -47,9 +48,8 @@ const ReviewList = ({
 
   return (
     <div>
-      <ReviewFilter />
       {allReviews.map((review: ReviewItemAPISchema) => (
-        <ReviewItem key={review.id} {...review} />
+        <ReviewItem isLogin={isLogin} key={review.id} {...review} />
       ))}
     </div>
   );

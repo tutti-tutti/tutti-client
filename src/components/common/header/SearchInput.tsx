@@ -47,7 +47,7 @@ const SearchInput = ({
       </div>
 
       <form
-        className="px-2xl py-md relative flex items-center justify-between"
+        className="px-2xl py-xs relative flex items-center justify-between"
         onSubmit={handleSubmit}
       >
         <input

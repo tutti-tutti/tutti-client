@@ -1,8 +1,6 @@
-import Link from 'next/link';
-
-import { getGroupOrderItemsByOrderId } from '@/utils';
+import { getGroupOrderItemsByOrderId, cn } from '@/utils';
 import type { OrderHistoryItem, GroupedOrderItemByOrderId } from '@/types';
-import { Icon } from '@/components';
+import { OrderHistoryListGroupHeader } from '@/components';
 import { default as OrderHistoryList } from './OrderHistoryList';
 
 interface OrderHistoryListGroupProps {
@@ -15,21 +13,27 @@ const OrderHistoryListGroup = ({
   const groupedOrderItems: GroupedOrderItemByOrderId[] =
     getGroupOrderItemsByOrderId(orderHistoryList);
 
+  const cancelStyles = 'rounded-md opacity-75 bg-bg-tertiary';
+
   return (
     <ul className="gap-2xl flex flex-col">
-      {groupedOrderItems.map(({ orderId, items }) => (
-        <li key={orderId} className="md:-pl-xl">
+      {groupedOrderItems.map(({ orderId, orderNumber, items, orderStatus }) => (
+        <li
+          key={orderId}
+          className={cn(orderStatus === 'CANCELED' ? cancelStyles : '')}
+        >
           <article>
-            <div className="gap-xs flex text-xl">
-              <strong>주문번호 {orderId}</strong>
-              <Link
-                href={`/my/orders/${orderId}`}
-                className="text-text-info flex items-center"
-              >
-                주문 상세 보기 <Icon iconName="right" />
-              </Link>
-            </div>
-            <OrderHistoryList orderId={orderId} orderItems={items} />
+            <OrderHistoryListGroupHeader
+              orderId={orderId}
+              orderNumber={orderNumber}
+              isCanceled={orderStatus === 'CANCELED'}
+            />
+            <OrderHistoryList
+              orderId={orderId}
+              orderNumber={orderNumber}
+              orderItems={items}
+              orderStatus={orderStatus}
+            />
           </article>
         </li>
       ))}

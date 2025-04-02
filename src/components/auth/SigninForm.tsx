@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 
 import { signinAction } from '@/server-actions';
 import { Button, Checkbox, ClickText } from '@/components';
@@ -9,6 +9,7 @@ import { EmailVerificationState } from '@/types';
 import SocialLoginButton from '@/components/auth/SocialLoginButton';
 import PwInput from '@/components/auth/PwInput';
 import VerifyEmailInput from '@/components/auth/VerifyEmailInput';
+import { useRouter } from 'next/navigation';
 
 const initialVerificationState: EmailVerificationState = {
   success: false,
@@ -26,10 +27,17 @@ const {
 } = AUTH_CONSTANTS;
 
 const SigninForm = () => {
+  const router = useRouter();
   const [signinState, signinFormAction, isSigninPending] = useActionState(
     signinAction,
     initialVerificationState,
   );
+
+  useEffect(() => {
+    if (signinState.success) {
+      router.push('/');
+    }
+  }, [signinState.success, router]);
 
   const signinButtonText = isSigninPending ? SIGNIN_LOADING : SIGNIN;
 
@@ -53,6 +61,9 @@ const SigninForm = () => {
             >
               {FORGOT_PW}
             </ClickText>
+          </div>
+          <div className="text-text-danger font-style-info text-center">
+            {signinState.serverError}
           </div>
           <Button
             type="submit"

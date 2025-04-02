@@ -54,12 +54,14 @@ export interface OrderHistoryItem {
 // 주문번호 별 데이터 그룹화
 export interface GroupedOrderItemByOrderId {
   orderId: number;
+  orderStatus: string;
+  orderNumber: string;
   items: OrderItem[];
 }
 
-// 주문내역 상세 조회 API 스키마
+// 주문내역 상세 조회 API 스키마 (GET 요청 path 파라미터: orderId )
 export interface OrderDetailResponseAPISchema {
-  orderNumber: string;
+  orderNumber: string; // tosspayments에서 사용하는 key
   orderStatus: string;
   totalDiscountAmount: number;
   totalProductAmount: number;
@@ -78,3 +80,5 @@ export interface OrderDetailResponseAPISchema {
   note: string;
   storeName: string;
 }
+
+export type OrderStatus = 'CANCELED' | 'DONE' | 'READY';

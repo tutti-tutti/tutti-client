@@ -26,8 +26,9 @@ const CategoryFilterItems = ({
         hoverClass,
         isSelected && selectedCategoryClass,
       )}
-      {...props}
       scroll={false}
+      replace={true}
+      {...props}
     >
       {children}
     </Link>

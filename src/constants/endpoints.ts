@@ -11,6 +11,7 @@ export const API_RESOURCES = {
   CART: '/cart',
   ORDERS: '/orders',
   PAYMENTS: '/payments',
+  REFUND: '/refund',
   REVIEWS: '/reviews',
   FAQS: '/faqs',
   CATEGORIES: '/categories',
@@ -25,6 +26,7 @@ export const AUTH_ENDPOINTS = {
   MYPAGE: `${API_RESOURCES.MEMBERS}/mypage`,
   SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
   TERMS: `${API_RESOURCES.MEMBERS}/terms`,
+  UPDATE_ACCESS_TOKEN: `${API_RESOURCES.MEMBERS}/update-token`,
 };
 
 export const PRODUCTS_ENDPOINTS = {
@@ -32,6 +34,7 @@ export const PRODUCTS_ENDPOINTS = {
   LATEST: `${API_RESOURCES.PRODUCTS}/latest-list`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
+  PAGINATION: `${API_RESOURCES.PRODUCTS}/latest-list/page`,
 };
 
 export const CART_ENDPOINTS = {
@@ -52,6 +55,10 @@ export const PAYMENTS_ENDPOINTS = {
     `${API_RESOURCES.PAYMENTS}/orderId/${orderId}`,
   DETAIL_BY_PAYMENT_ID: (paymentId: string) =>
     `${API_RESOURCES.PAYMENTS}/paymentId/${paymentId}`,
+};
+
+export const REFUND_ENDPOINTS = {
+  REQUEST: `${API_RESOURCES.REFUND}/request`,
 };
 
 export const REVIEW_ENDPOINTS = {

@@ -10,7 +10,7 @@ const {
 } = AUTH_CONSTANTS;
 
 const PASSWORD_LOWERCASE_NUMBER_MIN8_REGEX =
-  /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
+  /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*\-_=+\\|:;"'<>,.?/])(?=.{8,}).+$/;
 
 export const authSchema = z.object({
   email: z.string().email({ message: EMAIL_INPUT.ERROR }).trim(),

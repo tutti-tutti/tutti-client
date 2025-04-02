@@ -1,5 +1,5 @@
 import { fetchOrderHistoryList } from '@/services';
-import { MypageHeader, OrderHistoryListGroup } from '@/components';
+import { MypageHeader, OrderHistoryClientWrapper } from '@/components';
 
 const pageTitle = '주문 내역';
 
@@ -10,11 +10,11 @@ export async function generateMetadata() {
 }
 
 const OrderHistoryPage = async () => {
-  const orderHistoryList = await fetchOrderHistoryList();
+  const initialOrderHistoryList = await fetchOrderHistoryList();
 
   const linkItems = [
-    { label: '홈', href: '' },
-    { label: '마이페이지', href: '' },
+    { label: '홈', href: '/' },
+    { label: '마이페이지', href: '', isCurrent: true },
     { label: '주문내역', href: '/orders', isCurrent: true },
   ];
 
@@ -22,7 +22,9 @@ const OrderHistoryPage = async () => {
     <div className="gap-4xl mx-auto flex flex-col">
       <section className="gap-lg flex flex-col">
         <MypageHeader linkItems={linkItems} pageName={pageTitle} />
-        <OrderHistoryListGroup orderHistoryList={orderHistoryList} />
+        <OrderHistoryClientWrapper
+          initialOrderHistoryList={initialOrderHistoryList}
+        />
       </section>
     </div>
   );

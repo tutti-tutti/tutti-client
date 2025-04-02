@@ -1,5 +1,5 @@
 import { fetchOrderHistoryList } from '@/services';
-import { MypageHeader, OrderHistoryClientWrapper } from '@/components';
+import { MypageHeader, OrderHistoryClientWrapper, NoData } from '@/components';
 
 const pageTitle = '주문 내역';
 
@@ -22,9 +22,15 @@ const OrderHistoryPage = async () => {
     <div className="gap-4xl mx-auto flex flex-col">
       <section className="gap-lg flex flex-col">
         <MypageHeader linkItems={linkItems} pageName={pageTitle} />
-        <OrderHistoryClientWrapper
-          initialOrderHistoryList={initialOrderHistoryList}
-        />
+        {!initialOrderHistoryList || initialOrderHistoryList.length === 0 ? (
+          <NoData>
+            <p>아직 주문하신 내역이 없습니다.</p>
+          </NoData>
+        ) : (
+          <OrderHistoryClientWrapper
+            initialOrderHistoryList={initialOrderHistoryList}
+          />
+        )}
       </section>
     </div>
   );

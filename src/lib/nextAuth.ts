@@ -26,8 +26,8 @@ export const authOptions: NextAuthOptions = {
             account.access_token || '',
           );
 
-          await setAccessToken(response.accessToken);
-          await setRefreshToken(response.refreshToken);
+          await setAccessToken(response.access_token);
+          await setRefreshToken(response.refresh_token);
         } catch (error) {
           console.error('백엔드 JWT 발급 오류:', error);
         }

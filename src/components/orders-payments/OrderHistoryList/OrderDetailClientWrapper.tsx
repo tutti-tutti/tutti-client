@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+
 import { fetchOrderDetail } from '@/services';
 import type { OrderDetailResponseAPISchema } from '@/types';
 import { OrderHistoryList } from '@/components';

@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
 import type { Product, ProductOption } from '@/types';
+import { Divider } from '@/components';
 import ProductHeader from './ProductHeader';
 import ProductOptions from './ProductOptions';
 import ProductPrice from './ProductPrice';
@@ -60,9 +61,9 @@ const ProductDetailItem = ({
   };
 
   return (
-    <div className="gap-md flex flex-col md:flex-row">
+    <section className="gap-md flex flex-col md:flex-row">
       {/* 상품 이미지 */}
-      <figure className="md:w-1/2">
+      <div className="md:w-1/2">
         <ProductThumbnail
           width="w-full"
           height="h-auto"
@@ -70,49 +71,56 @@ const ProductDetailItem = ({
           name={name}
           className="aspect-square"
         />
-      </figure>
+      </div>
 
       {/* 상품 정보  */}
-      <section className="md:w-1/2">
-        <ProductHeader
-          storeName={storeName}
-          name={name}
-          freeDelivery={freeDelivery}
-          almostOutOfStock={almostOutOfStock}
-          likes={likes}
-          productReviewInfo={
-            productReviewInfo || { productId, avg: '', totalCount: 0 }
-          }
-        />
-        <ProductOptions
-          productItems={productOptionItems}
-          handleOptionChange={handleOptionChange}
-        />
-        <ProductPrice
-          originalPrice={
-            selectedOption
-              ? originalPrice + selectedOption.additionalPrice
-              : originalPrice
-          }
-          finalPrice={finalPrice}
-          quantity={quantity}
-          discountRate={discountRate}
-        />
-        <ProductQuantity
-          quantity={quantity}
-          maxPurchaseQuantity={maxPurchaseQuantity}
-          handleIncrease={handleIncrease}
-          handleDecrease={handleDecrease}
-          disabled={selectedProductItemId === null}
-        />
-        <ProductActions
-          productItemId={selectedProductItemId ?? 0}
-          quantity={quantity}
-          disabled={selectedProductItemId === null}
-          productId={productId}
-        />
-      </section>
-    </div>
+      <div className="gap-lg flex flex-col justify-between md:w-1/2">
+        <div>
+          <ProductHeader
+            storeName={storeName}
+            name={name}
+            freeDelivery={freeDelivery}
+            almostOutOfStock={almostOutOfStock}
+            likes={likes}
+            productReviewInfo={
+              productReviewInfo || { productId, avg: '', totalCount: 0 }
+            }
+          />
+          <ProductOptions
+            productItems={productOptionItems}
+            handleOptionChange={handleOptionChange}
+          />
+        </div>
+
+        <Divider />
+
+        <div>
+          <ProductPrice
+            originalPrice={
+              selectedOption
+                ? originalPrice + selectedOption.additionalPrice
+                : originalPrice
+            }
+            finalPrice={finalPrice}
+            quantity={quantity}
+            discountRate={discountRate}
+          />
+          <ProductQuantity
+            quantity={quantity}
+            maxPurchaseQuantity={maxPurchaseQuantity}
+            handleIncrease={handleIncrease}
+            handleDecrease={handleDecrease}
+            disabled={selectedProductItemId === null}
+          />
+          <ProductActions
+            productItemId={selectedProductItemId ?? 0}
+            quantity={quantity}
+            disabled={selectedProductItemId === null}
+            productId={productId}
+          />
+        </div>
+      </div>
+    </section>
   );
 };
 

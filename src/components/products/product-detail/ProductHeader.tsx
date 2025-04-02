@@ -32,7 +32,7 @@ const ProductHeader = ({
   };
 
   return (
-    <header className="md:border-border-secondary pb-lg md:border-b">
+    <header className="md:border-border-secondary">
       <Link href="#" className="text-text-secondary font-style-subHeading">
         {storeName}
       </Link>

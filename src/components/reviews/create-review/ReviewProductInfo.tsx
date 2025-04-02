@@ -1,75 +1,5 @@
 import { ProductThumbnail } from '@/components';
-
-const tempFetchOrder = async (orderId: string, productItemId: string) => {
-  const tempData = {
-    orderNumber: 'string',
-    orderStatus: 'string',
-    totalDiscountAmount: 0,
-    totalProductAmount: 0,
-    deliveryFee: 0,
-    totalAmount: 0,
-    paymentType: 'CARD',
-    orderedAt: '2025-03-25T07:20:41.050Z',
-    paidAt: '2025-03-25T07:20:41.050Z',
-    expectedArrivalAt: '2025-03-25T07:20:41.050Z',
-    completedAt: '2025-03-25T07:20:41.050Z',
-    orderItems: [
-      {
-        storeId: 0,
-        storeName: 'string',
-        productItemId: 0,
-        productName: 'string',
-        productImgUrl:
-          'https://ae-pic-a1.aliexpress-media.com/kf/Ad36bb01de72146b4a6f6f1748402bb1fY.jpg_960x960q75.jpg_.avif',
-        firstOptionName: 'string',
-        firstOptionValue: 'string',
-        secondOptionName: 'string',
-        secondOptionValue: 'string',
-        quantity: 0,
-        price: 0,
-      },
-      {
-        storeId: 0,
-        storeName: 'string',
-        productItemId: 1,
-        productName: 'string',
-        productImgUrl:
-          'https://ae-pic-a1.aliexpress-media.com/kf/Ad36bb01de72146b4a6f6f1748402bb1fY.jpg_960x960q75.jpg_.avif',
-        firstOptionName: 'string',
-        firstOptionValue: 'string',
-        secondOptionName: 'string',
-        secondOptionValue: 'string',
-        quantity: 0,
-        price: 0,
-      },
-      {
-        storeId: 0,
-        storeName: 'string',
-        productItemId: 2,
-        productName: 'string',
-        productImgUrl:
-          'https://ae-pic-a1.aliexpress-media.com/kf/Ad36bb01de72146b4a6f6f1748402bb1fY.jpg_960x960q75.jpg_.avif',
-        firstOptionName: 'string',
-        firstOptionValue: 'string',
-        secondOptionName: 'string',
-        secondOptionValue: 'string',
-        quantity: 0,
-        price: 0,
-      },
-    ],
-    recipientName: 'string',
-    recipientPhone: 'string',
-    recipientAddress: 'string',
-    zipCode: 'string',
-    note: 'string',
-  };
-
-  const productItemData = tempData.orderItems.find(
-    item => item.productItemId === Number(productItemId),
-  );
-
-  return productItemData;
-};
+import { fetchProductItemDataForReview } from '@/services';
 
 interface ReviewProductInfoProps {
   orderId: string;
@@ -80,7 +10,7 @@ const ReviewProductInfo = async ({
   orderId,
   productItemId,
 }: ReviewProductInfoProps) => {
-  const orderData = await tempFetchOrder(orderId, productItemId);
+  const orderData = await fetchProductItemDataForReview(orderId, productItemId);
 
   return (
     <div className="gap-lg flex w-full">
@@ -98,7 +28,9 @@ const ReviewProductInfo = async ({
         <div className="font-style-subHeading text-text-primary mb-2xs">
           {orderData?.productName}
         </div>
-        <div className="font-style-paragraph text-text-tertiary mb-md">{`${orderData?.firstOptionName} ${orderData?.secondOptionName}`}</div>
+        {orderData?.firstOptionValue && (
+          <div className="font-style-paragraph text-text-tertiary mb-md">{`${orderData?.firstOptionValue}${orderData?.secondOptionValue ? `, ${orderData.secondOptionValue}` : ''}`}</div>
+        )}
         <div className="font-style-paragraph text-text-secondary mb-sm">
           {orderData?.quantity}개
         </div>

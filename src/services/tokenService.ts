@@ -29,7 +29,7 @@ export const setAccessToken = async (accessToken: string) => {
 
   cookieStore.set('access_token', accessToken, {
     httpOnly: true,
-    // secure: true, // 📌 https 프로토콜 통신일 경우에만 가능하도록 강제하는 옵션이므로 배포 환경에서 테스트할 때 사용하기
+    secure: true,
     maxAge: 60 * 60,
     path: '/',
   });
@@ -40,7 +40,7 @@ export const setRefreshToken = async (refreshToken: string) => {
 
   cookieStore.set('refresh_token', refreshToken, {
     httpOnly: true,
-    // secure: true, // 📌 https 프로토콜 통신일 경우에만 가능하도록 강제하는 옵션이므로 배포 환경에서 테스트할 때 사용하기
+    secure: true,
     maxAge: 7 * 24 * 60 * 60,
     path: '/',
   });

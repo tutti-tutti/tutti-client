@@ -146,13 +146,9 @@ export const fetchProductItemDataForReview = async (
 ) => {
   const data = await fetchOrderDetail(orderId);
 
-  console.log('@@@@', data);
-
   const productItemData = data.orderItems.find(
     item => item.productItemId === Number(productItemId),
   );
-
-  console.log('#######', productItemData);
 
   return productItemData;
 };

@@ -50,7 +50,7 @@ export const resetPwAction = async (
 
     return {
       ...prevState,
-      success: false,
+      success: true,
     };
   } catch (error) {
     console.error(error); // 📌 추후에 서버 에러 처리 예정!

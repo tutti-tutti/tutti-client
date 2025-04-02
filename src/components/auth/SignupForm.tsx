@@ -1,6 +1,7 @@
 'use client';
 
 import { useActionState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 import {
   requestVerificationCodeAction,
@@ -35,6 +36,7 @@ const {
 } = AUTH_CONSTANTS;
 
 const SignupForm = ({ signupTerms }: SignupFormProps) => {
+  const router = useRouter();
   const [
     emailVerificationState,
     requestVerificationCodeFormAction,
@@ -65,6 +67,12 @@ const SignupForm = ({ signupTerms }: SignupFormProps) => {
     emailVerificationState.emailVerified,
     codeVerificationState.codeVerified,
   ]);
+
+  useEffect(() => {
+    if (signupState.success) {
+      router.push('/signin');
+    }
+  }, [signupState.success, router]);
 
   const action = !emailVerificationState.emailVerified
     ? async (formData: FormData) => {

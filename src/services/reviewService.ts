@@ -1,5 +1,6 @@
 import { REVIEW_ENDPOINTS } from '@/constants';
 import { axiosInstance } from '@/lib';
+import { fetchOrderDetail } from '@/services/ordersService';
 
 const fetchReviewsLatest = async (
   productId: string,
@@ -137,4 +138,17 @@ export const fetchProductReviewInfo = async (productId: string) => {
     ...reviewAverage,
     totalCount,
   };
+};
+
+export const fetchProductItemDataForReview = async (
+  orderId: string,
+  productItemId: string,
+) => {
+  const data = await fetchOrderDetail(orderId);
+
+  const productItemData = data.orderItems.find(
+    item => item.productItemId === Number(productItemId),
+  );
+
+  return productItemData;
 };

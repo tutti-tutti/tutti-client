@@ -52,7 +52,7 @@ export const resetPwAction = async (
 
     return {
       ...prevState,
-      success: false,
+      success: true,
     };
   } catch (error) {
     if (error instanceof AxiosError) {

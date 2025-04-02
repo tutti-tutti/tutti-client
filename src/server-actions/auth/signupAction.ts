@@ -64,7 +64,7 @@ export const signupAction = async (
 
     return {
       ...prevState,
-      success: false,
+      success: true,
     };
   } catch (error) {
     if (error instanceof AxiosError) {

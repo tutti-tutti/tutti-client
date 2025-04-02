@@ -13,6 +13,7 @@ import { EmailVerificationState } from '@/types';
 import PwInput from '@/components/auth/PwInput';
 import VerifyCodeInput from '@/components/auth/VerifyCodeInput';
 import VerifyEmailInput from '@/components/auth/VerifyEmailInput';
+import { useRouter } from 'next/navigation';
 
 const initialVerificationState: EmailVerificationState = {
   success: false,
@@ -30,6 +31,7 @@ const {
 } = AUTH_CONSTANTS;
 
 const ResetPwForm = () => {
+  const router = useRouter();
   const [
     emailVerificationState,
     requestVerificationCodeFormAction,
@@ -60,6 +62,12 @@ const ResetPwForm = () => {
     emailVerificationState.emailVerified,
     codeVerificationState.codeVerified,
   ]);
+
+  useEffect(() => {
+    if (resetPwState.success) {
+      router.push('/signin');
+    }
+  }, [resetPwState.success, router]);
 
   const action = !emailVerificationState.emailVerified
     ? async (formData: FormData) => {

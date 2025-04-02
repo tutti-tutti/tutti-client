@@ -1,9 +1,9 @@
-import { axiosInstance } from '@/lib';
+import { axiosInstance, staticAxios } from '@/lib';
 import { PRODUCTS_ENDPOINTS } from '@/constants';
 import { Product } from '@/types';
 
 export const fetchProducts = async () => {
-  const response = await axiosInstance.get(PRODUCTS_ENDPOINTS.LATEST);
+  const response = await staticAxios.get(PRODUCTS_ENDPOINTS.LATEST);
 
   return response.data;
 };

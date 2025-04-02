@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { cn } from '@/utils';
 import { reviewServerStore } from '@/stores';
 
-const REVIEW_FILTERS = [
-  { id: 'LATEST', text: '최신순', queryParameter: 'latest' },
-  { id: 'LIKE', text: '도움돼요순', queryParameter: 'like' },
-  { id: 'RATING', text: '평점순', queryParameter: 'rating' },
+const REVIEW_SORT = [
+  { text: '최신순', queryParameter: 'latest' },
+  { text: '도움돼요순', queryParameter: 'like' },
+  { text: '평점순', queryParameter: 'rating' },
 ];
 
-const ReviewFilter = () => {
+const ReviewSort = () => {
   const { getParams } = reviewServerStore();
   const { reviewSortSearchParams } = getParams();
 
@@ -23,19 +23,22 @@ const ReviewFilter = () => {
   return (
     <>
       <div className="border-border-secondary pb-md gap-lg flex justify-end border-b">
-        {REVIEW_FILTERS.map(filter => {
+        {REVIEW_SORT.map(sort => {
           return (
             <Link
-              key={filter.id}
-              href={`?review-sort=${filter.queryParameter}`}
-              className={cn(
-                'font-style-paragraph',
-                isSelectedClass(filter.queryParameter),
-              )}
+              key={sort.queryParameter}
+              href={`?review-sort=${sort.queryParameter}`}
               scroll={false}
               replace={true}
             >
-              <div>{filter.text}</div>
+              <div
+                className={cn(
+                  'font-style-paragraph',
+                  isSelectedClass(sort.queryParameter),
+                )}
+              >
+                {sort.text}
+              </div>
             </Link>
           );
         })}
@@ -44,4 +47,4 @@ const ReviewFilter = () => {
   );
 };
 
-export default ReviewFilter;
+export default ReviewSort;

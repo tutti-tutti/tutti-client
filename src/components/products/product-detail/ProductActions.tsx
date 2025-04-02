@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { Button } from '@/components';
-import { addCart } from '@/services';
+import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
 import { ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
@@ -31,10 +31,22 @@ const ProductActions = ({
 
   const noticeSelectOption = () => toast.warning('옵션을 선택해주세요!');
 
-  const handleCheckoutClick = () =>
-    disabled
-      ? noticeSelectOption()
-      : router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+  const handleCheckoutClick = async () => {
+    if (disabled) {
+      noticeSelectOption();
+      return;
+    }
+
+    const user = await getAccessToken();
+
+    if (!user) {
+      toast.warning('로그인 후 이용해주세요!');
+      router.push(ROUTER_PATH.LOGIN);
+      return;
+    }
+
+    router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+  };
 
   const handleCartClick = async () =>
     disabled ? noticeSelectOption() : await handleAddCart();

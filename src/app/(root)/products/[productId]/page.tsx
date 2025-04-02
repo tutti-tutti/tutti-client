@@ -1,4 +1,8 @@
-import { fetchProductById, fetchProductReviewInfo } from '@/services';
+import {
+  fetchProductById,
+  fetchProductReviewInfo,
+  fetchProducts,
+} from '@/services';
 import {
   RecommendProductList,
   ClientProductDetail,
@@ -6,6 +10,7 @@ import {
   ProductDetailInfo,
 } from '@/components';
 import { reviewServerStore } from '@/stores';
+import type { Product } from '@/types';
 
 interface Params {
   params: Promise<{ productId: string }>;
@@ -30,13 +35,23 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
+export async function generateStaticParams() {
+  const products = await fetchProducts();
+
+  return products.map((product: Product) => ({
+    productId: String(product.productId),
+  }));
+}
+
 const ProductDetailPage = async ({ params, searchParams }: Params) => {
   const { productId } = await params;
-  const initialProduct = await fetchProductById(productId);
   const { 'review-sort': reviewSortSearchParams } = await searchParams;
+  const [initialProduct, productReviewInfo] = await Promise.all([
+    fetchProductById(productId),
+    fetchProductReviewInfo(productId),
+  ]);
+
   const { setParams } = reviewServerStore();
-  const productReviewInfo = await fetchProductReviewInfo(productId);
-  
   setParams({ productIdParams: productId, reviewSortSearchParams });
 
   return (
@@ -47,7 +62,7 @@ const ProductDetailPage = async ({ params, searchParams }: Params) => {
         productReviewInfo={productReviewInfo}
       />
 
-      <RecommendProductList categoryName="식료품" />
+      <RecommendProductList />
 
       <section className="bg-bg-secondary font-style-subHeading text-text-tertiary flex h-[640px] items-center justify-center overflow-y-auto">
         챗봇영역

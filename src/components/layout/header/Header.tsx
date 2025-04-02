@@ -8,7 +8,11 @@ import { SearchInput, Logo, NavIcon } from '@/components';
 import HeaderNavigation from './HeaderNavigation';
 import TextHeader from './TextHeader';
 
-const Header = () => {
+interface HeaderProps {
+  isLogin: boolean;
+}
+
+const Header = ({ isLogin }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const toggleSearch = () => {
@@ -20,11 +24,7 @@ const Header = () => {
     <header className="bg-bg-primary pt-sm md:pb-md md:border-border-secondary fixed top-0 right-0 left-0 z-10 w-full md:border-b">
       <div className="px-container gap-xs layout-max-width mx-auto flex w-full flex-col">
         <nav className="ml-auto hidden md:block">
-          <TextHeader
-            country="한국"
-            isLoggedIn={false}
-            email="tutti@tutti.com"
-          />
+          <TextHeader isLogin={isLogin} country="한국" />
         </nav>
 
         <div className="gap-lg flex h-[54px] items-center justify-between md:h-[64px]">

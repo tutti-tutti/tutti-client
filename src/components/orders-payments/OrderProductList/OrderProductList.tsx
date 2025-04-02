@@ -1,4 +1,4 @@
-import { cn, formatAfterDays } from '@/utils';
+import { cn } from '@/utils';
 import type { OrderItem } from '@/types';
 import {
   ProductThumbnail,
@@ -50,7 +50,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
                   className="hidden sm:flex"
                   price={item.price}
                   quantity={item.quantity}
-                  expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
+                  expectedArrivalAt={item.expectedArrivalAt}
                 />
               </div>
             </div>
@@ -58,7 +58,7 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
               <ProductAmoutInfo
                 price={item.price}
                 quantity={item.quantity}
-                expectedArrivalAt={formatAfterDays(item.expectedArrivalAt)}
+                expectedArrivalAt={item.expectedArrivalAt}
                 className="justify-center"
               />
             </div>

@@ -47,7 +47,7 @@ const ProductOptions = ({
   }
 
   return (
-    <article className="gap-lg pb-lg md:py-xl flex flex-col">
+    <article className="gap-lg pt-lg md:pt-xl flex flex-col">
       <div className="gap-md flex items-center">
         <label className="font-style-subHeading text-text-secondary min-w-[60px]">
           옵션

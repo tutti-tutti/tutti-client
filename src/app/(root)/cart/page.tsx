@@ -8,7 +8,7 @@ const CartPage = async () => {
     <div className="gap-3xl flex flex-col">
       <CartInfo isLoggedIn={isLoggedIn} />
       <div className="mb-7xl">
-        <RecommendProductList categoryName="식료품" />
+        <RecommendProductList />
       </div>
     </div>
   );

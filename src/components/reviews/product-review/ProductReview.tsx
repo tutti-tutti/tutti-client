@@ -12,9 +12,10 @@ import ReviewList from './ReviewList';
 import { getAccessToken } from '@/services';
 
 const ProductReview = async () => {
-  const isLogin = !!getAccessToken();
   const { getParams } = reviewServerStore();
   const { productIdParams, reviewSortSearchParams } = getParams();
+  const accessToken = await getAccessToken();
+  const isLogin = !!accessToken;
 
   const queryClient = new QueryClient({
     defaultOptions: {

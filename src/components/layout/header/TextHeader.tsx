@@ -1,22 +1,21 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { cn } from '@/utils/cn';
 import { ROUTER_PATH, PATH_NAME } from '@/constants';
 import { ClickText, LogoutButton } from '@/components';
+import { memberDataQueryOptions } from '@/queries';
 
 interface TextHeaderProps {
-  email: string;
-  isLoggedIn: boolean;
+  isLogin: boolean;
   className?: string;
   country: string;
 }
 
-const TextHeader = ({
-  email,
-  isLoggedIn,
-  className = '',
-  country,
-}: TextHeaderProps) => {
+const TextHeader = ({ isLogin, className = '', country }: TextHeaderProps) => {
   const renderHeaderItems = (items: React.ReactNode[]) => {
-    return items.map((item, index) => (
+    const filteredItems = items.filter(Boolean);
+
+    return filteredItems.map((item, index) => (
       <div key={index} className="flex items-center">
         {index > 0 && <span className="text-text-primary mx-4">|</span>}
         {item}
@@ -24,10 +23,20 @@ const TextHeader = ({
     ));
   };
 
+  const { data: memberData } = useQuery(memberDataQueryOptions(isLogin));
+
+  const authItems = !memberData
+    ? [
+        <ClickText key="login" href={ROUTER_PATH.LOGIN}>
+          {PATH_NAME.LOGIN}
+        </ClickText>,
+        <ClickText key="signup" href={ROUTER_PATH.SIGNUP}>
+          {PATH_NAME.SIGNUP}
+        </ClickText>,
+      ]
+    : [];
+
   const commonItems = [
-    <ClickText key="signup" href={ROUTER_PATH.SIGNUP}>
-      {PATH_NAME.SIGNUP}
-    </ClickText>,
     <ClickText key="support" href={ROUTER_PATH.FAQS}>
       {PATH_NAME.FAQS}
     </ClickText>,
@@ -36,18 +45,14 @@ const TextHeader = ({
     </ClickText>,
   ];
 
-  const firstItem = isLoggedIn ? (
+  const firstItem = memberData ? (
     <div key="account" className="flex items-center">
-      <span className="mr-2">{email}</span>
+      <span className="mr-2">{memberData?.email}</span>
       <LogoutButton />
     </div>
-  ) : (
-    <ClickText key="login" href={ROUTER_PATH.LOGIN}>
-      {PATH_NAME.LOGIN}
-    </ClickText>
-  );
+  ) : null;
 
-  const allItems = [firstItem, ...commonItems];
+  const allItems = [firstItem, ...authItems, ...commonItems].filter(Boolean);
 
   return (
     <div className={cn('flex items-center', className)}>

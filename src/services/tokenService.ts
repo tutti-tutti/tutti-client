@@ -4,6 +4,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 
 import { axiosInstance } from '@/lib';
+import { AUTH_ENDPOINTS } from '@/constants';
 
 export const getAccessToken = async () => {
   const cookieStore = await cookies();
@@ -47,10 +48,9 @@ export const setRefreshToken = async (refreshToken: string) => {
 
 export const renewAccessToken = async () => {
   try {
-    const refreshToken = getRefreshToken();
-    const { data } = await axiosInstance.post('/members/temp-endpoint', {
-      refresh_token: refreshToken,
-    });
+    const { data } = await axiosInstance.post(
+      AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN,
+    );
     const { access_token: accessToken } = data;
 
     await setAccessToken(accessToken);

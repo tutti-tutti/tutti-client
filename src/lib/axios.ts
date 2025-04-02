@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 import { SERVER_API_BASE_URL } from '@/constants';
-import { getAccessToken, renewAccessToken, removeTokens } from '@/services';
+import {
+  getAccessToken,
+  getRefreshToken,
+  renewAccessToken,
+  removeTokens,
+} from '@/services';
 
 const isServer = typeof window === 'undefined';
 const baseURL = isServer
@@ -36,7 +41,6 @@ if (isServer) {
 
       return config;
     },
-
     error => Promise.reject(error),
   );
 
@@ -47,6 +51,14 @@ if (isServer) {
         error.config._retry = true;
 
         try {
+          const refreshToken = await getRefreshToken();
+
+          if (!refreshToken) {
+            throw new Error('refreshToken이 만료되었습니다');
+          }
+
+          axiosInstance.defaults.headers.Authorization = `Bearer ${refreshToken}`;
+
           const newAccessToken = await renewAccessToken();
 
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;

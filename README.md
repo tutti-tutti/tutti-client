@@ -4,6 +4,17 @@
 
 ![뚜띠_표지](https://github.com/user-attachments/assets/08c1cfef-3c2a-4098-8caf-21c9dc27a50e)
 
+
+&nbsp;
+
+## 🛍️ Service Overview
+**사용자 패턴 분석을 활용한 통합형 쇼핑 플랫폼 구축과 맞춤형 상품 추천 서비스**
+- 하이퍼 개인화 (Hyper-personalization)된 쇼핑 서비스
+  - AI와 CRM을 활용한 사용자 개인을 위한 맞춤형 경험
+- 사용자 감성 분석을 이용한 깨끗한 리뷰 제공
+- 반응형 대응으로 디바이스 별 동일한 경험 제공
+- 상품 별 상세 페이지의 검색 엔진 최적화
+
 &nbsp;
 
 ## 🎵 Tutti's FE Developers
@@ -18,6 +29,45 @@
 
 &nbsp;
 
+## 🚀 Project Setup Guide
+
+1. git clone 후 [pnpm 설치](https://pnpm.io/ko/installation)   
+2. pnpm을 사용하여 의존성 설치
+
+   ```
+   pnpm install
+   ```
+3. lefthook 설치 및 실행 (lint 및 prettier 동작)
+   ```
+   pnpm dlx lefthook install
+   ``` 
+
+&nbsp;
+
+## 💻 Development Environment
+
+ 1. 필수 확인 사항
+
+      ```
+      Next.js: v15.2.3
+
+      Node.js: v20.17.0 (Next.js 15는 Node.js 20.x 이상을 권장)
+
+      pnpm: v10.3.0 (v8.15.0 이상을 권장)
+      ```
+
+  2. 주요 라이브러리 버전
+
+      ```
+      tanstack query: v5.69.0
+
+      zustand: v5.0.3
+
+      tailwind: v4.0.9
+      ```
+
+&nbsp;
+
 ## 🛠️ Tech Stack & Why
 
 | **기술 스택**                                                                                                                | **선정 이유**                                                                                                                                                                                                                                                 |
@@ -27,7 +77,7 @@
 | ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) | 직관적인 유틸리티 클래스로 HTML 내에서 바로 스타일링이 가능해 빠른 UI 개발이 가능합니다. 커스터마이징이 용이하고 일관된 디자인 시스템을 유지할 수 있어 디자인-개발 협업 효율성을 높여줍니다.                                                                  |
 | ![Tanstack Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) | 서버 상태 관리를 단순화하고 데이터 페칭, 캐싱, 동기화, 업데이트를 효율적으로 처리합니다. 백그라운드 업데이트, 에러 처리, 로딩 상태 관리 등 복잡한 비동기 로직을 선언적으로 작성할 수 있어 코드 가독성을 높여줍니다.                                           |
 | ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)                           | 비동기 HTTP 요청을 간편하게 관리할 수 있으며, 응답 및 오류 처리를 효율적으로 수행할 수 있습니다. 특히 인터셉터 기능을 활용하면 요청 또는 응답을 가로채어 인증 토큰을 자동으로 추가하거나, 공통적인 에러 핸들링 로직을 적용할 수 있어 유지보수성이 향상됩니다. |
-| ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)                          | 런타임에서 타입 검증을 수행할 수 있어, 안전한 데이터 구조를 유지하는 데 도움을 줍니다. 특히, 폼 검증 및 API 응답 데이터 검증에 유용합니.                                                                                                                      |
+| ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)                          | 런타임에서 타입 검증을 수행할 수 있어, 안전한 데이터 구조를 유지하는 데 도움을 줍니다. 특히, 폼 검증 및 API 응답 데이터 검증에 유용합니다.                                                                                                                      |
 | ![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)              | 컴포넌트 기반 개발을 촉진하고 독립적인 환경에서 UI 컴포넌트를 개발할 수 있습니다. 시각적 테스트와 문서화를 동시에 지원하여 팀 협업과 디자인 시스템 구축에 효과적입니다.                                                                                       |
 | ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)                      | 중복 패키지를 하드 링크로 관리하여 디스크 공간을 절약하고 설치 속도를 크게 향상시킵니다. 엄격한 패키지 관리로 의존성 문제를 줄여줍니다.                                                                                                                       |
 | ![lefthook](https://img.shields.io/badge/lefthook-FF1E1E?style=for-the-badge)                                                | Git 훅을 통한 자동화된 코드 품질 검사로 일관된 코딩 표준을 유지합니다. 커밋 전 린팅, 포매팅, 테스트 실행을 자동화하여 코드 품질을 보장하고 CI/CD 파이프라인의 효율성을 높여줍니다.                                                                            |

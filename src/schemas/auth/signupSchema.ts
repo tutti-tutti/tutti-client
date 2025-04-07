@@ -16,5 +16,3 @@ export const signupSchema = z
     message: CHECK_PW_INPUT.ERROR,
     path: ['checkPw'],
   });
-
-export type SignupFormData = z.infer<typeof signupSchema>;

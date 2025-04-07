@@ -20,6 +20,8 @@ export const CART_CONSTANTS = {
   INVALID_OPTION: '유효하지 않은 상품 옵션입니다.',
   MAX_QUANTITY: (maxQuantity: number) =>
     `최대 구매 수량은 ${maxQuantity}개입니다.`,
+  ADD_CART: '장바구니 담기',
+  CHECKOUT: '구매하기',
   CART: '장바구니',
   ORDER_PAYMENT: '주문결제',
   ORDER_COMPLETE: '주문완료',
@@ -35,6 +37,6 @@ export const CART_CONSTANTS = {
   ADDITIONAL_PRICE: '추가금액',
   DELIVERY_PRICE: '배송비',
   TOTAL_PAYMENT: '총 결제 예정금액',
-  KOREAN_CURRENCY: (price: string) => `${price.toLocaleString()}원`,
+  KOREAN_CURRENCY: (price: number) => `${price.toLocaleString()}원`,
   PAYMENT: '결제하기',
 };

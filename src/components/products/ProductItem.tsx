@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 import { calculateDiscountRate, formatPrice } from '@/utils';
 import { PRODUCTS_CONSTANTS } from '@/constants';
-import type { Product } from '@/types';
+import type { Product, ProductReviewInfo } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
+import { Icon } from '../common';
 
 const { FREE_DELIVERY, ALMOST_OUT_OF_STOCK } = PRODUCTS_CONSTANTS;
 
@@ -16,7 +17,8 @@ const ProductItem = ({
   sellingPrice,
   freeDelivery,
   almostOutOfStock,
-}: Product) => {
+  reviewInfo,
+}: Product & { reviewInfo: ProductReviewInfo }) => {
   const discountRate =
     originalPrice && sellingPrice
       ? calculateDiscountRate(originalPrice, sellingPrice)
@@ -38,16 +40,26 @@ const ProductItem = ({
       </figure>
 
       <div className="w-7/12 md:w-full">
-        <p className="text-text-secondary md:mt-xs mb-2xs font-style-info">
-          <Link href="#">{storeName}</Link>
-        </p>
+        <div className="md:mt-xs mt-0 flex items-center justify-between">
+          <p className="text-text-secondary font-style-info">
+            <Link href="#">{storeName}</Link>
+          </p>
+
+          <div className="font-style-paragraph flex cursor-pointer items-center">
+            <Icon iconName="starFill" />
+            <div className="text-text-primary">{reviewInfo.avg}</div>
+            <div className="text-text-secondary ml-1">
+              ({reviewInfo.totalCount})
+            </div>
+          </div>
+        </div>
 
         <Link href={`/products/${productId}`}>
-          <h2 className="mb-xs font-style-subHeading line-clamp-2 w-full text-ellipsis">
+          <h2 className="font-style-subHeading line-clamp-2 w-full text-ellipsis">
             {name}
           </h2>
 
-          <div className="gap-xs md:mb-xs flex items-center">
+          <div className="gap-xs flex items-center">
             {freeDelivery && (
               <div className="bg-bg-successSubtle px-xs rounded-sm">
                 <p className="text-text-success font-style-info">

@@ -6,12 +6,16 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { productsInfiniteQueryOptions } from '@/queries';
 import { useProductListVirtualizer } from '@/hooks';
-import type { Product } from '@/types';
+import type { Product, ProductReviewInfo } from '@/types';
 import ProductItem from './ProductItem';
 import { MoreViewButton } from '../common';
 import ProductListSkeleton from './skeleton/ProductListSkeleton';
 
-const ClientProductList = () => {
+interface ClientProductListProps {
+  productReviews: ProductReviewInfo[];
+}
+
+const ClientProductList = ({ productReviews = [] }: ClientProductListProps) => {
   const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
@@ -87,9 +91,18 @@ const ClientProductList = () => {
                 height: `${virtualRow.size}px`,
               }}
             >
-              <ul className="gap-x-md grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+              <ul className="gap-x-md grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                 {rowItems.map((item: Product) => (
-                  <ProductItem key={item.productId} {...item} />
+                  <ProductItem
+                    key={item.productId}
+                    {...item}
+                    reviewInfo={
+                      productReviews[item.productId] || {
+                        avg: '0.0',
+                        totalCount: 0,
+                      }
+                    }
+                  />
                 ))}
               </ul>
             </div>

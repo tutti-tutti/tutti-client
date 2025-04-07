@@ -7,6 +7,8 @@ export const PRODUCTS_CONSTANTS = {
   FETCH_CATEGORY_FAIL_MESSAGE: '카테고리를 불러오는 중 오류가 발생했습니다.',
   FETCH_RECOMMEND_FAIL_MESSAGE: '추천 상품을 불러오는 중 오류가 발생했습니다.',
   SELECT_OPTION_MESSAGE: '옵션을 선택해주세요!',
+  FETCH_REVIEW_FAIL_MESSAGE:
+    '해당 리뷰 정보를 불러오는 중 오류가 발생했습니다.',
   LIKE_RECOMMEND_MESSAGE:
     '고객님의 데이터가 아직 없어 좋아요순으로 상품을 추천한 리스트에요!',
   CATEGORY_TITLE: '뚜띠 쇼핑몰 카테고리',
@@ -37,5 +39,5 @@ export const PRODUCTS_CONSTANTS = {
 export const PRODUCT_LIST_LAYOUT_CONFIG = {
   mobile: { columns: 1, estimatedSize: 200, gap: 24, overscan: 10 },
   tablet: { columns: 3, estimatedSize: 424, gap: 80, overscan: 5 },
-  desktop: { columns: 5, estimatedSize: 424, gap: 80, overscan: 5 },
+  desktop: { columns: 4, estimatedSize: 504, gap: 80, overscan: 4 },
 };

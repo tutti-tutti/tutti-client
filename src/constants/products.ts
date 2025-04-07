@@ -18,6 +18,20 @@ export const PRODUCTS_CONSTANTS = {
   NO_OPTION: '옵션 없음',
   QUANTITY: '수량',
   RESTOCK_NOTIFICATION: '이 상품 재입고알림',
+  STORE_NAME: '스토어명',
+  PRODUCT_STATUS: '상품상태',
+  PRODUCT_STATUS_NEW: '신상품',
+  ADULT_ONLY: '성인인증',
+  ADULT_ONLY_NEED: '필요',
+  ADULT_ONLY_NOT_NEED: '불필요',
+  MODEL_NAME: '모델명',
+  EVENT: '이벤트',
+  ORIGINAL_DELIVERY: '정상배송',
+  FREE_GIFT: '사은품',
+  DETAIL_PAGE_REFERENCE: '상세페이지 참조',
+  OPTION_TYPE: '옵션종류',
+  OPTION_TYPE_COUNT: (count: number) => `${count}종류`,
+  RELEASE_DATE: '출시년일',
 };
 
 export const PRODUCT_LIST_LAYOUT_CONFIG = {

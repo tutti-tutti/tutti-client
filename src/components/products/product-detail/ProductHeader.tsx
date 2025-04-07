@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Button, Icon } from '@/components';
+import { PRODUCTS_CONSTANTS } from '@/constants';
 import type { ProductReviewInfo } from '@/types';
 
 interface ProductHeaderProps {
@@ -45,14 +46,16 @@ const ProductHeader = ({
             {freeDelivery && (
               <div className="bg-bg-successSubtle px-xs rounded-sm">
                 <p className="text-text-success font-style-subHeading">
-                  무료배송
+                  {PRODUCTS_CONSTANTS.FREE_DELIVERY}
                 </p>
               </div>
             )}
 
             {almostOutOfStock && (
               <div className="bg-bg-infoSubtle px-xs rounded-sm">
-                <p className="text-text-info font-style-subHeading">품절임박</p>
+                <p className="text-text-info font-style-subHeading">
+                  {PRODUCTS_CONSTANTS.ALMOST_OUT_OF_STOCK}
+                </p>
               </div>
             )}
           </div>

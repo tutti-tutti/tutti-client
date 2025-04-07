@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 
 import { categoryQueryOptions } from '@/queries';
-import { ROUTER_PATH } from '@/constants';
+import { PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cn } from '@/utils';
 import type { CategoryResponseAPISchema } from '@/types';
 import CategorySkeleton from './CategorySkeleton';
@@ -37,7 +37,7 @@ const ProductCategory = ({
   if (error)
     return (
       <div className="text-text-danger py-4 text-center">
-        카테고리를 불러오는 중 오류가 발생했습니다.
+        {PRODUCTS_CONSTANTS.FETCH_CATEGORY_FAIL_MESSAGE}
       </div>
     );
 
@@ -58,7 +58,7 @@ const ProductCategory = ({
         </h1>
       ) : (
         <h2 className="text-text-primary font-style-heading text-center">
-          지혜 쇼핑몰 카테고리
+          {PRODUCTS_CONSTANTS.CATEGORY_TITLE}
         </h2>
       )}
 

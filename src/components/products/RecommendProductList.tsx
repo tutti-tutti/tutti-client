@@ -25,9 +25,7 @@ const RecommendProductList = async ({
               <span className="hidden md:inline">{titleContent.desktop}</span>
             </>
           ) : (
-            <span>
-              고객님의 데이터가 아직 없어 좋아요순으로 상품을 추천한 리스트에요!
-            </span>
+            <span>{PRODUCTS_CONSTANTS.LIKE_RECOMMEND_MESSAGE}</span>
           )}
         </h2>
       </div>

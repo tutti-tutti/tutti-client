@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components';
 import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
-import { ROUTER_PATH } from '@/constants';
+import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
 
 interface ProductActionsProps {
@@ -14,6 +14,14 @@ interface ProductActionsProps {
   quantity: number;
   disabled?: boolean;
 }
+
+const {
+  CART_TOAST_MESSAGE,
+  ADD_SUCCESS_MESSAGE,
+  ADD_FAIL_MESSAGE,
+  ADD_CART,
+  CHECKOUT,
+} = CART_CONSTANTS;
 
 const ProductActions = ({
   productId,
@@ -29,7 +37,8 @@ const ProductActions = ({
     JSON.stringify(orderProductItems),
   );
 
-  const noticeSelectOption = () => toast.warning('옵션을 선택해주세요!');
+  const noticeSelectOption = () =>
+    toast.warning(PRODUCTS_CONSTANTS.SELECT_OPTION_MESSAGE);
 
   const handleCheckoutClick = async () => {
     if (disabled) {
@@ -40,7 +49,7 @@ const ProductActions = ({
     const user = await getAccessToken();
 
     if (!user) {
-      toast.warning('로그인 후 이용해주세요!');
+      toast.warning(CART_TOAST_MESSAGE.LOGIN);
       router.push(ROUTER_PATH.LOGIN);
       return;
     }
@@ -56,18 +65,18 @@ const ProductActions = ({
       const result = await addCart(productId, productItemId, quantity);
 
       if (result.success) {
-        toast.success(result.message || '장바구니에 추가되었습니다.');
+        toast.success(result.message || ADD_SUCCESS_MESSAGE);
 
         await queryClient.invalidateQueries({
           queryKey: cartQueryOptions.queryKey,
         });
         await queryClient.prefetchQuery(cartQueryOptions);
       } else {
-        toast.error(result.message || '장바구니에 추가하지 못했습니다.');
+        toast.error(result.message || ADD_FAIL_MESSAGE);
       }
     } catch (error) {
-      console.error('장바구니 담기 중 오류가 발생했습니다.', error);
-      toast.error('장바구니 담기에 실패했습니다.');
+      console.error(ADD_FAIL_MESSAGE, error);
+      toast.error(ADD_FAIL_MESSAGE);
     }
   };
 
@@ -80,10 +89,10 @@ const ProductActions = ({
         variant="secondaryOutline"
         onClick={handleCartClick}
       >
-        장바구니 담기
+        {ADD_CART}
       </Button>
       <Button className={buttonDefaultStyle} onClick={handleCheckoutClick}>
-        구매하기
+        {CHECKOUT}
       </Button>
     </div>
   );

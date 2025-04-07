@@ -1,7 +1,8 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useActionState, useEffect, useRef } from 'react';
+
 import type { EmailVerificationState } from '@/types';
 import {
   requestVerificationCodeAction,
@@ -49,28 +50,24 @@ export const useAuthSteps = (
     emailVerificationState,
   );
 
-  const isEmailStep =
-    formType === 'signin' ? false : !emailVerificationState.emailVerified;
-  const isCodeStep =
-    formType === 'signin'
-      ? false
-      : emailVerificationState.emailVerified &&
-        !codeVerificationState.codeVerified;
-  const isFinalStep =
-    formType === 'signin'
-      ? true
-      : emailVerificationState.emailVerified &&
-        codeVerificationState.codeVerified;
+  const determineStep = () => {
+    if (formType === 'signin') return 'final';
+    if (!emailVerificationState.emailVerified) return 'email';
+    if (!codeVerificationState.codeVerified) return 'code';
+    return 'final';
+  };
+
+  const currentStep = determineStep();
 
   useEffect(() => {
-    if (isEmailStep) {
-      emailRef.current?.focus();
-    } else if (isCodeStep) {
-      verifyRef.current?.focus();
-    } else if (isFinalStep) {
-      pwRef.current?.focus();
-    }
-  }, [isEmailStep, isCodeStep, isFinalStep]);
+    const refFocusMap = {
+      email: () => emailRef.current?.focus(),
+      code: () => verifyRef.current?.focus(),
+      final: () => pwRef.current?.focus(),
+    };
+
+    refFocusMap[currentStep]();
+  }, [currentStep]);
 
   useEffect(() => {
     if (finalState.success) {
@@ -78,26 +75,31 @@ export const useAuthSteps = (
     }
   }, [finalState.success, router, redirectPath]);
 
-  const action = isEmailStep
-    ? async (formData: FormData) => {
-        formData.append('type', 'signup');
-        return requestVerificationCodeFormAction(formData);
-      }
-    : isCodeStep
-      ? async (formData: FormData) => {
-          formData.append('email', emailVerificationState.email || '');
-          return verifyCodeFormAction(formData);
-        }
-      : async (formData: FormData) => {
-          formData.append('email', emailVerificationState.email || '');
-          return finalFormAction(formData);
-        };
+  const formActionMap = {
+    email: (formData: FormData) => {
+      formData.append('type', formType === 'resetPw' ? 'reset' : 'signup');
+      return requestVerificationCodeFormAction(formData);
+    },
+    code: (formData: FormData) => {
+      formData.append('email', emailVerificationState.email || '');
+      return verifyCodeFormAction(formData);
+    },
+    final: (formData: FormData) => {
+      formData.append('email', emailVerificationState.email || '');
+      return finalFormAction(formData);
+    },
+  };
 
-  const isPending = isEmailStep
-    ? isEmailVerificationPending
-    : isCodeStep
-      ? isCodeVerificationPending
-      : isFinalActionPending;
+  const pendingMap = {
+    email: isEmailVerificationPending,
+    code: isCodeVerificationPending,
+    final: isFinalActionPending,
+  };
+
+  const createFormAction = (formData: FormData) =>
+    formActionMap[currentStep](formData);
+
+  const isPending = pendingMap[currentStep];
 
   const serverError =
     emailVerificationState.serverError ||
@@ -108,10 +110,10 @@ export const useAuthSteps = (
     emailVerificationState,
     codeVerificationState,
     finalState,
-    isEmailStep,
-    isCodeStep,
-    isFinalStep,
-    action,
+    isEmailStep: currentStep === 'email',
+    isCodeStep: currentStep === 'code',
+    isFinalStep: currentStep === 'final',
+    createFormAction,
     isPending,
     serverError,
     emailRef,

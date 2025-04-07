@@ -50,14 +50,14 @@ export const useAuthSteps = (
     emailVerificationState,
   );
 
-  const determineStep = () => {
+  const getStep = (): 'final' | 'email' | 'code' => {
     if (formType === 'signin') return 'final';
     if (!emailVerificationState.emailVerified) return 'email';
     if (!codeVerificationState.codeVerified) return 'code';
     return 'final';
   };
 
-  const currentStep = determineStep();
+  const currentStep = getStep();
 
   useEffect(() => {
     const refFocusMap = {
@@ -110,9 +110,7 @@ export const useAuthSteps = (
     emailVerificationState,
     codeVerificationState,
     finalState,
-    isEmailStep: currentStep === 'email',
-    isCodeStep: currentStep === 'code',
-    isFinalStep: currentStep === 'final',
+    currentStep,
     createFormAction,
     isPending,
     serverError,

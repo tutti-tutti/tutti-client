@@ -1,3 +1,4 @@
+import { CART_CONSTANTS } from '@/constants';
 import { cn } from '@/utils';
 
 interface CartItemPriceProps {
@@ -27,7 +28,7 @@ const CartItemPrice = ({
             </span>
           )}
           <span className="font-style-heading text-text-primary">
-            {totalPrice.toLocaleString()}원
+            {CART_CONSTANTS.KOREAN_CURRENCY(totalPrice.toLocaleString())}
           </span>
         </div>
       </>

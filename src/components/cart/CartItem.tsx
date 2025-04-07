@@ -4,14 +4,17 @@ import React, { useState, useEffect } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
 import { useCartStore } from '@/stores';
-import type { CartProductItem } from '@/types';
 import { removeFromCart } from '@/services';
+import { CART_CONSTANTS } from '@/constants';
 import { toast } from '@/utils';
+import type { CartProductItem } from '@/types';
 import CartItemImage from './CartItemImage';
 import CartItemHeader from './CartItemHeader';
 import CartItemOptions from './CartItemOptions';
 import CartItemPrice from './CartItemPrice';
 import CartItemQuantity from './CartItemQuantity';
+
+const { CONFIRM_DELETE_MESSAGE, CART_TOAST_MESSAGE } = CART_CONSTANTS;
 
 const CartItem = ({
   productItemId,
@@ -58,15 +61,15 @@ const CartItem = ({
   };
 
   const handleDelete = async () => {
-    if (window.confirm('해당 상품을 삭제하시겠습니까?')) {
+    if (window.confirm(CONFIRM_DELETE_MESSAGE)) {
       try {
         const result = await removeFromCart(items, [productItemId]);
 
         removeItem(productItemId);
         toast.success(result.message);
       } catch (error) {
-        console.error('장바구니에서 상품을 삭제하는 데 실패했습니다.', error);
-        toast.error('장바구니에서 상품을 삭제하는 데 실패했습니다.');
+        console.error(CART_TOAST_MESSAGE.DELETE_ERROR, error);
+        toast.error(CART_TOAST_MESSAGE.DELETE_ERROR);
       }
     }
   };

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import { Dropdown } from '@/components';
 import type { ProductOption } from '@/types';
+import { PRODUCTS_CONSTANTS } from '@/constants';
 
 interface ProductOptionsProps {
   productItems: ProductOption[];
@@ -33,9 +34,9 @@ const ProductOptions = ({
           : ''
       }${
         option.additionalPrice && option.additionalPrice > 0
-          ? `(+${option.additionalPrice.toLocaleString()}원)`
+          ? `(+${PRODUCTS_CONSTANTS.KOREAN_CURRENCY(option.additionalPrice)})`
           : option.additionalPrice && option.additionalPrice < 0
-            ? `(${option.additionalPrice.toLocaleString()}원)`
+            ? `(${PRODUCTS_CONSTANTS.KOREAN_CURRENCY(option.additionalPrice)})`
             : ''
       }`,
       additionalPrice: option.additionalPrice || 0,
@@ -50,11 +51,11 @@ const ProductOptions = ({
     <article className="gap-lg pt-lg md:pt-xl flex flex-col">
       <div className="gap-md flex items-center">
         <label className="font-style-subHeading text-text-secondary min-w-[60px]">
-          옵션
+          {PRODUCTS_CONSTANTS.OPTION}
         </label>
         <Dropdown
           options={formatDropdownOptions(productItems)}
-          placeholder="옵션 선택"
+          placeholder={PRODUCTS_CONSTANTS.OPTION_SELECT}
           onChange={selectedOption => {
             const selectedValue = productItems.find(
               option =>

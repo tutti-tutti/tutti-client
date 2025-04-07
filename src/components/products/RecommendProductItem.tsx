@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { calculateDiscountRate } from '@/utils';
+import { PRODUCTS_CONSTANTS } from '@/constants';
 import type { Product } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
 
@@ -42,13 +43,13 @@ const RecommendProductItem = ({
                 {discountRate}
               </p>
               <p className="text-text-primary font-style-subHeading">
-                {sellingPrice.toLocaleString()}원
+                {PRODUCTS_CONSTANTS.KOREAN_CURRENCY(sellingPrice)}
               </p>
             </div>
           </>
         ) : (
           <p className="text-text-primary font-style-subHeading">
-            {originalPrice.toLocaleString()}원
+            {PRODUCTS_CONSTANTS.KOREAN_CURRENCY(originalPrice)}
           </p>
         )}
       </Link>

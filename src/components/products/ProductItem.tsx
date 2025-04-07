@@ -1,8 +1,12 @@
 import Link from 'next/link';
 
 import { calculateDiscountRate } from '@/utils';
+import { PRODUCTS_CONSTANTS } from '@/constants';
 import type { Product } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
+
+const { FREE_DELIVERY, ALMOST_OUT_OF_STOCK, KOREAN_CURRENCY } =
+  PRODUCTS_CONSTANTS;
 
 const ProductItem = ({
   name,
@@ -47,13 +51,17 @@ const ProductItem = ({
           <div className="gap-xs md:mb-xs flex items-center">
             {freeDelivery && (
               <div className="bg-bg-successSubtle px-xs rounded-sm">
-                <p className="text-text-success font-style-info">무료배송</p>
+                <p className="text-text-success font-style-info">
+                  {FREE_DELIVERY}
+                </p>
               </div>
             )}
 
             {almostOutOfStock && (
               <div className="bg-bg-infoSubtle px-xs rounded-sm">
-                <p className="text-text-info font-style-info">품절임박</p>
+                <p className="text-text-info font-style-info">
+                  {ALMOST_OUT_OF_STOCK}
+                </p>
               </div>
             )}
           </div>
@@ -68,13 +76,13 @@ const ProductItem = ({
                   {discountRate}
                 </p>
                 <p className="text-text-primary font-style-heading">
-                  {sellingPrice.toLocaleString()}원
+                  {KOREAN_CURRENCY(sellingPrice)}
                 </p>
               </div>
             </>
           ) : (
             <p className="text-text-primary font-style-heading">
-              {(sellingPrice ?? 0).toLocaleString()}원
+              {KOREAN_CURRENCY(sellingPrice ?? 0)}
             </p>
           )}
         </Link>

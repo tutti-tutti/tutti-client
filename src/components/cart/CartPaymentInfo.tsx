@@ -39,7 +39,7 @@ const CartPaymentInfo = ({
           {TOTAL_PRICE}
         </span>
         <span className="text-text-primary font-style-paragraph">
-          {KOREAN_CURRENCY(totalPrice.toLocaleString())}
+          {KOREAN_CURRENCY(totalPrice)}
         </span>
       </div>
 
@@ -49,7 +49,7 @@ const CartPaymentInfo = ({
             {DISCOUNT_PRICE}
           </span>
           <span className="text-text-danger font-style-paragraph">
-            {KOREAN_CURRENCY(discountPrice.toLocaleString())}
+            {KOREAN_CURRENCY(discountPrice)}
           </span>
         </div>
       )}
@@ -60,7 +60,7 @@ const CartPaymentInfo = ({
             {ADDITIONAL_PRICE}
           </span>
           <span className="text-text-info font-style-paragraph">
-            {KOREAN_CURRENCY(additionalPrice.toLocaleString())}
+            {KOREAN_CURRENCY(additionalPrice)}
           </span>
         </div>
       )}
@@ -70,7 +70,7 @@ const CartPaymentInfo = ({
           {DELIVERY_PRICE}
         </span>
         <span className="text-text-primary font-style-paragraph">
-          {KOREAN_CURRENCY(deliveryPrice.toLocaleString())}
+          {KOREAN_CURRENCY(deliveryPrice)}
         </span>
       </div>
 
@@ -79,7 +79,7 @@ const CartPaymentInfo = ({
           {TOTAL_PAYMENT}
         </span>
         <span className="text-text-primaryInteraction font-style-subHeading">
-          {KOREAN_CURRENCY(calculatedFinalPrice.toLocaleString())}
+          {KOREAN_CURRENCY(calculatedFinalPrice)}
         </span>
       </div>
     </div>

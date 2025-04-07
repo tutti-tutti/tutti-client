@@ -28,7 +28,7 @@ const CartItemPrice = ({
             </span>
           )}
           <span className="font-style-heading text-text-primary">
-            {CART_CONSTANTS.KOREAN_CURRENCY(totalPrice.toLocaleString())}
+            {CART_CONSTANTS.KOREAN_CURRENCY(totalPrice)}
           </span>
         </div>
       </>

@@ -37,6 +37,5 @@ export const CART_CONSTANTS = {
   ADDITIONAL_PRICE: '추가금액',
   DELIVERY_PRICE: '배송비',
   TOTAL_PAYMENT: '총 결제 예정금액',
-  KOREAN_CURRENCY: (price: number) => `${price.toLocaleString()}원`,
   PAYMENT: '결제하기',
 };

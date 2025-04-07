@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Dropdown } from '@/components';
 import type { ProductOption } from '@/types';
 import { PRODUCTS_CONSTANTS } from '@/constants';
+import { formatPrice } from '@/utils';
 
 interface ProductOptionsProps {
   productItems: ProductOption[];
@@ -34,9 +35,9 @@ const ProductOptions = ({
           : ''
       }${
         option.additionalPrice && option.additionalPrice > 0
-          ? `(+${PRODUCTS_CONSTANTS.KOREAN_CURRENCY(option.additionalPrice)})`
+          ? `(+${formatPrice(option.additionalPrice)})`
           : option.additionalPrice && option.additionalPrice < 0
-            ? `(${PRODUCTS_CONSTANTS.KOREAN_CURRENCY(option.additionalPrice)})`
+            ? `(${formatPrice(option.additionalPrice)})`
             : ''
       }`,
       additionalPrice: option.additionalPrice || 0,

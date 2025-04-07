@@ -1,12 +1,11 @@
 import Link from 'next/link';
 
-import { calculateDiscountRate } from '@/utils';
+import { calculateDiscountRate, formatPrice } from '@/utils';
 import { PRODUCTS_CONSTANTS } from '@/constants';
 import type { Product } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
 
-const { FREE_DELIVERY, ALMOST_OUT_OF_STOCK, KOREAN_CURRENCY } =
-  PRODUCTS_CONSTANTS;
+const { FREE_DELIVERY, ALMOST_OUT_OF_STOCK } = PRODUCTS_CONSTANTS;
 
 const ProductItem = ({
   name,
@@ -76,13 +75,13 @@ const ProductItem = ({
                   {discountRate}
                 </p>
                 <p className="text-text-primary font-style-heading">
-                  {KOREAN_CURRENCY(sellingPrice)}
+                  {formatPrice(sellingPrice)}
                 </p>
               </div>
             </>
           ) : (
             <p className="text-text-primary font-style-heading">
-              {KOREAN_CURRENCY(sellingPrice ?? 0)}
+              {formatPrice(sellingPrice ?? 0)}
             </p>
           )}
         </Link>

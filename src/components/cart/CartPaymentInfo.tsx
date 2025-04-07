@@ -1,4 +1,5 @@
 import { CART_CONSTANTS } from '@/constants';
+import { formatPrice } from '@/utils';
 
 interface CartPaymentInfoProps {
   totalPrice: number;
@@ -15,7 +16,6 @@ const {
   ADDITIONAL_PRICE,
   DELIVERY_PRICE,
   TOTAL_PRICE,
-  KOREAN_CURRENCY,
 } = CART_CONSTANTS;
 
 const CartPaymentInfo = ({
@@ -39,7 +39,7 @@ const CartPaymentInfo = ({
           {TOTAL_PRICE}
         </span>
         <span className="text-text-primary font-style-paragraph">
-          {KOREAN_CURRENCY(totalPrice)}
+          {formatPrice(totalPrice)}
         </span>
       </div>
 
@@ -49,7 +49,7 @@ const CartPaymentInfo = ({
             {DISCOUNT_PRICE}
           </span>
           <span className="text-text-danger font-style-paragraph">
-            {KOREAN_CURRENCY(discountPrice)}
+            {formatPrice(discountPrice)}
           </span>
         </div>
       )}
@@ -60,7 +60,7 @@ const CartPaymentInfo = ({
             {ADDITIONAL_PRICE}
           </span>
           <span className="text-text-info font-style-paragraph">
-            {KOREAN_CURRENCY(additionalPrice)}
+            {formatPrice(additionalPrice)}
           </span>
         </div>
       )}
@@ -70,7 +70,7 @@ const CartPaymentInfo = ({
           {DELIVERY_PRICE}
         </span>
         <span className="text-text-primary font-style-paragraph">
-          {KOREAN_CURRENCY(deliveryPrice)}
+          {formatPrice(deliveryPrice)}
         </span>
       </div>
 
@@ -79,7 +79,7 @@ const CartPaymentInfo = ({
           {TOTAL_PAYMENT}
         </span>
         <span className="text-text-primaryInteraction font-style-subHeading">
-          {KOREAN_CURRENCY(calculatedFinalPrice)}
+          {formatPrice(calculatedFinalPrice)}
         </span>
       </div>
     </div>

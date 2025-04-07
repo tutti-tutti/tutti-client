@@ -13,7 +13,6 @@ export const PRODUCTS_CONSTANTS = {
   MORE_VIEW: '더보기',
   FREE_DELIVERY: '무료배송',
   ALMOST_OUT_OF_STOCK: '품절임박',
-  KOREAN_CURRENCY: (price: number) => `${price.toLocaleString()}원`,
   OPTION: '옵션',
   OPTION_SELECT: '옵션 선택',
   NO_OPTION: '옵션 없음',

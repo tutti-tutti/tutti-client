@@ -8,7 +8,7 @@ interface ProductParams {
 export const productServerStore = cache(() => {
   const params: ProductParams = {
     cursorId: undefined,
-    size: 30,
+    size: 20,
   };
 
   return {

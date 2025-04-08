@@ -23,7 +23,7 @@ type Story = StoryObj<typeof OrderStatusBadge>;
 // 모든 주문상태를 표시하는 스토리 추가
 const orderStatusList = ['READY', 'DONE', 'CANCELED'] as const;
 
-export const AllStyles: Story = {
+export const AllStatuses: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       {orderStatusList.map(orderStatus => (
@@ -37,14 +37,20 @@ export const AllStyles: Story = {
 };
 
 // 각 상태별 스토리
-export const PrimaryStyles: Story = {
-  render: () => <OrderStatusBadge orderStatus="READY" />,
+export const Ready: Story = {
+  args: {
+    orderStatus: 'READY',
+  },
 };
 
-export const SecondaryStyles: Story = {
-  render: () => <OrderStatusBadge orderStatus="DONE" />,
+export const Done: Story = {
+  args: {
+    orderStatus: 'DONE',
+  },
 };
 
-export const SuccessStyles: Story = {
-  render: () => <OrderStatusBadge orderStatus="CANCELED" />,
+export const Canceled: Story = {
+  args: {
+    orderStatus: 'CANCELED',
+  },
 };

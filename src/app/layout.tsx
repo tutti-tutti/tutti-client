@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import { Toaster } from 'sonner';
 
 import { BASE_URL } from '@/constants';
-import ogImg from '../assets/images/open_graph.jpg';
+import ogImg from '@/assets/images/open_graph.jpg';
 import '@/styles/globals.css';
 
 const pretendard = localFont({

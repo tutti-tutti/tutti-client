@@ -14,15 +14,24 @@ const OrderStatusBadge = ({ orderStatus }: OrderStatusBadgeProps) => {
   const status: Record<OrderStatus, StatusInfo> = {
     READY: {
       label: '결제 대기',
-      variant: 'warningOutlineSquare',
+      variant: {
+        color: 'warning',
+        style: 'outlineSquare',
+      },
     },
     DONE: {
       label: '결제 완료',
-      variant: 'successOutlineSquare',
+      variant: {
+        color: 'success',
+        style: 'outlineSquare',
+      },
     },
     CANCELED: {
       label: '주문 취소',
-      variant: 'secondaryOutlineSquare',
+      variant: {
+        color: 'secondary',
+        style: 'outlineSquare',
+      },
     },
   };
 

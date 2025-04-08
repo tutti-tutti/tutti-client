@@ -1,7 +1,9 @@
 'use server';
 
 import { AxiosError } from 'axios';
+
 import type { EmailVerificationState } from '@/types';
+import { ERROR_MESSAGES } from '@/constants';
 
 export const handleServerError = async (
   error: unknown,
@@ -21,7 +23,7 @@ export const handleServerError = async (
       return {
         ...prevState,
         isSuccess: false,
-        serverError: '서버 응답이 없습니다. 네트워크 연결을 확인해주세요.',
+        serverError: ERROR_MESSAGES.NETWORK_ERROR,
       };
     }
   }
@@ -29,6 +31,6 @@ export const handleServerError = async (
   return {
     ...prevState,
     isSuccess: false,
-    serverError: '알 수 없는 오류가 발생했습니다.',
+    serverError: ERROR_MESSAGES.UNKNOWN_ERROR,
   };
 };

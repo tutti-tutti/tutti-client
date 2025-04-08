@@ -1,6 +1,7 @@
 'use server';
 
-import { ZodError } from 'zod';
+import type { ZodError } from 'zod';
+
 import type { EmailVerificationState } from '@/types';
 
 export const handleValidationError = async (

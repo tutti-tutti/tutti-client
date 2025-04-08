@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn, formatPrice } from '@/utils';
 
 interface CartItemPriceProps {
   originalPrice: number;
@@ -27,7 +27,7 @@ const CartItemPrice = ({
             </span>
           )}
           <span className="font-style-heading text-text-primary">
-            {totalPrice.toLocaleString()}원
+            {formatPrice(totalPrice)}
           </span>
         </div>
       </>

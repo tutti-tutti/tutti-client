@@ -1,5 +1,6 @@
 'use client';
 
+import { CART_CONSTANTS } from '@/constants';
 import { IconButton } from '../common';
 
 interface CartItemQuantityProps {
@@ -19,7 +20,7 @@ const CartItemQuantity = ({
     <div className="flex h-full flex-col">
       <div className="mt-auto flex items-center justify-start md:justify-end">
         <span className="mr-md font-style-paragraph md:font-style-heading text-text-secondary">
-          수량
+          {CART_CONSTANTS.QUANTITY}
         </span>
         <div className="gap-xs md:gap-lg flex items-center">
           <IconButton
@@ -40,7 +41,7 @@ const CartItemQuantity = ({
         </div>
       </div>
       <span className="text-text-tertiary font-style-info flex justify-start md:justify-end">
-        고객 당 최대 {maxQuantity}개 구매가능
+        {CART_CONSTANTS.CUSTOMER_PER_PURCHASE(maxQuantity)}
       </span>
     </div>
   );

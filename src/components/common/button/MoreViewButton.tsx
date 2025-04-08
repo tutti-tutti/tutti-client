@@ -1,3 +1,4 @@
+import { PRODUCTS_CONSTANTS } from '@/constants';
 import Button from './Button';
 
 interface MoreViewButtonProps {
@@ -13,7 +14,7 @@ const MoreViewButton = ({ onClick }: MoreViewButtonProps) => {
       iconPosition="right"
       onClick={onClick}
     >
-      더보기
+      {PRODUCTS_CONSTANTS.MORE_VIEW}
     </Button>
   );
 };

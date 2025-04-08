@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
+import { PRODUCTS_CONSTANTS } from '@/constants';
 import { cn } from '@/utils';
 import Icon from './Icon';
 import RadioOption from './RadioOption';
@@ -20,7 +21,7 @@ interface DropdownProps {
 
 const Dropdown = ({
   options,
-  placeholder = '옵션 없음',
+  placeholder = `${PRODUCTS_CONSTANTS.NO_OPTION}`,
   onChange,
   defaultValue,
 }: DropdownProps) => {

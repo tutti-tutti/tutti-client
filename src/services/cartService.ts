@@ -1,5 +1,9 @@
 import { axiosInstance } from '@/lib';
-import { CART_ENDPOINTS } from '@/constants';
+import {
+  CART_ENDPOINTS,
+  CART_CONSTANTS,
+  PRODUCTS_CONSTANTS,
+} from '@/constants';
 import type {
   Product,
   ProductOption,
@@ -9,6 +13,20 @@ import type {
 } from '@/types';
 import { getAccessToken } from './tokenService';
 import { fetchProductById } from './productService';
+
+const {
+  FETCH_FAIL_MESSAGE,
+  MAX_CART_ITEMS_COUNT,
+  NO_USER_MAX_ADD_COUNT,
+  INVALID_OPTION,
+  MAX_QUANTITY,
+  ADD_SUCCESS_MESSAGE,
+  ADD_FAIL_MESSAGE,
+  DELETE_SELECTED_SUCCESS_MESSAGE,
+  DELETE_SUCCESS_MESSAGE,
+  DELETE_FAIL_MESSAGE,
+  EMPTY_CART_MESSAGE,
+} = CART_CONSTANTS;
 
 export const mapProductToCartItem = (
   product: Product,
@@ -49,7 +67,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
       const response = await axiosInstance.get(CART_ENDPOINTS.LIST);
       return response.data;
     } catch (error) {
-      console.error('장바구니를 불러오는 데 실패했습니다.', error);
+      console.error(FETCH_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
@@ -74,7 +92,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
 
             return mapProductToCartItem(product, selectedOption, item.quantity);
           } catch (error) {
-            console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+            console.error(PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE, error);
             return null;
           }
         }),
@@ -82,7 +100,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
 
       return cartItemsWithProducts.filter(Boolean) as CartProductItem[];
     } catch (error) {
-      console.error('장바구니 정보를 불러오는 데 실패했습니다.', error);
+      console.error(FETCH_FAIL_MESSAGE, error);
       throw error;
     }
   }
@@ -94,7 +112,6 @@ export const addToLocalCart = async (
   quantity: number,
 ) => {
   const currentCart = fetchLocalCart();
-  const MAX_CART_ITEMS_COUNT = 10;
 
   if (currentCart.length >= MAX_CART_ITEMS_COUNT) {
     const existingItemIndex = currentCart.findIndex(
@@ -104,7 +121,7 @@ export const addToLocalCart = async (
     if (existingItemIndex < 0) {
       return {
         success: false,
-        message: `비회원은 최대 ${MAX_CART_ITEMS_COUNT}개 상품만 담을 수 있습니다.`,
+        message: NO_USER_MAX_ADD_COUNT(MAX_CART_ITEMS_COUNT),
         cart: currentCart,
       };
     }
@@ -127,13 +144,13 @@ export const addToLocalCart = async (
       if (!optionExists) {
         return {
           success: false,
-          message: '유효하지 않은 상품 옵션입니다.',
+          message: INVALID_OPTION,
           cart: currentCart,
         };
       }
     }
   } catch (error) {
-    console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+    console.error(PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE, error);
   }
 
   if (existingItemById >= 0) {
@@ -143,7 +160,7 @@ export const addToLocalCart = async (
     if (newQuantity > maxQuantity) {
       return {
         success: false,
-        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
+        message: MAX_QUANTITY(maxQuantity),
         cart: currentCart,
       };
     }
@@ -153,7 +170,7 @@ export const addToLocalCart = async (
     if (quantity > maxQuantity) {
       return {
         success: false,
-        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
+        message: MAX_QUANTITY(maxQuantity),
         cart: currentCart,
       };
     }
@@ -169,7 +186,7 @@ export const addToLocalCart = async (
 
   return {
     success: true,
-    message: '장바구니에 추가되었습니다.',
+    message: ADD_SUCCESS_MESSAGE,
     cart: currentCart,
   };
 };
@@ -197,7 +214,7 @@ export const addCart = async (
       );
       return data;
     } catch (error) {
-      console.error('장바구니에 추가하는 데 실패했습니다.', error);
+      console.error(ADD_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
@@ -233,11 +250,11 @@ export const removeFromCart = async (
         success: true,
         message:
           productItemIds.length > 1
-            ? '선택한 상품이 삭제되었습니다.'
-            : '상품이 삭제되었습니다.',
+            ? DELETE_SELECTED_SUCCESS_MESSAGE
+            : DELETE_SUCCESS_MESSAGE,
       };
     } catch (error) {
-      console.error('장바구니 상품 삭제에 실패했습니다.', error);
+      console.error(DELETE_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
@@ -246,7 +263,7 @@ export const removeFromCart = async (
       if (!localCart) {
         return {
           success: false,
-          message: '장바구니 비어있습니다.',
+          message: EMPTY_CART_MESSAGE,
           cart: [],
         };
       }
@@ -262,12 +279,12 @@ export const removeFromCart = async (
         success: true,
         message:
           productItemIds.length > 1
-            ? '선택한 상품이 삭제되었습니다.'
-            : '상품이 삭제되었습니다.',
+            ? DELETE_SELECTED_SUCCESS_MESSAGE
+            : DELETE_SUCCESS_MESSAGE,
         cart: updatedCart,
       };
     } catch (error) {
-      console.error('장바구니 삭제에 실패했습니다.', error);
+      console.error(DELETE_FAIL_MESSAGE, error);
       throw error;
     }
   }

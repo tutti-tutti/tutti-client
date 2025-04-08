@@ -1,3 +1,5 @@
+import { formatPrice } from '@/utils';
+
 interface ProductPriceProps {
   originalPrice: number;
   finalPrice: number;
@@ -21,13 +23,13 @@ const ProductPrice = ({
           <div className="mt-2xs flex items-center gap-2">
             <p className="text-text-danger font-style-title">{discountRate}</p>
             <p className="text-text-primary font-style-title">
-              {(finalPrice * quantity).toLocaleString()}원
+              {formatPrice(finalPrice * quantity)}
             </p>
           </div>
         </>
       ) : (
         <p className="text-text-primary font-style-title">
-          {(finalPrice * quantity).toLocaleString()}원
+          {formatPrice(finalPrice * quantity)}
         </p>
       )}
     </article>

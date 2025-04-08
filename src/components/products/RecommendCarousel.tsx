@@ -8,8 +8,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { recommededProductsQueryOptions } from '@/queries';
-import type { Product } from '@/types';
 import { RecommendProductItemSkeleton } from '@/components';
+import { PRODUCTS_CONSTANTS } from '@/constants';
+import type { Product } from '@/types';
 import RecommendProductItem from './RecommendProductItem';
 import { CustomNextArrow, CustomPrevArrow } from './CarouselArrowButton';
 
@@ -76,7 +77,7 @@ const RecommendCarousel = ({
     if (isError) {
       return (
         <div className="text-text-danger py-4 text-center">
-          추천 상품을 불러오는 중 오류가 발생했습니다.
+          {PRODUCTS_CONSTANTS.FETCH_RECOMMEND_FAIL_MESSAGE}
         </div>
       );
     }

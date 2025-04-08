@@ -2,6 +2,7 @@ export const ROUTER_PATH = {
   HOME: '/',
   SIGNUP: '/signup',
   LOGIN: '/signin',
+  RESET_PW: '/reset-password',
   FAQS: '/faqs',
   CART: '/cart',
   MY_PAGE: '/my/orders',

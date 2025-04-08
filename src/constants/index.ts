@@ -5,5 +5,6 @@ export * from './products';
 export * from './queries';
 export * from './review';
 export * from './orders';
+export * from './errorMessages';
 export * from './cart';
 export * from './base';

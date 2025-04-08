@@ -1,33 +1,65 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import {
-  authMiddleware,
-  directAccessRestrictionMiddleware,
-  externalRequestRestrictionMiddleware,
-} from '@/middlewares';
-import { ROUTER_PATH } from '@/constants';
+import { ERROR_MESSAGES, ROUTER_PATH } from '@/constants';
 
-export const middleware = async (request: NextRequest) => {
-  const directAccessRestrictionResponse =
-    await directAccessRestrictionMiddleware(request);
-  if (directAccessRestrictionResponse?.status !== 200)
-    return directAccessRestrictionResponse;
+const ALLOWED_DOMAINS = ['http://localhost:3000/', 'https://www.tutti.today'];
 
-  const authResponse = await authMiddleware(request);
-  if (authResponse?.status !== 200) return authResponse;
+const {
+  ERROR_AUTHORIZED,
+  ERROR_RESTRICTED,
+  ERROR_UNAUTHORIZED,
+  LOGIN,
+  SIGNUP,
+  RESET_PW,
+} = ROUTER_PATH;
 
-  const externalRequestRestrictionResponse =
-    await externalRequestRestrictionMiddleware(request);
-  if (externalRequestRestrictionResponse.status !== 200)
-    return externalRequestRestrictionResponse;
+export const middleware = (request: NextRequest) => {
+  const { pathname } = request.nextUrl;
+  const referer = request.headers.get('referer');
+  const accessToken = request.cookies.get('access_token')?.value;
+
+  if (pathname === ERROR_RESTRICTED) return NextResponse.next();
+
+  const isRestrictionPath =
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/checkout') ||
+    pathname.startsWith('/error');
+
+  if (isRestrictionPath) {
+    const isAllowedReferer =
+      referer && ALLOWED_DOMAINS.some(domain => referer.startsWith(domain));
+
+    const isExternalRequest =
+      pathname.startsWith('/api') && referer && !isAllowedReferer;
+    const isDirectAccess = !referer || !isAllowedReferer;
+
+    if (isExternalRequest) {
+      return NextResponse.json(
+        { error: ERROR_MESSAGES.RESTRICT_EXTERNAL_REQUEST },
+        { status: 403 },
+      );
+    }
+
+    if (isDirectAccess) {
+      return NextResponse.redirect(new URL(ERROR_RESTRICTED, request.url));
+    }
+  }
+
+  if (accessToken) {
+    if ([LOGIN, SIGNUP, RESET_PW].includes(pathname)) {
+      return NextResponse.redirect(new URL(ERROR_AUTHORIZED, request.url));
+    }
+  } else if (pathname.startsWith('/my')) {
+    return NextResponse.redirect(new URL(ERROR_UNAUTHORIZED, request.url));
+  }
 
   return NextResponse.next();
 };
 
 export const config = {
   matcher: [
-    ROUTER_PATH.LOGIN,
-    ROUTER_PATH.SIGNUP,
-    ROUTER_PATH.RESET_PW,
+    '/signin',
+    '/signup',
+    '/reset-password',
     '/my/:path*',
     '/api/:path*',
     '/checkout/:path*',

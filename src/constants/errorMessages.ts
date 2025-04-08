@@ -34,4 +34,5 @@ export const ERROR_MESSAGES = {
     ],
   },
   GO_TO_MAIN_BUTTON: '메인페이지로 돌아가기',
+  RESTRICT_EXTERNAL_REQUEST: '외부 요청은 허용되지 않습니다.',
 };

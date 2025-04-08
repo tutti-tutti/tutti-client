@@ -94,7 +94,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             variant={checkedCount === 0 ? 'disabled' : 'primary'}
             onClick={handleCheckoutClick}
           >
-            {formatPrice(finalPrice)} ${PAYMENT}
+            {formatPrice(finalPrice)} {PAYMENT}
           </Button>
         </section>
       </div>

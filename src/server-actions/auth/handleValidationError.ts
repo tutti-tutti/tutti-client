@@ -26,6 +26,6 @@ export const handleValidationError = async (
     ...prevState,
     ...formData,
     ...fieldErrors,
-    success: false,
+    isSuccess: false,
   };
 };

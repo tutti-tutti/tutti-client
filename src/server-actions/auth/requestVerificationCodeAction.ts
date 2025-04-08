@@ -22,8 +22,8 @@ export const requestVerificationCodeAction = async (
     if (!validatedData.success) {
       return await handleValidationError(validatedData.error, prevState, {
         email: email as string,
-        emailVerified: false,
-        codeVerified: false,
+        isEmailVerified: false,
+        isCodeVerified: false,
       });
     }
 
@@ -33,9 +33,9 @@ export const requestVerificationCodeAction = async (
     );
 
     return {
-      success: true,
-      emailVerified: true,
-      codeVerified: false,
+      isSuccess: true,
+      isEmailVerified: true,
+      isCodeVerified: false,
       email: validatedData.data.email,
       message: response.message,
     };

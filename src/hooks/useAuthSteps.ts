@@ -13,9 +13,9 @@ import {
 } from '@/server-actions';
 
 const initialVerificationState: EmailVerificationState = {
-  success: false,
-  emailVerified: false,
-  codeVerified: false,
+  isSuccess: false,
+  isEmailVerified: false,
+  isCodeVerified: false,
 };
 
 const finalActionMap = {
@@ -52,8 +52,8 @@ export const useAuthSteps = (
 
   const getStep = (): 'final' | 'email' | 'code' => {
     if (formType === 'signin') return 'final';
-    if (!emailVerificationState.emailVerified) return 'email';
-    if (!codeVerificationState.codeVerified) return 'code';
+    if (!emailVerificationState.isEmailVerified) return 'email';
+    if (!codeVerificationState.isCodeVerified) return 'code';
     return 'final';
   };
 
@@ -70,10 +70,10 @@ export const useAuthSteps = (
   }, [currentStep]);
 
   useEffect(() => {
-    if (finalState.success) {
+    if (finalState.isSuccess) {
       router.push(redirectPath);
     }
-  }, [finalState.success, router, redirectPath]);
+  }, [finalState.isSuccess, router, redirectPath]);
 
   const formActionMap = {
     email: (formData: FormData) => {

@@ -36,7 +36,7 @@ export const signinAction = async (
 
     return {
       ...prevState,
-      success: true,
+      isSuccess: true,
     };
   } catch (error) {
     return await handleServerError(error, prevState);

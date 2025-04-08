@@ -10,8 +10,8 @@ const SigninPage = () => {
       type="signin"
       title={SIGNIN}
       redirectPath={ROUTER_PATH.HOME}
-      afterFormContent={<AutoLoginAndResetBox />}
-      afterForm={<SocialLoginAndSignupBox />}
+      extraFields={<AutoLoginAndResetBox />}
+      formFooter={<SocialLoginAndSignupBox />}
     />
   );
 };

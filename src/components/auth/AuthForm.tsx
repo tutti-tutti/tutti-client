@@ -12,8 +12,8 @@ interface AuthFormProps {
   title: string;
   redirectPath: string;
   signupTerms?: SignupTerm[];
-  afterFormContent?: ReactNode;
-  afterForm?: ReactNode;
+  extraFields?: ReactNode;
+  formFooter?: ReactNode;
 }
 
 const AuthForm = ({
@@ -21,8 +21,8 @@ const AuthForm = ({
   title,
   redirectPath,
   signupTerms = [],
-  afterFormContent,
-  afterForm,
+  extraFields,
+  formFooter,
 }: AuthFormProps) => {
   const {
     emailVerificationState,
@@ -55,7 +55,7 @@ const AuthForm = ({
             signupTerms={signupTerms}
           />
 
-          {afterFormContent}
+          {extraFields}
 
           <div className="text-text-danger font-style-info text-center">
             {serverError}
@@ -70,7 +70,7 @@ const AuthForm = ({
         </fieldset>
       </form>
 
-      {afterForm}
+      {formFooter}
     </>
   );
 };

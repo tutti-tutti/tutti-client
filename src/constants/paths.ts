@@ -2,6 +2,7 @@ export const ROUTER_PATH = {
   HOME: '/',
   SIGNUP: '/signup',
   LOGIN: '/signin',
+  RESET_PW: '/reset-password',
   FAQS: '/faqs',
   CART: '/cart',
   MY_PAGE: '/my/orders',
@@ -17,6 +18,7 @@ export const ROUTER_PATH = {
     `/my/review/write/${orderId}/${productItemId}`,
   ERROR_AUTHORIZED: '/error/authorized',
   ERROR_UNAUTHORIZED: '/error/unauthorized',
+  ERROR_RESTRICTED: '/error/restricted',
 };
 
 export const PATH_NAME = {

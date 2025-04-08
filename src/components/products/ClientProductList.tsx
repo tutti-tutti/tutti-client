@@ -1,11 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { productsInfiniteQueryOptions } from '@/queries';
-import { useProductListVirtualizer } from '@/hooks';
+import { useProductListVirtualizer, useProductReviews } from '@/hooks';
 import type { Product, ProductReviewInfo } from '@/types';
 import ProductItem from './ProductItem';
 import { MoreViewButton } from '../common';
@@ -29,7 +29,15 @@ const ClientProductList = ({ productReviews = [] }: ClientProductListProps) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQuery(productsInfiniteQueryOptions(20));
 
-  const products = data?.pages.flatMap(page => page.content) || [];
+  const products = useMemo(
+    () => data?.pages.flatMap(page => page.content) || [],
+    [data],
+  );
+
+  const { getReviewInfo } = useProductReviews({
+    initialReviews: productReviews,
+    products,
+  });
 
   const { groupedRows, totalSize, virtualRows, rowVirtualizer } =
     useProductListVirtualizer({ products });
@@ -105,12 +113,7 @@ const ClientProductList = ({ productReviews = [] }: ClientProductListProps) => {
                   <ProductItem
                     key={item.productId}
                     {...item}
-                    reviewInfo={
-                      productReviews[item.productId] || {
-                        avg: '0.0',
-                        totalCount: 0,
-                      }
-                    }
+                    reviewInfo={getReviewInfo(item.productId)}
                   />
                 ))}
               </ul>

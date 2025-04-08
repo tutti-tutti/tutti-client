@@ -15,5 +15,3 @@ export const resetPwSchema = z
     message: CHECK_PW_INPUT.ERROR,
     path: ['checkPw'],
   });
-
-export type ResetPwFormData = z.infer<typeof resetPwSchema>;

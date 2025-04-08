@@ -30,7 +30,7 @@ export const productByIdQueryOptions = (productId: string) =>
 
 export const productsPrefetchInfiniteQueryOptions = (
   cursorId?: number,
-  size: number = 30,
+  size: number = 20,
 ) => ({
   queryKey: [QUERY_KEYS_ENDPOINT.PRODUCTS, PRODUCTS_QUERY_KEY.PAGINATION, size],
   queryFn: () => fetchProductsWithPagination(cursorId, size),

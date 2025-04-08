@@ -1,7 +1,7 @@
 export interface EmailVerificationState {
-  success?: boolean;
-  emailVerified?: boolean;
-  codeVerified?: boolean;
+  isSuccess?: boolean;
+  isEmailVerified?: boolean;
+  isCodeVerified?: boolean;
   email?: string;
   pw?: string;
   checkPw?: string;

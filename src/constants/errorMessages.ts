@@ -35,4 +35,6 @@ export const ERROR_MESSAGES = {
   },
   GO_TO_MAIN_BUTTON: '홈페이지로 돌아가기',
   RESTRICT_EXTERNAL_REQUEST: '외부 요청은 허용되지 않습니다.',
+  NETWORK_ERROR: '서버 응답이 없습니다. 네트워크 연결을 확인해 주세요',
+  UNKNOWN_ERROR: '알 수 없는 오류가 발생했습니다. 재시도해 주세요.',
 };

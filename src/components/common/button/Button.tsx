@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 import { cn } from '@/utils/cn';
 import type { IconType } from '@/types';
@@ -20,6 +21,8 @@ export type ButtonVariant =
   | 'likeOff';
 
 export interface ButtonProps {
+  href?: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
   type?: 'button' | 'submit' | 'reset';
   icon?: IconType;
   iconPosition?: 'left' | 'right';
@@ -31,6 +34,8 @@ export interface ButtonProps {
 }
 
 const Button = ({
+  href,
+  target,
   type = 'button',
   icon,
   iconPosition = 'left',
@@ -40,9 +45,9 @@ const Button = ({
   children,
   iconProps,
 }: ButtonProps) => {
-  const defaultClass =
+  const defaultStyle =
     'px-lg py-md flex gap-sm rounded-lg transition-all duration-300 justify-center items-center cursor-pointer';
-  const variantClass = {
+  const variantStyle = {
     primary:
       'bg-bg-primaryInteraction text-text-inverse hover:bg-bg-primaryHover active:bg-bg-primaryPressed',
     secondary:
@@ -63,13 +68,10 @@ const Button = ({
     likeOff: 'border border-border-primary text-secondaryInteration',
   };
 
-  return (
-    <button
-      type={type}
-      className={cn(defaultClass, variantClass[variant], className)}
-      onClick={onClick}
-      disabled={variant === 'disabled'}
-    >
+  const finalStyle = cn(defaultStyle, variantStyle[variant], className);
+
+  const renderContent = () => (
+    <>
       {iconPosition === 'left' && icon && (
         <Icon iconName={icon} {...iconProps} />
       )}
@@ -77,6 +79,21 @@ const Button = ({
       {iconPosition === 'right' && icon && (
         <Icon iconName={icon} {...iconProps} />
       )}
+    </>
+  );
+
+  return href ? (
+    <Link href={href} target={target} className={finalStyle}>
+      {renderContent()}
+    </Link>
+  ) : (
+    <button
+      type={type}
+      className={finalStyle}
+      onClick={onClick}
+      disabled={variant === 'disabled'}
+    >
+      {renderContent()}
     </button>
   );
 };

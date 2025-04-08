@@ -1,6 +1,6 @@
 import { fetchSignupTerms } from '@/services';
 import { AuthForm } from '@/components';
-import { AUTH_CONSTANTS } from '@/constants';
+import { AUTH_CONSTANTS, ROUTER_PATH } from '@/constants';
 
 const SignupPage = async () => {
   const signupTerms = await fetchSignupTerms();
@@ -9,7 +9,7 @@ const SignupPage = async () => {
     <AuthForm
       type="signup"
       title={AUTH_CONSTANTS.SIGNUP}
-      redirectPath="/signin"
+      redirectPath={ROUTER_PATH.LOGIN}
       signupTerms={signupTerms}
     />
   );

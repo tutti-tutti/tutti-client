@@ -15,8 +15,16 @@ interface ClientProductListProps {
   productReviews: ProductReviewInfo[];
 }
 
+const FIRST_PAGE_LOADED_KEY = 'products_first_page_loaded';
+
 const ClientProductList = ({ productReviews = [] }: ClientProductListProps) => {
-  const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
+  const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const storedValue = sessionStorage.getItem(FIRST_PAGE_LOADED_KEY);
+      return storedValue === 'true';
+    }
+    return false;
+  });
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQuery(productsInfiniteQueryOptions(20));
@@ -29,6 +37,7 @@ const ClientProductList = ({ productReviews = [] }: ClientProductListProps) => {
   const handleMoreView = () => {
     fetchNextPage().then(() => {
       setIsFirstPageLoaded(true);
+      sessionStorage.setItem(FIRST_PAGE_LOADED_KEY, 'true');
     });
   };
 

@@ -22,7 +22,8 @@ export const middleware = (request: NextRequest) => {
   const isRestrictionPath =
     pathname.startsWith('/api') ||
     pathname.startsWith('/checkout') ||
-    pathname.startsWith('/error');
+    pathname.startsWith('/error') ||
+    pathname.startsWith('/my/review/write');
 
   if (isRestrictionPath) {
     const isAllowedReferer =

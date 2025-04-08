@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { ERROR_MESSAGES, ROUTER_PATH } from '@/constants';
+import { BASE_URL, ERROR_MESSAGES, ROUTER_PATH } from '@/constants';
 
-const ALLOWED_DOMAINS = ['http://localhost:3000/', 'https://www.tutti.today'];
+const ALLOWED_DOMAINS = [BASE_URL.LOCAL, BASE_URL.SITE];
 
 const {
   ERROR_AUTHORIZED,

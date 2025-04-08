@@ -33,6 +33,6 @@ export const ERROR_MESSAGES = {
       '뒤로가기 버튼을 누르거나 아래 버튼을 눌러 홈페이지로 돌아가시기 바랍니다!',
     ],
   },
-  GO_TO_MAIN_BUTTON: '메인페이지로 돌아가기',
+  GO_TO_MAIN_BUTTON: '홈페이지로 돌아가기',
   RESTRICT_EXTERNAL_REQUEST: '외부 요청은 허용되지 않습니다.',
 };

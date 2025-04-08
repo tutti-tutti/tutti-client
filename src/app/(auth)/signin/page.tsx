@@ -10,15 +10,15 @@ const SigninPage = () => {
       type="signin"
       title={SIGNIN}
       redirectPath={ROUTER_PATH.HOME}
-      afterFormContent={<AfterFormContent />}
-      afterForm={<AfterForm />}
+      afterFormContent={<AutoLoginAndResetBox />}
+      afterForm={<SocialLoginAndSignupBox />}
     />
   );
 };
 
 export default SigninPage;
 
-const AfterFormContent = () => (
+const AutoLoginAndResetBox = () => (
   <>
     <div className="flex justify-between">
       <div className="font-style-paragraph text-text-tertiary gap-xs flex">
@@ -35,7 +35,7 @@ const AfterFormContent = () => (
   </>
 );
 
-const AfterForm = () => (
+const SocialLoginAndSignupBox = () => (
   <>
     <div className="mb-sm flex items-center">
       <hr className="border-border-primary flex-grow border-t" />

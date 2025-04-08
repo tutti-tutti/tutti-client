@@ -35,8 +35,8 @@ const ProductPage = async ({ searchParams }: SearchParamsProps) => {
           currentCategoryId={categoryId}
         />
         <RecommendProductList categoryName={categoryName} />
+        <CategoryProductList categoryId={categoryId} />
       </div>
-      <CategoryProductList categoryId={categoryId} />
     </>
   );
 };

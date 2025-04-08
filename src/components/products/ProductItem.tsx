@@ -37,7 +37,7 @@ const ProductItem = ({
 
   return (
     <li className="gap-sm flex w-full flex-row md:flex-col md:gap-0">
-      <figure className="w-5/12 md:w-full">
+      <section className="w-5/12 md:w-full">
         <Link href={`/products/${productId}`}>
           <ProductThumbnail
             imageUrl={titleUrl}
@@ -48,9 +48,9 @@ const ProductItem = ({
             className="aspect-square"
           />
         </Link>
-      </figure>
+      </section>
 
-      <div className="w-7/12 md:w-full">
+      <section className="w-7/12 md:w-full">
         <div className="md:mt-xs mt-0 flex items-center justify-between">
           <p className="text-text-secondary font-style-info">
             <Link href="#">{storeName}</Link>
@@ -113,7 +113,7 @@ const ProductItem = ({
             </p>
           )}
         </Link>
-      </div>
+      </section>
     </li>
   );
 };

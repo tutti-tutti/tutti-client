@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { Button, Icon } from '@/components';
 import { ROUTER_PATH } from '@/constants';
 
@@ -25,8 +23,8 @@ export default function NotFound() {
           <p>돌아가시기 바랍니다!</p>
         </div>
 
-        <Button className="w-auto md:w-fit">
-          <Link href={ROUTER_PATH.HOME}>메인페이지로 돌아가기</Link>
+        <Button href={ROUTER_PATH.HOME} className="w-auto md:w-fit">
+          메인페이지로 돌아가기
         </Button>
       </div>
     </div>

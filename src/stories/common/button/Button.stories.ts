@@ -4,7 +4,7 @@ import { Button } from '@/components';
 import type { IconType } from '@/types';
 
 const meta: Meta<typeof Button> = {
-  title: 'Button/Button',
+  title: 'Common/Button/Button',
   component: Button,
   parameters: {
     layout: 'centered',

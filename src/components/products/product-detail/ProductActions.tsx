@@ -7,15 +7,14 @@ import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
 import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
-import type { ProductOption } from '@/types';
+import type { SelectedOptionItem } from '@/types';
 
 interface ProductActionsProps {
   productId: number;
   productItemId: number;
   quantity: number;
   disabled?: boolean;
-  selectedOptions?: ProductOption[];
-  selectedQuantities?: number[];
+  selectedOptionItems?: SelectedOptionItem[];
 }
 
 const {
@@ -31,17 +30,16 @@ const ProductActions = ({
   productItemId,
   quantity,
   disabled,
-  selectedOptions = [],
-  selectedQuantities = [],
+  selectedOptionItems = [],
 }: ProductActionsProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const orderProductItems =
-    selectedOptions.length > 0
-      ? selectedOptions.map((option, index) => ({
-          productItemId: option.productItemId,
-          quantity: selectedQuantities[index] || 1,
+    selectedOptionItems.length > 0
+      ? selectedOptionItems.map(item => ({
+          productItemId: item.option.productItemId,
+          quantity: item.quantity,
         }))
       : [{ productItemId, quantity }];
 
@@ -74,10 +72,10 @@ const ProductActions = ({
 
   const handleAddCart = async () => {
     try {
-      if (selectedOptions.length > 0) {
-        const cartItems = selectedOptions.map((option, index) => ({
-          productItemId: option.productItemId,
-          quantity: selectedQuantities[index] || 1,
+      if (selectedOptionItems.length > 0) {
+        const cartItems = selectedOptionItems.map(item => ({
+          productItemId: item.option.productItemId,
+          quantity: item.quantity,
         }));
 
         const result = await addCart(productId, cartItems);

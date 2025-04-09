@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
-import type { Product, ProductOption } from '@/types';
+import type { Product, ProductOption, SelectedOptionItem } from '@/types';
 import ProductHeader from './ProductHeader';
 import ProductOptions from './ProductOptions';
 import ProductPrice from './ProductPrice';
@@ -23,36 +23,42 @@ const ProductDetailItem = ({
   maxPurchaseQuantity,
   productReviewInfo,
 }: Product) => {
-  const [selectedOptions, setSelectedOptions] = useState<ProductOption[]>([]);
-  const [selectedQuantities, setSelectedQuantities] = useState<number[]>([]);
+  const [selectedOptionItems, setSelectedOptionItems] = useState<
+    SelectedOptionItem[]
+  >([]);
 
   const finalPrice = useMemo(() => {
-    if (selectedOptions.length === 0) return originalPrice;
+    if (selectedOptionItems.length === 0) return originalPrice;
 
-    return selectedOptions.reduce((total, option, index) => {
-      const quantity = selectedQuantities[index] || 1;
-      return total + option.sellingPrice * quantity;
+    return selectedOptionItems.reduce((total, item) => {
+      return total + item.option.sellingPrice * item.quantity;
     }, 0);
-  }, [selectedOptions, selectedQuantities, originalPrice]);
+  }, [selectedOptionItems, originalPrice]);
 
   const totalOriginalPrice = useMemo(() => {
-    if (selectedOptions.length === 0) return originalPrice;
+    if (selectedOptionItems.length === 0) return originalPrice;
 
-    return selectedOptions.reduce((total, option, index) => {
-      const quantity = selectedQuantities[index] || 1;
-      return total + (originalPrice + (option.additionalPrice || 0)) * quantity;
+    return selectedOptionItems.reduce((total, item) => {
+      return (
+        total +
+        (originalPrice + (item.option.additionalPrice || 0)) * item.quantity
+      );
     }, 0);
-  }, [selectedOptions, selectedQuantities, originalPrice]);
+  }, [selectedOptionItems, originalPrice]);
 
   const discountRate = useMemo(() => {
-    if (selectedOptions.length === 0) return '0%';
+    if (selectedOptionItems.length === 0) return '0%';
     return calculateDiscountRate(totalOriginalPrice, finalPrice);
-  }, [totalOriginalPrice, finalPrice, selectedOptions.length]);
+  }, [totalOriginalPrice, finalPrice, selectedOptionItems.length]);
 
   const handleOptionsChange = useCallback(
     (options: ProductOption[], quantities: number[]) => {
-      setSelectedOptions(options);
-      setSelectedQuantities(quantities);
+      const newSelectedOptionItems = options.map((option, index) => ({
+        option,
+        quantity: quantities[index] || 1,
+      }));
+
+      setSelectedOptionItems(newSelectedOptionItems);
     },
     [],
   );
@@ -97,13 +103,14 @@ const ProductDetailItem = ({
         />
         <ProductActions
           productItemId={
-            selectedOptions.length > 0 ? selectedOptions[0].productItemId : 0
+            selectedOptionItems.length > 0
+              ? selectedOptionItems[0].option.productItemId
+              : 0
           }
           quantity={1}
-          disabled={selectedOptions.length === 0}
+          disabled={selectedOptionItems.length === 0}
           productId={productId}
-          selectedOptions={selectedOptions}
-          selectedQuantities={selectedQuantities}
+          selectedOptionItems={selectedOptionItems}
         />
       </div>
     </section>

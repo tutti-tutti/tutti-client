@@ -3,12 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { formatPrice } from '@/utils';
-import type { ProductOption } from '@/types';
-
-interface SelectedOptionItem {
-  option: ProductOption;
-  quantity: number;
-}
+import type { ProductOption, SelectedOptionItem } from '@/types';
 
 interface UseProductOptionsReturn {
   selectedOptions: SelectedOptionItem[];

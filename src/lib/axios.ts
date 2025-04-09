@@ -14,7 +14,7 @@ const baseURL = isServer
   : `${window.location.origin}/api`;
 
 export const staticAxios = axios.create({
-  baseURL: SERVER_API_BASE_URL,
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

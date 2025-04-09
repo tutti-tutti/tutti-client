@@ -1,4 +1,28 @@
-import { AddressInputItem } from '@/types';
+import type { OrderStatusInfo, OrderStatus, AddressInputItem } from '@/types';
+
+export const ORDER_STATUS: Record<OrderStatus, OrderStatusInfo> = {
+  READY: {
+    label: '결제 대기',
+    variant: {
+      color: 'warning',
+      style: 'outlineSquare',
+    },
+  },
+  DONE: {
+    label: '결제 완료',
+    variant: {
+      color: 'success',
+      style: 'outlineSquare',
+    },
+  },
+  CANCELED: {
+    label: '주문 취소',
+    variant: {
+      color: 'secondary',
+      style: 'outlineSquare',
+    },
+  },
+};
 
 export const SHIPPING_ADDRESS_INPUT_ITEMS: AddressInputItem[] = [
   {

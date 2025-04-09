@@ -16,3 +16,8 @@ export interface BadgeVariant {
   color: BadgeColor;
   style: BadgeStyle;
 }
+
+export interface OrderStatusInfo {
+  label: string;
+  variant: BadgeVariant;
+}

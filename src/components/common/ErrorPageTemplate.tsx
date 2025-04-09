@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { Button, Icon } from '@/components';
 
 interface ErrorPageTemplateProps {
@@ -40,8 +38,8 @@ const ErrorPageTemplate = ({
           ))}
         </div>
 
-        <Button className="w-auto md:w-fit">
-          <Link href={buttonLink}>{buttonText}</Link>
+        <Button href={buttonLink} className="w-auto md:w-fit">
+          {buttonText}
         </Button>
       </div>
     </div>

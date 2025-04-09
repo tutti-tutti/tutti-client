@@ -5,6 +5,7 @@ export const ROUTER_PATH = {
   RESET_PW: '/reset-password',
   FAQS: '/faqs',
   CART: '/cart',
+  MY: '/my',
   MY_PAGE: '/my/orders',
   COUNTRY_SETTING: '/country-setting',
   CHECKOUT: (orderProductItems: string) =>

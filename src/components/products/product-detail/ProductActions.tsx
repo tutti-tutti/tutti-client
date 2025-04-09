@@ -7,12 +7,15 @@ import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
 import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
+import type { ProductOption } from '@/types';
 
 interface ProductActionsProps {
   productId: number;
   productItemId: number;
   quantity: number;
   disabled?: boolean;
+  selectedOptions?: ProductOption[];
+  selectedQuantities?: number[];
 }
 
 const {
@@ -28,11 +31,20 @@ const ProductActions = ({
   productItemId,
   quantity,
   disabled,
+  selectedOptions = [],
+  selectedQuantities = [],
 }: ProductActionsProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const orderProductItems = [{ productItemId, quantity }];
+  const orderProductItems =
+    selectedOptions.length > 0
+      ? selectedOptions.map((option, index) => ({
+          productItemId: option.productItemId,
+          quantity: selectedQuantities[index] || 1,
+        }))
+      : [{ productItemId, quantity }];
+
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(orderProductItems),
   );
@@ -62,17 +74,24 @@ const ProductActions = ({
 
   const handleAddCart = async () => {
     try {
-      const result = await addCart(productId, productItemId, quantity);
+      if (selectedOptions.length > 0) {
+        const cartItems = selectedOptions.map((option, index) => ({
+          productItemId: option.productItemId,
+          quantity: selectedQuantities[index] || 1,
+        }));
 
-      if (result.success) {
-        toast.success(result.message || ADD_SUCCESS_MESSAGE);
+        const result = await addCart(productId, cartItems);
 
-        await queryClient.invalidateQueries({
-          queryKey: cartQueryOptions.queryKey,
-        });
-        await queryClient.prefetchQuery(cartQueryOptions);
-      } else {
-        toast.error(result.message || ADD_FAIL_MESSAGE);
+        if (result.success) {
+          toast.success(result.message || ADD_SUCCESS_MESSAGE);
+
+          await queryClient.invalidateQueries({
+            queryKey: cartQueryOptions.queryKey,
+          });
+          await queryClient.prefetchQuery(cartQueryOptions);
+        } else {
+          toast.error(result.message || ADD_FAIL_MESSAGE);
+        }
       }
     } catch (error) {
       console.error(ADD_FAIL_MESSAGE, error);

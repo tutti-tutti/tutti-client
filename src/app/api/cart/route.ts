@@ -29,20 +29,16 @@ export const POST = async (request: Request) => {
       );
     }
 
-    const cartItem = body.cartItems[0];
-
-    if (!cartItem.productItemId || !cartItem.quantity) {
-      return NextResponse.json(
-        { message: 'productItemId와 quantity가 필요합니다.' },
-        { status: 400 },
-      );
+    for (const cartItem of body.cartItems) {
+      if (!cartItem.productItemId || !cartItem.quantity) {
+        return NextResponse.json(
+          { message: '모든 항목에 productItemId와 quantity가 필요합니다.' },
+          { status: 400 },
+        );
+      }
     }
 
-    const products = await addCart(
-      cartItem.productId,
-      cartItem.productItemId,
-      cartItem.quantity,
-    );
+    const products = await addCart(body.productId, body.cartItems);
 
     return NextResponse.json({
       success: true,

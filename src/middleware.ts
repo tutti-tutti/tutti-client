@@ -17,6 +17,8 @@ export const middleware = (request: NextRequest) => {
   const referer = request.headers.get('referer');
   const accessToken = request.cookies.get('access_token')?.value;
 
+  if (pathname.startsWith('/api/auth')) return NextResponse.next();
+
   if (pathname === ERROR_RESTRICTED) return NextResponse.next();
 
   const isRestrictionPath =
@@ -33,25 +35,21 @@ export const middleware = (request: NextRequest) => {
       pathname.startsWith('/api') && referer && !isAllowedReferer;
     const isDirectAccess = !referer || !isAllowedReferer;
 
-    if (isExternalRequest) {
+    if (isExternalRequest)
       return NextResponse.json(
         { error: ERROR_MESSAGES.RESTRICT_EXTERNAL_REQUEST },
         { status: 403 },
       );
-    }
 
-    if (isDirectAccess) {
+    if (isDirectAccess)
       return NextResponse.redirect(new URL(ERROR_RESTRICTED, request.url));
-    }
   }
 
   if (accessToken) {
-    if ([LOGIN, SIGNUP, RESET_PW].includes(pathname)) {
+    if ([LOGIN, SIGNUP, RESET_PW].includes(pathname))
       return NextResponse.redirect(new URL(ERROR_AUTHORIZED, request.url));
-    }
-  } else if (pathname.startsWith('/my')) {
+  } else if (pathname.startsWith('/my'))
     return NextResponse.redirect(new URL(ERROR_UNAUTHORIZED, request.url));
-  }
 
   return NextResponse.next();
 };

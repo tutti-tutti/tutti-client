@@ -10,34 +10,34 @@ interface StatusInfo {
   variant: BadgeVariant;
 }
 
-const OrderStatusBadge = ({ orderStatus }: OrderStatusBadgeProps) => {
-  const status: Record<OrderStatus, StatusInfo> = {
-    READY: {
-      label: '결제 대기',
-      variant: {
-        color: 'warning',
-        style: 'outlineSquare',
-      },
+const ORDER_STATUS: Record<OrderStatus, StatusInfo> = {
+  READY: {
+    label: '결제 대기',
+    variant: {
+      color: 'warning',
+      style: 'outlineSquare',
     },
-    DONE: {
-      label: '결제 완료',
-      variant: {
-        color: 'success',
-        style: 'outlineSquare',
-      },
+  },
+  DONE: {
+    label: '결제 완료',
+    variant: {
+      color: 'success',
+      style: 'outlineSquare',
     },
-    CANCELED: {
-      label: '주문 취소',
-      variant: {
-        color: 'secondary',
-        style: 'outlineSquare',
-      },
+  },
+  CANCELED: {
+    label: '주문 취소',
+    variant: {
+      color: 'secondary',
+      style: 'outlineSquare',
     },
-  };
+  },
+};
 
+const OrderStatusBadge = ({ orderStatus }: OrderStatusBadgeProps) => {
   return (
     <Badge orderStatus={orderStatus}>
-      {status[orderStatus]?.label || orderStatus}
+      {ORDER_STATUS[orderStatus]?.label || orderStatus}
     </Badge>
   );
 };

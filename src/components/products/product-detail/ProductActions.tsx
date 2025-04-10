@@ -35,13 +35,7 @@ const ProductActions = ({
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const orderProductItems =
-    selectedOptionItems.length > 0
-      ? selectedOptionItems.map(item => ({
-          productItemId: item.option.productItemId,
-          quantity: item.quantity,
-        }))
-      : [{ productItemId, quantity }];
+  const orderProductItems = [{ productItemId, quantity }];
 
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(orderProductItems),

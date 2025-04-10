@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import { calculateDiscountRate } from '@/utils';
 import type { Product, ProductOption, SelectedOptionItem } from '@/types';
@@ -27,29 +27,31 @@ const ProductDetailItem = ({
     SelectedOptionItem[]
   >([]);
 
-  const finalPrice = useMemo(() => {
-    if (selectedOptionItems.length === 0) return originalPrice;
-
-    return selectedOptionItems.reduce((total, item) => {
+  let finalPrice;
+  if (selectedOptionItems.length === 0) {
+    finalPrice = originalPrice;
+  } else {
+    finalPrice = selectedOptionItems.reduce((total, item) => {
       return total + item.option.sellingPrice * item.quantity;
     }, 0);
-  }, [selectedOptionItems, originalPrice]);
+  }
 
-  const totalOriginalPrice = useMemo(() => {
-    if (selectedOptionItems.length === 0) return originalPrice;
-
-    return selectedOptionItems.reduce((total, item) => {
+  let totalOriginalPrice;
+  if (selectedOptionItems.length === 0) {
+    totalOriginalPrice = originalPrice;
+  } else {
+    totalOriginalPrice = selectedOptionItems.reduce((total, item) => {
       return (
         total +
         (originalPrice + (item.option.additionalPrice || 0)) * item.quantity
       );
     }, 0);
-  }, [selectedOptionItems, originalPrice]);
+  }
 
-  const discountRate = useMemo(() => {
-    if (selectedOptionItems.length === 0) return '0%';
-    return calculateDiscountRate(totalOriginalPrice, finalPrice);
-  }, [totalOriginalPrice, finalPrice, selectedOptionItems.length]);
+  const discountRate =
+    selectedOptionItems.length === 0
+      ? '0%'
+      : calculateDiscountRate(totalOriginalPrice, finalPrice);
 
   const handleOptionsChange = useCallback(
     (options: ProductOption[], quantities: number[]) => {

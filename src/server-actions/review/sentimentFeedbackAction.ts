@@ -13,8 +13,6 @@ export const sentimentFeedbackAction = async (
 
     revalidateTag('reviews');
 
-    console.log('감성분석 피드백 결과: ', result);
-
     return result;
   } catch (error) {
     console.error('감성분석 피드백 제출 실패:', error);

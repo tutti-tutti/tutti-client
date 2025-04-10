@@ -9,5 +9,3 @@ export const signinSchema = z.object({
   email: authSchema.shape.email,
   pw: z.string().min(1, { message: PW_INPUT.SIGNIN_ERROR }),
 });
-
-export type SigninFormData = z.infer<typeof signinSchema>;

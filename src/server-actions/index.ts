@@ -8,3 +8,5 @@ export * from './review/createReviewAction';
 export * from './faq/faqSearchAction';
 export * from './review/fetchReviewsAction';
 export * from './review/sentimentFeedbackAction';
+export * from './review/productReviewAction';
+export * from './auth/signoutAction';

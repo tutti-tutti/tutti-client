@@ -1,10 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ProductItem } from '@/components';
-import type { Product } from '@/types';
+import type { Product, ProductReviewInfo } from '@/types';
 
 const sampleImage =
   'https://cdn-optimized.imweb.me/upload/S20240328110100ace0842/55757f8d5f03e.jpg';
+
+const defaultReviewInfo: ProductReviewInfo = {
+  productId: 1,
+  avg: '4.5',
+  totalCount: 42,
+};
+
+const defaultProduct: Product & { reviewInfo: ProductReviewInfo } = {
+  productId: 1,
+  storeName: '오디오마스터',
+  name: '프리미엄 무선 이어폰 - 노이즈 캔슬링 탑재 고음질 블루투스 이어버드',
+  titleUrl: sampleImage,
+  originalPrice: 129000,
+  sellingPrice: 89000,
+  likes: 123,
+  createdAt: new Date(),
+  freeDelivery: false,
+  almostOutOfStock: false,
+  productOptionItems: [],
+  maxPurchaseQuantity: 1,
+  reviewInfo: defaultReviewInfo,
+};
 
 const meta: Meta<typeof ProductItem> = {
   title: 'Product/ProductItem',
@@ -24,21 +46,6 @@ const meta: Meta<typeof ProductItem> = {
 
 export default meta;
 type Story = StoryObj<typeof ProductItem>;
-
-const defaultProduct: Product = {
-  productId: 1,
-  storeName: '오디오마스터',
-  name: '프리미엄 무선 이어폰 - 노이즈 캔슬링 탑재 고음질 블루투스 이어버드',
-  titleUrl: sampleImage,
-  originalPrice: 129000,
-  sellingPrice: 89000,
-  likes: 123,
-  createdAt: new Date(),
-  freeDelivery: false,
-  almostOutOfStock: false,
-  productOptionItems: [],
-  maxPurchaseQuantity: 1,
-};
 
 export const Default: Story = {
   args: {

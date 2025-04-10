@@ -4,6 +4,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 
 import { axiosInstance } from '@/lib';
+import { AUTH_ENDPOINTS } from '@/constants';
 
 export const getAccessToken = async () => {
   const cookieStore = await cookies();
@@ -28,7 +29,7 @@ export const setAccessToken = async (accessToken: string) => {
 
   cookieStore.set('access_token', accessToken, {
     httpOnly: true,
-    // secure: true, // 📌 https 프로토콜 통신일 경우에만 가능하도록 강제하는 옵션이므로 배포 환경에서 테스트할 때 사용하기
+    secure: true,
     maxAge: 60 * 60,
     path: '/',
   });
@@ -39,7 +40,7 @@ export const setRefreshToken = async (refreshToken: string) => {
 
   cookieStore.set('refresh_token', refreshToken, {
     httpOnly: true,
-    // secure: true, // 📌 https 프로토콜 통신일 경우에만 가능하도록 강제하는 옵션이므로 배포 환경에서 테스트할 때 사용하기
+    secure: true,
     maxAge: 7 * 24 * 60 * 60,
     path: '/',
   });
@@ -47,10 +48,9 @@ export const setRefreshToken = async (refreshToken: string) => {
 
 export const renewAccessToken = async () => {
   try {
-    const refreshToken = getRefreshToken();
-    const { data } = await axiosInstance.post('/members/temp-endpoint', {
-      refresh_token: refreshToken,
-    });
+    const { data } = await axiosInstance.post(
+      AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN,
+    );
     const { access_token: accessToken } = data;
 
     await setAccessToken(accessToken);

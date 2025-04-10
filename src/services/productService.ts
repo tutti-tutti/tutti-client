@@ -1,9 +1,9 @@
-import { axiosInstance } from '@/lib';
+import { axiosInstance, staticAxios } from '@/lib';
 import { PRODUCTS_ENDPOINTS } from '@/constants';
-import { Product } from '@/types';
+import { Product, PaginatedProductsResponseAPISchema } from '@/types';
 
 export const fetchProducts = async () => {
-  const response = await axiosInstance.get(PRODUCTS_ENDPOINTS.LATEST);
+  const response = await staticAxios.get(PRODUCTS_ENDPOINTS.LATEST);
 
   return response.data;
 };
@@ -21,22 +21,19 @@ export const fetchProductById = async (productId: string): Promise<Product> => {
   return response.data;
 };
 
-// export const fetchProductsWithPagination = async (
-//   pageParm = 1,
-//   pageSize = 20,
-// ) => {
-//   const allProducts = await fetchProducts();
+export const fetchProductsWithPagination = async (
+  cursorId?: number,
+  size: number = 20,
+): Promise<PaginatedProductsResponseAPISchema> => {
+  const params: Record<string, string | number> = { size };
 
-//   const startIndex = (pageParm - 1) * pageSize;
-//   const endIndex = startIndex + pageSize;
+  if (cursorId !== undefined) {
+    params.cursorId = cursorId;
+  }
 
-//   const paginatedItems = allProducts.slice(startIndex, endIndex);
+  const response = await axiosInstance.get(PRODUCTS_ENDPOINTS.PAGINATION, {
+    params,
+  });
 
-//   const hasNextPage = endIndex < allProducts.length;
-
-//   return {
-//     items: paginatedItems,
-//     nextPage: hasNextPage ? pageParm + 1 : null,
-//     totalItems: allProducts.length,
-//   };
-// };
+  return response.data;
+};

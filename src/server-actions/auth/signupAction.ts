@@ -1,8 +1,10 @@
 'use server';
 
-import { signupSchema } from '@/schemas';
 import { signup } from '@/services';
+import { signupSchema } from '@/schemas';
 import type { EmailVerificationState } from '@/types';
+import { handleServerError } from './handleServerError';
+import { handleValidationError } from './handleValidationError';
 
 export const signupAction = async (
   prevState: EmailVerificationState,
@@ -23,33 +25,12 @@ export const signupAction = async (
     });
 
     if (!validatedData.success) {
-      const fieldErrors = {
-        emailError: '',
-        pwError: '',
-        checkPwError: '',
-        essentialPolicyError: '',
-      };
-
-      validatedData.error.errors.forEach(error => {
-        const field = error.path[0];
-        const errorMessage = error.message;
-
-        if (field === 'email') fieldErrors.emailError = errorMessage;
-        else if (field === 'pw') fieldErrors.pwError = errorMessage;
-        else if (field === 'checkPw') fieldErrors.checkPwError = errorMessage;
-        else if (field === 'essentialPolicy')
-          fieldErrors.essentialPolicyError = errorMessage;
-      });
-
-      return {
-        ...prevState,
-        success: false,
-        ...fieldErrors,
+      return await handleValidationError(validatedData.error, prevState, {
         pw: pw as string,
         checkPw: checkPw as string,
         essentialPolicy: essentialPolicy as string[],
         optionalPolicy: optionalPolicy as string[],
-      };
+      });
     }
 
     await signup(
@@ -62,14 +43,9 @@ export const signupAction = async (
 
     return {
       ...prevState,
-      success: false,
+      isSuccess: true,
     };
   } catch (error) {
-    console.error(error); // 📌 추후에 서버 에러 처리 예정!
-
-    return {
-      success: false,
-      error: '회원가입 중 오류가 발생했습니다.',
-    };
+    return await handleServerError(error, prevState);
   }
 };

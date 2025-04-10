@@ -1,10 +1,13 @@
 export const AUTH_CONSTANTS = {
   SIGNIN: '로그인',
-  SIGNIN_LOADING: '로그인 중',
+  SIGNIN_BUTTON: '로그인',
+  SIGNIN_BUTTON_LOADING: '로그인 중',
   SIGNUP: '회원가입',
-  SIGNUP_LOADING: '회원가입 중',
+  SIGNUP_BUTTON: '회원가입',
+  SIGNUP_BUTTON_LOADING: '회원가입 중',
   RESET_PW: '비밀번호 재설정',
-  RESET_PW_LOADING: '비밀번호 재설정 중',
+  RESET_PW_BUTTON: '비밀번호 재설정',
+  RESET_PW_BUTTON_LOADING: '비밀번호 재설정 중',
   AUTO_SIGNIN: '자동 로그인',
   FORGOT_PW: '비밀번호를 잊어버렸나요?',
   SOCIAL_SIGNIN: '소셜로 로그인하기',
@@ -18,6 +21,7 @@ export const AUTH_CONSTANTS = {
     LABEL: '이메일 입력',
     PLACEHOLDER: '이메일을 입력해주세요',
     ERROR: '유효한 이메일 주소를 입력해주세요.',
+    SUCCESS: '이메일 인증이 완료되었습니다.',
   },
   VERIFY_EMAIL_INPUT: {
     LABEL: '인증번호 입력',
@@ -27,7 +31,8 @@ export const AUTH_CONSTANTS = {
   PW_INPUT: {
     LABEL: '비밀번호 입력',
     PLACEHOLDER: '비밀번호를 입력해주세요',
-    ERROR: '비밀번호는 영문, 숫자를 포함한 8자리 이상이어야 합니다.',
+    ERROR:
+      '비밀번호는 영문 대·소문자, 숫자, 특수문자를 포함한 8자리 이상이어야 합니다.',
     SIGNIN_ERROR: '비밀번호를 입력해주세요.',
   },
   CHECK_PW_INPUT: {

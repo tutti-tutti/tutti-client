@@ -1,8 +1,10 @@
 'use server';
 
-import { requestVerifySchema } from '@/schemas/auth/requestVerifySchema';
 import { verifyEmail } from '@/services';
+import { requestVerifySchema } from '@/schemas';
 import type { EmailVerificationState } from '@/types';
+import { handleServerError } from './handleServerError';
+import { handleValidationError } from './handleValidationError';
 
 export const requestVerificationCodeAction = async (
   prevState: EmailVerificationState,
@@ -11,20 +13,18 @@ export const requestVerificationCodeAction = async (
   try {
     const email = formData.get('email');
     const type = formData.get('type');
+
     const validatedData = requestVerifySchema.safeParse({
       email,
       type,
     });
 
     if (!validatedData.success) {
-      return {
-        ...prevState,
-        success: false,
-        emailVerified: false,
-        codeVerified: false,
+      return await handleValidationError(validatedData.error, prevState, {
         email: email as string,
-        error: validatedData.error.errors[0]?.message,
-      };
+        isEmailVerified: false,
+        isCodeVerified: false,
+      });
     }
 
     const response = await verifyEmail(
@@ -33,19 +33,13 @@ export const requestVerificationCodeAction = async (
     );
 
     return {
-      success: true,
-      emailVerified: true,
-      codeVerified: false,
+      isSuccess: true,
+      isEmailVerified: true,
+      isCodeVerified: false,
       email: validatedData.data.email,
       message: response.message,
     };
   } catch (error) {
-    console.error(error); // 📌 추후에 서버 에러 처리 예정!
-
-    return {
-      ...prevState,
-      success: false,
-      error: '인증 코드 요청 중 알 수 없는 오류가 발생했습니다.',
-    };
+    return await handleServerError(error, prevState);
   }
 };

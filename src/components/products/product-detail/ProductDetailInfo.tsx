@@ -2,10 +2,28 @@ import Image from 'next/image';
 
 import { formatDateWithKorean } from '@/utils';
 import type { Product } from '@/types';
+import { PRODUCTS_CONSTANTS } from '@/constants';
 
 interface ProductInfoTableProps {
   initialProduct: Product;
 }
+
+const {
+  STORE_NAME,
+  PRODUCT_STATUS,
+  PRODUCT_STATUS_NEW,
+  ADULT_ONLY,
+  ADULT_ONLY_NOT_NEED,
+  ADULT_ONLY_NEED,
+  MODEL_NAME,
+  EVENT,
+  ORIGINAL_DELIVERY,
+  FREE_GIFT,
+  DETAIL_PAGE_REFERENCE,
+  OPTION_TYPE,
+  OPTION_TYPE_COUNT,
+  RELEASE_DATE,
+} = PRODUCTS_CONSTANTS;
 
 const ProductDetailInfo = ({ initialProduct }: ProductInfoTableProps) => {
   const {
@@ -19,27 +37,27 @@ const ProductDetailInfo = ({ initialProduct }: ProductInfoTableProps) => {
 
   const tableRows = [
     {
-      firstLabel: '스토어명',
+      firstLabel: `${STORE_NAME}`,
       firstValue: storeName,
-      secondLabel: '상품상태',
-      secondValue: '신상품',
+      secondLabel: `${PRODUCT_STATUS}`,
+      secondValue: `${PRODUCT_STATUS_NEW}`,
     },
     {
-      firstLabel: '성인인증',
-      firstValue: adultOnly ? '필요' : '불필요',
-      secondLabel: '모델명',
+      firstLabel: `${ADULT_ONLY}`,
+      firstValue: adultOnly ? `${ADULT_ONLY_NEED}` : `${ADULT_ONLY_NOT_NEED}`,
+      secondLabel: `${MODEL_NAME}`,
       secondValue: name,
     },
     {
-      firstLabel: '이벤트',
-      firstValue: '정상배송',
-      secondLabel: '사은품',
-      secondValue: '상세페이지참조',
+      firstLabel: `${EVENT}`,
+      firstValue: `${ORIGINAL_DELIVERY}`,
+      secondLabel: `${FREE_GIFT}`,
+      secondValue: `${DETAIL_PAGE_REFERENCE}`,
     },
     {
-      firstLabel: '옵션종류',
-      firstValue: `${productOptionItems.length}종류`,
-      secondLabel: '출시년일',
+      firstLabel: `${OPTION_TYPE}`,
+      firstValue: `${OPTION_TYPE_COUNT(productOptionItems.length)}`,
+      secondLabel: `${RELEASE_DATE}`,
       secondValue: formatDateWithKorean(createdAt),
     },
   ];

@@ -10,12 +10,15 @@ export const AUTH_QUERY_KEY = {
   SIGNUP_EMAIL: 'signup-email',
   RESET_PW: 'password-reset',
   SIGNIN_EMAIL: 'login-email',
+  MEMBER_DATA: 'member-data',
 };
 
 export const PRODUCTS_QUERY_KEY = {
   LIST: 'list',
   LATEST: 'latest',
   RECOMMEND: 'recommend',
+  PAGINATION: 'pagination',
+  PRODUCT_REVIEWS: 'productReview',
 };
 
 export const CART_QUERY_KEY = {

@@ -1,6 +1,7 @@
 'use client';
 
 import { IconButton, Switch } from '@/components';
+import { CART_CONSTANTS, PRODUCTS_CONSTANTS } from '@/constants';
 
 interface ProductQuantityProps {
   quantity: number;
@@ -22,7 +23,9 @@ const ProductQuantity = ({
       <div className="gap-md flex flex-col md:flex-row md:items-center md:justify-between md:gap-0">
         <div className="gap-md flex items-center md:flex-col md:items-start md:gap-0">
           <div className="gap-lg flex items-center">
-            <p className="font-style-heading text-text-secondary">수량</p>
+            <p className="font-style-heading text-text-secondary">
+              {PRODUCTS_CONSTANTS.QUANTITY}
+            </p>
 
             <div className="gap-sm md:gap-lg flex items-center">
               <IconButton
@@ -48,13 +51,13 @@ const ProductQuantity = ({
           </div>
 
           <p className="font-style-paragraph text-text-tertiary">
-            고객 당 최대 {maxPurchaseQuantity}개 구매가능
+            {CART_CONSTANTS.CUSTOMER_PER_PURCHASE(maxPurchaseQuantity)}
           </p>
         </div>
 
         <div className="gap-sm flex items-center">
           <p className="font-style-subHeading text-text-secondary">
-            이 상품 재입고알림
+            {PRODUCTS_CONSTANTS.RESTOCK_NOTIFICATION}
           </p>
           <Switch />
         </div>

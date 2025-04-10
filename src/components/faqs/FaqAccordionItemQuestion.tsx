@@ -15,6 +15,8 @@ const FaqAccordionItemQuestion = ({
   return (
     <Link
       className="p-md border-border-secondary flex items-center justify-between border-b"
+      scroll={false}
+      replace={true}
       {...props}
     >
       <div className="gap-3xl flex items-center">

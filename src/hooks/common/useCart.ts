@@ -8,6 +8,9 @@ import { useCartStore } from '@/stores';
 import { removeFromCart } from '@/services';
 import { toast } from '@/utils';
 import { cartQueryOptions } from '@/queries';
+import { CART_CONSTANTS } from '@/constants';
+
+const { CART_TOAST_MESSAGE, CONFIRM_DELETE_MESSAGE } = CART_CONSTANTS;
 
 const useCart = () => {
   const queryClient = useQueryClient();
@@ -57,8 +60,8 @@ const useCart = () => {
         queryClient.invalidateQueries({ queryKey: cartQueryOptions.queryKey });
       }
       if (error) {
-        console.error('선택한 상품 삭제 중 오류가 발생했습니다.', error);
-        toast.error('선택한 상품 삭제에 실패했습니다.');
+        console.error(CART_TOAST_MESSAGE.DELETE_ERROR, error);
+        toast.error(CART_TOAST_MESSAGE.DELETE_ERROR);
       }
     },
   });
@@ -67,7 +70,7 @@ const useCart = () => {
     const checkedCount = getCheckedItemsCount();
     if (checkedCount === 0) return;
 
-    if (window.confirm('선택한 상품을 삭제하시겠습니까?')) {
+    if (window.confirm(CONFIRM_DELETE_MESSAGE)) {
       try {
         const selectedProductItemIds = Object.entries(checkedItems)
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -76,8 +79,8 @@ const useCart = () => {
 
         deleteSelectedMutation.mutate(selectedProductItemIds);
       } catch (err) {
-        console.error('선택한 상품 삭제 중 오류가 발생했습니다.', err);
-        toast.error('선택한 상품 삭제에 실패했습니다.');
+        console.error(CART_TOAST_MESSAGE.DELETE_ERROR, err);
+        toast.error(CART_TOAST_MESSAGE.DELETE_ERROR);
       }
     }
   };

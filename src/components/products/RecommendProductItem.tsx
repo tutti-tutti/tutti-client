@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { calculateDiscountRate } from '@/utils';
+import { calculateDiscountRate, formatPrice } from '@/utils';
 import type { Product } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
 
@@ -42,13 +42,13 @@ const RecommendProductItem = ({
                 {discountRate}
               </p>
               <p className="text-text-primary font-style-subHeading">
-                {sellingPrice.toLocaleString()}원
+                {formatPrice(sellingPrice)}
               </p>
             </div>
           </>
         ) : (
           <p className="text-text-primary font-style-subHeading">
-            {originalPrice.toLocaleString()}원
+            {formatPrice(originalPrice)}
           </p>
         )}
       </Link>

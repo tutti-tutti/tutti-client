@@ -2,7 +2,7 @@ import { fetchOrderDetail } from '@/services';
 import { formatDateWithKorean } from '@/utils';
 import {
   MypageHeader,
-  OrderHistoryList,
+  OrderDetailClientWrapper,
   OrderTableInfoSection,
 } from '@/components';
 
@@ -21,12 +21,12 @@ export async function generateMetadata() {
 const OrderDetailPage = async ({ params }: Params) => {
   const { orderId } = await params;
   const orderDetailInfo = await fetchOrderDetail(orderId);
-  const { orderedAt } = orderDetailInfo;
+  const { orderNumber, orderedAt } = orderDetailInfo;
 
   const linkItems = [
     { label: '홈', href: '' },
     { label: '마이페이지', href: '' },
-    { label: '주문 내역', href: '/orders' },
+    { label: '주문 내역', href: '/my/orders' },
     { label: pageTitle, href: `${orderId}`, isCurrent: true },
   ];
 
@@ -38,11 +38,14 @@ const OrderDetailPage = async ({ params }: Params) => {
         <section className="gap-5xl flex flex-col">
           <h2 className="gap-sm flex">
             <span>{formatDateWithKorean(orderedAt)} 주문</span>
-            <span className="text-text-tertiary">주문번호 : {orderId}</span>
+            <span className="text-text-tertiary">주문번호 : {orderNumber}</span>
           </h2>
 
           <section className="bg-bg-tertiary px-5xl py-3xl">
-            <OrderHistoryList orderId={Number(orderId)} {...orderDetailInfo} />
+            <OrderDetailClientWrapper
+              orderId={Number(orderId)}
+              initialOrderDetailInfo={orderDetailInfo}
+            />
           </section>
 
           <OrderTableInfoSection {...orderDetailInfo} className="py-3xl" />

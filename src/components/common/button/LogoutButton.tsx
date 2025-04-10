@@ -1,11 +1,24 @@
 'use client';
 
-import { PATH_NAME } from '@/constants';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { AUTH_QUERY_KEY, PATH_NAME, QUERY_KEYS_ENDPOINT } from '@/constants';
+import { signoutAction } from '@/server-actions';
 import ClickTextButton from './ClickTextButton';
 
 const LogoutButton = () => {
-  const handleLogout = () => {
-    console.log('logout completed'); // 추후 로그아웃 기능 추가
+  const queryClient = useQueryClient();
+
+  const handleLogout = async () => {
+    await signoutAction();
+
+    queryClient.setQueryData(
+      [QUERY_KEYS_ENDPOINT.MEMBERS, AUTH_QUERY_KEY.MEMBER_DATA],
+      null,
+    );
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS_ENDPOINT.MEMBERS, AUTH_QUERY_KEY.MEMBER_DATA],
+    });
   };
 
   return (

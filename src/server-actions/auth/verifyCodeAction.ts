@@ -1,8 +1,10 @@
 'use server';
 
-import { verifyEmailSchema } from '@/schemas';
 import { verifyCode } from '@/services';
+import { verifyEmailSchema } from '@/schemas';
 import type { EmailVerificationState } from '@/types';
+import { handleServerError } from './handleServerError';
+import { handleValidationError } from './handleValidationError';
 
 export const verifyCodeAction = async (
   prevState: EmailVerificationState,
@@ -17,14 +19,12 @@ export const verifyCodeAction = async (
       verify: verificationCode,
     });
 
-    if (!validatedData.success)
-      return {
-        ...prevState,
-        success: false,
-        emailVerified: false,
-        codeVerified: false,
-        error: validatedData.error.errors[0].message,
-      };
+    if (!validatedData.success) {
+      return await handleValidationError(validatedData.error, prevState, {
+        isEmailVerified: true,
+        isCodeVerified: false,
+      });
+    }
 
     const response = await verifyCode(
       validatedData.data?.email || '',
@@ -33,19 +33,12 @@ export const verifyCodeAction = async (
 
     return {
       ...prevState,
-      success: true,
-      emailVerified: true,
-      codeVerified: true,
+      isSuccess: true,
+      isEmailVerified: true,
+      isCodeVerified: true,
       message: response.message,
     };
   } catch (error) {
-    console.error(error); // 📌 추후에 서버 에러 처리 예정!
-
-    return {
-      ...prevState,
-      success: false,
-      codeVerified: false,
-      error: '인증 코드 확인 중 오류가 발생했습니다.',
-    };
+    return await handleServerError(error, prevState);
   }
 };

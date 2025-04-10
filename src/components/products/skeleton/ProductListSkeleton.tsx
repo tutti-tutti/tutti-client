@@ -24,7 +24,7 @@ const ProductItemSkeleton = () => {
 
 const ProductListSkeleton = () => {
   return (
-    <ul className="gap-x-md gap-y-6xl grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+    <ul className="gap-x-md gap-y-6xl grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
       {Array(9)
         .fill(0)
         .map((_, index) => (

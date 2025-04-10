@@ -1,14 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ProductItem } from '@/components';
-import type { Product } from '@/types';
+import type { Product, ProductReviewInfo } from '@/types';
+
+const ProductItemWithReview = (props: Product) => {
+  const reviewInfo: ProductReviewInfo = {
+    productId: props.productId,
+    avg: '4.5',
+    totalCount: 42,
+  };
+
+  return <ProductItem {...props} reviewInfo={reviewInfo} />;
+};
 
 const ProductListMock = ({ products }: { products: Product[] }) => {
   return (
     <section>
       <ul className="gap-x-md gap-y-7xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {products.map(item => (
-          <ProductItem key={item.productId} {...item} />
+          <ProductItemWithReview key={item.productId} {...item} />
         ))}
       </ul>
     </section>

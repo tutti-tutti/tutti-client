@@ -6,5 +6,3 @@ export const requestVerifySchema = z.object({
   email: authSchema.shape.email,
   type: authSchema.shape.type,
 });
-
-export type VerifyEmailFormData = z.infer<typeof requestVerifySchema>;

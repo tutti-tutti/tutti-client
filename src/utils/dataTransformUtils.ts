@@ -66,10 +66,12 @@ export const getGroupOrderItemsByOrderId = (
     return acc;
   }, {});
 
-  return Object.entries(groupedByOrderId).map(([orderId, data]) => ({
-    orderId: Number(orderId),
-    orderStatus: data.orderStatus,
-    orderNumber: data.orderNumber,
-    items: data.items,
-  }));
+  return Object.entries(groupedByOrderId)
+    .sort((a, b) => Number(b[0]) - Number(a[0])) // orderId 기준 내림차순 정렬
+    .map(([orderId, data]) => ({
+      orderId: Number(orderId),
+      orderStatus: data.orderStatus,
+      orderNumber: data.orderNumber,
+      items: data.items,
+    }));
 };

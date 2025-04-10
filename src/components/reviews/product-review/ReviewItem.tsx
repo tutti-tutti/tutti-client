@@ -16,9 +16,10 @@ interface ReviewItemProps {
   sentimentProbability: number;
   createdAt: string;
   liked?: boolean;
+  isLogin: boolean;
 }
 
-const ReviewItem = ({ ...review }: ReviewItemProps) => {
+const ReviewItem = ({ isLogin, ...review }: ReviewItemProps) => {
   const reviewBadgeText =
     review.sentiment === 'positive'
       ? '긍정적인 반응을 보이는 리뷰에요'
@@ -48,7 +49,11 @@ const ReviewItem = ({ ...review }: ReviewItemProps) => {
         >
           {reviewBadgeText}
         </ReviewBadge>
-        <ReviewLikeButton liked={review.liked} id={review.id} />
+        <ReviewLikeButton
+          isLogin={isLogin}
+          liked={review.liked}
+          id={review.id}
+        />
       </div>
     </div>
   );

@@ -26,13 +26,17 @@ export const AUTH_ENDPOINTS = {
   MYPAGE: `${API_RESOURCES.MEMBERS}/mypage`,
   SOCIAL_LOGIN: `${API_RESOURCES.MEMBERS}/social`,
   TERMS: `${API_RESOURCES.MEMBERS}/terms`,
+  UPDATE_ACCESS_TOKEN: `${API_RESOURCES.MEMBERS}/update-token`,
 };
 
 export const PRODUCTS_ENDPOINTS = {
   LIST: `${API_RESOURCES.PRODUCTS}`,
   LATEST: `${API_RESOURCES.PRODUCTS}/latest-list`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
+  DETAIL_REVIEWS: (productId: string) =>
+    `${API_RESOURCES.PRODUCTS}/${productId}#product-review`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
+  PAGINATION: `${API_RESOURCES.PRODUCTS}/latest-list/page`,
 };
 
 export const CART_ENDPOINTS = {

@@ -1,4 +1,4 @@
-import { cn, formatPrice } from '@/utils';
+import { cn, formatPrice, formatAfterDays } from '@/utils';
 
 interface ProductAmoutInfoProps {
   price: number;
@@ -22,7 +22,9 @@ const ProductAmoutInfo = ({
         {quantity} 개
       </span>
       <strong className="text-text-primaryInteraction text-base font-semibold md:text-lg">
-        {expectedArrivalAt}
+        {expectedArrivalAt
+          ? formatAfterDays(expectedArrivalAt)
+          : '배송일 알 수 없음'}
       </strong>
     </div>
   );

@@ -80,3 +80,5 @@ export interface OrderDetailResponseAPISchema {
   note: string;
   storeName: string;
 }
+
+export type OrderStatus = 'CANCELED' | 'DONE' | 'READY';

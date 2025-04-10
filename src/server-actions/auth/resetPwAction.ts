@@ -1,13 +1,15 @@
 'use server';
 
-import { resetPwSchema } from '@/schemas';
 import { resetPw } from '@/services';
+import { resetPwSchema } from '@/schemas';
 import type { EmailVerificationState } from '@/types';
+import { handleValidationError } from './handleValidationError';
+import { handleServerError } from './handleServerError';
 
 export const resetPwAction = async (
   prevState: EmailVerificationState,
   formData: FormData,
-) => {
+): Promise<EmailVerificationState> => {
   try {
     const email = formData.get('email');
     const pw = formData.get('pw');
@@ -20,26 +22,10 @@ export const resetPwAction = async (
     });
 
     if (!validatedData.success) {
-      const fieldErrors = {
-        emailError: '',
-        pwError: '',
-        checkPwError: '',
-      };
-
-      validatedData.error.errors.forEach(error => {
-        const field = error.path[0];
-        const errorMessage = error.message;
-
-        if (field === 'email') fieldErrors.emailError = errorMessage;
-        else if (field === 'pw') fieldErrors.pwError = errorMessage;
-        else if (field === 'checkPw') fieldErrors.checkPwError = errorMessage;
+      return await handleValidationError(validatedData.error, prevState, {
+        pw: pw as string,
+        checkPw: checkPw as string,
       });
-
-      return {
-        ...prevState,
-        success: false,
-        ...fieldErrors,
-      };
     }
 
     await resetPw(
@@ -50,14 +36,9 @@ export const resetPwAction = async (
 
     return {
       ...prevState,
-      success: false,
+      isSuccess: true,
     };
   } catch (error) {
-    console.error(error); // 📌 추후에 서버 에러 처리 예정!
-
-    return {
-      success: false,
-      error: '비밀번호 재설정 중 오류가 발생했습니다.',
-    };
+    return await handleServerError(error, prevState);
   }
 };

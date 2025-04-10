@@ -1,31 +1,37 @@
 'use client';
 
 import Link from 'next/link';
-
-import { requestRefundPayment } from '@/services';
 import { ROUTER_PATH } from '@/constants';
+import { useRefundMutation } from '@/hooks';
 import { Icon, ExtraButton } from '@/components';
 
-interface OrderHistoryListGroupProps {
+interface OrderHistoryListGroupHeaderProps {
   orderId: number;
   orderNumber: string;
+  isCanceled: boolean;
 }
 
-const OrderHistoryListGroup = ({
+const OrderHistoryListGroupHeader = ({
   orderId,
   orderNumber,
-}: OrderHistoryListGroupProps) => {
-  const handleCancelOrder = async () => {
-    await requestRefundPayment({
-      orderNumber,
-      cancelReason: '',
+  isCanceled,
+}: OrderHistoryListGroupHeaderProps) => {
+  const { isPending, handleCancelOrder } = useRefundMutation();
+
+  const onCancelOrder = () => {
+    if (isPending) return;
+
+    handleCancelOrder(orderNumber, {
+      confirmMessage:
+        '주문 번호의 전체 상품 주문이 취소됩니다. 진행 하시겠습니까?',
     });
   };
 
   return (
     <header className="flex w-full items-center justify-between">
       <div className="gap-xs flex items-center text-xl">
-        <strong>주문번호 {orderId}</strong>
+        {/**TODO - 주문내역 API 응답 값에 주문일자가 포함될 경우 적용 */}
+        {/* <strong>주문 일자 {}</strong> */}
         <Link
           href={ROUTER_PATH.ORDERS_DETAIL(orderId)}
           className="text-text-info flex items-center"
@@ -33,10 +39,17 @@ const OrderHistoryListGroup = ({
           주문 상세 보기 <Icon iconName="right" />
         </Link>
       </div>
-
-      <ExtraButton onClick={handleCancelOrder}>전체 주문 취소</ExtraButton>
+      {!isCanceled ? (
+        <ExtraButton onClick={onCancelOrder}>
+          {isPending ? '처리 중...' : '전체 주문 취소'}
+        </ExtraButton>
+      ) : (
+        <span className="text-text-disabled inline-flex items-center">
+          해당 주문이 전체 취소되었습니다
+        </span>
+      )}
     </header>
   );
 };
 
-export default OrderHistoryListGroup;
+export default OrderHistoryListGroupHeader;

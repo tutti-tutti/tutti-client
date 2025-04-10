@@ -16,7 +16,7 @@ export const fetchRecommededProducts = async () => {
 
 export const fetchProductById = async (productId: string): Promise<Product> => {
   const endpoint = PRODUCTS_ENDPOINTS.DETAIL(productId);
-  const response = await axiosInstance.get(endpoint);
+  const response = await staticAxios.get(endpoint);
 
   return response.data;
 };

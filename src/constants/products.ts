@@ -36,6 +36,10 @@ export const PRODUCTS_CONSTANTS = {
   RELEASE_DATE: '출시년일',
 };
 
+export const PRODUCT_API_ROUTE_MESSAGE = {
+  PRODUCT_NOT_FOUND: '상품을 찾을 수 없습니다.',
+};
+
 export const PRODUCT_LIST_LAYOUT_CONFIG = {
   mobile: { columns: 1, estimatedSize: 200, gap: 24, overscan: 10 },
   tablet: { columns: 3, estimatedSize: 424, gap: 80, overscan: 5 },

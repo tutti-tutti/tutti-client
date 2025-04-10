@@ -24,6 +24,7 @@ export const ORDER_CONSTANT = {
     PENDING: '처리 중...',
     DELIVERY_TRACKING: '배송 조회',
   },
+  ORDER: '주문',
   ORDER_SHEET_NO: '주문번호',
   ORDER_DATE: '주문 일자',
   EXPECTED_SHIPPING: '도착 예정',

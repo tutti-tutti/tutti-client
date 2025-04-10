@@ -68,7 +68,7 @@ export interface OrderDetailResponseAPISchema {
   deliveryFee: number;
   totalAmount: number;
   paymentType: string;
-  orderedAt: string;
+  createdAt: string;
   paidAt: string;
   deliveredAt: string;
   completedAt: string;

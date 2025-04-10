@@ -35,7 +35,15 @@ const ProductActions = ({
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const orderProductItems = [{ productItemId, quantity }];
+  const mapToItems = () =>
+    selectedOptionItems.length > 0
+      ? selectedOptionItems.map(item => ({
+          productItemId: item.option.productItemId,
+          quantity: item.quantity,
+        }))
+      : [{ productItemId, quantity }];
+
+  const orderProductItems = mapToItems();
 
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(orderProductItems),
@@ -66,24 +74,19 @@ const ProductActions = ({
 
   const handleAddCart = async () => {
     try {
-      if (selectedOptionItems.length > 0) {
-        const cartItems = selectedOptionItems.map(item => ({
-          productItemId: item.option.productItemId,
-          quantity: item.quantity,
-        }));
+      const cartItems = mapToItems();
 
-        const result = await addCart(productId, cartItems);
+      const result = await addCart(productId, cartItems);
 
-        if (result.success) {
-          toast.success(result.message || ADD_SUCCESS_MESSAGE);
+      if (result.success) {
+        toast.success(result.message || ADD_SUCCESS_MESSAGE);
 
-          await queryClient.invalidateQueries({
-            queryKey: cartQueryOptions.queryKey,
-          });
-          await queryClient.prefetchQuery(cartQueryOptions);
-        } else {
-          toast.error(result.message || ADD_FAIL_MESSAGE);
-        }
+        await queryClient.invalidateQueries({
+          queryKey: cartQueryOptions.queryKey,
+        });
+        await queryClient.prefetchQuery(cartQueryOptions);
+      } else {
+        toast.error(result.message || ADD_FAIL_MESSAGE);
       }
     } catch (error) {
       console.error(ADD_FAIL_MESSAGE, error);

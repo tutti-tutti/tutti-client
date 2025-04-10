@@ -1,7 +1,8 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { ROUTER_PATH } from '@/constants';
+
+import { ROUTER_PATH, ORDER_CONSTANT, REVIEW_CONSTANTS } from '@/constants';
 import { ExtraButton } from '@/components';
 
 interface OrdersExtraActionsProps {
@@ -23,11 +24,14 @@ const OrdersExtraActions = ({
   return (
     <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
-        주문번호 : {orderNumber}
+        {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderNumber}
       </div>
+
       {!isCanceled && (
         <div className="gap-xs flex justify-end">
-          <ExtraButton onClick={handleWriteReview}>리뷰 작성</ExtraButton>
+          <ExtraButton onClick={handleWriteReview}>
+            {REVIEW_CONSTANTS.CREATE.LABEL}
+          </ExtraButton>
         </div>
       )}
     </article>

@@ -1,3 +1,4 @@
+import { ORDER_CONSTANT } from '@/constants';
 import { cn, formatPrice, formatAfterDays } from '@/utils';
 
 interface ProductAmoutInfoProps {
@@ -24,7 +25,7 @@ const ProductAmoutInfo = ({
       <strong className="text-text-primaryInteraction text-base font-semibold md:text-lg">
         {expectedArrivalAt
           ? formatAfterDays(expectedArrivalAt)
-          : '배송일 알 수 없음'}
+          : ORDER_CONSTANT.MESSAGE.NOT_FOUND_EXPECTED_SHIPPING_DATE}
       </strong>
     </div>
   );

@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 
+import { ORDER_CONSTANT } from '@/constants';
 import { requestRefundPayment } from '@/services';
+
+const { ERROR_MESSAGES } = ORDER_CONSTANT;
 
 export const POST = async (request: Request) => {
   try {
@@ -10,7 +13,7 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('환불 요청 생성 중 오류가 발생했습니다: api route', error);
+    console.error(`${ERROR_MESSAGES.REFUND}: api route`, error);
 
     const status =
       error instanceof Error && 'status' in error

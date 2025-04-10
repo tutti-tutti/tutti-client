@@ -3,6 +3,7 @@ import {
   formatDateWithDay,
   getGroupedOrderItemsByExpectedArrivalAt,
 } from '@/utils';
+import { ORDER_CONSTANT } from '@/constants';
 import type { OrderItem } from '@/types';
 import { default as OrderProductList } from './OrderProductList';
 
@@ -23,7 +24,7 @@ const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
               <strong className="text-text-info">
                 {formatDateWithDay(expectedArrivalAt)}
               </strong>
-              <span>도착 예정</span>
+              <span>{ORDER_CONSTANT.EXPECTED_SHIPPING}</span>
             </div>
             <OrderProductList orderItems={items} gapStyles={gapStyles} />
           </article>

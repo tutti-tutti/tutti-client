@@ -79,3 +79,23 @@ export const formatDateWithKorean = (dateString: string | Date): string => {
 
   return `${year}년 ${month}월 ${day}일`;
 };
+
+/**
+ * 'yyyy-mm-dd' 형식의 날짜 문자열을 특정 구분자 형식으로 반환하는 함수
+ * @param dateString 'yyyy-mm-dd' 형식의 날짜
+ * @returns 'yyyy년 mm월 dd일' 형식의 문자열
+ */
+export const formatDateWithSeparator = (
+  dateString: string | Date,
+  separator: string,
+): string => {
+  if (!dateString) return '';
+
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}${separator}${month}${separator}${day}`;
+};

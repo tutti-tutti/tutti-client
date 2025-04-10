@@ -6,3 +6,4 @@ export { default as OrderHistoryListGroupHeader } from './OrderHistoryListGroupH
 export { default as OrderHistoryClientWrapper } from './OrderHistoryClientWrapper';
 export { default as OrderDetailClientWrapper } from './OrderDetailClientWrapper';
 export { default as OrderDetailListGroupHeader } from './OrderDetailListGroupHeader';
+export { default as OrderGroupHeader } from './OrderGroupHeader';

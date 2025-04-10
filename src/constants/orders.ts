@@ -26,7 +26,7 @@ export const ORDER_CONSTANT = {
   },
   ORDER: '주문',
   ORDER_SHEET_NO: '주문번호',
-  ORDER_DATE: '주문 일자',
+  ORDER_DATE: '주문일',
   EXPECTED_SHIPPING: '도착 예정',
 };
 

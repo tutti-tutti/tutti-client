@@ -3,15 +3,18 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchOrderDetail } from '@/services';
-import { cn } from '@/utils';
+import { cn, formatDateWithSeparator } from '@/utils';
+import { ORDER_CONSTANT } from '@/constants';
 import type { OrderDetailResponseAPISchema } from '@/types';
-import { OrderDetailListGroupHeader, OrderHistoryList } from '@/components';
+import { OrderGroupHeader, OrderHistoryList } from '@/components';
 
 interface OrderDetailClientWrapperProps {
   orderId: number;
   initialOrderDetailInfo: OrderDetailResponseAPISchema;
   className?: string;
 }
+
+const { ORDER_DATE, ORDER_SHEET_NO } = ORDER_CONSTANT;
 
 const OrderDetailClientWrapper = ({
   orderId,
@@ -28,12 +31,22 @@ const OrderDetailClientWrapper = ({
 
   return (
     <section className={cn('bg-bg-tertiary px-5xl rounded-md', className)}>
-      <OrderDetailListGroupHeader
+      <OrderGroupHeader
         orderId={orderId}
         orderNumber={orderNumber}
-        createdAt={createdAt}
         isCanceled={orderStatus === 'CANCELED'}
-      />
+      >
+        <h2 className="gap-sm flex">
+          <span>
+            {ORDER_DATE} : {formatDateWithSeparator(createdAt, '.')}
+          </span>
+
+          <span className="text-text-tertiary">
+            {ORDER_SHEET_NO} : {orderNumber}
+          </span>
+        </h2>
+      </OrderGroupHeader>
+
       <OrderHistoryList
         orderId={orderId}
         orderNumber={orderNumber}

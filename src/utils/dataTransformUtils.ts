@@ -50,13 +50,19 @@ export const getGroupOrderItemsByOrderId = (
   const groupedByOrderId = orderHistoryItems.reduce<
     Record<
       number,
-      { orderStatus: string; orderNumber: string; items: OrderItem[] }
+      {
+        orderStatus: string;
+        orderNumber: string;
+        createdAt: string;
+        items: OrderItem[];
+      }
     >
   >((acc, item) => {
     if (!acc[item.orderId]) {
       acc[item.orderId] = {
         orderStatus: item.orderStatus,
         orderNumber: item.orderNumber,
+        createdAt: item.createdAt,
         items: [],
       };
     }
@@ -72,6 +78,7 @@ export const getGroupOrderItemsByOrderId = (
       orderId: Number(orderId),
       orderStatus: data.orderStatus,
       orderNumber: data.orderNumber,
+      createdAt: data.createdAt,
       items: data.items,
     }));
 };

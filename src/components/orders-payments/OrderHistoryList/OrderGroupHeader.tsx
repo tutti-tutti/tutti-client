@@ -1,25 +1,24 @@
 'use client';
 
-import { formatDateWithSeparator } from '@/utils';
 import { ORDER_CONSTANT } from '@/constants';
 import { useRefundMutation } from '@/hooks';
 import { ExtraButton } from '@/components';
 
-interface OrderDetailListGroupHeaderProps {
+interface OrderGroupHeaderProps {
   orderId: number;
   orderNumber: string;
-  createdAt: string;
   isCanceled: boolean;
+  children: React.ReactNode;
 }
 
-const { MESSAGE, ORDER_DATE, TEXT_BUTTON, ORDER_SHEET_NO } = ORDER_CONSTANT;
+const { MESSAGE, TEXT_BUTTON } = ORDER_CONSTANT;
 
-const OrderDetailListGroupHeader = ({
+const OrderGroupHeader = ({
   orderId,
   orderNumber,
-  createdAt,
   isCanceled,
-}: OrderDetailListGroupHeaderProps) => {
+  children,
+}: OrderGroupHeaderProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation(orderId);
 
   const onCancelOrder = () => {
@@ -32,15 +31,7 @@ const OrderDetailListGroupHeader = ({
 
   return (
     <header className="flex w-full items-center justify-between">
-      <h2 className="gap-sm flex">
-        <span>
-          {ORDER_DATE} : {formatDateWithSeparator(createdAt, '.')}
-        </span>
-
-        <span className="text-text-tertiary">
-          {ORDER_SHEET_NO} : {orderNumber}
-        </span>
-      </h2>
+      {children}
 
       {!isCanceled ? (
         <ExtraButton onClick={onCancelOrder}>
@@ -55,4 +46,4 @@ const OrderDetailListGroupHeader = ({
   );
 };
 
-export default OrderDetailListGroupHeader;
+export default OrderGroupHeader;

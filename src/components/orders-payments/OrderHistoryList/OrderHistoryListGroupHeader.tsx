@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { formatDateWithSeparator } from '@/utils';
 import { ROUTER_PATH, ORDER_CONSTANT } from '@/constants';
 import { useRefundMutation } from '@/hooks';
 import { Icon, ExtraButton } from '@/components';
@@ -9,6 +10,7 @@ import { Icon, ExtraButton } from '@/components';
 interface OrderHistoryListGroupHeaderProps {
   orderId: number;
   orderNumber: string;
+  createdAt: string;
   isCanceled: boolean;
 }
 
@@ -17,6 +19,7 @@ const { MESSAGE, TEXT_LINK, TEXT_BUTTON } = ORDER_CONSTANT;
 const OrderHistoryListGroupHeader = ({
   orderId,
   orderNumber,
+  createdAt,
   isCanceled,
 }: OrderHistoryListGroupHeaderProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation(orderId);
@@ -32,8 +35,7 @@ const OrderHistoryListGroupHeader = ({
   return (
     <header className="flex w-full items-center justify-between">
       <div className="gap-xs flex items-center text-xl">
-        {/**TODO - 주문내역 API 응답 값에 주문일자가 포함될 경우 적용 */}
-        {/* <strong>{ORDER_DATE} {}</strong> */}
+        <strong>{formatDateWithSeparator(createdAt, '.')}</strong>
 
         <Link
           href={ROUTER_PATH.ORDERS_DETAIL(orderId)}

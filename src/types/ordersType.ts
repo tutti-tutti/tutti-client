@@ -45,6 +45,7 @@ export interface OrderHistoryItem {
   orderId: number;
   orderNumber: string;
   orderName: string;
+  createdAt: string;
   completedAt: string;
   totalAmount: number;
   orderStatus: string;
@@ -56,6 +57,7 @@ export interface GroupedOrderItemByOrderId {
   orderId: number;
   orderStatus: string;
   orderNumber: string;
+  createdAt: string;
   items: OrderItem[];
 }
 

@@ -1,12 +1,19 @@
 import { NextResponse } from 'next/server';
 
 import { axiosInstance } from '@/lib';
-import { CART_ENDPOINTS } from '@/constants';
+import { CART_API_ROUTE_MESSAGE, CART_ENDPOINTS } from '@/constants';
 import { getAccessToken } from '@/services';
 
 interface Params {
   params: Promise<{ cartItemId: number }>;
 }
+
+const {
+  NEED_LOGIN,
+  NEED_CART_ITEM_ID,
+  PATCH_SUCCESS_MESSAGE,
+  PATCH_FAIL_MESSAGE,
+} = CART_API_ROUTE_MESSAGE;
 
 export const PATCH = async (_request: Request, { params }: Params) => {
   const { cartItemId } = await params;
@@ -15,14 +22,14 @@ export const PATCH = async (_request: Request, { params }: Params) => {
     const accessToken = await getAccessToken();
     if (!accessToken) {
       return NextResponse.json(
-        { success: false, message: '로그인이 필요합니다.' },
+        { success: false, message: NEED_LOGIN },
         { status: 401 },
       );
     }
 
     if (!cartItemId) {
       return NextResponse.json(
-        { success: false, message: '장바구니 아이템 ID가 필요합니다.' },
+        { success: false, message: NEED_CART_ITEM_ID },
         { status: 400 },
       );
     }
@@ -31,15 +38,14 @@ export const PATCH = async (_request: Request, { params }: Params) => {
 
     return NextResponse.json({
       success: true,
-      message: '상품이 삭제되었습니다.',
+      message: PATCH_SUCCESS_MESSAGE,
     });
   } catch (error) {
-    console.error('장바구니 상품 삭제에 실패했습니다.', error);
+    console.error(PATCH_FAIL_MESSAGE, error);
     return NextResponse.json(
       {
         success: false,
-        message:
-          (error as Error).message || '장바구니 상품 삭제에 실패했습니다.',
+        message: (error as Error).message || PATCH_FAIL_MESSAGE,
       },
       { status: 500 },
     );

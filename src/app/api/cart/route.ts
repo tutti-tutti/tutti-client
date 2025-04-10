@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { addCart, fetchCart } from '@/services';
+import { CART_API_ROUTE_MESSAGE, CART_CONSTANTS } from '@/constants';
 
 export const GET = async () => {
   try {
@@ -24,7 +25,7 @@ export const POST = async (request: Request) => {
       body.cartItems.length === 0
     ) {
       return NextResponse.json(
-        { message: 'cartItems가 필요합니다.' },
+        { message: CART_API_ROUTE_MESSAGE.NEED_CART_ITEMS },
         { status: 400 },
       );
     }
@@ -32,7 +33,7 @@ export const POST = async (request: Request) => {
     for (const cartItem of body.cartItems) {
       if (!cartItem.productItemId || !cartItem.quantity) {
         return NextResponse.json(
-          { message: '모든 항목에 productItemId와 quantity가 필요합니다.' },
+          { message: CART_API_ROUTE_MESSAGE.NEED_PRODUCT_INFO },
           { status: 400 },
         );
       }
@@ -42,7 +43,7 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json({
       success: true,
-      message: '장바구니에 추가되었습니다.',
+      message: CART_CONSTANTS.ADD_SUCCESS_MESSAGE,
       data: products,
     });
   } catch (error) {

@@ -39,3 +39,12 @@ export const CART_CONSTANTS = {
   TOTAL_PAYMENT: '총 결제 예정금액',
   PAYMENT: '결제하기',
 };
+
+export const CART_API_ROUTE_MESSAGE = {
+  NEED_CART_ITEMS: 'cartItems가 필요합니다.',
+  NEED_PRODUCT_INFO: '모든 항목에 productItemId와 quantity가 필요합니다.',
+  NEED_LOGIN: '로그인이 필요합니다.',
+  NEED_CART_ITEM_ID: '장바구니 아이템 ID가 필요합니다.',
+  PATCH_SUCCESS_MESSAGE: '해당 상품이 삭제되었습니다.',
+  PATCH_FAIL_MESSAGE: '장바구니 상품 삭제에 실패했습니다.',
+};

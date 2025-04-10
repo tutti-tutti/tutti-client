@@ -12,11 +12,12 @@ interface OrderDetailListGroupHeaderProps {
 }
 
 const OrderDetailListGroupHeader = ({
+  orderId,
   orderNumber,
   orderedAt,
   isCanceled,
 }: OrderDetailListGroupHeaderProps) => {
-  const { isPending, handleCancelOrder } = useRefundMutation();
+  const { isPending, handleCancelOrder } = useRefundMutation(orderId);
 
   const onCancelOrder = () => {
     if (isPending) return;

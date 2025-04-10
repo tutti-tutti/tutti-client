@@ -16,7 +16,7 @@ const OrderHistoryListGroupHeader = ({
   orderNumber,
   isCanceled,
 }: OrderHistoryListGroupHeaderProps) => {
-  const { isPending, handleCancelOrder } = useRefundMutation();
+  const { isPending, handleCancelOrder } = useRefundMutation(orderId);
 
   const onCancelOrder = () => {
     if (isPending) return;
@@ -39,6 +39,7 @@ const OrderHistoryListGroupHeader = ({
           주문 상세 보기 <Icon iconName="right" />
         </Link>
       </div>
+
       {!isCanceled ? (
         <ExtraButton onClick={onCancelOrder}>
           {isPending ? '처리 중...' : '전체 주문 취소'}

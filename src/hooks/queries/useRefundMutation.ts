@@ -3,36 +3,29 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { requestRefundPayment } from '@/services';
-import type { OrderHistoryItem, OrderDetailResponseAPISchema } from '@/types';
-
-interface CancelPaymentParams {
-  orderNumber: string;
-  cancelReason: string;
-}
+import type {
+  OrderHistoryItem,
+  OrderDetailResponseAPISchema,
+  RefundRequestAPISSchema,
+} from '@/types';
 
 interface MutationContext {
   previousOrders?: OrderHistoryItem[];
   previousOrderDetail?: OrderDetailResponseAPISchema;
-  orderId?: number;
+  orderId: number;
 }
 
-/**
- * 결제 취소/환불 처리를 위한 커스텀 훅
- * @param orderId 주문 ID (주문 상세 페이지에서 사용 시 필요)
- * @returns mutation 객체 및 취소 처리 핸들러
- */
-export const useRefundMutation = (orderId?: number) => {
+export const useRefundMutation = (orderId: number) => {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: CancelPaymentParams) => requestRefundPayment(data),
+    mutationFn: (payload: RefundRequestAPISSchema) =>
+      requestRefundPayment(payload),
 
     onMutate: async (variables): Promise<MutationContext> => {
       // 진행 중인 쿼리 취소
       await queryClient.cancelQueries({ queryKey: ['orders'] });
-      if (orderId) {
-        await queryClient.cancelQueries({ queryKey: ['order', orderId] });
-      }
+      await queryClient.cancelQueries({ queryKey: ['order', orderId] });
 
       // 주문 목록 스냅샷 저장
       const previousOrders = queryClient.getQueryData<OrderHistoryItem[]>([
@@ -92,17 +85,10 @@ export const useRefundMutation = (orderId?: number) => {
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['orders'] });
-      if (orderId) {
-        queryClient.invalidateQueries({ queryKey: ['order', orderId] });
-      }
+      queryClient.invalidateQueries({ queryKey: ['order', orderId] });
     },
   });
 
-  /**
-   * 주문 취소 처리 핸들러
-   * @param orderNumber 주문 번호
-   * @param options 추가 옵션 (취소 사유)
-   */
   const handleCancelOrder = (
     orderNumber: string,
     options: {

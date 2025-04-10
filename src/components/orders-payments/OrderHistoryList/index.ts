@@ -5,3 +5,4 @@ export { default as OrdersExtraActions } from './OrdersExtraActions';
 export { default as OrderHistoryListGroupHeader } from './OrderHistoryListGroupHeader';
 export { default as OrderHistoryClientWrapper } from './OrderHistoryClientWrapper';
 export { default as OrderDetailClientWrapper } from './OrderDetailClientWrapper';
+export { default as OrderDetailListGroupHeader } from './OrderDetailListGroupHeader';

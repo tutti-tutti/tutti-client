@@ -22,7 +22,7 @@ const createFetchAdaptedAxios = (
 ): AxiosInstance => {
   const configs = {
     adapter: 'fetch',
-    fetchOptions: { cache: 'force-cache', next: { revalidate: 3600 } },
+    fetchOptions: { cache: 'no-store' },
     ...config,
   };
   return axios.create(configs);

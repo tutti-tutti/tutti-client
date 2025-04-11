@@ -1,5 +1,5 @@
 import type { IconType } from '@/types';
-import Icon from '../Icon';
+import Icon from '../../common/Icon';
 
 interface NavIconProps {
   icon: IconType;

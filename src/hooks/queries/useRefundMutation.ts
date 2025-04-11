@@ -60,7 +60,7 @@ export const useRefundMutation = (orderId: number) => {
             if (!old) return old;
 
             return old.map(order => {
-              if (order.orderNumber === variables.orderNumber) {
+              if (order.orderSheetNo === variables.orderSheetNo) {
                 return { ...order, orderStatus: CANCELED };
               }
               return order;
@@ -110,7 +110,7 @@ export const useRefundMutation = (orderId: number) => {
   });
 
   const handleCancelOrder = (
-    orderNumber: string,
+    orderSheetNo: string,
     options: {
       cancelReason?: string;
       confirmMessage?: string;
@@ -132,7 +132,7 @@ export const useRefundMutation = (orderId: number) => {
     }
 
     if (confirm(finalConfirmMessage)) {
-      mutate({ orderNumber, cancelReason });
+      mutate({ orderSheetNo, cancelReason });
     }
   };
 

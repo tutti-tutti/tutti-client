@@ -1,7 +1,7 @@
 const orderHistoryList = [
   {
     orderId: 1,
-    orderNumber: '1',
+    orderSheetNo: '1',
     orderName: '상품명',
     completedAt: '배송 완료일',
     totalAmount: 3,
@@ -71,7 +71,7 @@ const orderHistoryList = [
   },
   {
     orderId: 2,
-    orderNumber: '2',
+    orderSheetNo: '2',
     orderName: '상품명',
     completedAt: '배송 완료일',
     totalAmount: 3,

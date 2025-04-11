@@ -15,7 +15,7 @@ import { default as OrdersExtraActions } from './OrdersExtraActions';
 
 type OrderProductListProps = {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   orderItems: OrderItem[];
   orderStatus: string;
 };
@@ -28,7 +28,7 @@ const INFO_COLUMN_STYLES = 'w-full md:w-full';
 
 const OrderHistoryList = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   orderItems,
   orderStatus,
 }: OrderProductListProps) => {
@@ -85,7 +85,7 @@ const OrderHistoryList = ({
 
                   <OrdersExtraActions
                     orderId={orderId}
-                    orderNumber={orderNumber}
+                    orderSheetNo={orderSheetNo}
                     productItemId={item.productItemId}
                     isCanceled={orderStatus === CANCELED}
                   />
@@ -95,7 +95,7 @@ const OrderHistoryList = ({
                 <OrdersActions
                   orderId={orderId}
                   itemsCount={itemsCount}
-                  orderNumber={orderNumber}
+                  orderSheetNo={orderSheetNo}
                   isCanceled={orderStatus === CANCELED}
                 />
               </div>
@@ -112,7 +112,7 @@ const OrderHistoryList = ({
               <OrdersActions
                 orderId={orderId}
                 itemsCount={itemsCount}
-                orderNumber={orderNumber}
+                orderSheetNo={orderSheetNo}
                 isCanceled={orderStatus === CANCELED}
               />
             </div>

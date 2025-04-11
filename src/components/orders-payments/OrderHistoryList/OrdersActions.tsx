@@ -7,7 +7,7 @@ import { Button } from '@/components';
 
 interface OrdersActionsProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   itemsCount: number;
   isCanceled?: boolean;
   className?: string;
@@ -19,7 +19,7 @@ const BUTTON_STYLES = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
 
 const OrdersActions = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   itemsCount,
   isCanceled = false,
   className,
@@ -29,7 +29,7 @@ const OrdersActions = ({
   const handleCancelPartialOrder = () => {
     if (isPending) return;
 
-    handleCancelOrder(orderNumber, {
+    handleCancelOrder(orderSheetNo, {
       itemsCount,
       confirmMessage:
         itemsCount > 1

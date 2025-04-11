@@ -3,24 +3,24 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { QUERY_KEYS_ENDPOINT } from '@/constants';
-import { fetchOrderHistoryList } from '@/services';
-import type { OrderHistoryItem } from '@/types';
+import { fetchOrderHistory } from '@/services';
+import type { OrderHistoryListResponseAPISchema } from '@/types';
 import { OrderHistoryListGroup } from '@/components';
 
 interface OrderHistoryClientWrapperProps {
-  initialOrderHistoryList: OrderHistoryItem[];
+  initialOrderHistory: OrderHistoryListResponseAPISchema;
 }
 
 const OrderHistoryClientWrapper = ({
-  initialOrderHistoryList,
+  initialOrderHistory,
 }: OrderHistoryClientWrapperProps) => {
-  const { data: orderHistoryList } = useQuery({
+  const { data: orderHistory } = useQuery({
     queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
-    queryFn: fetchOrderHistoryList,
-    initialData: initialOrderHistoryList,
+    queryFn: fetchOrderHistory,
+    initialData: initialOrderHistory,
   });
 
-  return <OrderHistoryListGroup orderHistoryList={orderHistoryList} />;
+  return <OrderHistoryListGroup orderHistoryList={orderHistory.content} />;
 };
 
 export default OrderHistoryClientWrapper;

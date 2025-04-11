@@ -5,19 +5,19 @@ import { Icon } from '@/components';
 
 interface OrderHistoryListGroupProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
 }
 
 const { ORDER_SHEET_NO, TEXT_LINK } = ORDER_CONSTANT;
 
 const OrderIdHeading = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
 }: OrderHistoryListGroupProps) => {
   return (
     <div className="gap-xs flex items-center text-xl">
       <strong>
-        {ORDER_SHEET_NO} {orderNumber}
+        {ORDER_SHEET_NO} {orderSheetNo}
       </strong>
       <Link
         href={ROUTER_PATH.ORDERS_DETAIL(orderId)}

@@ -4,14 +4,14 @@ import { AllCancelButton } from '@/components';
 
 interface OrderGroupHeaderProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   isCanceled: boolean;
   children: React.ReactNode;
 }
 
 const OrderGroupHeader = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   isCanceled,
   children,
 }: OrderGroupHeaderProps) => {
@@ -21,7 +21,7 @@ const OrderGroupHeader = ({
 
       <AllCancelButton
         orderId={orderId}
-        orderNumber={orderNumber}
+        orderSheetNo={orderSheetNo}
         isCanceled={isCanceled}
       />
     </header>

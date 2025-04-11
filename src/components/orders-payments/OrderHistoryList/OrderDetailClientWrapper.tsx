@@ -4,7 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchOrderDetail } from '@/services';
 import { cn, formatDateWithSeparator } from '@/utils';
-import { ORDER_CONSTANT, ORDER_STATUS_LIST } from '@/constants';
+import {
+  ORDER_CONSTANT,
+  ORDER_STATUS_LIST,
+  QUERY_KEYS_ENDPOINT,
+} from '@/constants';
 import type { OrderDetailResponseAPISchema } from '@/types';
 import { OrderGroupHeader, OrderHistoryList } from '@/components';
 
@@ -23,7 +27,7 @@ const OrderDetailClientWrapper = ({
   className,
 }: OrderDetailClientWrapperProps) => {
   const { data: orderDetailInfo } = useQuery({
-    queryKey: ['order', orderId],
+    queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
     queryFn: () => fetchOrderDetail(orderId.toString()),
     initialData: initialOrderDetailInfo,
   });

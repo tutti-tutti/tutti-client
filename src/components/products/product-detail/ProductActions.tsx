@@ -7,12 +7,14 @@ import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
 import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
+import type { SelectedOptionItem } from '@/types';
 
 interface ProductActionsProps {
   productId: number;
   productItemId: number;
   quantity: number;
   disabled?: boolean;
+  selectedOptionItems?: SelectedOptionItem[];
 }
 
 const {
@@ -28,11 +30,21 @@ const ProductActions = ({
   productItemId,
   quantity,
   disabled,
+  selectedOptionItems = [],
 }: ProductActionsProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const orderProductItems = [{ productItemId, quantity }];
+  const mapToItems = () =>
+    selectedOptionItems.length > 0
+      ? selectedOptionItems.map(item => ({
+          productItemId: item.option.productItemId,
+          quantity: item.quantity,
+        }))
+      : [{ productItemId, quantity }];
+
+  const orderProductItems = mapToItems();
+
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(orderProductItems),
   );
@@ -62,7 +74,9 @@ const ProductActions = ({
 
   const handleAddCart = async () => {
     try {
-      const result = await addCart(productId, productItemId, quantity);
+      const cartItems = mapToItems();
+
+      const result = await addCart(productId, cartItems);
 
       if (result.success) {
         toast.success(result.message || ADD_SUCCESS_MESSAGE);

@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { QUERY_KEYS_ENDPOINT } from '@/constants';
+import { QUERY_KEYS_ENDPOINT, ORDER_CONSTANT } from '@/constants';
 import { requestRefundPayment } from '@/services';
 import type {
   OrderHistoryItem,
@@ -15,6 +15,8 @@ interface MutationContext {
   previousOrderDetail?: OrderDetailResponseAPISchema;
   orderId: number;
 }
+
+const { MESSAGE } = ORDER_CONSTANT;
 
 export const useRefundMutation = (orderId: number) => {
   const queryClient = useQueryClient();
@@ -114,15 +116,14 @@ export const useRefundMutation = (orderId: number) => {
 
     const {
       cancelReason = '',
-      confirmMessage = '주문을 취소하시겠습니까?',
+      confirmMessage = MESSAGE.CANCEL_ORDER_WARNING,
       itemsCount,
     } = options;
 
     let finalConfirmMessage = confirmMessage;
 
     if (itemsCount && itemsCount > 1) {
-      finalConfirmMessage =
-        '현재는 전체 주문 취소만 가능합니다. 진행하시겠습니까?';
+      finalConfirmMessage = MESSAGE.NOT_PARTIAL_CANCEL_ORDER_WARNING;
     }
 
     if (confirm(finalConfirmMessage)) {

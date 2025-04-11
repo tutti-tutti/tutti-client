@@ -1,3 +1,5 @@
+import { ORDER_STATUS_LIST } from '@/constants';
+
 export interface OrderProductItem {
   productItemId: number;
   quantity: number;
@@ -83,4 +85,4 @@ export interface OrderDetailResponseAPISchema {
   storeName: string;
 }
 
-export type OrderStatus = 'CANCELED' | 'DONE' | 'READY';
+export type OrderStatus = (typeof ORDER_STATUS_LIST)[number];

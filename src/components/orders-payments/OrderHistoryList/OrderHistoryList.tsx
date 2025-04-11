@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/utils';
+import { ORDER_STATUS_LIST } from '@/constants';
 import type { OrderItem, OrderStatus } from '@/types';
 import {
   ProductThumbnail,
@@ -19,6 +20,12 @@ type OrderProductListProps = {
   orderStatus: string;
 };
 
+const [, , CANCELED] = ORDER_STATUS_LIST;
+
+const paddingStyles = 'px-0 py-md md:py-xl';
+const thumbColumnStyles = 'w-[120px] md:w-[288px]';
+const infoColumnStyles = 'w-full md:w-full';
+
 const OrderHistoryList = ({
   orderId,
   orderNumber,
@@ -26,10 +33,6 @@ const OrderHistoryList = ({
   orderStatus,
 }: OrderProductListProps) => {
   const itemsCount = orderItems.length;
-
-  const paddingStyles = 'px-0 py-md md:py-xl';
-  const thumbColumnStyles = 'w-[120px] md:w-[288px]';
-  const infoColumnStyles = 'w-full md:w-full';
 
   return (
     <ul>
@@ -84,7 +87,7 @@ const OrderHistoryList = ({
                     orderId={orderId}
                     orderNumber={orderNumber}
                     productItemId={item.productItemId}
-                    isCanceled={orderStatus === 'CANCELED'}
+                    isCanceled={orderStatus === CANCELED}
                   />
                 </div>
               </article>
@@ -93,7 +96,7 @@ const OrderHistoryList = ({
                   orderId={orderId}
                   itemsCount={itemsCount}
                   orderNumber={orderNumber}
-                  isCanceled={orderStatus === 'CANCELED'}
+                  isCanceled={orderStatus === CANCELED}
                 />
               </div>
             </div>
@@ -110,7 +113,7 @@ const OrderHistoryList = ({
                 orderId={orderId}
                 itemsCount={itemsCount}
                 orderNumber={orderNumber}
-                isCanceled={orderStatus === 'CANCELED'}
+                isCanceled={orderStatus === CANCELED}
               />
             </div>
           </article>

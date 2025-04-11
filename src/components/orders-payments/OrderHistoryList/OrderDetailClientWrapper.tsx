@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchOrderDetail } from '@/services';
 import { cn, formatDateWithSeparator } from '@/utils';
-import { ORDER_CONSTANT } from '@/constants';
+import { ORDER_CONSTANT, ORDER_STATUS_LIST } from '@/constants';
 import type { OrderDetailResponseAPISchema } from '@/types';
 import { OrderGroupHeader, OrderHistoryList } from '@/components';
 
@@ -15,6 +15,7 @@ interface OrderDetailClientWrapperProps {
 }
 
 const { ORDER_DATE, ORDER_SHEET_NO } = ORDER_CONSTANT;
+const [, , CANCELED] = ORDER_STATUS_LIST;
 
 const OrderDetailClientWrapper = ({
   orderId,
@@ -34,7 +35,7 @@ const OrderDetailClientWrapper = ({
       <OrderGroupHeader
         orderId={orderId}
         orderNumber={orderNumber}
-        isCanceled={orderStatus === 'CANCELED'}
+        isCanceled={orderStatus === CANCELED}
       >
         <h2 className="gap-sm flex">
           <span>

@@ -2,7 +2,11 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { QUERY_KEYS_ENDPOINT, ORDER_CONSTANT } from '@/constants';
+import {
+  QUERY_KEYS_ENDPOINT,
+  ORDER_CONSTANT,
+  ORDER_STATUS_LIST,
+} from '@/constants';
 import { requestRefundPayment } from '@/services';
 import type {
   OrderHistoryItem,
@@ -17,6 +21,7 @@ interface MutationContext {
 }
 
 const { MESSAGE } = ORDER_CONSTANT;
+const [, , CANCELED] = ORDER_STATUS_LIST;
 
 export const useRefundMutation = (orderId: number) => {
   const queryClient = useQueryClient();
@@ -56,7 +61,7 @@ export const useRefundMutation = (orderId: number) => {
 
             return old.map(order => {
               if (order.orderNumber === variables.orderNumber) {
-                return { ...order, orderStatus: 'CANCELED' };
+                return { ...order, orderStatus: CANCELED };
               }
               return order;
             });
@@ -71,7 +76,7 @@ export const useRefundMutation = (orderId: number) => {
           old => {
             if (!old) return old;
 
-            return { ...old, orderStatus: 'CANCELED' };
+            return { ...old, orderStatus: CANCELED };
           },
         );
       }

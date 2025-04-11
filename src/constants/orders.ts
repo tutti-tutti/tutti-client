@@ -29,6 +29,8 @@ export const ORDER_CONSTANT = {
   EXPECTED_SHIPPING: '도착 예정',
 };
 
+export const ORDER_STATUS_LIST = ['READY', 'DONE', 'CANCELED'] as const;
+
 export const ORDER_STATUS: Record<OrderStatus, OrderStatusInfo> = {
   READY: {
     label: '결제 대기',

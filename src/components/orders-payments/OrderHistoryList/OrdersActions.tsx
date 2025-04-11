@@ -26,7 +26,7 @@ const OrdersActions = ({
 }: OrdersActionsProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation(orderId);
 
-  const handleCancelParcialOrder = () => {
+  const handleCancelPartialOrder = () => {
     if (isPending) return;
 
     handleCancelOrder(orderNumber, {
@@ -62,7 +62,7 @@ const OrdersActions = ({
           type="button"
           variant="tertiaryOutline"
           className={BUTTON_STYLES}
-          onClick={handleCancelParcialOrder}
+          onClick={handleCancelPartialOrder}
         >
           {isPending ? TEXT_BUTTON.PENDING : TEXT_BUTTON.CANCEL}
         </Button>

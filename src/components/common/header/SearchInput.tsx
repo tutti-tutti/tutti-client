@@ -42,7 +42,7 @@ const SearchInput = ({
 
   return (
     <div className={cn('relative w-full', className)}>
-      <div className="from-bg-subBrand via-text-secondary to-text-primaryInteraction absolute inset-0 rounded-full bg-gradient-to-r p-0.5">
+      <div className="from-bg-subBrand via-text-secondaryInteraction to-text-primaryInteraction absolute inset-0 rounded-full bg-gradient-to-r p-0.5">
         <div className="h-full w-full rounded-full bg-white"></div>
       </div>
 

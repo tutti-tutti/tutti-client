@@ -29,7 +29,7 @@ const createFetchAdaptedAxios = (
 };
 
 export const staticAxios = createFetchAdaptedAxios({
-  baseURL: SERVER_API_BASE_URL,
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

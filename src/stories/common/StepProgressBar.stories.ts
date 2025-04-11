@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { StepProgressBar } from '@/components';
 
 const meta: Meta<typeof StepProgressBar> = {
-  title: 'StepProgressBar/StepProgressBar',
+  title: 'Common/StepProgressBar',
   component: StepProgressBar,
   parameters: {
     layout: 'centered',

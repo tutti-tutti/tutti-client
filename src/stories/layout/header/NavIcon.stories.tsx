@@ -4,7 +4,7 @@ import { NavIcon } from '@/components';
 import { PATH_NAME } from '@/constants';
 
 const meta = {
-  title: 'Header/NavIcon',
+  title: 'Layout/Header/NavIcon',
   component: NavIcon,
   parameters: {
     layout: 'centered',

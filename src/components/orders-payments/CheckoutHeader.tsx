@@ -1,16 +1,19 @@
+import { CART_CONSTANTS } from '@/constants';
 import { StepProgressBar, PageTitle } from '@/components';
 
+const { CART, ORDER_PAYMENT, ORDER_COMPLETE } = CART_CONSTANTS;
+
 const CheckoutHeader = () => {
-  const steps = ['장바구니', '주문결제', '주문완료'];
+  const steps = [CART, ORDER_PAYMENT, ORDER_COMPLETE];
 
   return (
     <header className="pt-lg md:py-5xl pb-0">
       <div className="gap-lg md:gap-4xl flex flex-col justify-center">
         <PageTitle className="order-2 text-left md:order-1 md:text-center">
-          주문 결제
+          {ORDER_PAYMENT}
         </PageTitle>
         <div className="order-1 md:order-2">
-          <StepProgressBar currentStep="주문결제" steps={steps} />
+          <StepProgressBar currentStep={ORDER_PAYMENT} steps={steps} />
         </div>
       </div>
     </header>

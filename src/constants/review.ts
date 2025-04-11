@@ -1,4 +1,7 @@
 export const REVIEW_CONSTANTS = {
+  CREATE: {
+    LABEL: '리뷰 작성',
+  },
   RATING: {
     LABEL: '상품 별점',
     ERROR: '별점을 선택해주세요.',

@@ -1,3 +1,5 @@
+import { ORDER_STATUS_LIST } from '@/constants';
+
 export interface OrderProductItem {
   productItemId: number;
   quantity: number;
@@ -45,6 +47,7 @@ export interface OrderHistoryItem {
   orderId: number;
   orderNumber: string;
   orderName: string;
+  createdAt: string;
   completedAt: string;
   totalAmount: number;
   orderStatus: string;
@@ -56,6 +59,7 @@ export interface GroupedOrderItemByOrderId {
   orderId: number;
   orderStatus: string;
   orderNumber: string;
+  createdAt: string;
   items: OrderItem[];
 }
 
@@ -68,7 +72,7 @@ export interface OrderDetailResponseAPISchema {
   deliveryFee: number;
   totalAmount: number;
   paymentType: string;
-  orderedAt: string;
+  createdAt: string;
   paidAt: string;
   deliveredAt: string;
   completedAt: string;
@@ -81,4 +85,4 @@ export interface OrderDetailResponseAPISchema {
   storeName: string;
 }
 
-export type OrderStatus = 'CANCELED' | 'DONE' | 'READY';
+export type OrderStatus = (typeof ORDER_STATUS_LIST)[number];

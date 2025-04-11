@@ -65,7 +65,7 @@ export const config = {
     '/reset-password',
     '/my/:path*',
     '/api/:path*',
-    '/checkout/:path*',
+    '/checkout',
     '/error/:path*',
   ],
 };

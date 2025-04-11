@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 
-import { QUERY_KEYS_ENDPOINT, ORDER_QUERY_KEY } from '@/constants';
+import { QUERY_KEYS_ENDPOINT, PAYMENTS_QUERY_KEY } from '@/constants';
 import {
   requestPayment,
   confirmPayApproveSuccess,
@@ -13,7 +13,7 @@ import {
 
 export const requestPaymentQueryOptions = (payload: PaymentsRequestAPISchema) =>
   queryOptions({
-    queryKey: [QUERY_KEYS_ENDPOINT.PAYMENTS, ORDER_QUERY_KEY.CHECKOUT],
+    queryKey: [QUERY_KEYS_ENDPOINT.PAYMENTS],
     queryFn: async () => await requestPayment(payload),
   });
 
@@ -21,7 +21,7 @@ export const confirmPayApproveSuccessQueryOptions = (
   payload: PaymentsApproveRequestAPISchema,
 ) =>
   queryOptions({
-    queryKey: [QUERY_KEYS_ENDPOINT.PAYMENTS, ORDER_QUERY_KEY.LIST],
+    queryKey: [QUERY_KEYS_ENDPOINT.PAYMENTS, PAYMENTS_QUERY_KEY.SUCCESS],
     queryFn: async () => await confirmPayApproveSuccess(payload),
   });
 

@@ -15,6 +15,8 @@ interface OrdersActionsProps {
 
 const { TEXT_BUTTON, MESSAGE } = ORDER_CONSTANT;
 
+const BUTTON_STYLES = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
+
 const OrdersActions = ({
   orderId,
   orderNumber,
@@ -39,8 +41,6 @@ const OrdersActions = ({
   const handleConfirmShipping = () =>
     alert(MESSAGE.NOT_FOUND_DELIVERY_TRACKING);
 
-  const buttonStyles = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
-
   return (
     <article
       className={cn(
@@ -51,7 +51,7 @@ const OrdersActions = ({
       <Button
         type="button"
         variant="primaryOutline"
-        className={buttonStyles}
+        className={BUTTON_STYLES}
         onClick={handleConfirmShipping}
       >
         {TEXT_BUTTON.DELIVERY_TRACKING}
@@ -61,7 +61,7 @@ const OrdersActions = ({
         <Button
           type="button"
           variant="tertiaryOutline"
-          className={buttonStyles}
+          className={BUTTON_STYLES}
           onClick={handleCancelParcialOrder}
         >
           {isPending ? TEXT_BUTTON.PENDING : TEXT_BUTTON.CANCEL}

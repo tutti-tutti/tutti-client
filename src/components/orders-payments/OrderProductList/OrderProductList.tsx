@@ -12,21 +12,21 @@ interface OrderProductListProps {
   gapStyles?: string;
 }
 
-const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
-  const paddingStyles = 'py-md sm:py-lg sm:pr-lg first:pt-0';
-  const thumbColumnStyles = 'w-5/12 w-[120px] sm:w-[200px]';
-  const infoColumnStyles = 'w-7/12 sm:w-full';
+const PADDING_STYLES = 'py-md sm:py-lg sm:pr-lg first:pt-0';
+const THUMB_COLUMN_STYLES = 'w-5/12 w-[120px] sm:w-[200px]';
+const INFO_COLUMN_STYLES = 'w-7/12 sm:w-full';
 
+const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
   return (
     <ul>
       {orderItems.map(item => (
         <li
           key={item.productItemId}
-          className={cn(paddingStyles, 'border-border-secondary border-b')}
+          className={cn(PADDING_STYLES, 'border-border-secondary border-b')}
         >
           <article className={cn('flex-col', gapStyles)}>
             <div className={cn(gapStyles, 'items-center')}>
-              <div className={thumbColumnStyles}>
+              <div className={THUMB_COLUMN_STYLES}>
                 <ProductThumbnail
                   width="w-full"
                   className="aspect-200/175"
@@ -35,7 +35,10 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
                 />
               </div>
               <div
-                className={cn('gap-md flex flex-1 flex-col', infoColumnStyles)}
+                className={cn(
+                  'gap-md flex flex-1 flex-col',
+                  INFO_COLUMN_STYLES,
+                )}
               >
                 <ProductName productName={item.productName} />
 

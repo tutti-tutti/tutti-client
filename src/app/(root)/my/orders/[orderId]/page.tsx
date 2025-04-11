@@ -27,7 +27,7 @@ const OrderDetailPage = async ({ params }: Params) => {
     { label: PATH_NAME.ORDER_DETAIL, href: `${orderId}`, isCurrent: true },
   ];
 
-  const paddingStyles = 'py-3xl';
+  const PADDING_STYLES = 'py-3xl';
 
   return (
     <div className="gap-4xl mx-auto flex flex-col">
@@ -38,12 +38,12 @@ const OrderDetailPage = async ({ params }: Params) => {
           <OrderDetailClientWrapper
             orderId={Number(orderId)}
             initialOrderDetailInfo={orderDetailInfo}
-            className={paddingStyles}
+            className={PADDING_STYLES}
           />
 
           <OrderTableInfoSection
             {...orderDetailInfo}
-            className={paddingStyles}
+            className={PADDING_STYLES}
           />
         </section>
       </section>

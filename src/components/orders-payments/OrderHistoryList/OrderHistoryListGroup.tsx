@@ -16,8 +16,6 @@ interface OrderHistoryListGroupProps {
 const { TEXT_LINK } = ORDER_CONSTANT;
 const [, , CANCELED] = ORDER_STATUS_LIST;
 
-const cancelStyles = 'rounded-md opacity-75 bg-bg-tertiary';
-
 const OrderHistoryListGroup = ({
   orderHistoryList,
 }: OrderHistoryListGroupProps) => {
@@ -30,7 +28,11 @@ const OrderHistoryListGroup = ({
         ({ orderId, orderNumber, items, orderStatus, createdAt }) => (
           <li
             key={orderId}
-            className={cn(orderStatus === CANCELED ? cancelStyles : '')}
+            className={cn(
+              orderStatus === CANCELED
+                ? 'bg-bg-tertiary rounded-md opacity-75'
+                : '',
+            )}
           >
             <article>
               <OrderGroupHeader

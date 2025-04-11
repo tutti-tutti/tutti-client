@@ -10,3 +10,4 @@ export * from './review/fetchReviewsAction';
 export * from './review/sentimentFeedbackAction';
 export * from './review/productReviewAction';
 export * from './auth/signoutAction';
+export * from './revalidateServerCache';

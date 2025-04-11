@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { QUERY_KEYS_ENDPOINT } from '@/constants';
 import { requestRefundPayment } from '@/services';
 import type {
   OrderHistoryItem,
@@ -24,40 +25,47 @@ export const useRefundMutation = (orderId: number) => {
 
     onMutate: async (variables): Promise<MutationContext> => {
       // 진행 중인 쿼리 취소
-      await queryClient.cancelQueries({ queryKey: ['orders'] });
-      await queryClient.cancelQueries({ queryKey: ['order', orderId] });
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
+      });
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
+      });
 
       // 주문 목록 스냅샷 저장
       const previousOrders = queryClient.getQueryData<OrderHistoryItem[]>([
-        'orders',
+        QUERY_KEYS_ENDPOINT.ORDERS,
       ]);
 
       // 주문 상세 스냅샷 저장
       const previousOrderDetail = orderId
         ? queryClient.getQueryData<OrderDetailResponseAPISchema>([
-            'order',
+            QUERY_KEYS_ENDPOINT.ORDERS,
             orderId,
           ])
         : undefined;
 
       // 낙관적으로 주문 목록 업데이트
       if (previousOrders) {
-        queryClient.setQueryData<OrderHistoryItem[]>(['orders'], old => {
-          if (!old) return old;
+        queryClient.setQueryData<OrderHistoryItem[]>(
+          [QUERY_KEYS_ENDPOINT.ORDERS],
+          old => {
+            if (!old) return old;
 
-          return old.map(order => {
-            if (order.orderNumber === variables.orderNumber) {
-              return { ...order, orderStatus: 'CANCELED' };
-            }
-            return order;
-          });
-        });
+            return old.map(order => {
+              if (order.orderNumber === variables.orderNumber) {
+                return { ...order, orderStatus: 'CANCELED' };
+              }
+              return order;
+            });
+          },
+        );
       }
 
       // 낙관적으로 주문 상세 업데이트
       if (previousOrderDetail && orderId) {
         queryClient.setQueryData<OrderDetailResponseAPISchema>(
-          ['order', orderId],
+          [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
           old => {
             if (!old) return old;
 
@@ -72,20 +80,25 @@ export const useRefundMutation = (orderId: number) => {
     onError: (err, variables, context) => {
       // 오류 발생 시 이전 상태로 복구
       if (context?.previousOrders) {
-        queryClient.setQueryData(['orders'], context.previousOrders);
+        queryClient.setQueryData(
+          [QUERY_KEYS_ENDPOINT.ORDERS],
+          context.previousOrders,
+        );
       }
 
       if (context?.previousOrderDetail && context.orderId) {
         queryClient.setQueryData(
-          ['order', context.orderId],
+          [QUERY_KEYS_ENDPOINT.ORDERS, context.orderId],
           context.previousOrderDetail,
         );
       }
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
-      queryClient.invalidateQueries({ queryKey: ['order', orderId] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS_ENDPOINT.ORDERS] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
+      });
     },
   });
 

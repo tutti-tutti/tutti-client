@@ -68,7 +68,7 @@
   word-break: keep-all;
 
   @media (max-width: 768px) {
-    font-size: var(--text-sx);
+    font-size: var(--text-xs);
     line-height: var(--leading-lg);
     letter-spacing: var(--tracking-tighter);
     font-weight: var(--font-weight-normal);

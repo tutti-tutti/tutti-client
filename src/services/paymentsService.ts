@@ -5,7 +5,7 @@ import type {
   PaymentsApproveRequestAPISchema,
   PaymentsDetailResponseAPISchema,
   PaymentsResponseAPISchema,
-  RefundRequestAPISSchema,
+  RefundRequestAPISchema,
 } from '@/types';
 
 export const requestPayment = async (
@@ -50,9 +50,7 @@ export const fetchPaymentDetailByPaymentId = async (
 };
 
 // 환불 요청 (현재 판매자 프로세스가 없으므로 결제 취소 api를 대신)
-export const requestRefundPayment = async (
-  payload: RefundRequestAPISSchema,
-) => {
+export const requestRefundPayment = async (payload: RefundRequestAPISchema) => {
   const response = await axiosInstance.post(REFUND_ENDPOINTS.REQUEST, payload);
 
   return response.data;

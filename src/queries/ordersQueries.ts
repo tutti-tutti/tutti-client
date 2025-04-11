@@ -17,7 +17,7 @@ export const checkoutOrderQueryOptions = (
   });
 
 export const orderHistoryListQueryOptions = queryOptions({
-  queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, ORDER_QUERY_KEY.LIST],
+  queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
   queryFn: async () => await fetchOrderHistoryList(),
 });
 

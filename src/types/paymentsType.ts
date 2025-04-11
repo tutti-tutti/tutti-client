@@ -59,7 +59,7 @@ export interface PaymentsDetailResponseAPISchema {
 }
 
 // 환불 요청 API 스키마
-export interface RefundRequestAPISSchema {
+export interface RefundRequestAPISchema {
   orderNumber: string;
   cancelReason: string;
 }

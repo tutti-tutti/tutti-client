@@ -4,7 +4,7 @@ import { fn, expect, waitFor, userEvent, within } from '@storybook/test';
 import { SearchInput } from '@/components';
 
 const meta = {
-  title: 'Header/SearchInput',
+  title: 'Layout/Header/SearchInput',
   component: SearchInput,
   parameters: {
     layout: 'centered',

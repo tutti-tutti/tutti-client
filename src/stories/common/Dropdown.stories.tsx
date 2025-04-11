@@ -9,7 +9,7 @@ const dummyOptions = [
 ];
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Dropdown/Dropdown',
+  title: 'Common/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',

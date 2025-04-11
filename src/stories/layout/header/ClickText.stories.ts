@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { ClickText } from '@/components';
 
 const meta = {
-  title: 'Header/ClickText',
+  title: 'Layout/Header/ClickText',
   component: ClickText,
   parameters: {
     layout: 'centered',

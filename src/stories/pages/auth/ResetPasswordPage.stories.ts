@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Footer } from '@/components';
+import ResetPasswordPage from '@/app/(auth)/reset-password/page';
 
 const meta = {
-  title: 'Footer/Footer',
-  component: Footer,
+  title: 'Pages/Auth/ResetPasswordPage',
+  component: ResetPasswordPage,
   parameters: {
-    layout: 'bottom',
+    layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {},
-  args: {},
-} satisfies Meta<typeof Footer>;
+} satisfies Meta<typeof ResetPasswordPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

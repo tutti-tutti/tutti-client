@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import SigninPage from '@/app/(auth)/signin/page';
 
 const meta = {

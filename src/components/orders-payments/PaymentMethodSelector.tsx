@@ -144,11 +144,11 @@ const PaymentMethodSelector = ({
 
       // 결제를 요청하기 전에 백엔드 서버에 저장
       // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도
-      const { orderNumber, orderName } =
+      const { orderSheetNo, orderName } =
         await requestPayment(paymentRequestData);
 
       await widgets?.requestPayment({
-        orderId: orderNumber,
+        orderId: orderSheetNo,
         orderName: orderName,
         successUrl: `${window.location.origin + ROUTER_PATH.CHECKOUT_SUCCESS}`,
         failUrl: `${window.location.origin + ROUTER_PATH.CHECKOUT_FAIL}`,

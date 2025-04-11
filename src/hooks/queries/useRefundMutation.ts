@@ -7,7 +7,7 @@ import { requestRefundPayment } from '@/services';
 import type {
   OrderHistoryItem,
   OrderDetailResponseAPISchema,
-  RefundRequestAPISSchema,
+  RefundRequestAPISchema,
 } from '@/types';
 
 interface MutationContext {
@@ -22,7 +22,7 @@ export const useRefundMutation = (orderId: number) => {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (payload: RefundRequestAPISSchema) =>
+    mutationFn: (payload: RefundRequestAPISchema) =>
       requestRefundPayment(payload),
 
     onMutate: async (variables): Promise<MutationContext> => {

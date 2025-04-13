@@ -32,13 +32,13 @@ const OrderDetailClientWrapper = ({
     initialData: initialOrderDetailInfo,
   });
 
-  const { orderNumber, orderItems, orderStatus, createdAt } = orderDetailInfo;
+  const { orderSheetNo, orderItems, orderStatus, createdAt } = orderDetailInfo;
 
   return (
     <section className={cn('bg-bg-tertiary px-5xl rounded-md', className)}>
       <OrderGroupHeader
         orderId={orderId}
-        orderNumber={orderNumber}
+        orderSheetNo={orderSheetNo}
         isCanceled={orderStatus === CANCELED}
       >
         <h2 className="gap-sm flex">
@@ -47,14 +47,14 @@ const OrderDetailClientWrapper = ({
           </span>
 
           <span className="text-text-tertiary">
-            {ORDER_SHEET_NO} : {orderNumber}
+            {ORDER_SHEET_NO} : {orderSheetNo}
           </span>
         </h2>
       </OrderGroupHeader>
 
       <OrderHistoryList
         orderId={orderId}
-        orderNumber={orderNumber}
+        orderSheetNo={orderSheetNo}
         orderItems={orderItems}
         orderStatus={orderStatus}
       />

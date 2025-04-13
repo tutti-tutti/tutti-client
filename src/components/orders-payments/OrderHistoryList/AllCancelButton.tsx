@@ -6,7 +6,7 @@ import { ExtraButton } from '@/components';
 
 interface AllCancelButtonProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   isCanceled: boolean;
 }
 
@@ -14,7 +14,7 @@ const { MESSAGE, TEXT_BUTTON } = ORDER_CONSTANT;
 
 const AllCancelButton = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   isCanceled,
 }: AllCancelButtonProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation(orderId);
@@ -22,7 +22,7 @@ const AllCancelButton = ({
   const onCancelOrder = () => {
     if (isPending) return;
 
-    handleCancelOrder(orderNumber, {
+    handleCancelOrder(orderSheetNo, {
       confirmMessage: MESSAGE.ALL_CANCEL_ORDER_WARNING,
     });
   };

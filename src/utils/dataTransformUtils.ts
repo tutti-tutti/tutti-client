@@ -52,7 +52,7 @@ export const getGroupOrderItemsByOrderId = (
       number,
       {
         orderStatus: string;
-        orderNumber: string;
+        orderSheetNo: string;
         createdAt: string;
         items: OrderItem[];
       }
@@ -61,7 +61,7 @@ export const getGroupOrderItemsByOrderId = (
     if (!acc[item.orderId]) {
       acc[item.orderId] = {
         orderStatus: item.orderStatus,
-        orderNumber: item.orderNumber,
+        orderSheetNo: item.orderSheetNo,
         createdAt: item.createdAt,
         items: [],
       };
@@ -77,7 +77,7 @@ export const getGroupOrderItemsByOrderId = (
     .map(([orderId, data]) => ({
       orderId: Number(orderId),
       orderStatus: data.orderStatus,
-      orderNumber: data.orderNumber,
+      orderSheetNo: data.orderSheetNo,
       createdAt: data.createdAt,
       items: data.items,
     }));

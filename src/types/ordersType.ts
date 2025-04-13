@@ -41,16 +41,42 @@ export interface OrderCheckoutResponseAPISchema {
 }
 
 // 주문내역 조회 API 스키마
-export type OrderHistoryListResponseAPISchema = OrderHistoryItem[];
+export type OrderHistoryListResponseAPISchema = {
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
+  size: number;
+  content: OrderHistoryItem[];
+  number: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  pageable: {
+    offset: number;
+    sort: {
+      empty: boolean;
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    paged: boolean;
+    pageNumber: number;
+    pageSize: number;
+    unpaged: boolean;
+  };
+  numberOfElements: number;
+  empty: boolean;
+};
 
 export interface OrderHistoryItem {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
+  orderStatus: string;
   orderName: string;
   createdAt: string;
-  completedAt: string;
   totalAmount: number;
-  orderStatus: string;
   orderItems: OrderItem[];
 }
 
@@ -58,14 +84,15 @@ export interface OrderHistoryItem {
 export interface GroupedOrderItemByOrderId {
   orderId: number;
   orderStatus: string;
-  orderNumber: string;
+  orderSheetNo: string;
   createdAt: string;
   items: OrderItem[];
 }
 
 // 주문내역 상세 조회 API 스키마 (GET 요청 path 파라미터: orderId )
 export interface OrderDetailResponseAPISchema {
-  orderNumber: string; // tosspayments에서 사용하는 key
+  orderId: string; // 조회 할 주문 ID
+  orderSheetNo: string; // 주문번호; tosspayments에서 사용하는 key
   orderStatus: string;
   totalDiscountAmount: number;
   totalProductAmount: number;
@@ -79,10 +106,10 @@ export interface OrderDetailResponseAPISchema {
   orderItems: OrderItem[];
   recipientName: string;
   recipientPhone: string;
-  recipientAddress: string;
   zipCode: string;
+  recipientAddress: string;
+  detailAddress: string;
   note: string;
-  storeName: string;
 }
 
 export type OrderStatus = (typeof ORDER_STATUS_LIST)[number];

@@ -7,14 +7,14 @@ import { ExtraButton } from '@/components';
 
 interface OrdersExtraActionsProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   productItemId: number;
   isCanceled: boolean;
 }
 
 const OrdersExtraActions = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   productItemId,
   isCanceled,
 }: OrdersExtraActionsProps) => {
@@ -24,7 +24,7 @@ const OrdersExtraActions = ({
   return (
     <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
-        {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderNumber}
+        {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderSheetNo}
       </div>
 
       {!isCanceled && (

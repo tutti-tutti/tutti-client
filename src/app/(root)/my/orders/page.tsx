@@ -1,5 +1,5 @@
 import { ORDER_CONSTANT, PATH_NAME, ROUTER_PATH } from '@/constants';
-import { fetchOrderHistoryList } from '@/services';
+import { fetchOrderHistory } from '@/services';
 import { MypageHeader, OrderHistoryClientWrapper, NoData } from '@/components';
 
 export async function generateMetadata() {
@@ -9,7 +9,7 @@ export async function generateMetadata() {
 }
 
 const OrderHistoryPage = async () => {
-  const initialOrderHistoryList = await fetchOrderHistoryList();
+  const initialOrderHistory = await fetchOrderHistory();
 
   const linkItems = [
     { label: PATH_NAME.HOME, href: ROUTER_PATH.HOME },
@@ -29,13 +29,13 @@ const OrderHistoryPage = async () => {
           pageName={PATH_NAME.ORDER_HISTORY}
         />
 
-        {initialOrderHistoryList.length === 0 ? (
+        {initialOrderHistory.content.length === 0 ? (
           <NoData>
             <p>{ORDER_CONSTANT.MESSAGE.NO_DATA_ORDERS}</p>
           </NoData>
         ) : (
           <OrderHistoryClientWrapper
-            initialOrderHistoryList={initialOrderHistoryList}
+            initialOrderHistory={initialOrderHistory}
           />
         )}
       </section>

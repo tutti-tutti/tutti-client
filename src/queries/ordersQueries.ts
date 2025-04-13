@@ -1,11 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 
 import { QUERY_KEYS_ENDPOINT, ORDER_QUERY_KEY } from '@/constants';
-import {
-  checkoutOrder,
-  fetchOrderHistoryList,
-  fetchOrderDetail,
-} from '@/services';
+import { checkoutOrder, fetchOrderHistory, fetchOrderDetail } from '@/services';
 import { OrderProductItem } from '@/types';
 
 export const checkoutOrderQueryOptions = (
@@ -18,7 +14,7 @@ export const checkoutOrderQueryOptions = (
 
 export const orderHistoryListQueryOptions = queryOptions({
   queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
-  queryFn: async () => await fetchOrderHistoryList(),
+  queryFn: async () => await fetchOrderHistory(),
 });
 
 export const orderDetailQueryOptions = (orderId: string) =>

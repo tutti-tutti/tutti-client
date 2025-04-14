@@ -16,7 +16,7 @@ const meta: Meta<typeof CartInfo> = {
     Story => {
       return (
         <div className="layout-max-width m-auto">
-          <main className="px-container py-md">
+          <main className="px-container py-5xl">
             <Story />
           </main>
         </div>
@@ -73,7 +73,7 @@ export const WithCartHeader: Story = {
       return (
         <>
           <CartHeader />
-          <Story />;
+          <Story />
         </>
       );
     },
@@ -100,7 +100,7 @@ export const EmptyCartWithCartHeader: Story = {
       return (
         <>
           <CartHeader />
-          <Story />;
+          <Story />
         </>
       );
     },

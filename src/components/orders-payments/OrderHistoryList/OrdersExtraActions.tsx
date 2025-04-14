@@ -2,17 +2,13 @@
 
 import { redirect } from 'next/navigation';
 
-import { useQueryClient } from '@tanstack/react-query';
-
 import {
   ROUTER_PATH,
   ORDER_CONSTANT,
   REVIEW_CONSTANTS,
   CART_CONSTANTS,
 } from '@/constants';
-import { toast } from '@/utils';
-import { addCart } from '@/services';
-import { cartQueryOptions } from '@/queries';
+import { useAddCart } from '@/hooks';
 import { ExtraButton } from '@/components';
 
 interface OrdersExtraActionsProps {
@@ -23,8 +19,6 @@ interface OrdersExtraActionsProps {
   isCanceled: boolean;
 }
 
-const { ADD_SUCCESS_MESSAGE, ADD_FAIL_MESSAGE } = CART_CONSTANTS;
-
 const OrdersExtraActions = ({
   orderId,
   orderSheetNo,
@@ -32,32 +26,11 @@ const OrdersExtraActions = ({
   productItemId,
   isCanceled,
 }: OrdersExtraActionsProps) => {
-  const queryClient = useQueryClient();
-
   const handleWriteReview = () =>
     redirect(ROUTER_PATH.REVIEW_PRODUCT(orderId, productId, productItemId));
 
-  const handleAddCart = async () => {
-    try {
-      const cartItems = [{ productItemId, quantity: 1 }];
-
-      const result = await addCart(productId, cartItems);
-
-      if (result.isSuccess) {
-        toast.success(result.message || ADD_SUCCESS_MESSAGE);
-
-        await queryClient.invalidateQueries({
-          queryKey: cartQueryOptions.queryKey,
-        });
-        await queryClient.prefetchQuery(cartQueryOptions);
-      } else {
-        toast.error(result.message || ADD_FAIL_MESSAGE);
-      }
-    } catch (error) {
-      console.error(ADD_FAIL_MESSAGE, error);
-      toast.error(ADD_FAIL_MESSAGE);
-    }
-  };
+  const cartItems = [{ productItemId, quantity: 1 }];
+  const { handleAddCart } = useAddCart(productId, cartItems);
 
   return (
     <article className="w-full md:flex md:justify-between">

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { checkoutOrder } from '@/services';
 import {
-  OrderProductListGroup,
+  CheckoutProductListGroup,
   CheckoutHeader,
   ShippingAddressForm,
   PaymentMethodSelector,
@@ -64,7 +64,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
 
       <section className="gap-lg flex flex-col">
         <SectionTitle className="leading-none">결제 상품 정보</SectionTitle>
-        <OrderProductListGroup orderItems={orderItems} />
+        <CheckoutProductListGroup orderItems={orderItems} />
       </section>
 
       <section>

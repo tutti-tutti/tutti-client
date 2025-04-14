@@ -1,40 +1,44 @@
-
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PATH_NAME, ROUTER_PATH } from '@/constants';
-import { PageContentHeader, PageTitle, CartHeader, CheckoutHeader, MypageHeader } from '@/components';
-
+import {
+  PageContentHeader,
+  PageTitle,
+  CartHeader,
+  CheckoutHeader,
+  MypageHeader,
+} from '@/components';
 
 const meta = {
-    title: 'Common/PageContentHeader',
-    component: PageContentHeader,
-    parameters: {
-      layout: 'fullscreen',
+  title: 'Common/PageContentHeader',
+  component: PageContentHeader,
+  parameters: {
+    layout: 'fullscreen',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    children: {
+      control: 'text',
+      description: '페이지 제목 내용',
     },
-    tags: ['autodocs'],
-    argTypes: {
-      children: {
-        control: 'text',
-        description: '페이지 제목 내용',
-      },
-      className: {
-        control: 'text',
-        description: '추가적인 클래스명',
-      },
+    className: {
+      control: 'text',
+      description: '추가적인 클래스명',
     },
-    decorators: [
-      Story => {
-        return (
-            <div className="layout-max-width m-auto">
-              <main className='px-container'>
-                <Story />
-              </main>
-            </div>
-        );
-      },
-    ],
-  } satisfies Meta<typeof PageContentHeader>;
-  
+  },
+  decorators: [
+    Story => {
+      return (
+        <div className="layout-max-width m-auto">
+          <main className="px-container">
+            <Story />
+          </main>
+        </div>
+      );
+    },
+  ],
+} satisfies Meta<typeof PageContentHeader>;
+
 export default meta;
 type Story = StoryObj<typeof PageContentHeader>;
 
@@ -45,15 +49,14 @@ export const Default: Story = {
 };
 
 export const CartHeaderComponent: Story = {
-    args: {},
-    render: () => <CartHeader />,
+  args: {},
+  render: () => <CartHeader />,
 };
 
 export const CheckoutHeaderComponent: Story = {
-    args: {},
-    render: () => <CheckoutHeader />,
+  args: {},
+  render: () => <CheckoutHeader />,
 };
-
 
 const linkItems = [
   { label: PATH_NAME.HOME, href: ROUTER_PATH.HOME },
@@ -67,5 +70,7 @@ const linkItems = [
 
 export const MypageHeaderComponent: Story = {
   args: {},
-  render: () => <MypageHeader linkItems={linkItems} pageName={PATH_NAME.ORDER_HISTORY} />
+  render: () => (
+    <MypageHeader linkItems={linkItems} pageName={PATH_NAME.ORDER_HISTORY} />
+  ),
 };

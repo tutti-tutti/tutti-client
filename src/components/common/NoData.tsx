@@ -7,10 +7,7 @@ interface NoDataProps {
 const NoData = ({ children }: NoDataProps) => {
   return (
     <div className="gap-sm md:gap-md py-6xl flex flex-col items-center justify-center md:flex-row">
-      <Icon
-        iconName="notFound"
-        className="h-[32px] w-[32px] md:h-[40px] md:w-[40px]"
-      />
+      <Icon iconName="notFound" className="h-8 w-8 md:h-10 md:w-10" />
 
       <div className="flex flex-col">
         <div className="text-text-tertiaryInfo font-style-subHeading">

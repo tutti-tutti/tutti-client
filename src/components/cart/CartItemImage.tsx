@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { ROUTER_PATH } from '@/constants';
 import { Checkbox } from '../common';
 import { ProductThumbnail } from '../products';
 
@@ -23,7 +24,7 @@ const CartItemImage = ({
   toggleItemCheckbox,
 }: CartItemImageProps) => {
   return (
-    <figure className="relative w-1/2 md:w-2/5">
+    <article className="relative w-1/2 md:w-2/5">
       <div className="absolute top-5 left-5 z-1">
         <Checkbox
           checked={isChecked}
@@ -31,7 +32,7 @@ const CartItemImage = ({
         />
       </div>
 
-      <Link href={`/products/${productId}`}>
+      <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
         <ProductThumbnail
           height="h-auto"
           width="w-full"
@@ -40,7 +41,7 @@ const CartItemImage = ({
           className="aspect-square"
         />
       </Link>
-    </figure>
+    </article>
   );
 };
 

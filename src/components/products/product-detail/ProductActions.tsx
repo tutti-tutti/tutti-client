@@ -78,7 +78,7 @@ const ProductActions = ({
 
       const result = await addCart(productId, cartItems);
 
-      if (result.success) {
+      if (result.isSuccess) {
         toast.success(result.message || ADD_SUCCESS_MESSAGE);
 
         await queryClient.invalidateQueries({

@@ -1,16 +1,16 @@
 import { ProductThumbnail } from '@/components';
 import { fetchProductItemDataForReview } from '@/services';
+import type { CreateReviewParams } from '@/types';
 
 interface ReviewProductInfoProps {
-  orderId: string;
-  productItemId: string;
+  awaitedParams: CreateReviewParams;
 }
 
-const ReviewProductInfo = async ({
-  orderId,
-  productItemId,
-}: ReviewProductInfoProps) => {
-  const orderData = await fetchProductItemDataForReview(orderId, productItemId);
+const ReviewProductInfo = async ({ awaitedParams }: ReviewProductInfoProps) => {
+  const orderData = await fetchProductItemDataForReview(
+    awaitedParams.orderId,
+    awaitedParams.productItemId,
+  );
 
   return (
     <div className="gap-lg flex w-full">

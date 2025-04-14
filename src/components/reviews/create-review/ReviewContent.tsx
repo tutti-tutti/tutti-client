@@ -5,13 +5,12 @@ import { useActionState, useRef, useState } from 'react';
 import { createReviewAction } from '@/server-actions';
 import { cn } from '@/utils';
 import { REVIEW_CONSTANTS } from '@/constants';
-import type { CreateReviewState } from '@/types';
+import type { CreateReviewParams, CreateReviewState } from '@/types';
 import StarClick from './StarClick';
 import CreateReviewButtonBox from './CreateReviewButtonBox';
 
 interface ReviewContentProps {
-  orderId: string;
-  productItemId: string;
+  awaitedParams: CreateReviewParams;
 }
 
 const initialCreateReviewState: CreateReviewState = {
@@ -20,14 +19,14 @@ const initialCreateReviewState: CreateReviewState = {
 
 const { RATING, REVIEW_CONTENT } = REVIEW_CONSTANTS;
 
-const ReviewContent = ({ orderId, productItemId }: ReviewContentProps) => {
+const ReviewContent = ({ awaitedParams }: ReviewContentProps) => {
   const [characterCnt, setCharacterCnt] = useState(0);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const boundCreateReviewAction = createReviewAction.bind(
     null,
-    orderId,
-    productItemId,
+    awaitedParams.orderId,
+    awaitedParams.productItemId,
   );
 
   const [

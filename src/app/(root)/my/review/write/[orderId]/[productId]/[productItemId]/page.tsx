@@ -1,15 +1,13 @@
 import { REVIEW_CONSTANTS } from '@/constants';
 import { ReviewContent, ReviewProductInfo } from '@/components';
+import type { CreateReviewParams } from '@/types';
 
 type CreateReviewPageParams = {
-  params: Promise<{
-    orderId: string;
-    productItemId: string;
-  }>;
+  params: Promise<CreateReviewParams>;
 };
 
 const CreateReviewPage = async ({ params }: CreateReviewPageParams) => {
-  const { orderId, productItemId } = await params;
+  const awaitedParams = await params;
 
   return (
     <div className="mb-7xl flex justify-center">
@@ -18,8 +16,8 @@ const CreateReviewPage = async ({ params }: CreateReviewPageParams) => {
           {REVIEW_CONSTANTS.CREATE.LABEL}
         </h1>
 
-        <ReviewProductInfo orderId={orderId} productItemId={productItemId} />
-        <ReviewContent orderId={orderId} productItemId={productItemId} />
+        <ReviewProductInfo awaitedParams={awaitedParams} />
+        <ReviewContent awaitedParams={awaitedParams} />
       </div>
     </div>
   );

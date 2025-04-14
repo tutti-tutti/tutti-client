@@ -44,3 +44,9 @@ export interface ProductReviewInfo {
   avg: string;
   totalCount: number;
 }
+
+export interface CreateReviewParams {
+  orderId: string;
+  productId: string;
+  productItemId: string;
+}

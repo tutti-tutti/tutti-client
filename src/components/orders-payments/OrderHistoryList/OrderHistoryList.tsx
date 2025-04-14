@@ -86,6 +86,7 @@ const OrderHistoryList = ({
                   <OrdersExtraActions
                     orderId={orderId}
                     orderSheetNo={orderSheetNo}
+                    productId={item.productId}
                     productItemId={item.productItemId}
                     isCanceled={orderStatus === CANCELED}
                   />

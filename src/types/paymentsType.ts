@@ -30,7 +30,7 @@ export interface PaymentsRequestAPISchema {
 
 // 주문/결제 응답 API 스키마
 export interface PaymentsResponseAPISchema {
-  orderNumber: string; // tosspayments에서 사용하는 key
+  orderSheetNo: string; // tosspayments에서 사용하는 key
   orderName: string;
   amount: number;
 }
@@ -59,7 +59,7 @@ export interface PaymentsDetailResponseAPISchema {
 }
 
 // 환불 요청 API 스키마
-export interface RefundRequestAPISSchema {
-  orderNumber: string;
+export interface RefundRequestAPISchema {
+  orderSheetNo: string;
   cancelReason: string;
 }

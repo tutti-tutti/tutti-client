@@ -5,31 +5,52 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components';
 import { addCart, getAccessToken } from '@/services';
 import { toast } from '@/utils';
-import { ROUTER_PATH } from '@/constants';
+import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cartQueryOptions } from '@/queries';
+import type { SelectedOptionItem } from '@/types';
 
 interface ProductActionsProps {
   productId: number;
   productItemId: number;
   quantity: number;
   disabled?: boolean;
+  selectedOptionItems?: SelectedOptionItem[];
 }
+
+const {
+  CART_TOAST_MESSAGE,
+  ADD_SUCCESS_MESSAGE,
+  ADD_FAIL_MESSAGE,
+  ADD_CART,
+  CHECKOUT,
+} = CART_CONSTANTS;
 
 const ProductActions = ({
   productId,
   productItemId,
   quantity,
   disabled,
+  selectedOptionItems = [],
 }: ProductActionsProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const orderProductItems = [{ productItemId, quantity }];
+  const mapToItems = () =>
+    selectedOptionItems.length > 0
+      ? selectedOptionItems.map(item => ({
+          productItemId: item.option.productItemId,
+          quantity: item.quantity,
+        }))
+      : [{ productItemId, quantity }];
+
+  const orderProductItems = mapToItems();
+
   const encodedOrderProductItems = encodeURIComponent(
     JSON.stringify(orderProductItems),
   );
 
-  const noticeSelectOption = () => toast.warning('옵션을 선택해주세요!');
+  const noticeSelectOption = () =>
+    toast.warning(PRODUCTS_CONSTANTS.SELECT_OPTION_MESSAGE);
 
   const handleCheckoutClick = async () => {
     if (disabled) {
@@ -40,7 +61,7 @@ const ProductActions = ({
     const user = await getAccessToken();
 
     if (!user) {
-      toast.warning('로그인 후 이용해주세요!');
+      toast.warning(CART_TOAST_MESSAGE.LOGIN);
       router.push(ROUTER_PATH.LOGIN);
       return;
     }
@@ -53,21 +74,23 @@ const ProductActions = ({
 
   const handleAddCart = async () => {
     try {
-      const result = await addCart(productId, productItemId, quantity);
+      const cartItems = mapToItems();
+
+      const result = await addCart(productId, cartItems);
 
       if (result.success) {
-        toast.success(result.message || '장바구니에 추가되었습니다.');
+        toast.success(result.message || ADD_SUCCESS_MESSAGE);
 
         await queryClient.invalidateQueries({
           queryKey: cartQueryOptions.queryKey,
         });
         await queryClient.prefetchQuery(cartQueryOptions);
       } else {
-        toast.error(result.message || '장바구니에 추가하지 못했습니다.');
+        toast.error(result.message || ADD_FAIL_MESSAGE);
       }
     } catch (error) {
-      console.error('장바구니 담기 중 오류가 발생했습니다.', error);
-      toast.error('장바구니 담기에 실패했습니다.');
+      console.error(ADD_FAIL_MESSAGE, error);
+      toast.error(ADD_FAIL_MESSAGE);
     }
   };
 
@@ -80,10 +103,10 @@ const ProductActions = ({
         variant="secondaryOutline"
         onClick={handleCartClick}
       >
-        장바구니 담기
+        {ADD_CART}
       </Button>
       <Button className={buttonDefaultStyle} onClick={handleCheckoutClick}>
-        구매하기
+        {CHECKOUT}
       </Button>
     </div>
   );

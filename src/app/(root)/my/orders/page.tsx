@@ -1,34 +1,41 @@
-import { fetchOrderHistoryList } from '@/services';
+import { ORDER_CONSTANT, PATH_NAME, ROUTER_PATH } from '@/constants';
+import { fetchOrderHistory } from '@/services';
 import { MypageHeader, OrderHistoryClientWrapper, NoData } from '@/components';
-
-const pageTitle = '주문 내역';
 
 export async function generateMetadata() {
   return {
-    title: pageTitle,
+    title: PATH_NAME.ORDER_HISTORY,
   };
 }
 
 const OrderHistoryPage = async () => {
-  const initialOrderHistoryList = await fetchOrderHistoryList();
+  const initialOrderHistory = await fetchOrderHistory();
 
   const linkItems = [
-    { label: '홈', href: '/' },
-    { label: '마이페이지', href: '', isCurrent: true },
-    { label: '주문내역', href: '/orders', isCurrent: true },
+    { label: PATH_NAME.HOME, href: ROUTER_PATH.HOME },
+    { label: PATH_NAME.MY_PAGE, href: '', isCurrent: true },
+    {
+      label: PATH_NAME.ORDER_HISTORY,
+      href: ROUTER_PATH.ORDERS_HISTORY,
+      isCurrent: true,
+    },
   ];
 
   return (
     <div className="gap-4xl mx-auto flex flex-col">
       <section className="gap-lg flex flex-col">
-        <MypageHeader linkItems={linkItems} pageName={pageTitle} />
-        {!initialOrderHistoryList || initialOrderHistoryList.length === 0 ? (
+        <MypageHeader
+          linkItems={linkItems}
+          pageName={PATH_NAME.ORDER_HISTORY}
+        />
+
+        {initialOrderHistory.content.length === 0 ? (
           <NoData>
-            <p>아직 주문하신 내역이 없습니다.</p>
+            <p>{ORDER_CONSTANT.MESSAGE.NO_DATA_ORDERS}</p>
           </NoData>
         ) : (
           <OrderHistoryClientWrapper
-            initialOrderHistoryList={initialOrderHistoryList}
+            initialOrderHistory={initialOrderHistory}
           />
         )}
       </section>

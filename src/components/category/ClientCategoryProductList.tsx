@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { categoryByIdQueryOptions } from '@/queries';
 import { useProductListVirtualizer } from '@/hooks';
-import type { Product } from '@/types';
+import type { Product, ProductReviewInfo } from '@/types';
 import { ProductItem, ProductListSkeleton } from '../products';
 
 interface ClientCategoryProductListProps {
@@ -15,7 +15,10 @@ interface ClientCategoryProductListProps {
 const ClientCategoryProductList = ({
   initialProducts,
   categoryId,
-}: ClientCategoryProductListProps) => {
+  productReviews = [],
+}: ClientCategoryProductListProps & {
+  productReviews: ProductReviewInfo[];
+}) => {
   const { data: productItems, isPending } = useQuery({
     ...categoryByIdQueryOptions(String(categoryId)),
     initialData: initialProducts,
@@ -56,9 +59,18 @@ const ClientCategoryProductList = ({
                 height: `${virtualRow.size}px`,
               }}
             >
-              <ul className="gap-x-md grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+              <ul className="gap-x-md grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                 {rowItems.map((item: Product) => (
-                  <ProductItem key={item.productId} {...item} />
+                  <ProductItem
+                    key={item.productId}
+                    {...item}
+                    reviewInfo={
+                      productReviews[item.productId] || {
+                        avg: '0.0',
+                        totalCount: 0,
+                      }
+                    }
+                  />
                 ))}
               </ul>
             </div>

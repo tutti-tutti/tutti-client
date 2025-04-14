@@ -1,24 +1,29 @@
 import Link from 'next/link';
-import { ROUTER_PATH } from '@/constants';
+
+import { ROUTER_PATH, ORDER_CONSTANT } from '@/constants';
 import { Icon } from '@/components';
 
 interface OrderHistoryListGroupProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
 }
+
+const { ORDER_SHEET_NO, TEXT_LINK } = ORDER_CONSTANT;
 
 const OrderIdHeading = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
 }: OrderHistoryListGroupProps) => {
   return (
     <div className="gap-xs flex items-center text-xl">
-      <strong>주문번호 {orderNumber}</strong>
+      <strong>
+        {ORDER_SHEET_NO} {orderSheetNo}
+      </strong>
       <Link
         href={ROUTER_PATH.ORDERS_DETAIL(orderId)}
         className="text-text-info flex items-center"
       >
-        주문 상세 보기 <Icon iconName="right" />
+        {TEXT_LINK.DETAIL} <Icon iconName="right" />
       </Link>
     </div>
   );

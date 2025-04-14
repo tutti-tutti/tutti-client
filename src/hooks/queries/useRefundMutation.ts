@@ -2,73 +2,81 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import {
+  QUERY_KEYS_ENDPOINT,
+  ORDER_CONSTANT,
+  ORDER_STATUS_LIST,
+} from '@/constants';
 import { requestRefundPayment } from '@/services';
-import type { OrderHistoryItem, OrderDetailResponseAPISchema } from '@/types';
-
-interface CancelPaymentParams {
-  orderNumber: string;
-  cancelReason: string;
-}
+import type {
+  OrderHistoryItem,
+  OrderDetailResponseAPISchema,
+  RefundRequestAPISchema,
+} from '@/types';
 
 interface MutationContext {
   previousOrders?: OrderHistoryItem[];
   previousOrderDetail?: OrderDetailResponseAPISchema;
-  orderId?: number;
+  orderId: number;
 }
 
-/**
- * 결제 취소/환불 처리를 위한 커스텀 훅
- * @param orderId 주문 ID (주문 상세 페이지에서 사용 시 필요)
- * @returns mutation 객체 및 취소 처리 핸들러
- */
-export const useRefundMutation = (orderId?: number) => {
+const { MESSAGE } = ORDER_CONSTANT;
+const [, , CANCELED] = ORDER_STATUS_LIST;
+
+export const useRefundMutation = (orderId: number) => {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: CancelPaymentParams) => requestRefundPayment(data),
+    mutationFn: (payload: RefundRequestAPISchema) =>
+      requestRefundPayment(payload),
 
     onMutate: async (variables): Promise<MutationContext> => {
       // 진행 중인 쿼리 취소
-      await queryClient.cancelQueries({ queryKey: ['orders'] });
-      if (orderId) {
-        await queryClient.cancelQueries({ queryKey: ['order', orderId] });
-      }
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
+      });
+      await queryClient.cancelQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
+      });
 
       // 주문 목록 스냅샷 저장
       const previousOrders = queryClient.getQueryData<OrderHistoryItem[]>([
-        'orders',
+        QUERY_KEYS_ENDPOINT.ORDERS,
       ]);
 
       // 주문 상세 스냅샷 저장
       const previousOrderDetail = orderId
         ? queryClient.getQueryData<OrderDetailResponseAPISchema>([
-            'order',
+            QUERY_KEYS_ENDPOINT.ORDERS,
             orderId,
           ])
         : undefined;
 
       // 낙관적으로 주문 목록 업데이트
       if (previousOrders) {
-        queryClient.setQueryData<OrderHistoryItem[]>(['orders'], old => {
-          if (!old) return old;
+        queryClient.setQueryData<OrderHistoryItem[]>(
+          [QUERY_KEYS_ENDPOINT.ORDERS],
+          old => {
+            if (!old) return old;
 
-          return old.map(order => {
-            if (order.orderNumber === variables.orderNumber) {
-              return { ...order, orderStatus: 'CANCELED' };
-            }
-            return order;
-          });
-        });
+            return old.map(order => {
+              if (order.orderSheetNo === variables.orderSheetNo) {
+                return { ...order, orderStatus: CANCELED };
+              }
+              return order;
+            });
+          },
+        );
       }
 
       // 낙관적으로 주문 상세 업데이트
       if (previousOrderDetail && orderId) {
         queryClient.setQueryData<OrderDetailResponseAPISchema>(
-          ['order', orderId],
+          [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
           old => {
             if (!old) return old;
 
-            return { ...old, orderStatus: 'CANCELED' };
+            return { ...old, orderStatus: CANCELED };
           },
         );
       }
@@ -79,32 +87,30 @@ export const useRefundMutation = (orderId?: number) => {
     onError: (err, variables, context) => {
       // 오류 발생 시 이전 상태로 복구
       if (context?.previousOrders) {
-        queryClient.setQueryData(['orders'], context.previousOrders);
+        queryClient.setQueryData(
+          [QUERY_KEYS_ENDPOINT.ORDERS],
+          context.previousOrders,
+        );
       }
 
       if (context?.previousOrderDetail && context.orderId) {
         queryClient.setQueryData(
-          ['order', context.orderId],
+          [QUERY_KEYS_ENDPOINT.ORDERS, context.orderId],
           context.previousOrderDetail,
         );
       }
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
-      if (orderId) {
-        queryClient.invalidateQueries({ queryKey: ['order', orderId] });
-      }
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS_ENDPOINT.ORDERS] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, orderId],
+      });
     },
   });
 
-  /**
-   * 주문 취소 처리 핸들러
-   * @param orderNumber 주문 번호
-   * @param options 추가 옵션 (취소 사유)
-   */
   const handleCancelOrder = (
-    orderNumber: string,
+    orderSheetNo: string,
     options: {
       cancelReason?: string;
       confirmMessage?: string;
@@ -115,19 +121,18 @@ export const useRefundMutation = (orderId?: number) => {
 
     const {
       cancelReason = '',
-      confirmMessage = '주문을 취소하시겠습니까?',
+      confirmMessage = MESSAGE.CANCEL_ORDER_WARNING,
       itemsCount,
     } = options;
 
     let finalConfirmMessage = confirmMessage;
 
     if (itemsCount && itemsCount > 1) {
-      finalConfirmMessage =
-        '현재는 전체 주문 취소만 가능합니다. 진행하시겠습니까?';
+      finalConfirmMessage = MESSAGE.NOT_PARTIAL_CANCEL_ORDER_WARNING;
     }
 
     if (confirm(finalConfirmMessage)) {
-      mutate({ orderNumber, cancelReason });
+      mutate({ orderSheetNo, cancelReason });
     }
   };
 

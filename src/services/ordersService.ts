@@ -19,7 +19,7 @@ export const checkoutOrder = async (
   return response.data;
 };
 
-export const fetchOrderHistoryList =
+export const fetchOrderHistory =
   async (): Promise<OrderHistoryListResponseAPISchema> => {
     const response = await axiosInstance.get(ORDERS_ENDPOINTS.LIST);
 

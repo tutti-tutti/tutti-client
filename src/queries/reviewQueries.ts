@@ -1,8 +1,12 @@
-import { type InfiniteData, infiniteQueryOptions } from '@tanstack/react-query';
+import {
+  type InfiniteData,
+  infiniteQueryOptions,
+  queryOptions,
+} from '@tanstack/react-query';
 
 import { fetchReviews } from '@/services';
-import { fetchReviewsAction } from '@/server-actions';
-import { QUERY_KEYS_ENDPOINT } from '@/constants';
+import { fetchReviewsAction, getProductReview } from '@/server-actions';
+import { PRODUCTS_QUERY_KEY, QUERY_KEYS_ENDPOINT } from '@/constants';
 import type { ReviewsResponse, ReviewPageParam } from '@/types';
 
 export const reviewsPrefetchInfiniteQueryOptions = (
@@ -55,4 +59,10 @@ export const reviewsInfiniteQueryOptions = (
       };
     },
     staleTime: 60 * 1000,
+  });
+
+export const productReviewQueryOptions = (productId: string) =>
+  queryOptions({
+    queryKey: [PRODUCTS_QUERY_KEY.PRODUCT_REVIEWS, productId],
+    queryFn: () => getProductReview(productId),
   });

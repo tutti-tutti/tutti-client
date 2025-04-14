@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { fetchCategoriesById } from '@/services';
+import { PRODUCT_API_ROUTE_MESSAGE } from '@/constants';
 
 interface Params {
   params: Promise<{ categoryId: number }>;
@@ -14,7 +15,7 @@ export const GET = async (_request: Request, { params }: Params) => {
 
     if (!product) {
       return NextResponse.json(
-        { message: '상품을 찾을 수 없습니다.' },
+        { message: PRODUCT_API_ROUTE_MESSAGE.PRODUCT_NOT_FOUND },
         { status: 404 },
       );
     }

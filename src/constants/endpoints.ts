@@ -33,6 +33,8 @@ export const PRODUCTS_ENDPOINTS = {
   LIST: `${API_RESOURCES.PRODUCTS}`,
   LATEST: `${API_RESOURCES.PRODUCTS}/latest-list`,
   DETAIL: (productId: string) => `${API_RESOURCES.PRODUCTS}/${productId}`,
+  DETAIL_REVIEWS: (productId: string) =>
+    `${API_RESOURCES.PRODUCTS}/${productId}#product-review`,
   RECOMMEND: `${API_RESOURCES.PRODUCTS}/recommend`,
   PAGINATION: `${API_RESOURCES.PRODUCTS}/latest-list/page`,
 };

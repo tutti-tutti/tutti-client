@@ -1,5 +1,9 @@
 import { axiosInstance } from '@/lib';
-import { CART_ENDPOINTS } from '@/constants';
+import {
+  CART_ENDPOINTS,
+  CART_CONSTANTS,
+  PRODUCTS_CONSTANTS,
+} from '@/constants';
 import type {
   Product,
   ProductOption,
@@ -9,6 +13,20 @@ import type {
 } from '@/types';
 import { getAccessToken } from './tokenService';
 import { fetchProductById } from './productService';
+
+const {
+  FETCH_FAIL_MESSAGE,
+  MAX_CART_ITEMS_COUNT,
+  NO_USER_MAX_ADD_COUNT,
+  INVALID_OPTION,
+  MAX_QUANTITY,
+  ADD_SUCCESS_MESSAGE,
+  ADD_FAIL_MESSAGE,
+  DELETE_SELECTED_SUCCESS_MESSAGE,
+  DELETE_SUCCESS_MESSAGE,
+  DELETE_FAIL_MESSAGE,
+  EMPTY_CART_MESSAGE,
+} = CART_CONSTANTS;
 
 export const mapProductToCartItem = (
   product: Product,
@@ -49,7 +67,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
       const response = await axiosInstance.get(CART_ENDPOINTS.LIST);
       return response.data;
     } catch (error) {
-      console.error('장바구니를 불러오는 데 실패했습니다.', error);
+      console.error(FETCH_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
@@ -74,7 +92,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
 
             return mapProductToCartItem(product, selectedOption, item.quantity);
           } catch (error) {
-            console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+            console.error(PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE, error);
             return null;
           }
         }),
@@ -82,7 +100,7 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
 
       return cartItemsWithProducts.filter(Boolean) as CartProductItem[];
     } catch (error) {
-      console.error('장바구니 정보를 불러오는 데 실패했습니다.', error);
+      console.error(FETCH_FAIL_MESSAGE, error);
       throw error;
     }
   }
@@ -90,106 +108,117 @@ export const fetchCart = async (): Promise<CartProductItem[]> => {
 
 export const addToLocalCart = async (
   productId: number,
-  productItemId: number,
-  quantity: number,
+  cartItems: Array<{ productItemId: number; quantity: number }>,
 ) => {
   const currentCart = fetchLocalCart();
-  const MAX_CART_ITEMS_COUNT = 10;
-
-  if (currentCart.length >= MAX_CART_ITEMS_COUNT) {
-    const existingItemIndex = currentCart.findIndex(
-      cartItem => cartItem.productItemId === productItemId,
-    );
-
-    if (existingItemIndex < 0) {
-      return {
-        success: false,
-        message: `비회원은 최대 ${MAX_CART_ITEMS_COUNT}개 상품만 담을 수 있습니다.`,
-        cart: currentCart,
-      };
-    }
-  }
-
-  const existingItemById = currentCart.findIndex(
-    cartItem => cartItem.productItemId === productItemId,
-  );
-
   let maxQuantity = 10;
+  let product;
+
   try {
-    const product = await fetchProductById(String(productId));
+    product = await fetchProductById(String(productId));
     if (product) {
       maxQuantity = product.maxPurchaseQuantity || 10;
-
-      const optionExists = product.productOptionItems.some(
-        option => option.productItemId === productItemId,
-      );
-
-      if (!optionExists) {
-        return {
-          success: false,
-          message: '유효하지 않은 상품 옵션입니다.',
-          cart: currentCart,
-        };
-      }
     }
   } catch (error) {
-    console.error('상품 정보를 불러오는 데 실패했습니다.', error);
+    console.error(PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE, error);
+    return {
+      success: false,
+      message: PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE,
+      cart: currentCart,
+    };
   }
 
-  if (existingItemById >= 0) {
-    const existingItem = currentCart[existingItemById];
-    const newQuantity = existingItem.quantity + quantity;
+  const newItemsCount = cartItems.filter(
+    item =>
+      !currentCart.some(
+        cartItem => cartItem.productItemId === item.productItemId,
+      ),
+  ).length;
 
-    if (newQuantity > maxQuantity) {
+  if (currentCart.length + newItemsCount > MAX_CART_ITEMS_COUNT) {
+    return {
+      success: false,
+      message: NO_USER_MAX_ADD_COUNT(MAX_CART_ITEMS_COUNT),
+      cart: currentCart,
+    };
+  }
+
+  if (product) {
+    const invalidOptions = cartItems.filter(
+      item =>
+        !product.productOptionItems.some(
+          option => option.productItemId === item.productItemId,
+        ),
+    );
+
+    if (invalidOptions.length > 0) {
       return {
         success: false,
-        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
+        message: INVALID_OPTION,
         cart: currentCart,
       };
     }
-
-    currentCart[existingItemById].quantity = newQuantity;
-  } else {
-    if (quantity > maxQuantity) {
-      return {
-        success: false,
-        message: `최대 구매 수량은 ${maxQuantity}개입니다.`,
-        cart: currentCart,
-      };
-    }
-
-    currentCart.push({
-      productId,
-      productItemId,
-      quantity,
-    });
   }
 
-  localStorage.setItem('cart', JSON.stringify(currentCart));
+  const updatedCart = [...currentCart];
+  let quantityExceeded = false;
+
+  cartItems.forEach(item => {
+    const existingItemIndex = updatedCart.findIndex(
+      cartItem => cartItem.productItemId === item.productItemId,
+    );
+
+    if (existingItemIndex >= 0) {
+      const newQuantity =
+        updatedCart[existingItemIndex].quantity + item.quantity;
+
+      if (newQuantity > maxQuantity) {
+        quantityExceeded = true;
+        return;
+      }
+
+      updatedCart[existingItemIndex].quantity = newQuantity;
+    } else {
+      if (item.quantity > maxQuantity) {
+        quantityExceeded = true;
+        return;
+      }
+
+      updatedCart.push({
+        productId,
+        productItemId: item.productItemId,
+        quantity: item.quantity,
+      });
+    }
+  });
+
+  if (quantityExceeded) {
+    return {
+      success: false,
+      message: MAX_QUANTITY(maxQuantity),
+      cart: currentCart,
+    };
+  }
+
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
 
   return {
     success: true,
-    message: '장바구니에 추가되었습니다.',
-    cart: currentCart,
+    message: ADD_SUCCESS_MESSAGE,
+    cart: updatedCart,
   };
 };
 
 export const addCart = async (
   productId: number,
-  productItemId: number,
-  quantity: number,
+  cartItems: Array<{ productItemId: number; quantity: number }>,
 ) => {
   const accessToken = await getAccessToken();
 
   if (accessToken) {
     try {
       const apiPayload: CartAddRequestSchema = {
-        cartItems: [
-          {
-            productItemId,
-            quantity,
-          },
-        ],
+        cartItems: cartItems,
       };
       const { data } = await axiosInstance.post(
         CART_ENDPOINTS.LIST,
@@ -197,11 +226,11 @@ export const addCart = async (
       );
       return data;
     } catch (error) {
-      console.error('장바구니에 추가하는 데 실패했습니다.', error);
+      console.error(ADD_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
-    return addToLocalCart(productId, productItemId, quantity);
+    return addToLocalCart(productId, cartItems);
   }
 };
 
@@ -233,11 +262,11 @@ export const removeFromCart = async (
         success: true,
         message:
           productItemIds.length > 1
-            ? '선택한 상품이 삭제되었습니다.'
-            : '상품이 삭제되었습니다.',
+            ? DELETE_SELECTED_SUCCESS_MESSAGE
+            : DELETE_SUCCESS_MESSAGE,
       };
     } catch (error) {
-      console.error('장바구니 상품 삭제에 실패했습니다.', error);
+      console.error(DELETE_FAIL_MESSAGE, error);
       throw error;
     }
   } else {
@@ -246,7 +275,7 @@ export const removeFromCart = async (
       if (!localCart) {
         return {
           success: false,
-          message: '장바구니 비어있습니다.',
+          message: EMPTY_CART_MESSAGE,
           cart: [],
         };
       }
@@ -262,12 +291,12 @@ export const removeFromCart = async (
         success: true,
         message:
           productItemIds.length > 1
-            ? '선택한 상품이 삭제되었습니다.'
-            : '상품이 삭제되었습니다.',
+            ? DELETE_SELECTED_SUCCESS_MESSAGE
+            : DELETE_SUCCESS_MESSAGE,
         cart: updatedCart,
       };
     } catch (error) {
-      console.error('장바구니 삭제에 실패했습니다.', error);
+      console.error(DELETE_FAIL_MESSAGE, error);
       throw error;
     }
   }

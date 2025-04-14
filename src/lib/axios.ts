@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance, type AxiosRequestConfig } from 'axios';
 
 import { SERVER_API_BASE_URL } from '@/constants';
 import {
@@ -8,13 +8,28 @@ import {
   removeTokens,
 } from '@/services';
 
+interface ImproveFetchOptionsAxiosRequestConfig extends AxiosRequestConfig {
+  fetchOptions?: RequestInit;
+}
+
 const isServer = typeof window === 'undefined';
 const baseURL = isServer
   ? SERVER_API_BASE_URL
   : `${window.location.origin}/api`;
 
-export const staticAxios = axios.create({
-  baseURL: SERVER_API_BASE_URL,
+const createFetchAdaptedAxios = (
+  config: ImproveFetchOptionsAxiosRequestConfig,
+): AxiosInstance => {
+  const configs = {
+    adapter: 'fetch',
+    fetchOptions: { cache: 'no-store' },
+    ...config,
+  };
+  return axios.create(configs);
+};
+
+export const staticAxios = createFetchAdaptedAxios({
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -22,7 +37,7 @@ export const staticAxios = axios.create({
   timeout: 10000,
 });
 
-export const axiosInstance = axios.create({
+export const axiosInstance = createFetchAdaptedAxios({
   baseURL,
   headers: {
     'Content-Type': 'application/json',

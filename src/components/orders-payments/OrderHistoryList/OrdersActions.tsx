@@ -1,42 +1,45 @@
 'use client';
 
 import { cn } from '@/utils';
+import { ORDER_CONSTANT } from '@/constants';
 import { useRefundMutation } from '@/hooks';
 import { Button } from '@/components';
 
 interface OrdersActionsProps {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   itemsCount: number;
   isCanceled?: boolean;
   className?: string;
 }
 
+const { TEXT_BUTTON, MESSAGE } = ORDER_CONSTANT;
+
+const BUTTON_STYLES = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
+
 const OrdersActions = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   itemsCount,
   isCanceled = false,
   className,
 }: OrdersActionsProps) => {
   const { isPending, handleCancelOrder } = useRefundMutation(orderId);
 
-  const onCancelOrder = () => {
+  const handleCancelPartialOrder = () => {
     if (isPending) return;
 
-    handleCancelOrder(orderNumber, {
+    handleCancelOrder(orderSheetNo, {
       itemsCount,
       confirmMessage:
         itemsCount > 1
-          ? '현재는 전체 주문 취소만 가능합니다. 진행하시겠습니까?'
-          : '해당 상품의 주문을 취소합니다. 진행하시겠습니까?',
+          ? MESSAGE.NOT_PARTIAL_CANCEL_ORDER_WARNING
+          : MESSAGE.CANCEL_ORDER_WARNING,
     });
   };
 
   const handleConfirmShipping = () =>
-    alert('지금은 배송 현황을 확인할 수 없습니다.');
-
-  const buttonStyles = 'h-[40px] md:h-[60px] w-full md:w-[147px]';
+    alert(MESSAGE.NOT_FOUND_DELIVERY_TRACKING);
 
   return (
     <article
@@ -48,19 +51,20 @@ const OrdersActions = ({
       <Button
         type="button"
         variant="primaryOutline"
-        className={buttonStyles}
+        className={BUTTON_STYLES}
         onClick={handleConfirmShipping}
       >
-        배송 조회
+        {TEXT_BUTTON.DELIVERY_TRACKING}
       </Button>
+
       {!isCanceled && (
         <Button
           type="button"
           variant="tertiaryOutline"
-          className={buttonStyles}
-          onClick={onCancelOrder}
+          className={BUTTON_STYLES}
+          onClick={handleCancelPartialOrder}
         >
-          {isPending ? '처리 중...' : '주문 취소'}
+          {isPending ? TEXT_BUTTON.PENDING : TEXT_BUTTON.CANCEL}
         </Button>
       )}
     </article>

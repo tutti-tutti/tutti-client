@@ -31,6 +31,11 @@ export interface Product {
   productReviewInfo?: ProductReviewInfo;
 }
 
+export interface SelectedOptionItem {
+  option: ProductOption;
+  quantity: number;
+}
+
 export interface PaginatedProductsResponseAPISchema {
   hasNext: boolean;
   nextCursorId: number | null;

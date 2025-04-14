@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ROUTER_PATH } from '@/constants';
+import { CART_CONSTANTS, ROUTER_PATH } from '@/constants';
 import { cn, formatPrice, toast } from '@/utils';
 import { useCart } from '@/hooks';
 import {
@@ -13,6 +13,9 @@ import {
   Button,
 } from '@/components';
 import CartHeader from './CartHeader';
+
+const { CART_TOAST_MESSAGE, ALL_CHECKED, REMOVE_CHECKED, PAYMENT } =
+  CART_CONSTANTS;
 
 const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const router = useRouter();
@@ -39,12 +42,12 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 
   const handleCheckoutClick = () => {
     if (!isLoggedIn) {
-      toast.warning('로그인 후 이용해주세요!');
+      toast.warning(CART_TOAST_MESSAGE.LOGIN);
       router.push(ROUTER_PATH.LOGIN);
       return;
     }
     if (checkedCount === 0) {
-      toast.warning('주문할 상품을 선택해주세요!');
+      toast.warning(CART_TOAST_MESSAGE.OPTION);
     } else {
       router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
     }
@@ -59,7 +62,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <div className="gap-sm flex items-center">
             <div className="py-md flex w-full items-center justify-between">
               <Checkbox
-                label={`전체선택하기 (${checkedCount}/${totalCount})`}
+                label={`${ALL_CHECKED} (${checkedCount}/${totalCount})`}
                 checked={isAllChecked}
                 onChange={checked => toggleAllCheckbox(checked)}
                 disabled={totalCount === 0}
@@ -71,7 +74,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 )}
                 onClick={handleDeleteSelected}
               >
-                선택삭제
+                {REMOVE_CHECKED}
               </ExtraButton>
             </div>
           </div>
@@ -91,7 +94,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             variant={checkedCount === 0 ? 'disabled' : 'primary'}
             onClick={handleCheckoutClick}
           >
-            {formatPrice(finalPrice)} 결제하기
+            {formatPrice(finalPrice)} {PAYMENT}
           </Button>
         </section>
       </div>

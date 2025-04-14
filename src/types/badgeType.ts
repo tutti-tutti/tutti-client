@@ -1,21 +1,23 @@
-export type BadgeVariant =
+export type BadgeColor =
   | 'secondary'
-  | 'secondaryOutline'
-  | 'secondaryOutlineSquare'
-  | 'secondaryDot'
   | 'primary'
-  | 'primaryOutline'
-  | 'primaryOutlineSquare'
-  | 'primaryDot'
   | 'success'
-  | 'successOutline'
-  | 'successOutlineSquare'
-  | 'successDot'
   | 'warning'
-  | 'warningOutline'
-  | 'warningOutlineSquare'
-  | 'warningDot'
-  | 'danger'
-  | 'dangerOutline'
-  | 'dangerOutlineSquare'
-  | 'dangerDot';
+  | 'danger';
+
+export type BadgeStyle =
+  | 'default'
+  | 'subtle'
+  | 'subtleSquare'
+  | 'outlineSquare'
+  | 'dot';
+
+export interface BadgeVariant {
+  color: BadgeColor;
+  style: BadgeStyle;
+}
+
+export interface OrderStatusInfo {
+  label: string;
+  variant: BadgeVariant;
+}

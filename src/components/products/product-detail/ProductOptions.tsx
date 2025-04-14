@@ -1,71 +1,78 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { Dropdown } from '@/components';
+import { PRODUCTS_CONSTANTS } from '@/constants';
+import { useProductOptions } from '@/hooks';
 import type { ProductOption } from '@/types';
+import ProductSelectInfo from './ProductSelectInfo';
 
 interface ProductOptionsProps {
   productItems: ProductOption[];
-  handleOptionChange: (selectedOption: ProductOption) => void;
+  handleOptionChange: (
+    selectedOptions: ProductOption[],
+    quantities: number[],
+  ) => void;
+  maxPurchaseQuantity: number;
 }
 
 const ProductOptions = ({
   productItems,
   handleOptionChange,
+  maxPurchaseQuantity,
 }: ProductOptionsProps) => {
-  const hasOptions = productItems.some(
-    item => item.firstOptionName !== null || item.secondOptionName !== null,
-  );
-
-  useEffect(() => {
-    if (!hasOptions && productItems.length > 0) {
-      handleOptionChange(productItems[0]);
-    }
-  }, [productItems, hasOptions, handleOptionChange]);
-
-  const formatDropdownOptions = (options: ProductOption[]) => {
-    return options.map(option => ({
-      value: option.productItemId.toString(),
-      label: `${option.firstOptionValue || ''}${
-        option.secondOptionValue
-          ? (option.firstOptionValue ? ', ' : '') + option.secondOptionValue
-          : ''
-      }${
-        option.additionalPrice && option.additionalPrice > 0
-          ? `(+${option.additionalPrice.toLocaleString()}원)`
-          : option.additionalPrice && option.additionalPrice < 0
-            ? `(${option.additionalPrice.toLocaleString()}원)`
-            : ''
-      }`,
-      additionalPrice: option.additionalPrice || 0,
-    }));
-  };
-
-  if (!hasOptions) {
-    return null;
-  }
+  const {
+    selectedOptions,
+    hasOptions,
+    addOption,
+    handleIncrease,
+    handleDecrease,
+    handleRemove,
+    formatDropdownOptions,
+  } = useProductOptions(productItems, handleOptionChange, maxPurchaseQuantity);
 
   return (
     <article className="gap-lg pt-lg md:pt-xl flex flex-col">
-      <div className="gap-md flex items-center">
-        <label className="font-style-subHeading text-text-secondary min-w-[60px]">
-          옵션
-        </label>
-        <Dropdown
-          options={formatDropdownOptions(productItems)}
-          placeholder="옵션 선택"
-          onChange={selectedOption => {
-            const selectedValue = productItems.find(
-              option =>
-                option.productItemId.toString() === selectedOption.value,
-            );
-            if (selectedValue) {
-              handleOptionChange(selectedValue);
-            }
-          }}
-        />
-      </div>
+      {hasOptions ? (
+        <>
+          <div className="gap-md flex items-center">
+            <label className="font-style-subHeading text-text-secondary min-w-[60px]">
+              {PRODUCTS_CONSTANTS.OPTION}
+            </label>
+            <Dropdown
+              options={formatDropdownOptions(productItems)}
+              placeholder={PRODUCTS_CONSTANTS.OPTION_SELECT}
+              onChange={addOption}
+            />
+          </div>
+
+          <ProductSelectInfo
+            selectedOptions={selectedOptions.map((item, index) => ({
+              option: item.option,
+              quantity: item.quantity,
+              index,
+            }))}
+            maxPurchaseQuantity={maxPurchaseQuantity}
+            handleIncrease={handleIncrease}
+            handleDecrease={handleDecrease}
+            handleRemove={handleRemove}
+          />
+        </>
+      ) : (
+        selectedOptions.length > 0 && (
+          <ProductSelectInfo
+            selectedOptions={selectedOptions.map((item, index) => ({
+              option: item.option,
+              quantity: item.quantity,
+              index,
+            }))}
+            maxPurchaseQuantity={maxPurchaseQuantity}
+            handleIncrease={handleIncrease}
+            handleDecrease={handleDecrease}
+            handleRemove={handleRemove}
+            showRemoveButton={false}
+          />
+        )
+      )}
     </article>
   );
 };

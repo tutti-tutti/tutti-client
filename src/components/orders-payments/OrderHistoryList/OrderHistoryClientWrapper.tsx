@@ -2,26 +2,25 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchOrderHistoryList } from '@/services';
-import type { OrderHistoryItem } from '@/types';
+import { QUERY_KEYS_ENDPOINT } from '@/constants';
+import { fetchOrderHistory } from '@/services';
+import type { OrderHistoryListResponseAPISchema } from '@/types';
 import { OrderHistoryListGroup } from '@/components';
 
 interface OrderHistoryClientWrapperProps {
-  initialOrderHistoryList: OrderHistoryItem[];
+  initialOrderHistory: OrderHistoryListResponseAPISchema;
 }
 
 const OrderHistoryClientWrapper = ({
-  initialOrderHistoryList,
+  initialOrderHistory,
 }: OrderHistoryClientWrapperProps) => {
-  // 초기 데이터를 사용하면서 백그라운드에서 새로운 데이터 가져오기
-
-  const { data: orderHistoryList } = useQuery({
-    queryKey: ['orders'],
-    queryFn: fetchOrderHistoryList,
-    initialData: initialOrderHistoryList,
+  const { data: orderHistory } = useQuery({
+    queryKey: [QUERY_KEYS_ENDPOINT.ORDERS],
+    queryFn: fetchOrderHistory,
+    initialData: initialOrderHistory,
   });
 
-  return <OrderHistoryListGroup orderHistoryList={orderHistoryList} />;
+  return <OrderHistoryListGroup orderHistoryList={orderHistory.content} />;
 };
 
 export default OrderHistoryClientWrapper;

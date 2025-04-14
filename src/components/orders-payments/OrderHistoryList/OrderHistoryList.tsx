@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/utils';
+import { ORDER_STATUS_LIST } from '@/constants';
 import type { OrderItem, OrderStatus } from '@/types';
 import {
   ProductThumbnail,
@@ -14,34 +15,36 @@ import { default as OrdersExtraActions } from './OrdersExtraActions';
 
 type OrderProductListProps = {
   orderId: number;
-  orderNumber: string;
+  orderSheetNo: string;
   orderItems: OrderItem[];
   orderStatus: string;
 };
 
+const [, , CANCELED] = ORDER_STATUS_LIST;
+
+const PADDING_STYLES = 'px-0 py-md md:py-xl';
+const THUMB_COLUMN_STYLES = 'w-[120px] md:w-[288px]';
+const INFO_COLUMN_STYLES = 'w-full md:w-full';
+
 const OrderHistoryList = ({
   orderId,
-  orderNumber,
+  orderSheetNo,
   orderItems,
   orderStatus,
 }: OrderProductListProps) => {
   const itemsCount = orderItems.length;
-
-  const paddingStyles = 'px-0 py-md md:py-xl';
-  const thumbColumnStyles = 'w-[120px] md:w-[288px]';
-  const infoColumnStyles = 'w-full md:w-full';
 
   return (
     <ul>
       {orderItems.map(item => (
         <li
           key={`${orderId}-${item.productItemId}`}
-          className={cn(paddingStyles, 'border-border-secondary border-b')}
+          className={cn(PADDING_STYLES, 'border-border-secondary border-b')}
         >
           <article className="gap-style-orderList flex-col">
             <div className="gap-4xl flex justify-between">
               <article className="gap-style-orderList flex-1">
-                <div className={thumbColumnStyles}>
+                <div className={THUMB_COLUMN_STYLES}>
                   <ProductThumbnail
                     width="w-full"
                     className="aspect-200/175"
@@ -52,7 +55,7 @@ const OrderHistoryList = ({
 
                 <div
                   className={cn(
-                    infoColumnStyles,
+                    INFO_COLUMN_STYLES,
                     'gap-2xs items-between flex flex-col',
                   )}
                 >
@@ -82,9 +85,9 @@ const OrderHistoryList = ({
 
                   <OrdersExtraActions
                     orderId={orderId}
-                    orderNumber={orderNumber}
+                    orderSheetNo={orderSheetNo}
                     productItemId={item.productItemId}
-                    isCanceled={orderStatus === 'CANCELED'}
+                    isCanceled={orderStatus === CANCELED}
                   />
                 </div>
               </article>
@@ -92,8 +95,8 @@ const OrderHistoryList = ({
                 <OrdersActions
                   orderId={orderId}
                   itemsCount={itemsCount}
-                  orderNumber={orderNumber}
-                  isCanceled={orderStatus === 'CANCELED'}
+                  orderSheetNo={orderSheetNo}
+                  isCanceled={orderStatus === CANCELED}
                 />
               </div>
             </div>
@@ -109,8 +112,8 @@ const OrderHistoryList = ({
               <OrdersActions
                 orderId={orderId}
                 itemsCount={itemsCount}
-                orderNumber={orderNumber}
-                isCanceled={orderStatus === 'CANCELED'}
+                orderSheetNo={orderSheetNo}
+                isCanceled={orderStatus === CANCELED}
               />
             </div>
           </article>

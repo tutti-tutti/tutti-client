@@ -77,8 +77,8 @@ export const Default: Story = {
 
       return (
         <QueryClientProvider client={queryClient}>
-          <div className="layout-max-width py-md m-auto">
-            <main className="px-container">
+          <div className="layout-max-width m-auto">
+            <main className="px-container py-md">
               <Story />
             </main>
           </div>

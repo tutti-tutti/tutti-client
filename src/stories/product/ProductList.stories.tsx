@@ -55,8 +55,8 @@ const meta: Meta<typeof ProductListMock> = {
   },
   decorators: [
     Story => (
-      <div className="layout-max-width py-md m-auto">
-        <main className="px-container">
+      <div className="layout-max-width m-auto">
+        <main className="px-container py-md">
           <Story />
         </main>
       </div>

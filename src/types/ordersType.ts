@@ -1,6 +1,6 @@
 import { ORDER_STATUS_LIST } from '@/constants';
 
-export interface OrderProductItem {
+export interface CheckoutProductItem {
   productItemId: number;
   quantity: number;
 }
@@ -28,7 +28,7 @@ export interface GroupedOrderItemByExpectedArrivalAt {
 
 // 주문서 요청 API 스키마
 export interface OrderCheckoutRequestAPISchema {
-  orderItems: OrderProductItem[];
+  orderItems: CheckoutProductItem[];
 }
 
 // 주문서 응답 API 스키마

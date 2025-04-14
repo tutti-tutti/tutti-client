@@ -22,3 +22,4 @@ export { default as Breadcrumb } from './Breadcrumb';
 export { default as NoData } from './NoData';
 export { default as ErrorPageTemplate } from './ErrorPageTemplate';
 export { default as ClickText } from './ClickText';
+export { default as PageContentHeader } from './PageContentHeader';

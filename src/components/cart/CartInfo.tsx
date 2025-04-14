@@ -12,7 +12,6 @@ import {
   CartPaymentInfo,
   Button,
 } from '@/components';
-import CartHeader from './CartHeader';
 
 const { CART_TOAST_MESSAGE, ALL_CHECKED, REMOVE_CHECKED, PAYMENT } =
   CART_CONSTANTS;
@@ -55,7 +54,6 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 
   return (
     <>
-      <CartHeader />
 
       <div className="gap-2xl flex flex-col md:flex-row">
         <section className="-mt-4xl md:w-2/3">

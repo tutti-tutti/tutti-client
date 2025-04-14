@@ -3,7 +3,7 @@
 import { useCart } from '@/hooks';
 import { CART_CONSTANTS } from '@/constants';
 import CartItem from './CartItem';
-import { MoreViewButton } from '../common';
+import { MoreViewButton, NoData } from '../common';
 
 const CartList = () => {
   const { items, isPending } = useCart();
@@ -20,13 +20,7 @@ const CartList = () => {
   }
 
   if (items.length === 0) {
-    return (
-      <div className="py-xl text-center">
-        <p className="text-text-secondary font-style-heading">
-          {CART_CONSTANTS.EMPTY_CART_MESSAGE}
-        </p>
-      </div>
-    );
+    return <NoData>{CART_CONSTANTS.EMPTY_CART_MESSAGE}</NoData>;
   }
 
   return (

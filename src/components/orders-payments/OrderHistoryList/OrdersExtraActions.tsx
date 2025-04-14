@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import {
@@ -35,7 +36,9 @@ const OrdersExtraActions = ({
   return (
     <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
-        {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderSheetNo}
+        <Link href={ROUTER_PATH.ORDERS_DETAIL(orderId)}>
+          {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderSheetNo}
+        </Link>
       </div>
 
       <div className="gap-xs flex justify-end">

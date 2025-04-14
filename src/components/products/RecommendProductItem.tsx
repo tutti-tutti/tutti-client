@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { ROUTER_PATH } from '@/constants';
 import { calculateDiscountRate, formatPrice } from '@/utils';
 import type { Product } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
@@ -18,7 +19,7 @@ const RecommendProductItem = ({
 
   return (
     <li className="px-xs">
-      <Link href={`/products/${productId}`}>
+      <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
         <ProductThumbnail
           imageUrl={titleUrl || 'null'}
           name={name}

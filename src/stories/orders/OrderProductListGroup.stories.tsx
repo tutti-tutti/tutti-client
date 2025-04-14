@@ -113,8 +113,10 @@ const meta: Meta<typeof OrderProductListGroupMock> = {
   },
   decorators: [
     Story => (
-      <div className="container mx-auto p-4">
-        <Story />
+      <div className="layout-max-width py-md m-auto">
+        <main className="px-container">
+          <Story />
+        </main>
       </div>
     ),
   ],

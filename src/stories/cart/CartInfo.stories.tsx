@@ -15,8 +15,10 @@ const meta: Meta<typeof CartInfo> = {
   decorators: [
     Story => {
       return (
-        <div className="max-w-7xl">
-          <Story />
+        <div className="layout-max-width py-md m-auto">
+          <main className="px-container">
+            <Story />
+          </main>
         </div>
       );
     },

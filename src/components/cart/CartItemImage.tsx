@@ -1,10 +1,13 @@
 'use client';
 
+import Link from 'next/link';
+
 import { Checkbox } from '../common';
 import { ProductThumbnail } from '../products';
 
 interface CartItemImageProps {
   productId: number;
+  productItemId: number;
   productImgUrl: string;
   productItemName: string;
   isChecked: boolean;
@@ -13,6 +16,7 @@ interface CartItemImageProps {
 
 const CartItemImage = ({
   productId,
+  productItemId,
   productImgUrl,
   productItemName,
   isChecked,
@@ -23,16 +27,19 @@ const CartItemImage = ({
       <div className="absolute top-5 left-5 z-1">
         <Checkbox
           checked={isChecked}
-          onChange={checked => toggleItemCheckbox(productId, checked)}
+          onChange={checked => toggleItemCheckbox(productItemId, checked)}
         />
       </div>
-      <ProductThumbnail
-        height="h-auto"
-        width="w-full"
-        imageUrl={productImgUrl}
-        name={productItemName}
-        className="aspect-square"
-      />
+
+      <Link href={`/products/${productId}`}>
+        <ProductThumbnail
+          height="h-auto"
+          width="w-full"
+          imageUrl={productImgUrl}
+          name={productItemName}
+          className="aspect-square"
+        />
+      </Link>
     </figure>
   );
 };

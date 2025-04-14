@@ -12,6 +12,7 @@ export interface CartAddRequestSchema {
 }
 
 export interface CartProductItem {
+  productId: number;
   cartItemId: number;
   storeName: string;
   productItemId: number;

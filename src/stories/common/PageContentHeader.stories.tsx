@@ -25,11 +25,11 @@ const meta = {
     decorators: [
       Story => {
         return (
-          <div className="layout-max-width">
-            <main className='px-container'>
-              <Story />
-            </main>
-          </div>
+            <div className="layout-max-width m-auto">
+              <main className='px-container'>
+                <Story />
+              </main>
+            </div>
         );
       },
     ],

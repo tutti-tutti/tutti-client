@@ -1,5 +1,6 @@
 const cart = [
   {
+    productId: 1,
     cartItemId: 78901,
     storeName: '깔끔이몰',
     productItemId: 1,
@@ -18,6 +19,7 @@ const cart = [
     maxQuantity: 10,
   },
   {
+    productId: 2,
     cartItemId: 78902,
     storeName: 'Shop9876543210',
     productItemId: 2,
@@ -35,6 +37,7 @@ const cart = [
     maxQuantity: 10,
   },
   {
+    productId: 3,
     cartItemId: 78903,
     storeName: 'Shop2468101214',
     productItemId: 3,

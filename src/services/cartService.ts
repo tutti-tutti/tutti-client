@@ -36,6 +36,7 @@ export const mapProductToCartItem = (
   return {
     cartItemId: -1,
     storeName: product.storeName,
+    productId: product.productId,
     productItemId: selectedOption.productItemId,
     productImgUrl: product.titleUrl as string,
     productItemName: product.name,

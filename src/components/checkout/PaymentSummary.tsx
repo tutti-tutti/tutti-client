@@ -1,3 +1,4 @@
+import { CHECKOUT_CONSTANT } from '@/constants';
 import { formatPrice, cn } from '@/utils';
 
 interface PaymentSummaryProps {
@@ -7,39 +8,48 @@ interface PaymentSummaryProps {
   totalAmount: number;
 }
 
+const {
+  TOTAL_PRODUCT_AMOUNT,
+  DISCOUNT_AMOUNT,
+  DELIVERY_FEE,
+  TOTAL_PAYMENT_AMOUNT,
+} = CHECKOUT_CONSTANT.PAYMENT_SUMMARY;
+
+const FIELD_STYLES = 'h-[24px] md:h-[32px] font-normal text-left';
+const FIELD_NAME_STYLES = `${FIELD_STYLES} w-[200px]`;
+const FIELD_VALUE_STYLES = `${FIELD_STYLES}`;
+
 const PaymentSummary = ({
   totalProductAmount,
   totalDiscountAmount,
   deliveryFee,
   totalAmount,
 }: PaymentSummaryProps) => {
-  const fieldStyles = 'h-[24px] md:h-[32px] font-normal text-left';
-  const fieldNameStyles = `${fieldStyles} w-[200px]`;
-  const fieldValueStyles = `${fieldStyles}`;
-
   return (
     <div className="py-lg border-border-primary border-y">
       <table className="w-full">
         <tbody>
           <tr>
-            <th className={fieldNameStyles}>총 상품가격</th>
-            <td className={fieldValueStyles}>
+            <th className={FIELD_NAME_STYLES}>{TOTAL_PRODUCT_AMOUNT}</th>
+            <td className={FIELD_VALUE_STYLES}>
               {formatPrice(totalProductAmount)}
             </td>
           </tr>
           <tr>
-            <th className={fieldNameStyles}>할인 금액</th>
-            <td className={cn(fieldValueStyles, 'text-text-danger')}>
+            <th className={FIELD_NAME_STYLES}>{DISCOUNT_AMOUNT}</th>
+            <td className={cn(FIELD_VALUE_STYLES, 'text-text-danger')}>
               -{formatPrice(totalDiscountAmount)}
             </td>
           </tr>
           <tr>
-            <th className={fieldNameStyles}>배송비</th>
-            <td className={fieldValueStyles}>{formatPrice(deliveryFee)}</td>
+            <th className={FIELD_NAME_STYLES}>{DELIVERY_FEE}</th>
+            <td className={FIELD_VALUE_STYLES}>{formatPrice(deliveryFee)}</td>
           </tr>
           <tr className="font-semibold md:text-[24px]">
-            <th className={cn(fieldNameStyles, 'pt-lg')}>총 결제 금액</th>
-            <td className={cn(fieldValueStyles, 'pt-lg')}>
+            <th className={cn(FIELD_NAME_STYLES, 'pt-lg')}>
+              {TOTAL_PAYMENT_AMOUNT}
+            </th>
+            <td className={cn(FIELD_VALUE_STYLES, 'pt-lg')}>
               {formatPrice(totalAmount)}
             </td>
           </tr>

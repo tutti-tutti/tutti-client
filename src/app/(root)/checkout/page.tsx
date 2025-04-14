@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { PATH_NAME, CHECKOUT_CONSTANT } from '@/constants';
 import { checkoutOrder } from '@/services';
 import {
   CheckoutProductListGroup,
@@ -25,9 +26,13 @@ export async function generateMetadata({
   if (!orderProductItems) return;
 
   return {
-    title: '주문 결제',
+    title: PATH_NAME.ORDER_CHECKOUT,
   };
 }
+
+const { SECTION_TITLE } = CHECKOUT_CONSTANT;
+
+const ADDRESS_GAP_STYLES = 'flex flex-col gap-sm';
 
 const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   const { orderProductItems: productItemsJson } = await searchParams;
@@ -49,26 +54,26 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
     orderItems,
   } = await checkoutOrder(payload);
 
-  const addressGapStyles = 'flex flex-col gap-sm';
-
   return (
     <div className="gap-4xl mx-auto flex max-w-[630px] flex-col">
       <CheckoutHeader />
 
-      <section className={addressGapStyles}>
-        <SectionTitle>받는 사람 정보</SectionTitle>
-        <ShippingAddressForm gapStyles={addressGapStyles} />
+      <section className={ADDRESS_GAP_STYLES}>
+        <SectionTitle>{SECTION_TITLE.RECIPIENT_INFO}</SectionTitle>
+        <ShippingAddressForm gapStyles={ADDRESS_GAP_STYLES} />
       </section>
 
       <Divider />
 
       <section className="gap-lg flex flex-col">
-        <SectionTitle className="leading-none">결제 상품 정보</SectionTitle>
+        <SectionTitle className="leading-none">
+          {SECTION_TITLE.CHECKOUT_PRODUCT_INFO}
+        </SectionTitle>
         <CheckoutProductListGroup orderItems={orderItems} />
       </section>
 
       <section>
-        <SectionTitle>결제 예상 가격</SectionTitle>
+        <SectionTitle>{SECTION_TITLE.EXPECTED_PAYMENT_AMOUNT}</SectionTitle>
         <PaymentSummary
           totalProductAmount={totalProductAmount}
           totalDiscountAmount={totalDiscountAmount}
@@ -78,7 +83,7 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
       </section>
 
       <section className="h-[610px] md:h-[680px]">
-        <SectionTitle>결제 수단</SectionTitle>
+        <SectionTitle>{SECTION_TITLE.PAYMENT_METHOD}</SectionTitle>
         <PaymentMethodSelector
           totalDiscountAmount={totalDiscountAmount}
           totalProductAmount={totalProductAmount}

@@ -1,7 +1,10 @@
 'use client';
 
 import { ChangeEvent, useEffect, useRef } from 'react';
-import { SHIPPING_ADDRESS_INPUT_ITEMS } from '@/constants';
+import {
+  SHIPPING_ADDRESS_INPUT_ITEMS,
+  ADDRESS_FORM_CONSTANT,
+} from '@/constants';
 import { useShippingAddressStore } from '@/stores';
 import { cn } from '@/utils';
 import type { AddressInputItem } from '@/types';
@@ -10,6 +13,10 @@ import { Input, Button } from '@/components';
 interface ShippingAddressFormProps {
   gapStyles: string;
 }
+
+const { MESSAGE, ADDRESS_SEARCH_BUTTON } = ADDRESS_FORM_CONSTANT;
+
+const LEGEND_STYLES = 'absolute opacity-0';
 
 const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
   const { formData, updateField } = useShippingAddressStore();
@@ -51,7 +58,7 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
 
   const openAddressSearch = () => {
     if (!window.daum || !scriptLoaded.current) {
-      alert('주소 검색 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+      alert(MESSAGE.LAODING);
       return;
     }
 
@@ -70,15 +77,13 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
     }).open();
   };
 
-  const legendStyles = 'absolute opacity-0';
-
   return (
     <form className={gapStyles}>
       {SHIPPING_ADDRESS_INPUT_ITEMS.map((item, index) => {
         if (item.name === 'zipCode') {
           return (
             <fieldset key={`${item.name}-${index}`}>
-              <legend className={legendStyles}>{item.label}</legend>
+              <legend className={LEGEND_STYLES}>{item.label}</legend>
               <div className={cn(gapStyles, 'flex-row justify-between')}>
                 <Input
                   className="bg-bg-tertiary"
@@ -94,7 +99,7 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
                   onClick={openAddressSearch}
                   className="h-[54px]"
                 >
-                  주소 검색
+                  {ADDRESS_SEARCH_BUTTON}
                 </Button>
               </div>
             </fieldset>
@@ -103,7 +108,7 @@ const ShippingAddressForm = ({ gapStyles }: ShippingAddressFormProps) => {
 
         return (
           <fieldset key={`${item.name}-${index}`}>
-            <legend className={legendStyles}>{item.label}</legend>
+            <legend className={LEGEND_STYLES}>{item.label}</legend>
             <Input
               className="bg-bg-tertiary"
               name={item.name}

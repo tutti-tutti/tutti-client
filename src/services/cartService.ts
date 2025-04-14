@@ -217,6 +217,41 @@ export const addCart = async (
 
   if (accessToken) {
     try {
+      const { data: currentCart } = await axiosInstance.get<CartProductItem[]>(
+        CART_ENDPOINTS.LIST,
+      );
+
+      let quantityExceeded = false;
+      let exceededMaxQuantity = 10;
+
+      for (const item of cartItems) {
+        const existingItem = currentCart.find(
+          cartItem => cartItem.productItemId === item.productItemId,
+        );
+
+        let newQuantity = item.quantity;
+        let itemMaxQuantity = 10;
+
+        if (existingItem) {
+          newQuantity = existingItem.quantity + item.quantity;
+          itemMaxQuantity = existingItem.maxQuantity || 10;
+        }
+
+        if (newQuantity > itemMaxQuantity) {
+          quantityExceeded = true;
+          exceededMaxQuantity = itemMaxQuantity;
+          break;
+        }
+      }
+
+      if (quantityExceeded) {
+        return {
+          success: false,
+          message: MAX_QUANTITY(exceededMaxQuantity),
+          cart: currentCart,
+        };
+      }
+
       const apiPayload: CartAddRequestSchema = {
         cartItems: cartItems,
       };
@@ -224,7 +259,12 @@ export const addCart = async (
         CART_ENDPOINTS.LIST,
         apiPayload,
       );
-      return data;
+
+      return {
+        success: true,
+        message: ADD_SUCCESS_MESSAGE,
+        ...data,
+      };
     } catch (error) {
       console.error(ADD_FAIL_MESSAGE, error);
       throw error;

@@ -8,8 +8,9 @@ export interface CheckoutRequestItem {
 export interface OrderItem {
   storeId: number;
   storeName: string;
-  productItemId: number;
+  productId: number;
   productName: string;
+  productItemId: number;
   productImgUrl: string;
   firstOptionName: string | null;
   firstOptionValue: string | null;

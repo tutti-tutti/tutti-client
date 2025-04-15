@@ -1,19 +1,21 @@
 'use client';
 
-import { revalidateServerCache } from '@/server-actions';
+import { useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+
+import { revalidateServerCache } from '@/server-actions';
 
 export const useRevalidateServerClient = () => {
   const queryClient = useQueryClient();
 
-  const revalidateServerClient = async (
-    tag: string,
-    queryKey: Array<string>,
-  ) => {
-    await revalidateServerCache(tag);
+  const revalidateServerClient = useCallback(
+    async (tag: string, queryKey: Array<string>) => {
+      await revalidateServerCache(tag);
 
-    queryClient.invalidateQueries({ queryKey });
-  };
+      queryClient.invalidateQueries({ queryKey });
+    },
+    [queryClient],
+  );
 
   return { revalidateServerClient };
 };

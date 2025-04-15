@@ -1,20 +1,26 @@
 'use client';
 
-import { useActionState, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 
 import { createReviewAction } from '@/server-actions';
 import { cn } from '@/utils';
-import { REVIEW_CONSTANTS } from '@/constants';
+import {
+  QUERY_KEYS_ENDPOINT,
+  REVIEW_CONSTANTS,
+  REVIEW_TAGS,
+} from '@/constants';
 import type { CreateReviewParams, CreateReviewState } from '@/types';
 import StarClick from './StarClick';
 import CreateReviewButtonBox from './CreateReviewButtonBox';
+import { useRevalidateServerClient } from '@/hooks';
+import { reviewServerStore } from '@/stores';
 
 interface ReviewContentProps {
   awaitedParams: CreateReviewParams;
 }
 
 const initialCreateReviewState: CreateReviewState = {
-  success: false,
+  isSuccess: false,
 };
 
 const { RATING, REVIEW_CONTENT } = REVIEW_CONSTANTS;
@@ -22,6 +28,9 @@ const { RATING, REVIEW_CONTENT } = REVIEW_CONSTANTS;
 const ReviewContent = ({ awaitedParams }: ReviewContentProps) => {
   const [characterCnt, setCharacterCnt] = useState(0);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { revalidateServerClient } = useRevalidateServerClient();
+  const { getParams } = reviewServerStore();
+  const { productIdParams, reviewSortSearchParams } = getParams();
 
   const boundCreateReviewAction = createReviewAction.bind(
     null,
@@ -34,6 +43,21 @@ const ReviewContent = ({ awaitedParams }: ReviewContentProps) => {
     boundCreateReviewFormAction,
     isCreateReviewPending,
   ] = useActionState(boundCreateReviewAction, initialCreateReviewState);
+
+  useEffect(() => {
+    if (!createReviewState.isSuccess) return;
+
+    revalidateServerClient(
+      REVIEW_TAGS.PRODUCT_REVIEWS(awaitedParams.productId),
+      [QUERY_KEYS_ENDPOINT.REVIEWS, productIdParams, reviewSortSearchParams],
+    );
+  }, [
+    createReviewState.isSuccess,
+    revalidateServerClient,
+    awaitedParams.productId,
+    productIdParams,
+    reviewSortSearchParams,
+  ]);
 
   const handleRatingClick = () => {
     if (!textareaRef.current) return;

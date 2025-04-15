@@ -125,7 +125,7 @@ const PaymentMethodSelector = ({
     }
 
     try {
-      const orderProductItems = orderItems.map(item => ({
+      const checkoutRequestItems = orderItems.map(item => ({
         productItemId: item.productItemId,
         quantity: item.quantity,
       }));
@@ -137,7 +137,7 @@ const PaymentMethodSelector = ({
         deliveryFee,
         totalAmount,
         paymentType: PAYMENT_TYPE.CARD,
-        orderItems: orderProductItems,
+        orderItems: checkoutRequestItems,
         recipientName,
         recipientPhone,
         recipientAddress: recipientAddressTotal,

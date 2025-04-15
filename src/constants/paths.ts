@@ -8,8 +8,8 @@ export const ROUTER_PATH = {
   MY: '/my',
   MY_PAGE: '/my/orders',
   COUNTRY_SETTING: '/country-setting',
-  CHECKOUT: (orderProductItems: string) =>
-    `/checkout?orderProductItems=${orderProductItems}`,
+  CHECKOUT: (checkoutRequestItems: string) =>
+    `/checkout?checkoutRequestItems=${checkoutRequestItems}`,
   CHECKOUT_SUCCESS: '/checkout/success',
   CHECKOUT_FAIL: '/checkout/fail',
   ORDERS_HISTORY: '/my/orders',

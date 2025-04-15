@@ -14,14 +14,14 @@ import {
 
 interface CheckoutPageProps {
   searchParams: Promise<{
-    orderProductItems?: string;
+    checkoutRequestItems?: string;
   }>;
 }
 
 export async function generateMetadata({ searchParams }: CheckoutPageProps) {
-  const { orderProductItems } = await searchParams;
+  const { checkoutRequestItems } = await searchParams;
 
-  if (!orderProductItems) return;
+  if (!checkoutRequestItems) return;
 
   return {
     title: PATH_NAME.ORDER_CHECKOUT,
@@ -33,24 +33,24 @@ const { SECTION_TITLE } = CHECKOUT_CONSTANT;
 const ADDRESS_GAP_STYLES = 'flex flex-col gap-sm';
 
 const CheckoutPage = async ({ searchParams }: CheckoutPageProps) => {
-  const { orderProductItems: productItemsJson } = await searchParams;
-  const decodedProductItemsJson = decodeURIComponent(
-    productItemsJson as string,
+  const { checkoutRequestItems: checkoutRequestItemsJson } = await searchParams;
+  const decodedCheckoutRequestItemsJson = decodeURIComponent(
+    checkoutRequestItemsJson as string,
   );
 
   /**TODO - 쿼리 형태 타입 가드 추가 예정 */
-  if (!decodedProductItemsJson) {
+  if (!decodedCheckoutRequestItemsJson) {
     notFound();
   }
 
-  const payload = JSON.parse(decodedProductItemsJson);
+  const checkoutRequestItems = JSON.parse(decodedCheckoutRequestItemsJson);
   const {
     totalDiscountAmount,
     totalProductAmount,
     deliveryFee,
     totalAmount,
     orderItems,
-  } = await checkoutOrder(payload);
+  } = await checkoutOrder(checkoutRequestItems);
 
   return (
     <div className="gap-4xl mx-auto flex max-w-[630px] flex-col">

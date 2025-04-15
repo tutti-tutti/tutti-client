@@ -9,10 +9,10 @@ import type {
 } from '@/types';
 
 export const checkoutOrder = async (
-  orderProductItem: CheckoutRequestItem[],
+  checkoutRequestItems: CheckoutRequestItem[],
 ): Promise<OrderCheckoutResponseAPISchema> => {
   const payload: OrderCheckoutRequestAPISchema = {
-    orderItems: orderProductItem,
+    orderItems: checkoutRequestItems,
   };
   const response = await axiosInstance.post(ORDERS_ENDPOINTS.CHECKOUT, payload);
 

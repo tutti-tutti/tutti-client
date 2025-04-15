@@ -36,10 +36,10 @@ const ProductActions = ({
         }))
       : [{ productItemId, quantity }];
 
-  const orderProductItems = mapToItems();
+  const checkoutRequestItems = mapToItems();
 
-  const encodedOrderProductItems = encodeURIComponent(
-    JSON.stringify(orderProductItems),
+  const encodedCheckoutRequestItems = encodeURIComponent(
+    JSON.stringify(checkoutRequestItems),
   );
 
   const noticeSelectOption = () =>
@@ -59,7 +59,7 @@ const ProductActions = ({
       return;
     }
 
-    router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+    router.push(ROUTER_PATH.CHECKOUT(encodedCheckoutRequestItems));
   };
 
   const handleCartClick = async () =>

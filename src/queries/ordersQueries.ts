@@ -5,11 +5,11 @@ import { checkoutOrder, fetchOrderHistory, fetchOrderDetail } from '@/services';
 import type { CheckoutRequestItem } from '@/types';
 
 export const checkoutOrderQueryOptions = (
-  orderProductItem: CheckoutRequestItem[],
+  checkoutRequestItems: CheckoutRequestItem[],
 ) =>
   queryOptions({
     queryKey: [QUERY_KEYS_ENDPOINT.ORDERS, ORDER_QUERY_KEY.CHECKOUT],
-    queryFn: async () => await checkoutOrder(orderProductItem),
+    queryFn: async () => await checkoutOrder(checkoutRequestItems),
   });
 
 export const orderHistoryListQueryOptions = queryOptions({

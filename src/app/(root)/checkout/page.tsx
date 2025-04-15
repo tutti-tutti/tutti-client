@@ -12,15 +12,13 @@ import {
   Divider,
 } from '@/components';
 
-interface OrderCheckoutPageProps {
+interface CheckoutPageProps {
   searchParams: Promise<{
     orderProductItems?: string;
   }>;
 }
 
-export async function generateMetadata({
-  searchParams,
-}: OrderCheckoutPageProps) {
+export async function generateMetadata({ searchParams }: CheckoutPageProps) {
   const { orderProductItems } = await searchParams;
 
   if (!orderProductItems) return;
@@ -34,7 +32,7 @@ const { SECTION_TITLE } = CHECKOUT_CONSTANT;
 
 const ADDRESS_GAP_STYLES = 'flex flex-col gap-sm';
 
-const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
+const CheckoutPage = async ({ searchParams }: CheckoutPageProps) => {
   const { orderProductItems: productItemsJson } = await searchParams;
   const decodedProductItemsJson = decodeURIComponent(
     productItemsJson as string,
@@ -96,4 +94,4 @@ const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   );
 };
 
-export default OrderCheckoutPage;
+export default CheckoutPage;

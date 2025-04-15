@@ -8,14 +8,14 @@ import { Icon } from '../common';
 interface CartItemHeaderProps {
   productId: number;
   storeName: string;
-  productItemName: string;
+  productName: string;
   handleDelete: () => void;
 }
 
 const CartItemHeader = ({
   productId,
   storeName,
-  productItemName,
+  productName,
   handleDelete,
 }: CartItemHeaderProps) => {
   return (
@@ -33,7 +33,7 @@ const CartItemHeader = ({
 
         <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
           <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
-            {productItemName}
+            {productName}
           </h2>
         </Link>
       </div>

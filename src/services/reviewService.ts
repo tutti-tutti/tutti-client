@@ -1,4 +1,4 @@
-import { REVIEW_ENDPOINTS } from '@/constants';
+import { REVIEW_ENDPOINTS, REVIEW_TAGS } from '@/constants';
 import { axiosInstance } from '@/lib';
 import { fetchOrderDetail } from '@/services/ordersService';
 
@@ -9,6 +9,12 @@ const fetchReviewsLatest = async (
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_LATEST(productId, size, reviewId),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;
@@ -22,6 +28,12 @@ const fetchReviewsLike = async (
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_LIKE(productId, size, reviewId, likeCount),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;
@@ -35,6 +47,12 @@ const fetchReviewsRating = async (
 ) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEWS_RATING(productId, size, reviewId, rating),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;
@@ -66,6 +84,12 @@ export const reviewLike = async (reviewId: number) => {
 export const fetchReviewAverage = async (productId: string) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEW_AVERAGE(productId),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;
@@ -74,6 +98,12 @@ export const fetchReviewAverage = async (productId: string) => {
 export const fetchReviewCountStar = async (productId: string) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEW_COUNTSTAR(productId),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;
@@ -82,6 +112,12 @@ export const fetchReviewCountStar = async (productId: string) => {
 export const fetchReviewPositiveAverage = async (productId: string) => {
   const { data } = await axiosInstance.get(
     REVIEW_ENDPOINTS.REVIEW_POSITIVE_AVERAGE(productId),
+    {
+      fetchOptions: {
+        cache: 'force-cache',
+        next: { tags: [REVIEW_TAGS.PRODUCT_REVIEWS(productId)] },
+      },
+    },
   );
 
   return data;

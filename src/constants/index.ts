@@ -9,3 +9,4 @@ export * from './errorMessages';
 export * from './cart';
 export * from './errorMessages';
 export * from './base';
+export * from './tags';

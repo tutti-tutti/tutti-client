@@ -38,7 +38,7 @@ export const createReviewAction = async (
 
       return {
         ...prevState,
-        success: false,
+        isSuccess: false,
         ...fieldErrors,
       };
     }
@@ -52,14 +52,14 @@ export const createReviewAction = async (
     );
 
     return {
-      success: true,
+      isSuccess: true,
     };
   } catch (error) {
     console.error(error);
 
     return {
       ...prevState,
-      success: false,
+      isSuccess: false,
       error: '리뷰 작성 중 오류가 발생했습니다.',
     };
   }

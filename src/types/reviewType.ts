@@ -1,10 +1,3 @@
-export interface CreateReviewState {
-  success: boolean;
-  ratingError?: string;
-  reviewContentError?: string;
-  error?: string;
-}
-
 export interface ReviewItemAPISchema {
   id: number;
   productItemId: number;
@@ -20,7 +13,7 @@ export interface ReviewItemAPISchema {
 }
 
 export interface CreateReviewState {
-  success: boolean;
+  isSuccess: boolean;
   ratingError?: string;
   reviewContentError?: string;
   error?: string;

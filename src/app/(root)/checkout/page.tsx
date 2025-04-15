@@ -29,11 +29,6 @@ export async function generateMetadata({
   };
 }
 
-/**TODO
- * 인증 인가 확인 -> 인증 안되어 있으면 로그인 페이지로 이동
- * 결제 완료 시 주문 완료 페이지로 이동 -> 주문 내역을 바로 확인
- */
-
 const OrderCheckoutPage = async ({ searchParams }: OrderCheckoutPageProps) => {
   const { orderProductItems: productItemsJson } = await searchParams;
   const decodedProductItemsJson = decodeURIComponent(

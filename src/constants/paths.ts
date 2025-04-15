@@ -14,9 +14,10 @@ export const ROUTER_PATH = {
   CHECKOUT_FAIL: '/checkout/fail',
   ORDERS_HISTORY: '/my/orders',
   ORDERS_DETAIL: (orderId: number) => `/my/orders/${orderId}`,
+  PRODUCT_DETAIL: (productId: number) => `/products/${productId}`,
   PRODUCT_CATEGORY: (categoryId: string) => `/products?category=${categoryId}`,
-  REVIEW_PRODUCT: (orderId: number, productItemId: number) =>
-    `/my/review/write/${orderId}/${productItemId}`,
+  REVIEW_PRODUCT: (orderId: number, productId: number, productItemId: number) =>
+    `/my/review/write/${orderId}/${productId}/${productItemId}`,
   ERROR_AUTHORIZED: '/error/authorized',
   ERROR_UNAUTHORIZED: '/error/unauthorized',
   ERROR_RESTRICTED: '/error/restricted',

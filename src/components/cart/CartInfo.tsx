@@ -35,7 +35,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     deliveryPrice,
     finalPrice,
   } = paymentInfo;
-  const encodedOrderProductItems = encodeURIComponent(
+  const encodedCheckoutRequestItems = encodeURIComponent(
     JSON.stringify(payloadCheckedCartItems),
   );
 
@@ -48,7 +48,7 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     if (checkedCount === 0) {
       toast.warning(CART_TOAST_MESSAGE.OPTION);
     } else {
-      router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+      router.push(ROUTER_PATH.CHECKOUT(encodedCheckoutRequestItems));
     }
   };
 

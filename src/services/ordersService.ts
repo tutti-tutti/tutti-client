@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/lib';
 import { ORDERS_ENDPOINTS } from '@/constants';
 import type {
-  OrderProductItem,
+  CheckoutRequestItem,
   OrderCheckoutRequestAPISchema,
   OrderCheckoutResponseAPISchema,
   OrderDetailResponseAPISchema,
@@ -9,10 +9,10 @@ import type {
 } from '@/types';
 
 export const checkoutOrder = async (
-  orderProductItem: OrderProductItem[],
+  checkoutRequestItems: CheckoutRequestItem[],
 ): Promise<OrderCheckoutResponseAPISchema> => {
   const payload: OrderCheckoutRequestAPISchema = {
-    orderItems: orderProductItem,
+    orderItems: checkoutRequestItems,
   };
   const response = await axiosInstance.post(ORDERS_ENDPOINTS.CHECKOUT, payload);
 

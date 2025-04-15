@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { getExpectedArrivalAt } from '@/utils';
 import type { OrderItem } from '@/types';
-import { OrderProductListGroup } from '@/components';
+import { CheckoutProductListGroup } from '@/components';
 
-const OrderProductListGroupMock = ({
+const CheckoutProductListGroupMock = ({
   orderItems,
 }: {
   orderItems: OrderItem[];
 }) => {
-  return <OrderProductListGroup orderItems={orderItems} />;
+  return <CheckoutProductListGroup orderItems={orderItems} />;
 };
 
 const expectedArrivalAt = getExpectedArrivalAt();
@@ -111,9 +111,9 @@ const createOrderItems = (): OrderItem[] => [
   },
 ];
 
-const meta: Meta<typeof OrderProductListGroupMock> = {
-  title: 'Orders/OrderProductList',
-  component: OrderProductListGroupMock,
+const meta: Meta<typeof CheckoutProductListGroupMock> = {
+  title: 'Orders/CheckoutProductList',
+  component: CheckoutProductListGroupMock,
   parameters: {
     layout: 'fullscreen',
   },
@@ -129,7 +129,7 @@ const meta: Meta<typeof OrderProductListGroupMock> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof OrderProductListGroupMock>;
+type Story = StoryObj<typeof CheckoutProductListGroupMock>;
 
 export const ProductListGroupForCheckout: Story = {
   args: {

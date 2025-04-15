@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CartInfo } from '@/components';
+import { CartInfo, CartHeader } from '@/components';
 import { mockCartStore, restoreCartStore, createMockCartItems } from '@/stores';
 
 const mockCartItems = createMockCartItems();
@@ -15,8 +15,10 @@ const meta: Meta<typeof CartInfo> = {
   decorators: [
     Story => {
       return (
-        <div className="max-w-7xl">
-          <Story />
+        <div className="layout-max-width m-auto">
+          <main className="px-container py-5xl">
+            <Story />
+          </main>
         </div>
       );
     },
@@ -51,7 +53,34 @@ export const Default: Story = {
   ],
 };
 
-export const EmptyCart: Story = {
+export const WithCartHeader: Story = {
+  args: {
+    isLoggedIn: false,
+  },
+  decorators: [
+    Story => {
+      mockCartStore({
+        items: mockCartItems,
+        checkedItems: mockCartItems.reduce(
+          (acc, item) => ({
+            ...acc,
+            [item.productItemId]: true,
+          }),
+          {},
+        ),
+      });
+
+      return (
+        <>
+          <CartHeader />
+          <Story />
+        </>
+      );
+    },
+  ],
+};
+
+export const EmptyCartWithCartHeader: Story = {
   args: {
     isLoggedIn: false,
   },
@@ -68,7 +97,12 @@ export const EmptyCart: Story = {
         isAllSelected: false,
       });
 
-      return <Story />;
+      return (
+        <>
+          <CartHeader />
+          <Story />
+        </>
+      );
     },
   ],
 };

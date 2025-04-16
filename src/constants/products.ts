@@ -34,6 +34,8 @@ export const PRODUCTS_CONSTANTS = {
   OPTION_TYPE: '옵션종류',
   OPTION_TYPE_COUNT: (count: number) => `${count}종류`,
   RELEASE_DATE: '출시년일',
+  SEARCH_RESULT: (keyword: string) => `'${keyword}' 검색 결과`,
+  NO_SEARCH_RESULT: '검색 결과가 없습니다.',
 };
 
 export const PRODUCT_API_ROUTE_MESSAGE = {

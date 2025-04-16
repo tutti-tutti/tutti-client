@@ -28,62 +28,63 @@ export const fetchInstance = async <T>(
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
 
-  const accessToken = await getAccessToken();
-
   const defaultOptions: FetchOptions = {
     ...options,
     headers,
   };
 
   try {
-    if (accessToken && options.isAuthorized) {
-      headers.set('Authorization', `Bearer ${accessToken}`);
-    }
-
     const response = (await fetch(url, defaultOptions)) as FetchResponse<T>;
 
-    if (response.status === 401 && options.isAuthorized) {
-      const refreshToken = await getRefreshToken();
+    if (options.isAuthorized) {
+      const accessToken = await getAccessToken();
 
-      if (!refreshToken) throw new Error('refreshToken이 만료되었습니다.');
+      if (!accessToken) throw new Error('인증된 사용자가 아닙니다.');
 
-      try {
-        const refreshResponse = await fetch(
-          `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${refreshToken}`,
+      if (response.status === 401) {
+        const refreshToken = await getRefreshToken();
+
+        if (!refreshToken) throw new Error('refreshToken이 만료되었습니다.');
+
+        try {
+          const refreshResponse = await fetch(
+            `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${refreshToken}`,
+              },
             },
-          },
-        );
+          );
 
-        if (refreshResponse.ok) {
-          const { access_token: newAccessToken } = await refreshResponse.json();
+          if (refreshResponse.ok) {
+            const { access_token: newAccessToken } =
+              await refreshResponse.json();
 
-          await setAccessToken(newAccessToken);
+            await setAccessToken(newAccessToken);
 
-          headers.set('Authorization', `Bearer ${newAccessToken}`);
+            headers.set('Authorization', `Bearer ${newAccessToken}`);
 
-          const retryResponse = (await fetch(url, {
-            ...defaultOptions,
-            headers,
-          })) as FetchResponse<T>;
+            const retryResponse = (await fetch(url, {
+              ...defaultOptions,
+              headers,
+            })) as FetchResponse<T>;
 
-          if (
-            retryResponse.headers
-              .get('content-type')
-              ?.includes('application/json')
-          ) {
-            retryResponse.data = await retryResponse.json();
+            if (
+              retryResponse.headers
+                .get('content-type')
+                ?.includes('application/json')
+            ) {
+              retryResponse.data = await retryResponse.json();
+            }
+
+            return retryResponse as FetchResponse<T>;
           }
-
-          return retryResponse as FetchResponse<T>;
+        } catch (error) {
+          await removeTokens();
+          throw error;
         }
-      } catch (error) {
-        await removeTokens();
-        throw error;
       }
     }
 

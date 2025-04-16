@@ -37,3 +37,17 @@ export const fetchProductsWithPagination = async (
 
   return response.data;
 };
+
+export const fetchSearchProductsWithPagination = async (
+  keyword: string = '',
+  cursorId?: number,
+  size: number = 20,
+): Promise<PaginatedProductsResponseAPISchema> => {
+  const response = await axiosInstance.post(PRODUCTS_ENDPOINTS.SEARCH, {
+    keyword: keyword,
+    cursorId: cursorId ?? null,
+    size: size,
+  });
+
+  return response.data;
+};

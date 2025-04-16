@@ -10,8 +10,8 @@ interface FetchOptions extends RequestInit {
   isAuthorized?: boolean;
 }
 
-interface FetchResponse<T> extends Response {
-  data?: T;
+interface FetchResponse<T = unknown> extends Response {
+  data: T;
 }
 
 const isServer = typeof window === 'undefined';
@@ -79,11 +79,11 @@ export const fetchInstance = async <T>(
             retryResponse.data = await retryResponse.json();
           }
 
-          return retryResponse.json();
+          return retryResponse as FetchResponse<T>;
         }
       } catch (error) {
-        console.error('토큰 갱신 실패:', error);
         await removeTokens();
+        throw error;
       }
     }
 
@@ -91,62 +91,52 @@ export const fetchInstance = async <T>(
       response.data = await response.json();
     }
 
-    return response;
+    return response as FetchResponse<T>;
   } catch (error) {
-    console.error('API 요청 실패:', error);
     throw error;
   }
 };
 
-fetchInstance.get = (endpoint: string, options?: FetchOptions) => {
-  return fetchInstance(endpoint, { ...options, method: 'GET' });
+fetchInstance.get = <T>(endpoint: string, options?: FetchOptions) => {
+  return fetchInstance<T>(endpoint, { ...options, method: 'GET' });
 };
 
-fetchInstance.post = <
-  T,
-  D extends Record<string, unknown> = Record<string, unknown>,
->(
+fetchInstance.post = <T, D = Record<string, unknown>>(
   endpoint: string,
   data?: D,
   options?: FetchOptions,
-): Promise<FetchResponse<T>> => {
-  return fetchInstance(endpoint, {
+) => {
+  return fetchInstance<T>(endpoint, {
     ...options,
     method: 'POST',
     body: JSON.stringify(data),
   });
 };
 
-fetchInstance.put = <
-  T,
-  D extends Record<string, unknown> = Record<string, unknown>,
->(
+fetchInstance.put = <T, D = Record<string, unknown>>(
   endpoint: string,
   data?: D,
   options?: FetchOptions,
-): Promise<FetchResponse<T>> => {
-  return fetchInstance(endpoint, {
+) => {
+  return fetchInstance<T>(endpoint, {
     ...options,
     method: 'PUT',
     body: JSON.stringify(data),
   });
 };
 
-fetchInstance.patch = <
-  T,
-  D extends Record<string, unknown> = Record<string, unknown>,
->(
+fetchInstance.patch = <T, D = Record<string, unknown>>(
   endpoint: string,
   data?: D,
   options?: FetchOptions,
-): Promise<FetchResponse<T>> => {
-  return fetchInstance(endpoint, {
+) => {
+  return fetchInstance<T>(endpoint, {
     ...options,
     method: 'PATCH',
     body: JSON.stringify(data),
   });
 };
 
-fetchInstance.delete = (endpoint: string, options?: FetchOptions) => {
-  return fetchInstance(endpoint, { ...options, method: 'DELETE' });
+fetchInstance.delete = <T>(endpoint: string, options?: FetchOptions) => {
+  return fetchInstance<T>(endpoint, { ...options, method: 'DELETE' });
 };

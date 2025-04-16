@@ -48,9 +48,9 @@ export const fetchInstance = async <T>(
     if (options.isAuthorized) {
       const accessToken = await getAccessToken();
 
-      if (!accessToken) throw new Error('인증된 사용자가 아닙니다.');
-
-      headers.set('Authorization', `Bearer ${accessToken}`);
+      if (accessToken) {
+        headers.set('Authorization', `Bearer ${accessToken}`);
+      }
     }
 
     const request = new Request(url, defaultOptions);

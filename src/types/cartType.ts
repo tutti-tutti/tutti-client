@@ -16,7 +16,7 @@ export interface CartProductItem {
   cartItemId: number;
   storeName: string;
   productItemId: number;
-  productItemName: string;
+  productName: string;
   productImgUrl: string;
   firstOptionName?: string;
   firstOptionValue?: string;

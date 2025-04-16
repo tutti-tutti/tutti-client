@@ -10,7 +10,7 @@ interface CartItemImageProps {
   productId: number;
   productItemId: number;
   productImgUrl: string;
-  productItemName: string;
+  productName: string;
   isChecked: boolean;
   toggleItemCheckbox: (productId: number, checked: boolean) => void;
 }
@@ -19,7 +19,7 @@ const CartItemImage = ({
   productId,
   productItemId,
   productImgUrl,
-  productItemName,
+  productName,
   isChecked,
   toggleItemCheckbox,
 }: CartItemImageProps) => {
@@ -37,7 +37,7 @@ const CartItemImage = ({
           height="h-auto"
           width="w-full"
           imageUrl={productImgUrl}
-          name={productItemName}
+          name={productName}
           className="aspect-square"
         />
       </Link>

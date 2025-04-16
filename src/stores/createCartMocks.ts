@@ -66,7 +66,7 @@ export const createMockCartItems = (): CartProductItem[] => {
   return cart.map(item => ({
     productId: item.productId,
     productItemId: item.productItemId,
-    productItemName: item.productItemName,
+    productName: item.productName,
     productImgUrl: item.productImgUrl,
     originalPrice: item.originalPrice,
     sellingPrice: item.sellingPrice,

@@ -45,46 +45,45 @@ export const fetchInstance = async <T>(
     if (response.status === 401 && options.isAuthorized) {
       const refreshToken = await getRefreshToken();
 
-      if (refreshToken) {
-        try {
-          const refreshResponse = await fetch(
-            `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${refreshToken}`,
-              },
+      if (!refreshToken) throw new Error('refreshToken이 만료되었습니다.');
+
+      try {
+        const refreshResponse = await fetch(
+          `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${refreshToken}`,
             },
-          );
+          },
+        );
 
-          if (refreshResponse.ok) {
-            const { access_token: newAccessToken } =
-              await refreshResponse.json();
+        if (refreshResponse.ok) {
+          const { access_token: newAccessToken } = await refreshResponse.json();
 
-            await setAccessToken(newAccessToken);
+          await setAccessToken(newAccessToken);
 
-            headers.set('Authorization', `Bearer ${newAccessToken}`);
+          headers.set('Authorization', `Bearer ${newAccessToken}`);
 
-            const retryResponse = (await fetch(url, {
-              ...defaultOptions,
-              headers,
-            })) as FetchResponse<T>;
+          const retryResponse = (await fetch(url, {
+            ...defaultOptions,
+            headers,
+          })) as FetchResponse<T>;
 
-            if (
-              retryResponse.headers
-                .get('content-type')
-                ?.includes('application/json')
-            ) {
-              retryResponse.data = await retryResponse.json();
-            }
-
-            return retryResponse.json();
+          if (
+            retryResponse.headers
+              .get('content-type')
+              ?.includes('application/json')
+          ) {
+            retryResponse.data = await retryResponse.json();
           }
-        } catch (error) {
-          console.error('토큰 갱신 실패:', error);
-          await removeTokens();
+
+          return retryResponse.json();
         }
+      } catch (error) {
+        console.error('토큰 갱신 실패:', error);
+        await removeTokens();
       }
     }
 

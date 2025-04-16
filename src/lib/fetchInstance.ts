@@ -1,4 +1,14 @@
-import { SERVER_API_BASE_URL } from '@/constants';
+import { AUTH_ENDPOINTS, SERVER_API_BASE_URL } from '@/constants';
+import {
+  getAccessToken,
+  getRefreshToken,
+  removeTokens,
+  setAccessToken,
+} from '@/services';
+
+interface FetchOptions extends RequestInit {
+  isAuthorized?: boolean;
+}
 
 interface FetchResponse<T> extends Response {
   data?: T;
@@ -9,26 +19,87 @@ const baseURL = isServer
   ? SERVER_API_BASE_URL
   : `${window.location.origin}/api`;
 
-const fetchInstance = async <T>(
+export const fetchInstance = async <T>(
   endpoint: string,
-  options: RequestInit,
+  options: FetchOptions = { isAuthorized: false },
 ): Promise<FetchResponse<T>> => {
   const url = `${baseURL}${endpoint}`;
 
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
 
-  const defaultOptions: RequestInit = {
+  const accessToken = await getAccessToken();
+
+  const defaultOptions: FetchOptions = {
     ...options,
     headers,
   };
 
-  const response = (await fetch(url, defaultOptions)) as FetchResponse<T>;
+  try {
+    if (accessToken && options.isAuthorized) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    }
 
-  return response.json();
+    const response = (await fetch(url, defaultOptions)) as FetchResponse<T>;
+
+    if (response.status === 401 && options.isAuthorized) {
+      const refreshToken = await getRefreshToken();
+
+      if (refreshToken) {
+        try {
+          const refreshResponse = await fetch(
+            `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            },
+          );
+
+          if (refreshResponse.ok) {
+            const { access_token: newAccessToken } =
+              await refreshResponse.json();
+
+            await setAccessToken(newAccessToken);
+
+            headers.set('Authorization', `Bearer ${newAccessToken}`);
+
+            const retryResponse = (await fetch(url, {
+              ...defaultOptions,
+              headers,
+            })) as FetchResponse<T>;
+
+            if (
+              retryResponse.headers
+                .get('content-type')
+                ?.includes('application/json')
+            ) {
+              retryResponse.data = await retryResponse.json();
+            }
+
+            return retryResponse.json();
+          }
+        } catch (error) {
+          console.error('토큰 갱신 실패:', error);
+          await removeTokens();
+        }
+      }
+    }
+
+    if (response.headers.get('content-type')?.includes('application/json')) {
+      response.data = await response.json();
+    }
+
+    return response;
+  } catch (error) {
+    console.error('API 요청 실패:', error);
+    throw error;
+  }
 };
 
-fetchInstance.get = (endpoint: string, options?: RequestInit) => {
+fetchInstance.get = (endpoint: string, options?: FetchOptions) => {
   return fetchInstance(endpoint, { ...options, method: 'GET' });
 };
 
@@ -38,7 +109,7 @@ fetchInstance.post = <
 >(
   endpoint: string,
   data?: D,
-  options?: RequestInit,
+  options?: FetchOptions,
 ): Promise<FetchResponse<T>> => {
   return fetchInstance(endpoint, {
     ...options,
@@ -53,7 +124,7 @@ fetchInstance.put = <
 >(
   endpoint: string,
   data?: D,
-  options?: RequestInit,
+  options?: FetchOptions,
 ): Promise<FetchResponse<T>> => {
   return fetchInstance(endpoint, {
     ...options,
@@ -68,7 +139,7 @@ fetchInstance.patch = <
 >(
   endpoint: string,
   data?: D,
-  options?: RequestInit,
+  options?: FetchOptions,
 ): Promise<FetchResponse<T>> => {
   return fetchInstance(endpoint, {
     ...options,
@@ -77,8 +148,6 @@ fetchInstance.patch = <
   });
 };
 
-fetchInstance.delete = (endpoint: string, options?: RequestInit) => {
+fetchInstance.delete = (endpoint: string, options?: FetchOptions) => {
   return fetchInstance(endpoint, { ...options, method: 'DELETE' });
 };
-
-export default fetchInstance;

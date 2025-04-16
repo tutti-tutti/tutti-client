@@ -8,6 +8,7 @@ import {
 
 interface FetchOptions extends RequestInit {
   isAuthorized?: boolean;
+  timeout?: number;
 }
 
 interface FetchResponse<T = unknown> extends Response {
@@ -25,12 +26,21 @@ export const fetchInstance = async <T>(
 ): Promise<FetchResponse<T>> => {
   const url = `${baseURL}${endpoint}`;
 
+  const abortController = new AbortController();
+
+  let timeoutId: NodeJS.Timeout | undefined;
+
+  if (options.timeout) {
+    timeoutId = setTimeout(() => abortController.abort(), options.timeout);
+  }
+
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
 
   const defaultOptions: FetchOptions = {
     ...options,
     headers,
+    signal: abortController.signal,
   };
 
   try {
@@ -92,8 +102,12 @@ export const fetchInstance = async <T>(
       response.data = await response.json();
     }
 
+    if (timeoutId) clearTimeout(timeoutId);
+
     return response as FetchResponse<T>;
   } catch (error) {
+    if (timeoutId) clearTimeout(timeoutId);
+
     throw error;
   }
 };

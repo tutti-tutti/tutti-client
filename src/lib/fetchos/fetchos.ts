@@ -6,51 +6,12 @@ import {
 } from '@/services';
 import { AUTH_ENDPOINTS } from '@/constants';
 import { FetchosError } from './fetchosError';
-
-interface FetchosRequestConfig extends RequestInit {
-  baseURL?: string;
-  isAuthorized?: boolean;
-  timeout?: number;
-  headers?: HeadersInit;
-}
-
-interface FetchosResponse<T = unknown> extends Response {
-  data: T;
-}
-
-interface FetchosInstance {
-  <T>(
-    endpoint: string,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-  get<T>(
-    endpoint: string,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-  post<T, D = Record<string, unknown>>(
-    endpoint: string,
-    data?: D,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-  put<T, D = Record<string, unknown>>(
-    endpoint: string,
-    data?: D,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-  patch<T, D = Record<string, unknown>>(
-    endpoint: string,
-    data?: D,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-  delete<T>(
-    endpoint: string,
-    config?: FetchosRequestConfig,
-  ): Promise<FetchosResponse<T>>;
-}
-
-interface FetchosStatic {
-  create(config?: FetchosRequestConfig): FetchosInstance;
-}
+import type {
+  FetchosInstance,
+  FetchosRequestConfig,
+  FetchosResponse,
+  FetchosStatic,
+} from './fetchosTypes';
 
 const createFetchosInstance = (
   defaultConfig: FetchosRequestConfig = {},

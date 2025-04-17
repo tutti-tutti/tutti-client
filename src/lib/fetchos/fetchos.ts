@@ -13,6 +13,90 @@ import type {
   FetchosStatic,
 } from './fetchosTypes';
 
+const setupTimeout = (abortController: AbortController, timeout?: number) => {
+  if (!timeout) return undefined;
+
+  return setTimeout(() => abortController.abort(), timeout);
+};
+
+const setupHeaders = (
+  defaultHeaders: HeadersInit = {},
+  configHeaders: HeadersInit = {},
+) => {
+  const headers = new Headers(defaultHeaders);
+
+  Object.entries(configHeaders).forEach(([key, value]) => {
+    if (value) headers.set(key, value);
+  });
+
+  return headers;
+};
+
+const processResponse = async <T>(
+  response: Response,
+): Promise<FetchosResponse<T>> => {
+  const fetchosResponse = response as FetchosResponse<T>;
+
+  if (response.headers.get('content-type')?.includes('application/json')) {
+    fetchosResponse.data = await response.json();
+  }
+
+  return fetchosResponse;
+};
+
+const executeRequest = async <T>(
+  request: Request,
+  timeoutId?: NodeJS.Timeout,
+): Promise<FetchosResponse<T>> => {
+  try {
+    const response = (await fetch(request)) as FetchosResponse<T>;
+
+    if (timeoutId) clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new FetchosError(`요청 실패 ${response.status} error: `, {
+        response,
+        request,
+        data: await response.json(),
+        config: { method: request.method, headers: request.headers },
+      });
+    }
+
+    return await processResponse<T>(response);
+  } catch (error) {
+    if (timeoutId) clearTimeout(timeoutId);
+
+    throw error;
+  }
+};
+
+const renewAccessToken = async (baseURL: string, refreshToken: string) => {
+  const response = await fetch(
+    `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    await removeTokens();
+    throw new FetchosError(`토큰 갱신 실패 ${response.status} error: `, {
+      response,
+      data: await response.json(),
+    });
+  }
+
+  const { access_token: newAccessToken } = await response.json();
+
+  await setAccessToken(newAccessToken);
+
+  return newAccessToken;
+};
+
 const createFetchosInstance = (
   defaultConfig: FetchosRequestConfig = {},
 ): FetchosInstance => {
@@ -29,23 +113,11 @@ const createFetchosInstance = (
     config: FetchosRequestConfig = {},
   ) => {
     const url = `${baseURL}${endpoint}`;
-
     const abortController = new AbortController();
     const timeout = config.timeout || defaultTimeout;
-
-    let timeoutId: NodeJS.Timeout | undefined;
-
-    if (timeout) {
-      timeoutId = setTimeout(() => abortController.abort(), timeout);
-    }
-
-    const headers = new Headers(defaultHeaders);
-
-    if (config.headers) {
-      Object.entries(config.headers).forEach(([key, value]) => {
-        if (value) headers.set(key, value);
-      });
-    }
+    const timeoutId = setupTimeout(abortController, timeout);
+    const headers = setupHeaders(defaultHeaders, config.headers);
+    const isAuthorized = config.isAuthorized ?? defaultIsAuthorized;
 
     const requestConfig: FetchosRequestConfig = {
       ...restDefaultConfig,
@@ -53,8 +125,6 @@ const createFetchosInstance = (
       headers,
       signal: abortController.signal,
     };
-
-    const isAuthorized = config.isAuthorized ?? defaultIsAuthorized;
 
     try {
       if (isAuthorized) {
@@ -66,18 +136,7 @@ const createFetchosInstance = (
       }
 
       const request = new Request(url, requestConfig);
-
-      const response = (await fetch(request)) as FetchosResponse<T>;
-
-      if (timeoutId) clearTimeout(timeoutId);
-
-      if (!response.ok)
-        throw new FetchosError(`요청 실패 ${response.status} error: `, {
-          response,
-          request,
-          data: await response.json(),
-          config: requestConfig,
-        });
+      const response = await executeRequest<T>(request, timeoutId);
 
       if (isAuthorized && response.status === 401) {
         const refreshToken = await getRefreshToken();
@@ -90,34 +149,7 @@ const createFetchosInstance = (
           });
 
         try {
-          const renewAccessTokenResponse = await fetch(
-            `${baseURL}${AUTH_ENDPOINTS.UPDATE_ACCESS_TOKEN}`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${refreshToken}`,
-              },
-            },
-          );
-
-          if (!renewAccessTokenResponse.ok) {
-            await removeTokens();
-
-            throw new FetchosError(
-              `요청 실패 ${renewAccessTokenResponse.status} error: `,
-              {
-                response,
-                data: await renewAccessTokenResponse.json(),
-                config: requestConfig,
-              },
-            );
-          }
-
-          const { access_token: newAccessToken } =
-            await renewAccessTokenResponse.json();
-
-          await setAccessToken(newAccessToken);
+          const newAccessToken = await renewAccessToken(baseURL, refreshToken);
 
           headers.set('Authorization', `Bearer ${newAccessToken}`);
 
@@ -126,28 +158,7 @@ const createFetchosInstance = (
             headers,
           });
 
-          const retryResponse = (await fetch(
-            retryRequest,
-          )) as FetchosResponse<T>;
-
-          if (!retryResponse.ok)
-            throw new FetchosError(
-              `요청 실패 ${retryResponse.status} error: `,
-              {
-                response,
-                request,
-                data: await retryResponse.json(),
-                config: requestConfig,
-              },
-            );
-
-          if (
-            retryResponse.headers
-              .get('content-type')
-              ?.includes('application/json')
-          ) {
-            retryResponse.data = await retryResponse.json();
-          }
+          const retryResponse = await executeRequest<T>(retryRequest);
 
           return retryResponse;
         } catch (error) {
@@ -165,8 +176,6 @@ const createFetchosInstance = (
 
       return response;
     } catch (error) {
-      if (timeoutId) clearTimeout(timeoutId);
-
       if (error instanceof FetchosError) throw error;
 
       if (error instanceof DOMException && error.name === 'AbortError') {

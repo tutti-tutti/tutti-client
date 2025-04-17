@@ -54,7 +54,7 @@ const SearchInput = ({
       </div>
 
       <form
-        className="px-2xl py-xs relative flex items-center justify-between"
+        className="px-lg md:px-2xl py-xs relative flex items-center justify-between"
         onSubmit={handleSubmit}
       >
         <input
@@ -66,7 +66,7 @@ const SearchInput = ({
         />
 
         <button className="cursor-pointer" aria-label="search">
-          <SearchIcon />
+          <SearchIcon className="h-6 w-6 md:h-auto md:w-auto" />
         </button>
       </form>
     </div>

@@ -15,7 +15,6 @@ export const pageRouter = {
     PATH.ORDER_CHECKOUT.url(checkoutRequestItems),
   orderHistory: () => PATH.ORDER_HISTORY.url,
   orderDetail: (orderId: number) => PATH.ORDER_DETAIL.url(orderId),
-  my: PATH.MY.url,
   myPage: PATH.MY_PAGE.url,
   reviewProduct: (orderId: number, productId: number, productItemId: number) =>
     PATH.REVIEW_PRODUCT.url(orderId, productId, productItemId),

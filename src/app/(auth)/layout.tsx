@@ -1,8 +1,8 @@
 import React, { type ReactNode } from 'react';
 import Link from 'next/link';
 
+import { pageRouter } from '@/router';
 import { Icon } from '@/components';
-import { ROUTER_PATH } from '@/constants';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       <div className="w-full">
         <Link
           className="p-sm mb-2xl flex justify-center"
-          href={ROUTER_PATH.HOME}
+          href={pageRouter.home}
         >
           <Icon iconName="logo" />
         </Link>

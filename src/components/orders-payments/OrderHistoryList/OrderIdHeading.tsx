@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { ROUTER_PATH, ORDER_CONSTANT } from '@/constants';
+import { pageRouter } from '@/router';
+import { ORDER_CONSTANT } from '@/constants';
 import { Icon } from '@/components';
 
 interface OrderHistoryListGroupProps {
@@ -20,7 +21,7 @@ const OrderIdHeading = ({
         {ORDER_SHEET_NO} {orderSheetNo}
       </strong>
       <Link
-        href={ROUTER_PATH.ORDERS_DETAIL(orderId)}
+        href={pageRouter.orderDetail(orderId)}
         className="text-text-info flex items-center"
       >
         {TEXT_LINK.DETAIL} <Icon iconName="right" />

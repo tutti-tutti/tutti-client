@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { PATH } from '@/constants';
 import { cn, generateBreadcrumbItems } from '@/utils';
 import type { BreadcrumbItem } from '@/types';
 
@@ -16,7 +17,7 @@ type BreadcrumbProps = {
 
 export const Breadcrumb = ({
   linkItems,
-  homeLabel = '홈',
+  homeLabel = PATH.HOME.name,
   separator = '>',
   className = '',
 }: BreadcrumbProps) => {

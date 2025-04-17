@@ -9,3 +9,4 @@ export * from './paymentsType';
 export * from './categoryType';
 export * from './formDataType';
 export * from './badgeType';
+export * from './breadcrumbType';

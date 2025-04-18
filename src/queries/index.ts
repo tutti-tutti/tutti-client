@@ -5,3 +5,4 @@ export * from './paymentsQueries';
 export * from './categoryQueries';
 export * from './reviewQueries';
 export * from './memberQueries';
+export * from './searchQueries';

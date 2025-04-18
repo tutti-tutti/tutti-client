@@ -10,3 +10,4 @@ export * from './checkout';
 export * from './orders-payments';
 export * from './mypage';
 export * from './main';
+export * from './search';

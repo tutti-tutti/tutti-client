@@ -15,8 +15,6 @@ type SearchParamsProps = {
   }>;
 };
 
-const CONATINER_CLASSNAME = 'gap-md md:gap-4xl flex flex-col';
-
 const ProductPage = async ({ searchParams }: SearchParamsProps) => {
   const params = await searchParams;
   const categoryId = params.category || '1';
@@ -35,28 +33,27 @@ const ProductPage = async ({ searchParams }: SearchParamsProps) => {
   const categoryName = selectedCategory.name;
 
   return (
-    <>
+    <div className="gap-md md:gap-4xl flex flex-col">
       {searchWord ? (
-        <div className={CONATINER_CLASSNAME}>
+        <>
           <h1 className="font-style-title text-center">
             {PRODUCTS_CONSTANTS.SEARCH_RESULT(searchWord)}
           </h1>
-
           <ProductCategory />
           <RecommendProductList />
           <SearchResultList searchWord={searchWord} />
-        </div>
+        </>
       ) : (
-        <div className={CONATINER_CLASSNAME}>
+        <>
           <ProductCategory
             initialCategories={categories}
             currentCategoryId={categoryId}
           />
           <RecommendProductList categoryName={categoryName} />
           <CategoryProductList categoryId={categoryId} />
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
 

@@ -48,7 +48,7 @@ export const CART_ENDPOINTS = {
 };
 
 export const ORDERS_ENDPOINTS = {
-  CHECKOUT: `${API_RESOURCES.ORDERS}/checkout`,
+  CHECKOUT: `${API_RESOURCES.ORDERS}/ordersheet`,
   LIST: `${API_RESOURCES.ORDERS}`,
   DETAIL: (orderId: string) => `${API_RESOURCES.ORDERS}/${orderId}`,
 };
@@ -64,6 +64,7 @@ export const PAYMENTS_ENDPOINTS = {
 
 export const REFUND_ENDPOINTS = {
   REQUEST: `${API_RESOURCES.REFUND}/request`,
+  DETAIL: (orderId: string) => `${API_RESOURCES.REFUND}/orders/${orderId}`,
 };
 
 export const REVIEW_ENDPOINTS = {

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { pageRouter } from '@/router';
+import { pagePath } from '@/navigator';
 import { ORDER_CONSTANT, REVIEW_CONSTANTS, CART_CONSTANTS } from '@/constants';
 import { useAddCart } from '@/hooks';
 import { ExtraButton } from '@/components';
@@ -24,7 +24,7 @@ const OrdersExtraActions = ({
   isCanceled,
 }: OrdersExtraActionsProps) => {
   const handleWriteReview = () =>
-    redirect(pageRouter.reviewProduct(orderId, productId, productItemId));
+    redirect(pagePath.reviewProduct(orderId, productId, productItemId));
 
   const cartItems = [{ productItemId, quantity: 1 }];
   const { handleAddCart } = useAddCart(productId, cartItems);
@@ -32,7 +32,7 @@ const OrdersExtraActions = ({
   return (
     <article className="w-full md:flex md:justify-between">
       <div className="text-text-tertiary inline-flex items-center text-base">
-        <Link href={pageRouter.orderDetail(orderId)}>
+        <Link href={pagePath.orderDetail(orderId)}>
           {ORDER_CONSTANT.ORDER_SHEET_NO} : {orderSheetNo}
         </Link>
       </div>

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { pageRouter } from '@/router';
+import { pagePath } from '@/navigator';
 import { confirmPayApproveSuccess } from '@/services';
 
 interface PaymentSuccessPageProps {
@@ -17,7 +17,7 @@ const PaymentSuccessPage = async ({
   const { paymentKey, orderId, amount } = await searchParams;
 
   if (!paymentKey || !orderId || !amount) {
-    redirect(pageRouter.orderCheckoutSuccess);
+    redirect(pagePath.orderCheckoutSuccess);
   }
 
   const data = await confirmPayApproveSuccess({
@@ -27,10 +27,10 @@ const PaymentSuccessPage = async ({
   });
 
   if (!data.orderId) {
-    redirect(pageRouter.orderCheckoutFail);
+    redirect(pagePath.orderCheckoutFail);
   }
 
-  redirect(pageRouter.orderDetail(data.orderId));
+  redirect(pagePath.orderDetail(data.orderId));
 };
 
 export default PaymentSuccessPage;

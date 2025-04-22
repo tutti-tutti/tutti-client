@@ -1,6 +1,6 @@
 import { PATH } from '@/constants';
 
-export const pageRouter = {
+const pagePath = {
   home: PATH.HOME.url,
   countrySetting: PATH.COUNTRY_SETTING.url,
   signup: PATH.SIGNUP.url,
@@ -21,3 +21,5 @@ export const pageRouter = {
   reviewProduct: (orderId: number, productId: number, productItemId: number) =>
     PATH.REVIEW_PRODUCT.url(orderId, productId, productItemId),
 };
+
+export { pagePath };

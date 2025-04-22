@@ -16,22 +16,23 @@ export const getOrderItemsWithExpectedArrivalAt = (orderItems: OrderItem[]) =>
 
 /** PATH 상수에서 URL에 해당하는 이름 찾기 */
 export const getNameFromPath = (path: string): string => {
-  for (const key in PATH) {
-    const pathItem = PATH[key as keyof typeof PATH];
+  const pathEntry = Object.entries(PATH).find(([, pathItem]) => {
+    if (typeof pathItem.url === 'function') return false;
 
-    if (typeof pathItem.url === 'function') continue;
+    return pathItem.url === path;
+  });
 
-    if (pathItem.url === path) {
-      return pathItem.name;
-    }
+  if (!pathEntry) {
+    // 일치하는 항목이 없을 경우 경로의 마지막 세그먼트를 사용자 친화적으로 변환하여 반환
+    const lastSegment = path.split('/').filter(Boolean).pop() || '';
+
+    return (
+      lastSegment.charAt(0).toUpperCase() +
+      lastSegment.slice(1).replace(/-/g, ' ')
+    );
   }
 
-  const lastSegment = path.split('/').filter(Boolean).pop() || '';
-
-  return (
-    lastSegment.charAt(0).toUpperCase() +
-    lastSegment.slice(1).replace(/-/g, ' ')
-  );
+  return pathEntry[1].name;
 };
 
 /** 경로를 기반으로 빵 부스러기 항목 생성 */

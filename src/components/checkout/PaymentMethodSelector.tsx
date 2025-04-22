@@ -139,8 +139,8 @@ const PaymentMethodSelector = ({
         orderItems: checkoutRequestItems,
         recipientName,
         recipientPhone,
-        recipientAddress: recipientAddress,
-        recipientAddressDetail: recipientAddressDetail,
+        recipientAddress,
+        recipientAddressDetail,
         zipCode: zipCode,
         note: note,
       };

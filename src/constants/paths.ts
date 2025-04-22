@@ -1,3 +1,11 @@
+const MIDDLE_PATH = {
+  PRODUCTS: '/products',
+  CHECKOUT: '/checkout',
+  MY: '/my',
+  ORDERS: '/my/orders',
+  REVIEW: '/my/review',
+};
+
 export const PATH = {
   HOME: {
     name: '홈',
@@ -25,11 +33,12 @@ export const PATH = {
   },
   PRODUCT_CATEGORY: {
     name: '상품 카테고리',
-    url: (categoryId: string) => `/products?category=${categoryId}`,
+    url: (categoryId: string) =>
+      `/${MIDDLE_PATH.PRODUCTS}?category=${categoryId}`,
   },
   PRODUCT_DETAIL: {
     name: '상품 상세',
-    url: (productId: number) => `/products/${productId}`,
+    url: (productId: number) => `/${MIDDLE_PATH.PRODUCTS}/${productId}`,
   },
   CART: {
     name: '장바구니',
@@ -38,36 +47,36 @@ export const PATH = {
   ORDER_CHECKOUT: {
     name: '주문 결제',
     url: (checkoutRequestItems: string) =>
-      `/checkout?checkoutRequestItems=${checkoutRequestItems}`,
+      `/${MIDDLE_PATH.CHECKOUT}?checkoutRequestItems=${checkoutRequestItems}`,
   },
   ORDER_CHECKOUT_SUCCESS: {
     name: '주문 성공',
-    url: '/checkout/success',
+    url: `/${MIDDLE_PATH.CHECKOUT}/success`,
   },
   ORDER_CHECKOUT_FAIL: {
     name: '주문 실패',
-    url: '/checkout/fail',
+    url: `/${MIDDLE_PATH.CHECKOUT}/fail`,
   },
   ORDER_HISTORY: {
     name: '주문 내역',
-    url: '/my/orders',
+    url: `${MIDDLE_PATH.ORDERS}`,
   },
   ORDER_DETAIL: {
     name: '주문 상세',
-    url: (orderId: number) => `/my/orders/${orderId}`,
+    url: (orderId: number) => `${MIDDLE_PATH.ORDERS}/${orderId}`,
   },
   MY: {
     name: '마이페이지',
-    url: '/my',
+    url: `${MIDDLE_PATH.MY}`,
   },
   MY_PAGE: {
     name: '마이페이지',
-    url: '/my/orders',
+    url: `${MIDDLE_PATH.ORDERS}`,
   },
   REVIEW_PRODUCT: {
     name: '리뷰 작성',
     url: (orderId: number, productId: number, productItemId: number) =>
-      `/my/review/write/${orderId}/${productId}/${productItemId}`,
+      `${MIDDLE_PATH.REVIEW}/write/${orderId}/${productId}/${productItemId}`,
   },
 };
 

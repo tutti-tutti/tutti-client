@@ -34,11 +34,11 @@ export const PATH = {
   PRODUCT_CATEGORY: {
     name: '상품 카테고리',
     url: (categoryId: string) =>
-      `/${MIDDLE_PATH.PRODUCTS}?category=${categoryId}`,
+      `${MIDDLE_PATH.PRODUCTS}?category=${categoryId}`,
   },
   PRODUCT_DETAIL: {
     name: '상품 상세',
-    url: (productId: number) => `/${MIDDLE_PATH.PRODUCTS}/${productId}`,
+    url: (productId: number) => `${MIDDLE_PATH.PRODUCTS}/${productId}`,
   },
   CART: {
     name: '장바구니',
@@ -47,15 +47,15 @@ export const PATH = {
   ORDER_CHECKOUT: {
     name: '주문 결제',
     url: (checkoutRequestItems: string) =>
-      `/${MIDDLE_PATH.CHECKOUT}?checkoutRequestItems=${checkoutRequestItems}`,
+      `${MIDDLE_PATH.CHECKOUT}?checkoutRequestItems=${checkoutRequestItems}`,
   },
   ORDER_CHECKOUT_SUCCESS: {
     name: '주문 성공',
-    url: `/${MIDDLE_PATH.CHECKOUT}/success`,
+    url: `${MIDDLE_PATH.CHECKOUT}/success`,
   },
   ORDER_CHECKOUT_FAIL: {
     name: '주문 실패',
-    url: `/${MIDDLE_PATH.CHECKOUT}/fail`,
+    url: `${MIDDLE_PATH.CHECKOUT}/fail`,
   },
   ORDER_HISTORY: {
     name: '주문 내역',

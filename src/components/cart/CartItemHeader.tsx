@@ -2,17 +2,20 @@
 
 import Link from 'next/link';
 
+import { ROUTER_PATH } from '@/constants';
 import { Icon } from '../common';
 
 interface CartItemHeaderProps {
+  productId: number;
   storeName: string;
-  productItemName: string;
+  productName: string;
   handleDelete: () => void;
 }
 
 const CartItemHeader = ({
+  productId,
   storeName,
-  productItemName,
+  productName,
   handleDelete,
 }: CartItemHeaderProps) => {
   return (
@@ -28,9 +31,11 @@ const CartItemHeader = ({
           <Link href="#">{storeName}</Link>
         </p>
 
-        <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
-          {productItemName}
-        </h2>
+        <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
+          <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
+            {productName}
+          </h2>
+        </Link>
       </div>
     </>
   );

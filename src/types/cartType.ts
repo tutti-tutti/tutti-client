@@ -12,10 +12,11 @@ export interface CartAddRequestSchema {
 }
 
 export interface CartProductItem {
+  productId: number;
   cartItemId: number;
   storeName: string;
   productItemId: number;
-  productItemName: string;
+  productName: string;
   productImgUrl: string;
   firstOptionName?: string;
   firstOptionValue?: string;

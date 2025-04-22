@@ -1,13 +1,11 @@
 import { useRouter } from 'next/navigation';
 
-import { useQueryClient } from '@tanstack/react-query';
-
-import { Button } from '@/components';
-import { addCart, getAccessToken } from '@/services';
-import { toast } from '@/utils';
 import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
-import { cartQueryOptions } from '@/queries';
+import { toast } from '@/utils';
+import { useAddCart } from '@/hooks';
+import { getAccessToken } from '@/services';
 import type { SelectedOptionItem } from '@/types';
+import { Button } from '@/components';
 
 interface ProductActionsProps {
   productId: number;
@@ -17,13 +15,9 @@ interface ProductActionsProps {
   selectedOptionItems?: SelectedOptionItem[];
 }
 
-const {
-  CART_TOAST_MESSAGE,
-  ADD_SUCCESS_MESSAGE,
-  ADD_FAIL_MESSAGE,
-  ADD_CART,
-  CHECKOUT,
-} = CART_CONSTANTS;
+const { CART_TOAST_MESSAGE, ADD_CART, CHECKOUT } = CART_CONSTANTS;
+
+const BUTTON_DEFAULT_STYLE = 'font-style-subHeading flex-auto';
 
 const ProductActions = ({
   productId,
@@ -33,7 +27,6 @@ const ProductActions = ({
   selectedOptionItems = [],
 }: ProductActionsProps) => {
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const mapToItems = () =>
     selectedOptionItems.length > 0
@@ -43,10 +36,10 @@ const ProductActions = ({
         }))
       : [{ productItemId, quantity }];
 
-  const orderProductItems = mapToItems();
+  const checkoutRequestItems = mapToItems();
 
-  const encodedOrderProductItems = encodeURIComponent(
-    JSON.stringify(orderProductItems),
+  const encodedCheckoutRequestItems = encodeURIComponent(
+    JSON.stringify(checkoutRequestItems),
   );
 
   const noticeSelectOption = () =>
@@ -66,46 +59,26 @@ const ProductActions = ({
       return;
     }
 
-    router.push(ROUTER_PATH.CHECKOUT(encodedOrderProductItems));
+    router.push(ROUTER_PATH.CHECKOUT(encodedCheckoutRequestItems));
   };
 
   const handleCartClick = async () =>
     disabled ? noticeSelectOption() : await handleAddCart();
 
-  const handleAddCart = async () => {
-    try {
-      const cartItems = mapToItems();
-
-      const result = await addCart(productId, cartItems);
-
-      if (result.success) {
-        toast.success(result.message || ADD_SUCCESS_MESSAGE);
-
-        await queryClient.invalidateQueries({
-          queryKey: cartQueryOptions.queryKey,
-        });
-        await queryClient.prefetchQuery(cartQueryOptions);
-      } else {
-        toast.error(result.message || ADD_FAIL_MESSAGE);
-      }
-    } catch (error) {
-      console.error(ADD_FAIL_MESSAGE, error);
-      toast.error(ADD_FAIL_MESSAGE);
-    }
-  };
-
-  const buttonDefaultStyle = 'font-style-subHeading flex-auto';
+  const cartItems = mapToItems();
+  const { handleAddCart } = useAddCart(productId, cartItems);
 
   return (
     <div className="gap-sm grid grid-cols-2">
       <Button
-        className={buttonDefaultStyle}
+        className={BUTTON_DEFAULT_STYLE}
         variant="secondaryOutline"
         onClick={handleCartClick}
       >
         {ADD_CART}
       </Button>
-      <Button className={buttonDefaultStyle} onClick={handleCheckoutClick}>
+
+      <Button className={BUTTON_DEFAULT_STYLE} onClick={handleCheckoutClick}>
         {CHECKOUT}
       </Button>
     </div>

@@ -11,8 +11,10 @@ const meta: Meta<typeof ProductDetailItem> = {
   tags: ['autodocs'],
   decorators: [
     Story => (
-      <div className="max-w-7xl">
-        <Story />
+      <div className="layout-max-width m-auto">
+        <main className="px-container py-md">
+          <Story />
+        </main>
       </div>
     ),
   ],

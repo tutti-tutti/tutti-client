@@ -4,6 +4,7 @@ export * from './auth';
 export * from './products';
 export * from './queries';
 export * from './review';
+export * from './checkout';
 export * from './orders';
 export * from './errorMessages';
 export * from './cart';

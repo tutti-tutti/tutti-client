@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { calculateDiscountRate, formatPrice } from '@/utils';
-import { PRODUCTS_CONSTANTS, PRODUCTS_ENDPOINTS } from '@/constants';
+import {
+  PRODUCTS_CONSTANTS,
+  PRODUCTS_ENDPOINTS,
+  ROUTER_PATH,
+} from '@/constants';
 import type { Product, ProductReviewInfo } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
 import { Icon } from '../common';
@@ -23,6 +27,7 @@ const ProductItem = ({
   reviewInfo,
 }: Product & { reviewInfo: ProductReviewInfo }) => {
   const router = useRouter();
+  const productDetailLink = ROUTER_PATH.PRODUCT_DETAIL(productId);
 
   const discountRate =
     originalPrice && sellingPrice
@@ -38,7 +43,7 @@ const ProductItem = ({
   return (
     <li className="gap-sm flex w-full flex-row md:flex-col md:gap-0">
       <section className="w-5/12 md:w-full">
-        <Link href={`/products/${productId}`}>
+        <Link href={productDetailLink}>
           <ProductThumbnail
             imageUrl={titleUrl}
             name={name}
@@ -70,7 +75,7 @@ const ProductItem = ({
           </div>
         </div>
 
-        <Link href={`/products/${productId}`}>
+        <Link href={productDetailLink}>
           <h2 className="font-style-subHeading line-clamp-2 w-full text-ellipsis">
             {name}
           </h2>

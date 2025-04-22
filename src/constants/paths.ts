@@ -8,15 +8,16 @@ export const ROUTER_PATH = {
   MY: '/my',
   MY_PAGE: '/my/orders',
   COUNTRY_SETTING: '/country-setting',
-  CHECKOUT: (orderProductItems: string) =>
-    `/checkout?orderProductItems=${orderProductItems}`,
+  CHECKOUT: (checkoutRequestItems: string) =>
+    `/checkout?checkoutRequestItems=${checkoutRequestItems}`,
   CHECKOUT_SUCCESS: '/checkout/success',
   CHECKOUT_FAIL: '/checkout/fail',
   ORDERS_HISTORY: '/my/orders',
   ORDERS_DETAIL: (orderId: number) => `/my/orders/${orderId}`,
+  PRODUCT_DETAIL: (productId: number) => `/products/${productId}`,
   PRODUCT_CATEGORY: (categoryId: string) => `/products?category=${categoryId}`,
-  REVIEW_PRODUCT: (orderId: number, productItemId: number) =>
-    `/my/review/write/${orderId}/${productItemId}`,
+  REVIEW_PRODUCT: (orderId: number, productId: number, productItemId: number) =>
+    `/my/review/write/${orderId}/${productId}/${productItemId}`,
   ERROR_AUTHORIZED: '/error/authorized',
   ERROR_UNAUTHORIZED: '/error/unauthorized',
   ERROR_RESTRICTED: '/error/restricted',

@@ -9,7 +9,7 @@ import {
 
 import { toast } from '@/utils';
 import { requestPayment } from '@/services';
-import { ROUTER_PATH } from '@/constants';
+import { ROUTER_PATH, CHECKOUT_CONSTANT } from '@/constants';
 import { useShippingAddressStore } from '@/stores';
 import type {
   OrderItem,
@@ -18,8 +18,9 @@ import type {
 } from '@/types';
 import { Button } from '@/components';
 
-const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY || '';
-const customerKey = 'bhiy_d4GLTR_4gsaPxpvz'; // toss 에서 제공하는 테스트 key
+const CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY || '';
+/**TODO - uuid 라이브러리 사용하여 테스트 키 대체 */
+const CUSTOMERS_KEY = 'bhiy_d4GLTR_4gsaPxpvz'; // toss 에서 제공하는 public 테스트 key
 
 type PaymentMethodSelectorProps = {
   orderItems: OrderItem[];
@@ -27,6 +28,8 @@ type PaymentMethodSelectorProps = {
   PaymentsRequestAPISchema,
   'orderItems' | 'paymentType' | keyof ShippingAddress
 >;
+
+const { BUTTON, PAYMENT_TYPE, ERROR_MESSAGES } = CHECKOUT_CONSTANT;
 
 const PaymentMethodSelector = ({
   totalDiscountAmount,
@@ -47,9 +50,9 @@ const PaymentMethodSelector = ({
   // 초기화
   useEffect(() => {
     async function fetchPaymentWidgets() {
-      const tossPayments = await loadTossPayments(clientKey);
+      const tossPayments = await loadTossPayments(CLIENT_KEY);
       const widgets = tossPayments.widgets({
-        customerKey: customerKey || ANONYMOUS,
+        customerKey: CUSTOMERS_KEY || ANONYMOUS,
       }); // customerKey - 회원결제, ANONYMOUS - 비회원 결제
 
       setWidgets(widgets);
@@ -107,22 +110,21 @@ const PaymentMethodSelector = ({
       recipientEmail,
     } = formData;
 
-    const recipientAddressTotal = `${recipientAddress} ${recipientAddressDetail}`;
-
     if (
       !recipientName ||
       !recipientPhone ||
-      !recipientAddressTotal ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
       !zipCode ||
       !note
     ) {
-      toast.warning('배송지 정보를 모두 입력해주세요!');
+      toast.warning(ERROR_MESSAGES.FORM_WARNING);
 
       return;
     }
 
     try {
-      const orderProductItems = orderItems.map(item => ({
+      const checkoutRequestItems = orderItems.map(item => ({
         productItemId: item.productItemId,
         quantity: item.quantity,
       }));
@@ -133,11 +135,12 @@ const PaymentMethodSelector = ({
         totalProductAmount,
         deliveryFee,
         totalAmount,
-        paymentType: 'CARD',
-        orderItems: orderProductItems,
+        paymentType: PAYMENT_TYPE.CARD,
+        orderItems: checkoutRequestItems,
         recipientName,
         recipientPhone,
-        recipientAddress: recipientAddressTotal,
+        recipientAddress,
+        recipientAddressDetail,
         zipCode: zipCode,
         note: note,
       };
@@ -159,7 +162,7 @@ const PaymentMethodSelector = ({
     } catch (error) {
       console.error('Payment failed:', error);
 
-      toast.error('예기치 못한 오류가 발생했습니다. 다시 시도해주세요!');
+      toast.error(ERROR_MESSAGES.CHECKOUT_REQUEST_ERROR);
       alert(error);
     }
   }, [
@@ -187,7 +190,7 @@ const PaymentMethodSelector = ({
             onClick={handlePaymentRequest}
             className="font-style-heading w-full"
           >
-            결제하기
+            {BUTTON.CHECKOUT}
           </Button>
         </div>
       </div>

@@ -14,6 +14,7 @@ const OrderTableInfoSection = async ({
   recipientName,
   recipientPhone,
   recipientAddress,
+  recipientAddressDetail,
   zipCode,
   note,
 }: OrderTableInfoProps) => {
@@ -31,7 +32,7 @@ const OrderTableInfoSection = async ({
         },
         {
           fieldName: '받는 주소',
-          fieldValue: `(${zipCode}) ${recipientAddress}`,
+          fieldValue: `(${zipCode}) ${recipientAddress} ${recipientAddressDetail}`,
         },
         {
           fieldName: '배송 요청 사항',

@@ -7,7 +7,7 @@ import {
   ProductOptionInfo,
 } from '@/components';
 
-interface OrderProductListProps {
+interface CheckoutProductListProps {
   orderItems: Required<OrderItem>[];
   gapStyles?: string;
 }
@@ -16,7 +16,10 @@ const PADDING_STYLES = 'py-md sm:py-lg sm:pr-lg first:pt-0';
 const THUMB_COLUMN_STYLES = 'w-5/12 w-[120px] sm:w-[200px]';
 const INFO_COLUMN_STYLES = 'w-7/12 sm:w-full';
 
-const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
+const CheckoutProductList = ({
+  orderItems,
+  gapStyles,
+}: CheckoutProductListProps) => {
   return (
     <ul>
       {orderItems.map(item => (
@@ -72,4 +75,4 @@ const OrderProductList = ({ orderItems, gapStyles }: OrderProductListProps) => {
   );
 };
 
-export default OrderProductList;
+export default CheckoutProductList;

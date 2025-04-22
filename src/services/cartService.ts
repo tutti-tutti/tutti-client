@@ -36,9 +36,10 @@ export const mapProductToCartItem = (
   return {
     cartItemId: -1,
     storeName: product.storeName,
+    productId: product.productId,
     productItemId: selectedOption.productItemId,
     productImgUrl: product.titleUrl as string,
-    productItemName: product.name,
+    productName: product.name,
     originalPrice: product.originalPrice,
     quantity,
     firstOptionName: selectedOption.firstOptionName || undefined,
@@ -122,7 +123,7 @@ export const addToLocalCart = async (
   } catch (error) {
     console.error(PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE, error);
     return {
-      success: false,
+      isSuccess: false,
       message: PRODUCTS_CONSTANTS.FETCH_FAIL_MESSAGE,
       cart: currentCart,
     };
@@ -137,7 +138,7 @@ export const addToLocalCart = async (
 
   if (currentCart.length + newItemsCount > MAX_CART_ITEMS_COUNT) {
     return {
-      success: false,
+      isSuccess: false,
       message: NO_USER_MAX_ADD_COUNT(MAX_CART_ITEMS_COUNT),
       cart: currentCart,
     };
@@ -153,7 +154,7 @@ export const addToLocalCart = async (
 
     if (invalidOptions.length > 0) {
       return {
-        success: false,
+        isSuccess: false,
         message: INVALID_OPTION,
         cart: currentCart,
       };
@@ -194,7 +195,7 @@ export const addToLocalCart = async (
 
   if (quantityExceeded) {
     return {
-      success: false,
+      isSuccess: false,
       message: MAX_QUANTITY(maxQuantity),
       cart: currentCart,
     };
@@ -203,7 +204,7 @@ export const addToLocalCart = async (
   localStorage.setItem('cart', JSON.stringify(updatedCart));
 
   return {
-    success: true,
+    isSuccess: true,
     message: ADD_SUCCESS_MESSAGE,
     cart: updatedCart,
   };
@@ -217,6 +218,41 @@ export const addCart = async (
 
   if (accessToken) {
     try {
+      const { data: currentCart } = await axiosInstance.get<CartProductItem[]>(
+        CART_ENDPOINTS.LIST,
+      );
+
+      let quantityExceeded = false;
+      let exceededMaxQuantity = 10;
+
+      for (const item of cartItems) {
+        const existingItem = currentCart.find(
+          cartItem => cartItem.productItemId === item.productItemId,
+        );
+
+        let newQuantity = item.quantity;
+        let itemMaxQuantity = 10;
+
+        if (existingItem) {
+          newQuantity = existingItem.quantity + item.quantity;
+          itemMaxQuantity = existingItem.maxQuantity || 10;
+        }
+
+        if (newQuantity > itemMaxQuantity) {
+          quantityExceeded = true;
+          exceededMaxQuantity = itemMaxQuantity;
+          break;
+        }
+      }
+
+      if (quantityExceeded) {
+        return {
+          isSuccess: false,
+          message: MAX_QUANTITY(exceededMaxQuantity),
+          cart: currentCart,
+        };
+      }
+
       const apiPayload: CartAddRequestSchema = {
         cartItems: cartItems,
       };
@@ -224,7 +260,12 @@ export const addCart = async (
         CART_ENDPOINTS.LIST,
         apiPayload,
       );
-      return data;
+
+      return {
+        isSuccess: true,
+        message: ADD_SUCCESS_MESSAGE,
+        ...data,
+      };
     } catch (error) {
       console.error(ADD_FAIL_MESSAGE, error);
       throw error;
@@ -259,7 +300,7 @@ export const removeFromCart = async (
       await Promise.all(deletePromises);
 
       return {
-        success: true,
+        isSuccess: true,
         message:
           productItemIds.length > 1
             ? DELETE_SELECTED_SUCCESS_MESSAGE
@@ -274,7 +315,7 @@ export const removeFromCart = async (
       const localCart = localStorage.getItem('cart');
       if (!localCart) {
         return {
-          success: false,
+          isSuccess: false,
           message: EMPTY_CART_MESSAGE,
           cart: [],
         };
@@ -288,7 +329,7 @@ export const removeFromCart = async (
       localStorage.setItem('cart', JSON.stringify(updatedCart));
 
       return {
-        success: true,
+        isSuccess: true,
         message:
           productItemIds.length > 1
             ? DELETE_SELECTED_SUCCESS_MESSAGE

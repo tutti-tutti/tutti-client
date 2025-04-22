@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { SearchIcon } from '@/components';
 import { useDebounce } from '@/hooks';
 import { cn } from '@/utils';
+import { PRODUCTS_CONSTANTS, PRODUCTS_ENDPOINTS } from '@/constants';
 
 interface SearchInputProps {
   placeholder?: string;
@@ -15,12 +17,13 @@ interface SearchInputProps {
 }
 
 const SearchInput = ({
-  placeholder = '현재 찾고 싶은 상품을 검색해주세요!',
+  placeholder = PRODUCTS_CONSTANTS.SEARCH_PLACEHOLDER,
   onChange,
   value,
   className = '',
   debounceTime = 300,
 }: SearchInputProps) => {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState(value || '');
 
   const debouncedValue = useDebounce(inputValue, debounceTime);
@@ -37,6 +40,10 @@ const SearchInput = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (inputValue.trim()) {
+      router.push(PRODUCTS_ENDPOINTS.SEARCH_PAGE(inputValue.trim()));
+    }
     setInputValue('');
   };
 
@@ -47,7 +54,7 @@ const SearchInput = ({
       </div>
 
       <form
-        className="px-2xl py-xs relative flex items-center justify-between"
+        className="px-lg md:px-2xl py-xs relative flex items-center justify-between"
         onSubmit={handleSubmit}
       >
         <input
@@ -59,7 +66,7 @@ const SearchInput = ({
         />
 
         <button className="cursor-pointer" aria-label="search">
-          <SearchIcon />
+          <SearchIcon className="h-6 w-6 md:h-auto md:w-auto" />
         </button>
       </form>
     </div>

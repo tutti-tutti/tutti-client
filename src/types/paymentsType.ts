@@ -1,6 +1,6 @@
 /**NOTE - ordersType과 paymentsType을 나누는 기준은 endpoint 입니다 */
 
-import { OrderProductItem } from './ordersType';
+import { CheckoutRequestItem } from './ordersType';
 
 // 주문/결제 배송지 입력 값
 export interface ShippingAddress {
@@ -20,10 +20,11 @@ export interface PaymentsRequestAPISchema {
   deliveryFee: number;
   totalAmount: number;
   paymentType: string;
-  orderItems: OrderProductItem[];
+  orderItems: CheckoutRequestItem[];
   recipientName: string;
   recipientPhone: string;
   recipientAddress: string;
+  recipientAddressDetail: string;
   zipCode: string;
   note: string;
 }

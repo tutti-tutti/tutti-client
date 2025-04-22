@@ -5,15 +5,15 @@ import {
 } from '@/utils';
 import { ORDER_CONSTANT } from '@/constants';
 import type { OrderItem } from '@/types';
-import { default as OrderProductList } from './OrderProductList';
+import { default as CheckoutProductList } from './CheckoutProductList';
 
-interface OrderProductListProps {
+interface CheckoutProductListProps {
   orderItems: OrderItem[];
 }
 
 const GAP_STYLES = `flex gap-md sm:gap-lg`;
 
-const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
+const CheckoutProductListGroup = ({ orderItems }: CheckoutProductListProps) => {
   const groupedOrderItems = getGroupedOrderItemsByExpectedArrivalAt(orderItems);
 
   return (
@@ -27,7 +27,8 @@ const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
               </strong>
               <span>{ORDER_CONSTANT.EXPECTED_SHIPPING}</span>
             </div>
-            <OrderProductList orderItems={items} gapStyles={GAP_STYLES} />
+
+            <CheckoutProductList orderItems={items} gapStyles={GAP_STYLES} />
           </article>
         </li>
       ))}
@@ -35,4 +36,4 @@ const OrderProductListGroup = ({ orderItems }: OrderProductListProps) => {
   );
 };
 
-export default OrderProductListGroup;
+export default CheckoutProductListGroup;

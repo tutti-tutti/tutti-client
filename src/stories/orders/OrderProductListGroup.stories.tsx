@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { getExpectedArrivalAt } from '@/utils';
 import type { OrderItem } from '@/types';
-import { OrderProductListGroup } from '@/components';
+import { CheckoutProductListGroup } from '@/components';
 
-const OrderProductListGroupMock = ({
+const CheckoutProductListGroupMock = ({
   orderItems,
 }: {
   orderItems: OrderItem[];
 }) => {
-  return <OrderProductListGroup orderItems={orderItems} />;
+  return <CheckoutProductListGroup orderItems={orderItems} />;
 };
 
 const expectedArrivalAt = getExpectedArrivalAt();
@@ -20,6 +20,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 5,
     storeName: '라이프스타일 트렌드',
+    productId: 1,
     productItemId: 11,
     productName: '풀커버 강화유리 액정보호필름 갤럭시노트20, 2매입',
     productImgUrl: sampleImage,
@@ -34,6 +35,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 9,
     storeName: '꼼꼼이몰',
+    productId: 2,
     productItemId: 22,
     productName: '캐논 G3910 정품 무한잉크',
     productImgUrl: sampleImage,
@@ -48,6 +50,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 4,
     storeName: '홈 & 테크 쇼핑몰',
+    productId: 3,
     productItemId: 8,
     productName:
       '케이스 카드 2장 포켓 수납 파스텔 카메라 풀커버 실리콘 젤리 라벤더, 갤럭시S25 플러스',
@@ -63,6 +66,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 3,
     storeName: 'Marshall 공식몰',
+    productId: 4,
     productItemId: 320,
     productName: '[본사최신제품]인셀덤 크림 엑티브 50ml EX 수분 이엑스',
     productImgUrl: sampleImage,
@@ -77,6 +81,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 4,
     storeName: '홈 & 테크 쇼핑몰',
+    productId: 5,
     productItemId: 447,
     productName: '프로쉬 알로에베라 고농축 세탁세제 3L',
     productImgUrl: sampleImage,
@@ -91,6 +96,7 @@ const createOrderItems = (): OrderItem[] => [
   {
     storeId: 7,
     storeName: '살림의여왕',
+    productId: 6,
     productItemId: 370,
     productName:
       '르네 디종 프렌치 머스타드 850g 식자재 식료품 가공식품 수입식품 수입식재료',
@@ -105,23 +111,25 @@ const createOrderItems = (): OrderItem[] => [
   },
 ];
 
-const meta: Meta<typeof OrderProductListGroupMock> = {
-  title: 'Orders/OrderProductList',
-  component: OrderProductListGroupMock,
+const meta: Meta<typeof CheckoutProductListGroupMock> = {
+  title: 'Orders/CheckoutProductList',
+  component: CheckoutProductListGroupMock,
   parameters: {
     layout: 'fullscreen',
   },
   decorators: [
     Story => (
-      <div className="container mx-auto p-4">
-        <Story />
+      <div className="layout-max-width m-auto">
+        <main className="px-container py-md">
+          <Story />
+        </main>
       </div>
     ),
   ],
 };
 
 export default meta;
-type Story = StoryObj<typeof OrderProductListGroupMock>;
+type Story = StoryObj<typeof CheckoutProductListGroupMock>;
 
 export const ProductListGroupForCheckout: Story = {
   args: {

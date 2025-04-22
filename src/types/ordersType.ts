@@ -1,6 +1,6 @@
 import { ORDER_STATUS_LIST } from '@/constants';
 
-export interface OrderProductItem {
+export interface CheckoutRequestItem {
   productItemId: number;
   quantity: number;
 }
@@ -8,8 +8,9 @@ export interface OrderProductItem {
 export interface OrderItem {
   storeId: number;
   storeName: string;
-  productItemId: number;
+  productId: number;
   productName: string;
+  productItemId: number;
   productImgUrl: string;
   firstOptionName: string | null;
   firstOptionValue: string | null;
@@ -28,7 +29,7 @@ export interface GroupedOrderItemByExpectedArrivalAt {
 
 // 주문서 요청 API 스키마
 export interface OrderCheckoutRequestAPISchema {
-  orderItems: OrderProductItem[];
+  orderItems: CheckoutRequestItem[];
 }
 
 // 주문서 응답 API 스키마
@@ -108,7 +109,7 @@ export interface OrderDetailResponseAPISchema {
   recipientPhone: string;
   zipCode: string;
   recipientAddress: string;
-  detailAddress: string;
+  recipientAddressDetail: string;
   note: string;
 }
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { ROUTER_PATH } from '@/constants';
-import { SearchInput, Logo, NavIcon } from '@/components';
+import { SearchInput, Logo, NavIcon, Button } from '@/components';
 import HeaderNavigation from './HeaderNavigation';
 import TextHeader from './TextHeader';
 
@@ -17,17 +17,16 @@ const Header = ({ isLogin }: HeaderProps) => {
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
-    console.log('isSearchOpen', isSearchOpen);
   };
 
   return (
-    <header className="bg-bg-primary pt-sm md:pb-md md:border-border-secondary fixed top-0 right-0 left-0 z-10 w-full md:border-b">
+    <header className="bg-bg-primary py-sm md:pb-md md:border-border-secondary fixed top-0 right-0 left-0 z-10 w-full md:border-b">
       <div className="px-container gap-xs layout-max-width mx-auto flex w-full flex-col">
         <nav className="ml-auto hidden md:block">
           <TextHeader isLogin={isLogin} country="한국" />
         </nav>
 
-        <div className="gap-lg flex h-[54px] items-center justify-between md:h-[64px]">
+        <div className="gap-lg flex items-center justify-between">
           <Link href={ROUTER_PATH.HOME}>
             <Logo />
           </Link>
@@ -35,8 +34,19 @@ const Header = ({ isLogin }: HeaderProps) => {
             <SearchInput />
           </div>
           {isSearchOpen && (
-            <div className="bg-bg-primary absolute right-[var(--space-container)] left-[var(--space-container)] h-[64px] w-[calc(100%-2*var(--space-container))] md:hidden">
-              <SearchInput />
+            <div className="bg-bg-primary absolute right-[var(--space-container)] left-[var(--space-container)] w-[calc(100%-2*var(--space-container))] md:hidden">
+              <div className="gap-xs flex items-center">
+                <div className="flex-1">
+                  <SearchInput />
+                </div>
+                <Button
+                  className="px-sm py-xs rounded-xl"
+                  variant="primaryOutline"
+                  onClick={toggleSearch}
+                >
+                  닫기
+                </Button>
+              </div>
             </div>
           )}
           <div className="md:gap-xl gap-md flex">

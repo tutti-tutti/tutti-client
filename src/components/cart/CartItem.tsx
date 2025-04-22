@@ -17,8 +17,9 @@ import CartItemQuantity from './CartItemQuantity';
 const { CONFIRM_DELETE_MESSAGE, CART_TOAST_MESSAGE } = CART_CONSTANTS;
 
 const CartItem = ({
+  productId,
   productItemId,
-  productItemName,
+  productName,
   storeName,
   productImgUrl,
   originalPrice,
@@ -77,17 +78,19 @@ const CartItem = ({
   return (
     <li className="py-lg md:py-2xl border-border-secondary gap-sm flex w-full border-t">
       <CartItemImage
-        productId={productItemId}
+        productId={productId}
+        productItemId={productItemId}
         productImgUrl={productImgUrl}
-        productItemName={productItemName}
+        productName={productName}
         isChecked={isChecked}
         toggleItemCheckbox={toggleItemCheckbox}
       />
 
       <div className="flex w-1/2 flex-col md:w-3/5">
         <CartItemHeader
+          productId={productId}
           storeName={storeName}
-          productItemName={productItemName}
+          productName={productName}
           handleDelete={handleDelete}
         />
 

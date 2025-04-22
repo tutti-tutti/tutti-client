@@ -24,6 +24,7 @@ export interface PaymentsRequestAPISchema {
   recipientName: string;
   recipientPhone: string;
   recipientAddress: string;
+  recipientAddressDetail: string;
   zipCode: string;
   note: string;
 }

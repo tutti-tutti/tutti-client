@@ -110,12 +110,11 @@ const PaymentMethodSelector = ({
       recipientEmail,
     } = formData;
 
-    const recipientAddressTotal = `${recipientAddress} ${recipientAddressDetail}`;
-
     if (
       !recipientName ||
       !recipientPhone ||
-      !recipientAddressTotal ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
       !zipCode ||
       !note
     ) {
@@ -140,7 +139,8 @@ const PaymentMethodSelector = ({
         orderItems: checkoutRequestItems,
         recipientName,
         recipientPhone,
-        recipientAddress: recipientAddressTotal,
+        recipientAddress,
+        recipientAddressDetail,
         zipCode: zipCode,
         note: note,
       };

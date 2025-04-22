@@ -43,30 +43,34 @@ export const generateBreadcrumbItems = (
   const pathSegments = pathname.split('/').filter(Boolean);
 
   // 항상 홈 링크로 시작
-  const items: BreadcrumbItem[] = [
-    {
-      label: homeLabel,
-      href: PATH.HOME.url,
-      isCurrent: pathSegments.length === 0,
+  const homeItem: BreadcrumbItem = {
+    label: homeLabel,
+    href: PATH.HOME.url,
+    isCurrent: pathSegments.length === 0,
+  };
+
+  // reduce를 사용하여 pathSegments를 순회하면서 breadcrumb 항목 생성
+  const pathItems = pathSegments.reduce<{
+    items: BreadcrumbItem[];
+    currentPath: string;
+  }>(
+    (acc, segment, index) => {
+      const newPath = `${acc.currentPath}/${segment}`;
+      const isLast = index === pathSegments.length - 1;
+
+      const newItem: BreadcrumbItem = {
+        label: getNameFromPath(newPath),
+        href: newPath,
+        isCurrent: isLast,
+      };
+
+      return {
+        items: [...acc.items, newItem],
+        currentPath: newPath,
+      };
     },
-  ];
+    { items: [], currentPath: '' },
+  ).items;
 
-  // 경로 세그먼트를 기반으로 항목 생성
-  let currentPath = '';
-
-  pathSegments.forEach((segment, index) => {
-    currentPath += `/${segment}`;
-    const isLast = index === pathSegments.length - 1;
-
-    // 세그먼트에 대한 레이블 결정 (기본 레이블 또는 세그먼트 자체)
-    const label = getNameFromPath(currentPath);
-
-    items.push({
-      label,
-      href: currentPath,
-      isCurrent: isLast,
-    });
-  });
-
-  return items;
+  return [homeItem, ...pathItems];
 };

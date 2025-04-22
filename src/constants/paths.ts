@@ -77,7 +77,7 @@ export const PATH_ERROR = {
   ERROR_RESTRICTED: '/error/restricted',
 };
 
-/**TODO - 기존 레거시 코드 호완, 사용되는 코드 정리 시 제거 */
+/**TODO - 기존 레거시 코드 호환, 사용되는 코드 정리 시 제거 */
 export const PATH_NAME = {
   HOME: PATH.HOME.name,
   SIGNUP: PATH.SIGNUP.name,
@@ -93,7 +93,7 @@ export const PATH_NAME = {
   COUNTRY_SETTING: PATH.COUNTRY_SETTING.name,
 };
 
-/**TODO - 기존 레거시 코드 호완, pageRouter 로 사용 시 제거 */
+/**TODO - 기존 레거시 코드 호환, pageRouter 로 사용 시 제거 */
 export const ROUTER_PATH = {
   HOME: PATH.HOME.url,
   SIGNUP: PATH.SIGNUP.url,

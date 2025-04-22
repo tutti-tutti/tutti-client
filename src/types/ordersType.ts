@@ -109,7 +109,7 @@ export interface OrderDetailResponseAPISchema {
   recipientPhone: string;
   zipCode: string;
   recipientAddress: string;
-  detailAddress: string;
+  recipientAddressDetail: string;
   note: string;
 }
 

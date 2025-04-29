@@ -1,6 +1,6 @@
 import { PageTitle, Breadcrumb, PageContentHeader } from '@/components';
 interface MypageHeaderProps {
-  linkItems: {
+  linkItems?: {
     label: string;
     href: string;
   }[];

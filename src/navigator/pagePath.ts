@@ -4,7 +4,7 @@ const pagePath = {
   home: PATH.HOME.url,
   countrySetting: PATH.COUNTRY_SETTING.url,
   signup: PATH.SIGNUP.url,
-  signin: PATH.LOGIN.url,
+  signin: PATH.SIGNIN.url,
   resetPw: PATH.RESET_PW.url,
   faqs: PATH.FAQS.url,
   myPage: PATH.MY_PAGE.url,

@@ -19,7 +19,7 @@ export const PATH = {
     name: '회원가입',
     url: '/signup',
   },
-  LOGIN: {
+  SIGNIN: {
     name: '로그인',
     url: '/signin',
   },
@@ -90,7 +90,7 @@ export const PATH_ERROR = {
 export const PATH_NAME = {
   HOME: PATH.HOME.name,
   SIGNUP: PATH.SIGNUP.name,
-  LOGIN: PATH.LOGIN.name,
+  LOGIN: PATH.SIGNIN.name,
   LOGOUT: '로그아웃',
   FAQS: PATH.FAQS.name,
   CART: PATH.CART.name,
@@ -106,7 +106,7 @@ export const PATH_NAME = {
 export const ROUTER_PATH = {
   HOME: PATH.HOME.url,
   SIGNUP: PATH.SIGNUP.url,
-  LOGIN: PATH.LOGIN.url,
+  LOGIN: PATH.SIGNIN.url,
   RESET_PW: PATH.RESET_PW.url,
   FAQS: PATH.FAQS.url,
   CART: PATH.CART.url,

@@ -58,12 +58,13 @@ export const CheckoutHeaderComponent: Story = {
   render: () => <CheckoutHeader />,
 };
 
-const linkItems = [
-  { label: PATH.HOME.name, href: PATH.HOME.url },
-  { label: PATH.MY_PAGE.name, href: '', isCurrent: true },
+const { ORDER_HISTORY, HOME, MY_PAGE } = PATH;
+const LINK_ITEMS = [
+  { label: HOME.name, href: HOME.path },
+  { label: MY_PAGE.name, href: '', isCurrent: true },
   {
-    label: PATH.ORDER_HISTORY.name,
-    href: PATH.ORDER_HISTORY.url,
+    label: ORDER_HISTORY.name,
+    href: ORDER_HISTORY.path,
     isCurrent: true,
   },
 ];
@@ -71,6 +72,6 @@ const linkItems = [
 export const MypageHeaderComponent: Story = {
   args: {},
   render: () => (
-    <MypageHeader linkItems={linkItems} pageName={PATH.ORDER_HISTORY.name} />
+    <MypageHeader linkItems={LINK_ITEMS} pageName={ORDER_HISTORY.name} />
   ),
 };

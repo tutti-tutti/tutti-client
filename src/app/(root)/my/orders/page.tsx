@@ -2,9 +2,11 @@ import { ORDER_CONSTANT, PATH } from '@/constants';
 import { fetchOrderHistory } from '@/services';
 import { MypageHeader, OrderHistoryClientWrapper, NoData } from '@/components';
 
+const { ORDER_HISTORY, HOME, MY_PAGE } = PATH;
+
 export async function generateMetadata() {
   return {
-    title: PATH.ORDER_HISTORY.name,
+    title: ORDER_HISTORY.name,
   };
 }
 
@@ -12,11 +14,11 @@ const OrderHistoryPage = async () => {
   const initialOrderHistory = await fetchOrderHistory();
 
   const linkItems = [
-    { label: PATH.HOME.name, href: PATH.HOME.url },
-    { label: PATH.MY_PAGE.name, href: '', isCurrent: true },
+    { label: HOME.name, href: HOME.path },
+    { label: MY_PAGE.name, href: '', isCurrent: true },
     {
-      label: PATH.ORDER_HISTORY.name,
-      href: PATH.ORDER_HISTORY.url,
+      label: ORDER_HISTORY.name,
+      href: ORDER_HISTORY.path,
       isCurrent: true,
     },
   ];
@@ -24,10 +26,7 @@ const OrderHistoryPage = async () => {
   return (
     <div className="gap-4xl mx-auto flex flex-col">
       <section className="gap-lg flex flex-col">
-        <MypageHeader
-          linkItems={linkItems}
-          pageName={PATH.ORDER_HISTORY.name}
-        />
+        <MypageHeader linkItems={linkItems} pageName={ORDER_HISTORY.name} />
 
         {initialOrderHistory.content.length === 0 ? (
           <NoData>

@@ -27,17 +27,17 @@ const TextHeader = ({ isLogin, className = '', country }: TextHeaderProps) => {
 
   const authItems = !memberData
     ? [
-        <ClickText key="login" href={PATH.SIGNIN.url}>
+        <ClickText key="login" href={PATH.SIGNIN.path}>
           {PATH.SIGNIN.name}
         </ClickText>,
-        <ClickText key="signup" href={PATH.SIGNUP.url}>
+        <ClickText key="signup" href={PATH.SIGNUP.path}>
           {PATH.SIGNUP.name}
         </ClickText>,
       ]
     : [];
 
   const commonItems = [
-    <ClickText key="support" href={PATH.FAQS.url}>
+    <ClickText key="support" href={PATH.FAQS.path}>
       {PATH.FAQS.name}
     </ClickText>,
     <ClickText key="country" disabled>

@@ -10,73 +10,73 @@ export const MIDDLE_PATH = {
 export const PATH = {
   HOME: {
     name: '홈',
-    url: '/',
+    path: '/',
   },
   COUNTRY_SETTING: {
     name: '국가설정',
-    url: '/country-setting',
+    path: '/country-setting',
   },
   SIGNUP: {
     name: '회원가입',
-    url: '/signup',
+    path: '/signup',
   },
   SIGNIN: {
     name: '로그인',
-    url: '/signin',
+    path: '/signin',
   },
   RESET_PW: {
     name: '비밀번호 재설정',
-    url: '/reset-password',
+    path: '/reset-password',
   },
   FAQS: {
     name: '자주 묻는 질문',
-    url: '/faqs',
+    path: '/faqs',
   },
   PRODUCT_CATEGORY: {
     name: '상품 카테고리',
-    url: (categoryId: string) =>
+    path: (categoryId: string) =>
       `${MIDDLE_PATH.PRODUCTS}?category=${categoryId}`,
   },
   PRODUCT_DETAIL: {
     name: '상품 상세',
-    url: (productId: number) => `${MIDDLE_PATH.PRODUCTS}/${productId}`,
+    path: (productId: number) => `${MIDDLE_PATH.PRODUCTS}/${productId}`,
   },
   CART: {
     name: '장바구니',
-    url: '/cart',
+    path: '/cart',
   },
   ORDER_CHECKOUT: {
     name: '주문 결제',
-    url: (checkoutRequestItems: string) =>
+    path: (checkoutRequestItems: string) =>
       `${MIDDLE_PATH.CHECKOUT}?checkoutRequestItems=${checkoutRequestItems}`,
   },
   ORDER_CHECKOUT_SUCCESS: {
     name: '주문 성공',
-    url: `${MIDDLE_PATH.CHECKOUT}/success`,
+    path: `${MIDDLE_PATH.CHECKOUT}/success`,
   },
   ORDER_CHECKOUT_FAIL: {
     name: '주문 실패',
-    url: `${MIDDLE_PATH.CHECKOUT}/fail`,
+    path: `${MIDDLE_PATH.CHECKOUT}/fail`,
   },
   ORDER_HISTORY: {
     name: '주문 내역',
-    url: `${MIDDLE_PATH.ORDERS}`,
+    path: `${MIDDLE_PATH.ORDERS}`,
   },
   ORDER_DETAIL: {
     name: '주문 상세',
-    url: (orderId: number) => `${MIDDLE_PATH.ORDERS}/${orderId}`,
+    path: (orderId: number) => `${MIDDLE_PATH.ORDERS}/${orderId}`,
   },
   MY: {
     name: '마이페이지',
-    url: `${MIDDLE_PATH.MY}`,
+    path: `${MIDDLE_PATH.MY}`,
   },
   MY_PAGE: {
     name: '마이페이지',
-    url: `${MIDDLE_PATH.ORDERS}`,
+    path: `${MIDDLE_PATH.ORDERS}`,
   },
   REVIEW_PRODUCT: {
     name: '리뷰 작성',
-    url: (orderId: number, productId: number, productItemId: number) =>
+    path: (orderId: number, productId: number, productItemId: number) =>
       `${MIDDLE_PATH.REVIEW}/write/${orderId}/${productId}/${productItemId}`,
   },
 };

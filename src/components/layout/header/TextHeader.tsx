@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { cn } from '@/utils/cn';
-import { ROUTER_PATH, PATH_NAME } from '@/constants';
+import { PATH, CURRENT_COUNTRY } from '@/constants';
 import { ClickText, LogoutButton } from '@/components';
 import { memberDataQueryOptions } from '@/queries';
 
@@ -27,21 +27,21 @@ const TextHeader = ({ isLogin, className = '', country }: TextHeaderProps) => {
 
   const authItems = !memberData
     ? [
-        <ClickText key="login" href={ROUTER_PATH.LOGIN}>
-          {PATH_NAME.LOGIN}
+        <ClickText key="login" href={PATH.SIGNIN.url}>
+          {PATH.SIGNIN.name}
         </ClickText>,
-        <ClickText key="signup" href={ROUTER_PATH.SIGNUP}>
-          {PATH_NAME.SIGNUP}
+        <ClickText key="signup" href={PATH.SIGNUP.url}>
+          {PATH.SIGNUP.name}
         </ClickText>,
       ]
     : [];
 
   const commonItems = [
-    <ClickText key="support" href={ROUTER_PATH.FAQS}>
-      {PATH_NAME.FAQS}
+    <ClickText key="support" href={PATH.FAQS.url}>
+      {PATH.FAQS.name}
     </ClickText>,
     <ClickText key="country" disabled>
-      {PATH_NAME.CURRENT_COUNTRY}({country})
+      {CURRENT_COUNTRY}({country})
     </ClickText>,
   ];
 

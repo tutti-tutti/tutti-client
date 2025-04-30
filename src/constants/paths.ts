@@ -86,6 +86,9 @@ export const PATH_ERROR = {
   ERROR_RESTRICTED: '/error/restricted',
 };
 
+export const LOGOUT = '로그아웃';
+export const CURRENT_COUNTRY = '현재 국가';
+
 /**TODO - 기존 레거시 코드 호환, 사용되는 코드 정리 시 제거 */
 export const PATH_NAME = {
   HOME: PATH.HOME.name,

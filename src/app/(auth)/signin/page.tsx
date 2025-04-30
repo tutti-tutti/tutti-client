@@ -1,5 +1,6 @@
+import { AUTH_CONSTANTS } from '@/constants';
+import { pagePath } from '@/navigator';
 import { AuthForm, Checkbox, ClickText, SocialLoginButton } from '@/components';
-import { AUTH_CONSTANTS, ROUTER_PATH } from '@/constants';
 
 const { SIGNIN, AUTO_SIGNIN, FORGOT_PW, SOCIAL_SIGNIN, TO_SIGNUP } =
   AUTH_CONSTANTS;
@@ -9,7 +10,7 @@ const SigninPage = () => {
     <AuthForm
       type="signin"
       title={SIGNIN}
-      redirectPath={ROUTER_PATH.HOME}
+      redirectPath={pagePath.home}
       extraFields={<AutoLoginAndResetBox />}
       formFooter={<SocialLoginAndSignupBox />}
     />
@@ -26,7 +27,7 @@ const AutoLoginAndResetBox = () => (
         <div>{AUTO_SIGNIN}</div>
       </div>
       <ClickText
-        href={ROUTER_PATH.RESET_PW}
+        href={pagePath.resetPw}
         className="text-text-info font-style-info"
       >
         {FORGOT_PW}
@@ -46,7 +47,7 @@ const SocialLoginAndSignupBox = () => (
     </div>
     <SocialLoginButton />
     <ClickText
-      href={ROUTER_PATH.SIGNUP}
+      href={pagePath.signup}
       className="text-text-info font-style-info text-center"
     >
       {TO_SIGNUP}

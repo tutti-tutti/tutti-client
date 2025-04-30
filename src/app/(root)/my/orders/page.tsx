@@ -1,4 +1,5 @@
 import { ORDER_CONSTANT, PATH_NAME, ROUTER_PATH } from '@/constants';
+import { pagePath } from '@/navigator';
 import { fetchOrderHistory } from '@/services';
 import { MypageHeader, OrderHistoryClientWrapper, NoData } from '@/components';
 
@@ -12,7 +13,7 @@ const OrderHistoryPage = async () => {
   const initialOrderHistory = await fetchOrderHistory();
 
   const linkItems = [
-    { label: PATH_NAME.HOME, href: ROUTER_PATH.HOME },
+    { label: PATH_NAME.HOME, href: pagePath.home },
     { label: PATH_NAME.MY_PAGE, href: '', isCurrent: true },
     {
       label: PATH_NAME.ORDER_HISTORY,

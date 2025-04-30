@@ -4,9 +4,7 @@ import { BASE_URL, ERROR_MESSAGES, MIDDLE_PATH, PATH_ERROR } from '@/constants';
 import { pagePath } from '@/navigator';
 
 const { signin, signup, resetPw } = pagePath;
-
 const { ERROR_AUTHORIZED, ERROR_RESTRICTED, ERROR_UNAUTHORIZED } = PATH_ERROR;
-
 const { CHECKOUT, ERROR, REVIEW, MY } = MIDDLE_PATH;
 
 const ALLOWED_DOMAINS = [BASE_URL.LOCAL, BASE_URL.SITE];

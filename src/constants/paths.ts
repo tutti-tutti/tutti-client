@@ -89,22 +89,6 @@ export const PATH_ERROR = {
 export const LOGOUT = '로그아웃';
 export const CURRENT_COUNTRY = '현재 국가';
 
-/**TODO - 기존 레거시 코드 호환, 사용되는 코드 정리 시 제거 */
-export const PATH_NAME = {
-  HOME: PATH.HOME.name,
-  SIGNUP: PATH.SIGNUP.name,
-  LOGIN: PATH.SIGNIN.name,
-  LOGOUT: '로그아웃',
-  FAQS: PATH.FAQS.name,
-  CART: PATH.CART.name,
-  ORDER_CHECKOUT: PATH.ORDER_CHECKOUT.name,
-  ORDER_HISTORY: PATH.ORDER_HISTORY.name,
-  ORDER_DETAIL: PATH.ORDER_DETAIL.name,
-  MY_PAGE: PATH.MY_PAGE.name,
-  CURRENT_COUNTRY: '현재 국가',
-  COUNTRY_SETTING: PATH.COUNTRY_SETTING.name,
-};
-
 /**TODO - 기존 레거시 코드 호환, pageRouter 로 사용 시 제거 */
 export const ROUTER_PATH = {
   HOME: PATH.HOME.url,

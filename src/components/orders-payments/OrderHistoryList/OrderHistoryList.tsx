@@ -3,7 +3,8 @@
 import Link from 'next/link';
 
 import { cn } from '@/utils';
-import { ORDER_STATUS_LIST, ROUTER_PATH } from '@/constants';
+import { pagePath } from '@/navigator';
+import { ORDER_STATUS_LIST } from '@/constants';
 import type { OrderItem, OrderStatus } from '@/types';
 import {
   ProductThumbnail,
@@ -47,7 +48,7 @@ const OrderHistoryList = ({
             <div className="gap-4xl flex justify-between">
               <article className="gap-style-orderList flex-1">
                 <div className={THUMB_COLUMN_STYLES}>
-                  <Link href={ROUTER_PATH.PRODUCT_DETAIL(item.productId)}>
+                  <Link href={pagePath.productDetail(item.productId)}>
                     <ProductThumbnail
                       width="w-full"
                       className="aspect-200/175"
@@ -66,7 +67,7 @@ const OrderHistoryList = ({
                   <OrderStatusBadge orderStatus={orderStatus as OrderStatus} />
 
                   <div className="gap-xs flex flex-1 flex-col">
-                    <Link href={ROUTER_PATH.PRODUCT_DETAIL(item.productId)}>
+                    <Link href={pagePath.productDetail(item.productId)}>
                       <ProductName
                         className="w-full"
                         productName={item.productName}

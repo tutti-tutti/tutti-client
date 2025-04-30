@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { ROUTER_PATH } from '@/constants';
+import { pagePath } from '@/navigator';
 import { Icon } from '../common';
 
 interface CartItemHeaderProps {
@@ -31,7 +31,7 @@ const CartItemHeader = ({
           <Link href="#">{storeName}</Link>
         </p>
 
-        <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
+        <Link href={pagePath.productDetail(productId)}>
           <h2 className="mb-xs md:mb-sm font-style-subHeading text-text-primary line-clamp-2 text-ellipsis">
             {productName}
           </h2>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { ROUTER_PATH } from '@/constants';
+import { pagePath } from '@/navigator';
 import { Checkbox } from '../common';
 import { ProductThumbnail } from '../products';
 
@@ -32,7 +32,7 @@ const CartItemImage = ({
         />
       </div>
 
-      <Link href={ROUTER_PATH.PRODUCT_DETAIL(productId)}>
+      <Link href={pagePath.productDetail(productId)}>
         <ProductThumbnail
           height="h-auto"
           width="w-full"

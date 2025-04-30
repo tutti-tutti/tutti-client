@@ -4,11 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { calculateDiscountRate, formatPrice } from '@/utils';
-import {
-  PRODUCTS_CONSTANTS,
-  PRODUCTS_ENDPOINTS,
-  ROUTER_PATH,
-} from '@/constants';
+import { pagePath } from '@/navigator';
+import { PRODUCTS_CONSTANTS, PRODUCTS_ENDPOINTS } from '@/constants';
 import type { Product, ProductReviewInfo } from '@/types';
 import ProductThumbnail from './ProductThumbnail';
 import { Icon } from '../common';
@@ -27,7 +24,7 @@ const ProductItem = ({
   reviewInfo,
 }: Product & { reviewInfo: ProductReviewInfo }) => {
   const router = useRouter();
-  const productDetailLink = ROUTER_PATH.PRODUCT_DETAIL(productId);
+  const productDetailLink = pagePath.productDetail(productId);
 
   const discountRate =
     originalPrice && sellingPrice

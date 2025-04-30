@@ -5,7 +5,8 @@ import {
   cn,
   formatDateWithSeparator,
 } from '@/utils';
-import { ROUTER_PATH, ORDER_CONSTANT, ORDER_STATUS_LIST } from '@/constants';
+import { pagePath } from '@/navigator';
+import { ORDER_CONSTANT, ORDER_STATUS_LIST } from '@/constants';
 import type { OrderHistoryItem, GroupedOrderItemByOrderId } from '@/types';
 import { OrderGroupHeader, OrderHistoryList, Icon } from '@/components';
 
@@ -44,7 +45,7 @@ const OrderHistoryListGroup = ({
                   <strong>{formatDateWithSeparator(createdAt, '.')}</strong>
 
                   <Link
-                    href={ROUTER_PATH.ORDERS_DETAIL(orderId)}
+                    href={pagePath.orderDetail(orderId)}
                     className="text-text-info flex items-center"
                   >
                     {TEXT_LINK.DETAIL} <Icon iconName="right" />

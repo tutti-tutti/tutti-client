@@ -1,9 +1,10 @@
-const MIDDLE_PATH = {
+export const MIDDLE_PATH = {
   PRODUCTS: '/products',
   CHECKOUT: '/checkout',
   MY: '/my',
   ORDERS: '/my/orders',
   REVIEW: '/my/review',
+  ERROR: '/error',
 };
 
 export const PATH = {
@@ -81,37 +82,10 @@ export const PATH = {
 };
 
 export const PATH_ERROR = {
-  ERROR_AUTHORIZED: '/error/authorized',
-  ERROR_UNAUTHORIZED: '/error/unauthorized',
-  ERROR_RESTRICTED: '/error/restricted',
+  ERROR_AUTHORIZED: `/${MIDDLE_PATH.ERROR}/authorized`,
+  ERROR_UNAUTHORIZED: `/${MIDDLE_PATH.ERROR}/unauthorized`,
+  ERROR_RESTRICTED: `/${MIDDLE_PATH.ERROR}/restricted`,
 };
 
 export const LOGOUT = '로그아웃';
 export const CURRENT_COUNTRY = '현재 국가';
-
-/**TODO - 기존 레거시 코드 호환, pageRouter 로 사용 시 제거 */
-export const ROUTER_PATH = {
-  HOME: PATH.HOME.url,
-  SIGNUP: PATH.SIGNUP.url,
-  LOGIN: PATH.SIGNIN.url,
-  RESET_PW: PATH.RESET_PW.url,
-  FAQS: PATH.FAQS.url,
-  CART: PATH.CART.url,
-  MY: PATH.MY.url,
-  MY_PAGE: PATH.MY_PAGE.url,
-  COUNTRY_SETTING: PATH.COUNTRY_SETTING.url,
-  CHECKOUT: (checkoutRequestItems: string) =>
-    PATH.ORDER_CHECKOUT.url(checkoutRequestItems),
-  CHECKOUT_SUCCESS: PATH.ORDER_CHECKOUT_SUCCESS.url,
-  CHECKOUT_FAIL: PATH.ORDER_CHECKOUT_FAIL.url,
-  ORDERS_HISTORY: PATH.ORDER_HISTORY.url,
-  ORDERS_DETAIL: (orderId: number) => PATH.ORDER_DETAIL.url(orderId),
-  PRODUCT_DETAIL: (productId: number) => PATH.PRODUCT_DETAIL.url(productId),
-  PRODUCT_CATEGORY: (categoryId: string) =>
-    PATH.PRODUCT_CATEGORY.url(categoryId),
-  REVIEW_PRODUCT: (orderId: number, productId: number, productItemId: number) =>
-    PATH.REVIEW_PRODUCT.url(orderId, productId, productItemId),
-  ERROR_AUTHORIZED: PATH_ERROR.ERROR_AUTHORIZED,
-  ERROR_UNAUTHORIZED: PATH_ERROR.ERROR_UNAUTHORIZED,
-  ERROR_RESTRICTED: PATH_ERROR.ERROR_RESTRICTED,
-};

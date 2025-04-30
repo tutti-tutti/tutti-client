@@ -1,18 +1,16 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { BASE_URL, ERROR_MESSAGES, ROUTER_PATH } from '@/constants';
 
-const {
-  ERROR_AUTHORIZED,
-  ERROR_RESTRICTED,
-  ERROR_UNAUTHORIZED,
-  LOGIN,
-  SIGNUP,
-  RESET_PW,
-  MY,
-} = ROUTER_PATH;
+import { BASE_URL, ERROR_MESSAGES, MIDDLE_PATH, PATH_ERROR } from '@/constants';
+import { pagePath } from '@/navigator';
+
+const { signin, signup, resetPw } = pagePath;
+
+const { ERROR_AUTHORIZED, ERROR_RESTRICTED, ERROR_UNAUTHORIZED } = PATH_ERROR;
+
+const { CHECKOUT, ERROR, REVIEW, MY } = MIDDLE_PATH;
 
 const ALLOWED_DOMAINS = [BASE_URL.LOCAL, BASE_URL.SITE];
-const RESTRICTED_PATHS = ['/api', '/checkout', '/error', '/my/review/write'];
+const RESTRICTED_PATHS = ['/api', CHECKOUT, ERROR, `${REVIEW}/write`];
 const ALLOWED_PATHNAME = '/api/auth';
 const RESTRICTED_PATHNAME = '/api';
 const REFERER = 'referer';
@@ -50,7 +48,7 @@ export const middleware = (request: NextRequest) => {
   }
 
   if (accessToken) {
-    if ([LOGIN, SIGNUP, RESET_PW].includes(pathname))
+    if ([signin, signup, resetPw].includes(pathname))
       return NextResponse.redirect(new URL(ERROR_AUTHORIZED, request.url));
   } else if (pathname.startsWith(MY))
     return NextResponse.redirect(new URL(ERROR_UNAUTHORIZED, request.url));

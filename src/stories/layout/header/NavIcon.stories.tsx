@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { NavIcon } from '@/components';
-import { PATH_NAME } from '@/constants';
+import { PATH } from '@/constants';
 
 const meta = {
   title: 'Layout/Header/NavIcon',
@@ -28,20 +28,20 @@ type Story = StoryObj<typeof meta>;
 export const CountrySetting: Story = {
   args: {
     icon: 'nation',
-    label: PATH_NAME.COUNTRY_SETTING,
+    label: PATH.COUNTRY_SETTING.name,
   },
 };
 
 export const Cart: Story = {
   args: {
     icon: 'cart',
-    label: PATH_NAME.CART,
+    label: PATH.CART.name,
   },
 };
 
 export const MyPage: Story = {
   args: {
     icon: 'user',
-    label: PATH_NAME.MY_PAGE,
+    label: PATH.MY_PAGE.name,
   },
 };

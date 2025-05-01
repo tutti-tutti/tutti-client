@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { ROUTER_PATH } from '@/constants';
+import { pagePath } from '@/navigator';
 import { SearchInput, Logo, NavIcon, Button } from '@/components';
 import HeaderNavigation from './HeaderNavigation';
 import TextHeader from './TextHeader';
@@ -27,7 +27,7 @@ const Header = ({ isLogin }: HeaderProps) => {
         </nav>
 
         <div className="gap-lg flex items-center justify-between">
-          <Link href={ROUTER_PATH.HOME}>
+          <Link href={pagePath.home}>
             <Logo />
           </Link>
           <div className="hidden flex-1 md:block">

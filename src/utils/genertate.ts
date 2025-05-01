@@ -17,9 +17,9 @@ export const getOrderItemsWithExpectedArrivalAt = (orderItems: OrderItem[]) =>
 /** PATH 상수에서 URL에 해당하는 이름 찾기 */
 export const getNameFromPath = (path: string): string => {
   const pathEntry = Object.entries(PATH).find(([, pathItem]) => {
-    if (typeof pathItem.url === 'function') return false;
+    if (typeof pathItem.path === 'function') return false;
 
-    return pathItem.url === path;
+    return pathItem.path === path;
   });
 
   if (!pathEntry) {
@@ -45,7 +45,7 @@ export const generateBreadcrumbItems = (
   // 항상 홈 링크로 시작
   const homeItem: BreadcrumbItem = {
     label: homeLabel,
-    href: PATH.HOME.url,
+    href: PATH.HOME.path,
     isCurrent: pathSegments.length === 0,
   };
 

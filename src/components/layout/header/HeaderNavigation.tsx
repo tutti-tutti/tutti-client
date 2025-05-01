@@ -1,19 +1,21 @@
 import Link from 'next/link';
 
-import { ROUTER_PATH, PATH_NAME } from '@/constants';
+import { PATH } from '@/constants';
 import { NavIcon } from '@/components';
+
+const { COUNTRY_SETTING, CART, MY_PAGE } = PATH;
 
 const HeaderNavigation = () => {
   return (
     <nav className="md:gap-xl gap-md flex">
-      <Link href={ROUTER_PATH.COUNTRY_SETTING}>
-        <NavIcon icon="nation" label={PATH_NAME.COUNTRY_SETTING} />
+      <Link href={COUNTRY_SETTING.path}>
+        <NavIcon icon="nation" label={COUNTRY_SETTING.name} />
       </Link>
-      <Link href={ROUTER_PATH.CART}>
-        <NavIcon icon="cart" label={PATH_NAME.CART} />
+      <Link href={CART.path}>
+        <NavIcon icon="cart" label={CART.name} />
       </Link>
-      <Link href={ROUTER_PATH.MY_PAGE}>
-        <NavIcon icon="user" label={PATH_NAME.MY_PAGE} />
+      <Link href={MY_PAGE.path}>
+        <NavIcon icon="user" label={MY_PAGE.name} />
       </Link>
     </nav>
   );

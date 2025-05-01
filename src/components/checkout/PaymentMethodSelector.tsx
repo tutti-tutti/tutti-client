@@ -7,9 +7,10 @@ import {
   TossPaymentsWidgets,
 } from '@tosspayments/tosspayments-sdk';
 
+import { CHECKOUT_CONSTANT } from '@/constants';
+import { pagePath } from '@/navigator';
 import { toast } from '@/utils';
 import { requestPayment } from '@/services';
-import { ROUTER_PATH, CHECKOUT_CONSTANT } from '@/constants';
 import { useShippingAddressStore } from '@/stores';
 import type {
   OrderItem,
@@ -153,8 +154,8 @@ const PaymentMethodSelector = ({
       await widgets?.requestPayment({
         orderId: orderSheetNo,
         orderName: orderName,
-        successUrl: `${window.location.origin + ROUTER_PATH.CHECKOUT_SUCCESS}`,
-        failUrl: `${window.location.origin + ROUTER_PATH.CHECKOUT_FAIL}`,
+        successUrl: `${window.location.origin + pagePath.orderCheckoutSuccess}`,
+        failUrl: `${window.location.origin + pagePath.orderCheckoutFail}`,
         customerEmail: recipientEmail,
         customerName: recipientName,
         customerMobilePhone: recipientPhone,

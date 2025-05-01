@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
-import { CART_CONSTANTS, ROUTER_PATH } from '@/constants';
+import { CART_CONSTANTS } from '@/constants';
+import { pagePath } from '@/navigator';
 import { cn, formatPrice, toast } from '@/utils';
 import { useCart } from '@/hooks';
 import {
@@ -42,13 +43,13 @@ const CartInfo = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const handleCheckoutClick = () => {
     if (!isLoggedIn) {
       toast.warning(CART_TOAST_MESSAGE.LOGIN);
-      router.push(ROUTER_PATH.LOGIN);
+      router.push(pagePath.signin);
       return;
     }
     if (checkedCount === 0) {
       toast.warning(CART_TOAST_MESSAGE.OPTION);
     } else {
-      router.push(ROUTER_PATH.CHECKOUT(encodedCheckoutRequestItems));
+      router.push(pagePath.orderCheckout(encodedCheckoutRequestItems));
     }
   };
 

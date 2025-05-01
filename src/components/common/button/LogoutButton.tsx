@@ -2,7 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query';
 
-import { AUTH_QUERY_KEY, PATH_NAME, QUERY_KEYS_ENDPOINT } from '@/constants';
+import { AUTH_QUERY_KEY, QUERY_KEYS_ENDPOINT, LOGOUT } from '@/constants';
 import { signoutAction } from '@/server-actions';
 import ClickTextButton from './ClickTextButton';
 
@@ -21,9 +21,7 @@ const LogoutButton = () => {
     });
   };
 
-  return (
-    <ClickTextButton onClick={handleLogout}>{PATH_NAME.LOGOUT}</ClickTextButton>
-  );
+  return <ClickTextButton onClick={handleLogout}>{LOGOUT}</ClickTextButton>;
 };
 
 export default LogoutButton;

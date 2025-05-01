@@ -1,4 +1,4 @@
-import { PATH_NAME, ROUTER_PATH } from '@/constants';
+import { PATH } from '@/constants';
 import { fetchOrderDetail } from '@/services';
 import {
   MypageHeader,
@@ -10,9 +10,11 @@ interface Params {
   params: Promise<{ orderId: string }>;
 }
 
+const { ORDER_HISTORY, ORDER_DETAIL, HOME, MY_PAGE } = PATH;
+
 export async function generateMetadata() {
   return {
-    title: PATH_NAME.ORDER_DETAIL,
+    title: ORDER_DETAIL.name,
   };
 }
 
@@ -21,10 +23,10 @@ const OrderDetailPage = async ({ params }: Params) => {
   const orderDetailInfo = await fetchOrderDetail(orderId);
 
   const linkItems = [
-    { label: PATH_NAME.HOME, href: '' },
-    { label: PATH_NAME.MY_PAGE, href: '' },
-    { label: PATH_NAME.ORDER_HISTORY, href: ROUTER_PATH.ORDERS_HISTORY },
-    { label: PATH_NAME.ORDER_DETAIL, href: `${orderId}`, isCurrent: true },
+    { label: HOME.name, href: '' },
+    { label: MY_PAGE.name, href: '' },
+    { label: ORDER_HISTORY.name, href: ORDER_HISTORY.path },
+    { label: ORDER_DETAIL.name, href: `${orderId}`, isCurrent: true },
   ];
 
   const PADDING_STYLES = 'py-3xl';
@@ -32,7 +34,7 @@ const OrderDetailPage = async ({ params }: Params) => {
   return (
     <div className="gap-4xl mx-auto flex flex-col">
       <section className="gap-lg flex flex-col">
-        <MypageHeader linkItems={linkItems} pageName={PATH_NAME.ORDER_DETAIL} />
+        <MypageHeader linkItems={linkItems} pageName={ORDER_DETAIL.name} />
 
         <section className="gap-5xl flex flex-col">
           <OrderDetailClientWrapper

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 
-import { CART_CONSTANTS, PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
+import { CART_CONSTANTS, PRODUCTS_CONSTANTS } from '@/constants';
+import { pagePath } from '@/navigator';
 import { toast } from '@/utils';
 import { useAddCart } from '@/hooks';
 import { getAccessToken } from '@/services';
@@ -55,11 +56,11 @@ const ProductActions = ({
 
     if (!user) {
       toast.warning(CART_TOAST_MESSAGE.LOGIN);
-      router.push(ROUTER_PATH.LOGIN);
+      router.push(pagePath.signin);
       return;
     }
 
-    router.push(ROUTER_PATH.CHECKOUT(encodedCheckoutRequestItems));
+    router.push(pagePath.orderCheckout(encodedCheckoutRequestItems));
   };
 
   const handleCartClick = async () =>

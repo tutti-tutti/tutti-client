@@ -1,5 +1,6 @@
+import { pagePath } from '@/navigator';
+import { ERROR_MESSAGES } from '@/constants';
 import { ErrorPageTemplate } from '@/components';
-import { ERROR_MESSAGES, ROUTER_PATH } from '@/constants';
 
 const { AUTHORIZED_ERROR_PAGE, GO_TO_MAIN_BUTTON } = ERROR_MESSAGES;
 
@@ -10,7 +11,7 @@ const AuthorizedErrorPage = () => {
       subtitle={AUTHORIZED_ERROR_PAGE.SUB_TITLE}
       description={AUTHORIZED_ERROR_PAGE.DESCRIPTIONS}
       buttonText={GO_TO_MAIN_BUTTON}
-      buttonLink={ROUTER_PATH.HOME}
+      buttonLink={pagePath.home}
     />
   );
 };

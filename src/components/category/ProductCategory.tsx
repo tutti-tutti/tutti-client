@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { categoryQueryOptions } from '@/queries';
-import { PRODUCTS_CONSTANTS, ROUTER_PATH } from '@/constants';
+import { PRODUCTS_CONSTANTS } from '@/constants';
+import { pagePath } from '@/navigator';
 import { cn } from '@/utils';
+import { categoryQueryOptions } from '@/queries';
 import type { CategoryResponseAPISchema } from '@/types';
 import CategorySkeleton from './CategorySkeleton';
 import { Icon } from '../common';
@@ -30,7 +31,7 @@ const ProductCategory = ({
   } = useQuery({ ...categoryQueryOptions, initialData: initialCategories });
 
   const handleCategoryClick = (categoryId: number) => {
-    router.push(ROUTER_PATH.PRODUCT_CATEGORY(String(categoryId)));
+    router.push(pagePath.productCategory(String(categoryId)));
   };
 
   if (isPending) return <CategorySkeleton />;

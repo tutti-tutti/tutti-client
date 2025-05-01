@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { PATH_NAME, ROUTER_PATH } from '@/constants';
+import { PATH } from '@/constants';
 import {
   PageContentHeader,
   PageTitle,
@@ -58,12 +58,13 @@ export const CheckoutHeaderComponent: Story = {
   render: () => <CheckoutHeader />,
 };
 
-const linkItems = [
-  { label: PATH_NAME.HOME, href: ROUTER_PATH.HOME },
-  { label: PATH_NAME.MY_PAGE, href: '', isCurrent: true },
+const { ORDER_HISTORY, HOME, MY_PAGE } = PATH;
+const LINK_ITEMS = [
+  { label: HOME.name, href: HOME.path },
+  { label: MY_PAGE.name, href: '', isCurrent: true },
   {
-    label: PATH_NAME.ORDER_HISTORY,
-    href: ROUTER_PATH.ORDERS_HISTORY,
+    label: ORDER_HISTORY.name,
+    href: ORDER_HISTORY.path,
     isCurrent: true,
   },
 ];
@@ -71,6 +72,6 @@ const linkItems = [
 export const MypageHeaderComponent: Story = {
   args: {},
   render: () => (
-    <MypageHeader linkItems={linkItems} pageName={PATH_NAME.ORDER_HISTORY} />
+    <MypageHeader linkItems={LINK_ITEMS} pageName={ORDER_HISTORY.name} />
   ),
 };

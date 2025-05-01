@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { PATH_NAME, CHECKOUT_CONSTANT } from '@/constants';
+import { PATH, CHECKOUT_CONSTANT } from '@/constants';
 import { checkoutOrder } from '@/services';
 import {
   CheckoutProductListGroup,
@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: CheckoutPageProps) {
   if (!checkoutRequestItems) return;
 
   return {
-    title: PATH_NAME.ORDER_CHECKOUT,
+    title: PATH.ORDER_CHECKOUT.name,
   };
 }
 
